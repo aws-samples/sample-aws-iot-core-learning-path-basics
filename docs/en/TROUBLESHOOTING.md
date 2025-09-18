@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-This document provides comprehensive troubleshooting guidance for the AWS IoT Core - Basics learning project.
+This document provides comprehensive troubleshooting guidance for the Amazon Web Services (AWS) IoT Core - Basics learning project.
 
 ## Table of Contents
 
@@ -186,7 +186,7 @@ pip install --upgrade certifi
 
 ### Permission Issues
 
-#### AWS IAM Permissions
+#### AWS Identity and Access Management (IAM) Permissions
 
 **Required Permissions for Learning Scripts:**
 ```json
@@ -667,7 +667,7 @@ python script_name.py --debug
 3. **Policies**: IoT Core → Secure → Policies
 4. **Rules**: IoT Core → Act → Rules
 
-### CloudWatch Logs
+### Amazon CloudWatch Logs
 
 **Enable IoT logging for production debugging:**
 1. Go to IoT Core → Settings

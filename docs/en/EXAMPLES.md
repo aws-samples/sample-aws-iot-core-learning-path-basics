@@ -166,7 +166,7 @@ Select operation (1-9): 1
 📤 Response Payload:
 Found 20 Things:
 1. Vehicle-VIN-001 (Type: SedanVehicle)
-   Attributes: customerId=a1b2c3d4-e5f6-7890, country=USA, manufacturingDate=2024-03-15
+   Attributes: customerId=a1b2c3d4-e5f6-7890, country=US, manufacturingDate=2024-03-15
 2. Vehicle-VIN-002 (Type: SUVVehicle)  
    Attributes: customerId=b2c3d4e5-f6g7-8901, country=Germany, manufacturingDate=2024-07-22
 ...
@@ -229,7 +229,7 @@ Enter Thing name: Vehicle-VIN-001
   "thingTypeName": "SedanVehicle",
   "attributes": {
     "customerId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-    "country": "USA", 
+    "country": "US", 
     "manufacturingDate": "2024-03-15"
   },
   "version": 1

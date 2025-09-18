@@ -99,7 +99,7 @@ Select operation (1-9):
   - **Basic listing**: Shows all Things
   - **Pagination**: Retrieve Things in smaller batches (specify max results per page)
   - **Filter by Thing Type**: Find vehicles of specific categories (e.g., SedanVehicle)
-  - **Filter by Attribute**: Find vehicles with specific attributes (e.g., country=USA)
+  - **Filter by Attribute**: Find vehicles with specific attributes (e.g., country=US)
 - **Output**: Array of Thing objects with names, types, attributes
 - **📚 API Reference**: [ListThings](https://docs.aws.amazon.com/iot/latest/apireference/API_ListThings.html)
 
@@ -178,7 +178,7 @@ Select operation (1-9):
   "thingTypeName": "SedanVehicle",
   "attributes": {
     "customerId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-    "country": "USA",
+    "country": "US",
     "manufacturingDate": "2024-03-15"
   },
   "version": 1
