@@ -85,6 +85,8 @@ This project leverages the official AWS SDKs to provide authentic AWS IoT Core e
 - Terminal/command line access
 - OpenSSL (for certificate features)
 
+**⚠️ IMPORTANT SAFETY NOTE**: Use a dedicated development/learning AWS account. Do not run these scripts in accounts containing production IoT resources. While the cleanup script has multiple safety mechanisms, best practice is to use isolated environments for learning activities.
+
 ### Cost Information
 
 **This project creates real AWS resources that will incur charges (~$0.17 total).**
@@ -200,7 +202,7 @@ python scripts/setup_sample_data.py
 - ✅ `iot_rules_explorer.py` - Rules Engine exploration
 - ✅ `cleanup_sample_data.py` - Resource cleanup
 
-**All scripts now support Portuguese (pt-BR) language!**
+
 
 ## 📚 Learning Scripts
 
@@ -308,6 +310,11 @@ python scripts/<script_name>.py --debug
 - **[詳細スクリプトガイド](docs/ja/DETAILED_SCRIPTS.md)** - 詳細なスクリプトドキュメント
 - **[完全な例](docs/ja/EXAMPLES.md)** - 完全なワークフローとサンプル出力
 - **[トラブルシューティングガイド](docs/ja/TROUBLESHOOTING.md)** - よくある問題と解決策
+
+### 中文文档
+- **[详细脚本指南](docs/zh-CN/DETAILED_SCRIPTS.md)** - 每个学习脚本的深入文档
+- **[完整示例](docs/zh-CN/EXAMPLES.md)** - 完整的工作流程和实际场景
+- **[故障排除指南](docs/zh-CN/TROUBLESHOOTING.md)** - 常见问题和错误的解决方案
 
 
 ### Learning Resources

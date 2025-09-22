@@ -85,6 +85,8 @@ Este projeto aproveita os SDKs oficiais da AWS para fornecer experiências autê
 - Acesso a terminal/linha de comando
 - OpenSSL (para recursos de certificados)
 
+**⚠️ NOTA IMPORTANTE DE SEGURANÇA**: Use uma conta AWS dedicada para desenvolvimento/aprendizagem. Não execute estes scripts em contas que contenham recursos IoT de produção. Embora o script de limpeza tenha múltiplos mecanismos de segurança, a melhor prática é usar ambientes isolados para atividades de aprendizagem.
+
 ### Informações de Custo
 
 **Este projeto cria recursos reais da AWS que incorrerão em custos (~$0.17 total).**
@@ -198,7 +200,7 @@ python scripts/setup_sample_data.py
 - ✅ `iot_rules_explorer.py` - Exploração Rules Engine
 - ✅ `cleanup_sample_data.py` - Limpeza de recursos
 
-**Todos os scripts agora suportam o idioma português (pt-BR)!**
+
 
 ## 📚 Scripts de Aprendizagem
 

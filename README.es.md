@@ -85,6 +85,8 @@ Este proyecto aprovecha los SDKs oficiales de AWS para proporcionar experiencias
 - Acceso a terminal/línea de comandos
 - OpenSSL (para funciones de certificados)
 
+**⚠️ NOTA IMPORTANTE DE SEGURIDAD**: Usa una cuenta de AWS dedicada para desarrollo/aprendizaje. No ejecutes estos scripts en cuentas que contengan recursos IoT de producción. Aunque el script de limpieza tiene múltiples mecanismos de seguridad, la mejor práctica es usar entornos aislados para actividades de aprendizaje.
+
 <details>
 <summary>💰 <strong>Detalles de Costos de AWS</strong></summary>
 
