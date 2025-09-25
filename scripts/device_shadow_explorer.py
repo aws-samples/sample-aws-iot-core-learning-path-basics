@@ -1001,6 +1001,116 @@ MESSAGES = {
         "shadow_command_prompt": "🌟 Shadow> ",
         "unknown_command": "❌ Comando desconhecido: {}. Digite 'help' para comandos disponíveis.",
     },
+    "ko": {
+        "title": "🌟 AWS IoT Device Shadow 탐색기",
+        "separator": "=" * 60,
+        "aws_context_info": "🌍 AWS 컨텍스트 정보:",
+        "account_id": "계정 ID",
+        "region": "리전",
+        "aws_context_error": "⚠️ AWS 컨텍스트를 검색할 수 없습니다:",
+        "aws_credentials_reminder": "   AWS 자격 증명이 구성되어 있는지 확인하세요",
+        "description_intro": "이 스크립트는 AWS IoT Device Shadow 개념을 가르칩니다:",
+        "shadow_concepts": [
+            "• 상태 동기화를 위한 Device Shadow 서비스",
+            "• Shadow 문서 구조 (원하는 상태 vs 보고된 상태)",
+            "• Shadow 작업을 위한 MQTT 주제",
+            "• 상태 차이를 위한 델타 메시지",
+            "• 실시간 Shadow 업데이트 및 알림",
+            "• 각 작업에 대한 완전한 API 세부 정보",
+        ],
+        "debug_enabled": "🔍 디버그 모드 활성화",
+        "debug_features": [
+            "• 향상된 MQTT 메시지 로깅",
+            "• 완전한 Shadow 문서 분석",
+            "• 확장된 교육 정보",
+        ],
+        "tip": "💡 팁: 향상된 Shadow 로깅을 위해 --debug 또는 -d 플래그를 사용하세요",
+        "press_enter": "계속하려면 Enter를 누르세요...",
+        "goodbye": "👋 안녕히 가세요!",
+        "main_menu": "📋 Device Shadow 작업:",
+        "menu_options": [
+            "1. 디바이스에 연결 및 Shadow 주제 구독",
+            "2. 현재 Shadow 문서 가져오기",
+            "3. Shadow 보고된 상태 업데이트 (디바이스 → 클라우드)",
+            "4. Shadow 원하는 상태 업데이트 (클라우드 → 디바이스)",
+            "5. 디바이스 상태 변경 시뮬레이션",
+            "6. Shadow 메시지 기록 보기",
+            "7. 연결 해제 및 종료",
+        ],
+        "select_option": "옵션 선택 (1-7): ",
+        "invalid_choice": "❌ 잘못된 선택입니다. 1-7을 선택해주세요.",
+        "not_connected": "❌ AWS IoT Core에 연결되지 않음",
+        "connection_established": "SHADOW 연결 설정됨",
+        "shadow_get_accepted": "✅ SHADOW GET 승인됨",
+        "shadow_get_rejected": "❌ SHADOW GET 거부됨",
+        "shadow_update_accepted": "✅ SHADOW 업데이트 승인됨",
+        "shadow_update_rejected": "❌ SHADOW 업데이트 거부됨",
+        "shadow_delta_received": "🔄 SHADOW 델타 수신됨",
+        "operation_cancelled": "🛑 작업이 취소되었습니다",
+        "no_things_found": "❌ Things를 찾을 수 없습니다. 먼저 setup_sample_data.py를 실행하세요",
+        "available_devices": "📱 사용 가능한 디바이스 ({} 개 발견):",
+        "selected_device": "✅ 선택된 디바이스:",
+        "using_certificate": "✅ 인증서 사용:",
+        "certificate_files_found": "✅ 인증서 파일 발견:",
+        "certificate": "인증서",
+        "private_key": "개인 키",
+        "connecting_to_iot": "🔄 AWS IoT Core에 연결 중...",
+        "shadow_connection_params": "🔗 Shadow 연결 매개변수:",
+        "client_id": "클라이언트 ID",
+        "thing_name": "Thing 이름",
+        "endpoint": "엔드포인트",
+        "port": "포트",
+        "protocol": "프로토콜",
+        "authentication": "인증",
+        "shadow_type": "Shadow 유형",
+        "shadow_type_classic": "클래식",
+        "requesting_shadow_document": "📥 Shadow 문서 요청",
+        "topic": "주제",
+        "thing": "Thing",
+        "shadow_get_request_sent": "✅ Shadow GET 요청 전송됨",
+        "qos": "QoS",
+        "packet_id": "패킷 ID",
+        "waiting_for_response": "⏳ get/accepted 또는 get/rejected에서 응답 대기 중...",
+        "shadow_message_received": "🌟 SHADOW 메시지 수신됨",
+        "direction": "방향",
+        "received": "수신됨",
+        "payload_size": "페이로드 크기",
+        "timestamp": "타임스탬프",
+        "shadow_data": "Shadow 데이터",
+        "shadow_document_retrieved": "📋 Shadow 문서 검색됨:",
+        "version": "버전",
+        "desired_state": "원하는 상태",
+        "reported_state": "보고된 상태",
+        "none": "없음",
+        "error_code": "오류 코드",
+        "message": "메시지",
+        "shadow_doesnt_exist": "Shadow가 아직 존재하지 않습니다 - 다음 업데이트에서 생성됩니다",
+        "new_version": "새 버전",
+        "updated_desired": "업데이트된 원하는 상태",
+        "updated_reported": "업데이트된 보고된 상태",
+        "description": "설명",
+        "desired_differs_reported": "원하는 상태가 보고된 상태와 다릅니다",
+        "changes_needed": "필요한 변경사항",
+        "state_comparison": "🔍 상태 비교:",
+        "local_state": "로컬 상태",
+        "delta": "델타",
+        "desired": "원하는 상태",
+        "differences_found": "⚠️  차이점 발견:",
+        "apply_changes_prompt": "이러한 변경사항을 로컬 디바이스에 적용하시겠습니까? (y/N): ",
+        "local_state_updated": "✅ 로컬 상태가 성공적으로 업데이트되었습니다",
+        "failed_update_local": "❌ 로컬 상태 업데이트 실패",
+        "changes_not_applied": "⏭️  변경사항이 로컬 디바이스에 적용되지 않았습니다",
+        "local_matches_desired": "✅ 로컬 상태가 원하는 상태와 일치합니다 - 변경이 필요하지 않습니다",
+        "automatically_reporting": "📡 업데이트된 상태를 Shadow에 자동으로 보고 중...",
+        "local_state_saved": "💾 로컬 상태 저장됨:",
+        "created_default_state": "📄 기본 로컬 상태 파일 생성됨:",
+        "default_state": "📊 기본 상태:",
+        "using_existing_state": "📄 기존 로컬 상태 파일 사용:",
+        "current_local_state": "📊 현재 로컬 상태:",
+        "thank_you_message": "AWS IoT Device Shadows를 탐색해 주셔서 감사합니다!",
+        "shadow_command_prompt": "🌟 Shadow> ",
+        "unknown_command": "❌ 알 수 없는 명령: {}. 사용 가능한 명령을 보려면 'help'를 입력하세요.",
+    }
 }
 
 # Global variable for user's language preference
@@ -1024,19 +1134,22 @@ def get_language():
         return "zh-CN"
     elif env_lang in ["pt-br", "portuguese", "português", "pt"]:
         return "pt-BR"
+    elif env_lang in ["ko", "korean", "한국어", "kr"]:
+        return "ko"
 
     # If no environment variable, ask user
-    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma")
+    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma / 언어 선택")
     print("=" * 80)
     print("1. English")
     print("2. Español (Spanish)")
     print("3. 日本語 (Japanese)")
     print("4. 中文 (Chinese)")
     print("5. Português (Portuguese)")
+    print("6. 한국어 (Korean)")
 
     while True:
         try:
-            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma (1-5): ").strip()
+            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): ").strip()
             if choice == "1":
                 return "en"
             elif choice == "2":
@@ -1047,14 +1160,17 @@ def get_language():
                 return "zh-CN"
             elif choice == "5":
                 return "pt-BR"
+            elif choice == "6":
+                return "ko"
             else:
-                print("Invalid choice. Please select 1-5.")
-                print("Selección inválida. Por favor selecciona 1-5.")
-                print("無効な選択です。1-5を選択してください。")
-                print("无效选择。请选择 1-5。")
-                print("Escolha inválida. Por favor selecione 1-5.")
+                print("Invalid choice. Please select 1-6.")
+                print("Selección inválida. Por favor selecciona 1-6.")
+                print("無効な選択です。1-6を選択してください。")
+                print("无效选择。请选择 1-6。")
+                print("Escolha inválida. Por favor selecione 1-6.")
+                print("잘못된 선택입니다. 1-6을 선택해주세요.")
         except KeyboardInterrupt:
-            print("Goodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau!")
+            print("Goodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau! / 안녕히 가세요!")
             sys.exit(0)
 
 

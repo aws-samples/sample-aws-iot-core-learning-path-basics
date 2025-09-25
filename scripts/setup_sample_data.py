@@ -532,6 +532,110 @@ MESSAGES = {
             },
         },
     },
+    "ko": {
+        "title": "🚀 AWS IoT 샘플 데이터 설정",
+        "separator": "=" * 32,
+        "aws_config": "📍 AWS 구성:",
+        "account_id": "계정 ID",
+        "region": "리전",
+        "aws_context_error": "⚠️ AWS 컨텍스트를 검색할 수 없습니다:",
+        "aws_credentials_reminder": "   AWS 자격 증명이 구성되어 있는지 확인하세요",
+        "description_intro": "이 스크립트는 학습을 위한 샘플 IoT 리소스를 생성합니다:",
+        "thing_types_desc": "Thing Types:",
+        "thing_groups_desc": "Thing Groups:",
+        "things_desc": "무작위 속성을 가진 Things",
+        "debug_enabled": "🔍 디버그 모드 활성화",
+        "debug_features": [
+            "• 상세한 API 요청 및 응답을 표시합니다",
+            "• 확장된 일시 정지로 실행 속도가 느려집니다",
+            "• 완전한 오류 세부 정보 및 추적",
+        ],
+        "tip": "💡 팁: --debug 또는 -d 플래그를 사용하여 상세한 API 호출을 확인하세요",
+        "continue_prompt": "계속하시겠습니까? (y/N): ",
+        "setup_cancelled": "설정이 취소되었습니다",
+        "client_initialized": "✅ AWS IoT 클라이언트가 초기화되었습니다",
+        "client_error": "❌ AWS IoT 클라이언트 초기화 오류:",
+        "credentials_reminder": "AWS 자격 증명과 리전이 구성되어 있는지 확인하세요",
+        "no_region_error": "❌ AWS 리전이 구성되지 않았습니다",
+        "region_setup_instructions": [
+            "다음 방법 중 하나를 사용하여 AWS 리전을 구성하세요:",
+            "1. 환경 변수 설정: export AWS_DEFAULT_REGION=us-east-1",
+            "2. AWS CLI 구성: aws configure",
+            "3. AWS 자격 증명 파일에서 리전 설정",
+        ],
+        "invalid_credentials": "❌ 유효하지 않은 AWS 자격 증명",
+        "credentials_check_failed": "❌ 필수 환경 변수가 누락되었습니다:",
+        "credentials_instructions": [
+            "AWS 자격 증명을 내보내세요:",
+            "export AWS_ACCESS_KEY_ID=<your-access-key>",
+            "export AWS_SECRET_ACCESS_KEY=<your-secret-key>",
+            "export AWS_SESSION_TOKEN=<your-session-token>  # 임시 자격 증명의 경우 선택사항",
+        ],
+        "step_1_title": "Thing Types 생성 중",
+        "step_2_title": "Thing Groups 생성 중",
+        "step_3_title": "속성이 있는 {} Things 생성 중",
+        "step_4_title": "Things를 Thing Groups에 추가 중",
+        "step_5_title": "설정 요약",
+        "creating": "생성 중",
+        "created": "생성됨",
+        "already_exists": "이미 존재하므로 건너뜁니다",
+        "deprecated_undeprecating": "는 더 이상 사용되지 않습니다. 사용 중단을 해제하는 중...",
+        "undeprecated": "사용 중단 해제가 성공했습니다",
+        "already_active": "이미 존재하고 활성 상태입니다",
+        "error_checking": "확인 오류",
+        "error_creating": "생성 오류",
+        "creating_thing": "📱 Thing 생성 중:",
+        "customer_id": "고객 ID:",
+        "country": "국가:",
+        "manufacturing_date": "제조 날짜:",
+        "thing_type": "Thing Type:",
+        "adding_to_group": "{}를 그룹 {}에 추가 중",
+        "added_to_group": "{}를 {}에 추가했습니다",
+        "error_adding": "{}를 {}에 추가하는 중 오류:",
+        "resources_created": "📊 생성된 리소스:",
+        "things": "Things:",
+        "thing_types": "Thing Types:",
+        "thing_groups": "Thing Groups:",
+        "sample_thing_names": "🎯 샘플 Thing 이름:",
+        "and_more": "... 그리고 {} 개 더",
+        "error_summary": "❌ 요약을 가져오는 중 오류:",
+        "setup_complete": "🎉 설정 완료! 이제 iot_registry_explorer.py를 사용하여 데이터를 탐색할 수 있습니다.",
+        "debug_session_complete": "🔍 디버그: 상세한 API 로깅으로 세션이 완료되었습니다",
+        "setup_cancelled_user": "👋 사용자가 설정을 취소했습니다. 안녕히 가세요!",
+        "debug_creating": "🔍 디버그: 생성 중",
+        "debug_api_call": "📤 API 호출:",
+        "debug_input_params": "📥 입력 매개변수:",
+        "debug_api_response": "📤 API 응답:",
+        "debug_full_error": "🔍 디버그: 전체 오류 응답:",
+        "debug_full_traceback": "🔍 디버그: 전체 추적:",
+        "api_error": "❌ AWS API 오류",
+        "missing_param_error": "❌ 필수 매개변수 누락",
+        "invalid_value_error": "❌ 유효하지 않은 값",
+        "unexpected_error": "❌ 예상치 못한 오류",
+        "press_enter": "계속하려면 Enter를 누르세요...",
+        "learning_moments": {
+            "hierarchy": {
+                "title": "📚 학습 포인트: AWS IoT 리소스 계층 구조",
+                "content": "AWS IoT는 디바이스를 구성하기 위해 계층 구조를 사용합니다: Thing Types(템플릿)는 디바이스 카테고리를 정의하고, Thing Groups는 조직 구조를 제공하며, Things는 실제 디바이스를 나타냅니다. 이 계층 구조는 확장 가능한 디바이스 관리, 대량 작업 및 IoT 플릿 전체의 정책 상속을 가능하게 합니다.",
+                "next": "이 계층 구조를 보여주기 위해 샘플 리소스를 생성하겠습니다",
+            },
+            "thing_groups": {
+                "title": "📚 학습 포인트: Thing Groups - 디바이스 조직",
+                "content": "Thing Groups는 파일의 폴더와 유사하게 IoT 디바이스에 대한 계층적 조직을 제공합니다. 위치, 기능 또는 비즈니스 기준에 따른 대량 작업, 정책 상속 및 논리적 그룹화를 가능하게 합니다. 그룹은 다른 그룹을 포함할 수 있어 대규모 IoT 배포를 위한 유연한 조직 구조를 만듭니다.",
+                "next": "디바이스 조직을 위한 Thing Groups를 생성하겠습니다",
+            },
+            "things": {
+                "title": "📚 학습 포인트: Things - 디바이스 등록",
+                "content": "Things는 AWS IoT Core에서 실제 IoT 디바이스를 나타냅니다. 각 Thing은 고유한 이름, 선택적 속성(일련 번호, 위치 등)을 가지며 표준화를 위해 Thing Type에 할당될 수 있습니다. Things는 디바이스 관리, 보안 정책 및 섀도우 상태 동기화의 기초입니다.",
+                "next": "현실적인 속성을 가진 개별 Things를 생성하겠습니다",
+            },
+            "relationships": {
+                "title": "📚 학습 포인트: Thing-Group 관계",
+                "content": "Things를 Groups에 추가하면 대량 작업과 정책 상속을 가능하게 하는 조직적 관계가 생성됩니다. Thing은 여러 그룹에 속할 수 있고, 그룹은 중첩될 수 있습니다. 이 계층 구조는 규모에 맞는 디바이스 플릿 관리, 정책 적용 및 비즈니스 로직에 따른 디바이스 조직화에 필수적입니다.",
+                "next": "적절한 Groups에 Things를 할당하겠습니다",
+            },
+        },
+    },
 }
 
 # Global variable for user's language preference
@@ -558,20 +662,23 @@ def get_language():
         return "zh-CN"
     elif env_lang in ["pt", "pt-br", "portuguese", "português"]:
         return "pt-BR"
+    elif env_lang in ["ko", "korean", "한국어", "kr"]:
+        return "ko"
 
     # If no environment variable, ask user
-    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma")
+    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma / 언어 선택")
     print("=" * 80)
     print("1. English")
     print("2. Español (Spanish)")
     print("3. 日本語 (Japanese)")
     print("4. 中文 (Chinese)")
     print("5. Português (Portuguese)")
+    print("6. 한국어 (Korean)")
 
     while True:
         try:
             choice = input(
-                "\nSelect language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma (1-5): "
+                "\nSelect language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): "
             ).strip()
             if choice == "1":
                 return "en"
@@ -583,14 +690,17 @@ def get_language():
                 return "zh-CN"
             elif choice == "5":
                 return "pt-BR"
+            elif choice == "6":
+                return "ko"
             else:
-                print("Invalid choice. Please select 1-5.")
-                print("Selección inválida. Por favor selecciona 1-5.")
-                print("無効な選択です。1-5を選択してください。")
-                print("无效选择。请选择 1-5。")
-                print("Escolha inválida. Por favor selecione 1-5.")
+                print("Invalid choice. Please select 1-6.")
+                print("Selección inválida. Por favor selecciona 1-6.")
+                print("無効な選択です。1-6を選択してください。")
+                print("无效选择。请选择 1-6。")
+                print("Escolha inválida. Por favor selecione 1-6.")
+                print("잘못된 선택입니다. 1-6을 선택해주세요.")
         except KeyboardInterrupt:
-            print("\n\nGoodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau!")
+            print("\n\nGoodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau! / 안녕히 가세요!")
             sys.exit(0)
 
 

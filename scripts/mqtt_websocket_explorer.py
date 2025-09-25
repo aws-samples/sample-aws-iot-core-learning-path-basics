@@ -678,6 +678,129 @@ MESSAGES = {
         "not_subscribed_to": "❌ Não inscrito em: {}",
         "bytes": "bytes",
     },
+    "ko": {
+        "title": "📡 AWS IoT MQTT WebSocket 탐색기",
+        "separator": "=" * 60,
+        "description_intro": "SigV4 인증을 사용한 WebSocket 연결을 통한 교육용 MQTT 클라이언트.",
+        "debug_enabled": "🔍 디버그 모드 활성화됨",
+        "debug_features": [
+            "• 향상된 API 요청/응답 로깅",
+            "• 완전한 오류 세부사항 및 추적",
+            "• 확장된 교육 정보",
+        ],
+        "tip": "💡 팁: 향상된 API 로깅을 위해 --debug 또는 -d 플래그를 사용하세요",
+        "websocket_endpoint_discovery": "🌐 AWS IoT WebSocket 엔드포인트 검색",
+        "endpoint_type": "엔드포인트 유형: iot:Data-ATS (권장)",
+        "endpoint_url": "엔드포인트 URL",
+        "port": "포트: 443 (HTTPS/WebSocket)",
+        "protocol": "프로토콜: SigV4를 사용한 WebSocket 상의 MQTT",
+        "error_getting_endpoint": "❌ IoT 엔드포인트 가져오기 오류:",
+        "no_aws_credentials": "❌ AWS 자격 증명을 찾을 수 없습니다",
+        "credentials_help": "💡 다음 방법 중 하나를 사용하여 자격 증명을 설정하세요:",
+        "credentials_methods": [
+            "• AWS CLI: aws configure",
+            "• 환경 변수: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY",
+            "• IAM 역할 (EC2에서 실행하는 경우)",
+        ],
+        "aws_credentials_sigv4": "🔐 SigV4 인증을 위한 AWS 자격 증명",
+        "access_key": "액세스 키",
+        "region": "리전",
+        "session_token": "세션 토큰",
+        "present": "존재함",
+        "not_present": "존재하지 않음",
+        "error_getting_credentials": "❌ AWS 자격 증명 가져오기 오류:",
+        "connection_interrupted": "연결 중단됨",
+        "error": "오류",
+        "timestamp": "타임스탬프",
+        "auto_reconnect": "자동 재연결: AWS IoT SDK가 자동으로 재연결을 시도합니다",
+        "connection_resumed": "연결 재개됨",
+        "return_code": "반환 코드",
+        "session_present": "세션 존재",
+        "status": "상태: 연결이 성공적으로 복원되었습니다",
+        "incoming_message": "🔔 수신 메시지 #{} [{}]",
+        "topic": "📥 토픽",
+        "qos": "🏷️  QoS",
+        "qos_descriptions": {0: "최대 한 번", 1: "최소 한 번", 2: "정확히 한 번"},
+        "payload_size": "📊 페이로드 크기",
+        "transport": "🌐 전송: SigV4를 사용한 WebSocket",
+        "message_payload": "💬 메시지 페이로드:",
+        "json_format": "📋 JSON 형식:",
+        "text_format": "📝 텍스트:",
+        "establishing_connection": "WebSocket 상의 MQTT 연결 설정",
+        "websocket_connection_params": "🔗 WebSocket 연결 매개변수:",
+        "client_id": "클라이언트 ID",
+        "endpoint": "엔드포인트",
+        "port_443": "포트: 443",
+        "protocol_mqtt311": "프로토콜: WebSocket 상의 MQTT 3.1.1",
+        "authentication": "인증: AWS SigV4",
+        "connecting_websocket": "🔄 WebSocket을 통해 AWS IoT Core에 연결 중...",
+        "websocket_connection_established": "WEBSOCKET 연결 설정됨",
+        "connection_status": "상태: AWS IoT Core에 성공적으로 연결됨",
+        "websocket_connection_failed": "❌ WebSocket 연결 실패:",
+        "not_connected": "❌ AWS IoT Core에 연결되지 않음",
+        "subscribing_topic_websocket": "📥 토픽 구독 (WebSocket)",
+        "websocket_subscription_established": "WEBSOCKET 구독 설정됨",
+        "websocket_subscription_failed": "❌ WebSocket 구독 실패:",
+        "publishing_message_websocket": "📤 메시지 게시 (WebSocket)",
+        "published_websocket": "✅ [{}] WebSocket을 통해 게시됨",
+        "websocket_publish_failed": "❌ WebSocket 게시 실패:",
+        "interactive_messaging": "WebSocket 상의 대화형 MQTT 메시징",
+        "mqtt_topic_guidelines": "💡 MQTT 토픽 가이드라인:",
+        "topic_guidelines": [
+            "• 계층 구조에 슬래시 사용: device/sensor/temperature",
+            "• 앞의 슬래시 피하기: ❌ /device/data ✅ device/data",
+            "• 토픽을 설명적이고 체계적으로 유지",
+            "• AWS IoT 예약 토픽은 $aws/로 시작",
+        ],
+        "enter_subscribe_topic": "📥 구독할 토픽 입력 (또는 'skip'): ",
+        "qos_level_prompt": "QoS 레벨 (0=최대 한 번, 1=최소 한 번) [0]: ",
+        "invalid_qos": "❌ 0 또는 1을 입력하세요",
+        "subscription_failed_retry": "❌ 구독 실패, 다시 시도하세요",
+        "run_diagnostics": "연결 진단을 실행하시겠습니까? (y/N): ",
+        "topic_cannot_be_empty": "❌ 토픽은 비어있을 수 없습니다",
+        "interactive_websocket_mode": "🎮 대화형 WebSocket MQTT 메시징 모드",
+        "messages_appear_immediately": "💡 구독된 토픽에서 메시지를 받으면 즉시 나타납니다!",
+        "commands": "명령어:",
+        "command_list": [
+            "• 'sub <토픽>' - 토픽 구독 (QoS 0)",
+            "• 'sub1 <토픽>' - 토픽 구독 (QoS 1)",
+            "• 'unsub <토픽>' - 토픽 구독 해제",
+            "• 'pub <토픽> <메시지>' - 메시지 게시 (QoS 0)",
+            "• 'pub1 <토픽> <메시지>' - QoS 1로 게시",
+            "• 'json <토픽> <키=값> [키=값...]' - JSON 게시",
+            "• 'test' - 구독된 토픽에 테스트 메시지 전송",
+            "• 'status' - 연결 및 구독 상태 표시",
+            "• 'messages' - 메시지 기록 표시",
+            "• 'debug [토픽]' - 연결 진단 표시",
+            "• 'clear' - 화면 지우기",
+            "• 'help' - 이 도움말 표시",
+            "• 'quit' - 종료",
+        ],
+        "mqtt_ws_prompt": "📡 MQTT-WS> ",
+        "invalid_command": "❌ 잘못된 명령어입니다. 사용 가능한 명령어를 보려면 'help'를 입력하세요.",
+        "goodbye": "👋 안녕히 가세요!",
+        "connection_diagnostics": "🔍 연결 진단",
+        "connection_status_label": "연결 상태",
+        "connected": "연결됨",
+        "disconnected": "연결 해제됨",
+        "subscriptions_count": "활성 구독: {}",
+        "no_subscriptions": "활성 구독 없음",
+        "message_history": "📊 메시지 기록",
+        "received_messages": "수신된 메시지: {}",
+        "sent_messages": "전송된 메시지: {}",
+        "no_messages": "아직 메시지 없음",
+        "recent_received": "📥 최근 수신된 메시지:",
+        "recent_sent": "📤 최근 전송된 메시지:",
+        "size": "크기",
+        "clear_screen": "🧹 화면이 지워졌습니다",
+        "test_message_sent": "🧪 {}개의 구독된 토픽에 테스트 메시지가 전송되었습니다",
+        "no_subscribed_topics": "❌ 테스트 메시지를 위한 구독된 토픽이 없습니다",
+        "unsubscribing_from": "📤 구독 해제 중: {}",
+        "unsubscribed_success": "✅ 구독 해제됨: {}",
+        "unsubscribe_failed": "❌ 구독 해제 실패: {}",
+        "not_subscribed_to": "❌ 구독되지 않음: {}",
+        "bytes": "바이트",
+    },
 }
 
 # Global variable for user's language preference
@@ -701,6 +824,8 @@ def get_language():
         return "zh-CN"
     elif env_lang in ["pt-br", "portuguese", "português", "pt"]:
         return "pt-BR"
+    elif env_lang in ["ko", "korean", "한국어", "kr"]:
+        return "ko"
 
     # If no environment variable, ask user
     print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma")
@@ -710,10 +835,11 @@ def get_language():
     print("3. 日本語 (Japanese)")
     print("4. 中文 (Chinese)")
     print("5. Português (Portuguese)")
+    print("6. 한국어 (Korean)")
 
     while True:
         try:
-            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma (1-5): ").strip()
+            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): ").strip()
             if choice == "1":
                 return "en"
             elif choice == "2":
@@ -724,8 +850,10 @@ def get_language():
                 return "zh-CN"
             elif choice == "5":
                 return "pt-BR"
+            elif choice == "6":
+                return "ko"
             else:
-                print("Invalid choice. Please select 1-5.")
+                print("Invalid choice. Please select 1-6.")
                 print("Selección inválida. Por favor selecciona 1-5.")
                 print("無効な選択です。1-5を選択してください。")
                 print("无效选择。请选择 1-5。")

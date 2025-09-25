@@ -787,6 +787,43 @@ MESSAGES = {
         "select_language_prompt": "选择语言 (1-4): ",
         "invalid_language_choice": "无效选择。请选择 1-4。",
     },
+    "ko": {
+        "main_title": "⚙️ AWS IoT 규칙 엔진 탐색기",
+        "aws_config_title": "📍 AWS 구성:",
+        "account_id": "계정 ID",
+        "region": "리전",
+        "main_description": "실습을 통해 AWS IoT 규칙 엔진을 학습합니다.",
+        "main_features": "이 도구는 다음을 시연합니다:",
+        "feature_sql_syntax": "• IoT 규칙 엔진 SQL 구문 및 메시지 라우팅",
+        "feature_topic_filtering": "• SELECT, FROM, WHERE 절을 사용한 토픽 필터링",
+        "feature_republish_actions": "• 재게시 작업 및 IAM 역할 구성",
+        "feature_lifecycle": "• 규칙 생명주기 관리 (생성, 활성화, 비활성화, 삭제)",
+        "learning_moment_title": "📚 학습 포인트: IoT 규칙 엔진",
+        "learning_moment_description": "AWS IoT 규칙 엔진은 SQL과 유사한 쿼리를 사용하여 디바이스의 메시지를 처리하고 라우팅합니다. 규칙은 Lambda, DynamoDB, S3와 같은 다양한 AWS 서비스로 메시지를 필터링, 변환 및 라우팅할 수 있습니다.",
+        "next_action": "🔄 다음: 메시지 처리를 위한 IoT 규칙을 생성하고 관리합니다",
+        "press_enter_continue": "계속하려면 Enter를 누르세요...",
+        "debug_mode_enabled": "🔍 디버그 모드 활성화됨",
+        "debug_tip": "💡 팁: 향상된 로깅을 위해 --debug 또는 -d 플래그를 사용하세요",
+        "menu_title": "📋 IoT 규칙 엔진 메뉴:",
+        "menu_option_1": "1. 모든 IoT 규칙 나열",
+        "menu_option_2": "2. 특정 IoT 규칙 설명",
+        "menu_option_3": "3. 새 IoT 규칙 생성",
+        "menu_option_4": "4. 샘플 메시지로 IoT 규칙 테스트",
+        "menu_option_5": "5. IoT 규칙 관리 (활성화/비활성화/삭제)",
+        "menu_option_6": "6. 종료",
+        "select_option": "옵션 선택 (1-6): ",
+        "invalid_choice": "❌ 잘못된 선택입니다. 1-6을 선택하세요.",
+        "press_enter_menu": "계속하려면 Enter를 누르세요...",
+        "goodbye": "👋 안녕히 가세요!",
+        "operation_failed": "❌ {operation} 실패: {error}",
+        "unexpected_error": "❌ 예상치 못한 오류: {error}",
+        "interrupted_by_user": "🛑 사용자에 의해 중단됨",
+        "aws_context_error": "⚠️ AWS 컨텍스트를 가져올 수 없습니다: {error}",
+        "aws_credentials_check": "AWS 자격 증명이 구성되어 있는지 확인하세요",
+        "header_separator": "=" * 60,
+        "step_separator": "-" * 50,
+        "rule_separator": "-" * 40,
+    },
 }
 
 # Global variable for user's preferred language
@@ -807,6 +844,8 @@ def get_language():
         return "zh-CN"
     elif env_lang in ["pt-br", "portuguese", "português", "pt"]:
         return "pt-BR"
+    elif env_lang in ["ko", "korean", "한국어", "kr"]:
+        return "ko"
 
     # If no environment variable, ask user
     print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma")
@@ -816,10 +855,11 @@ def get_language():
     print("3. 日本語 (Japanese)")
     print("4. 中文 (Chinese)")
     print("5. Português (Portuguese)")
+    print("6. 한국어 (Korean)")
 
     while True:
         try:
-            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma (1-5): ").strip()
+            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): ").strip()
             if choice == "1":
                 return "en"
             elif choice == "2":
@@ -830,8 +870,10 @@ def get_language():
                 return "zh-CN"
             elif choice == "5":
                 return "pt-BR"
+            elif choice == "6":
+                return "ko"
             else:
-                print("Invalid choice. Please select 1-5.")
+                print("Invalid choice. Please select 1-6.")
                 print("Selección inválida. Por favor selecciona 1-5.")
                 print("無効な選択です。1-5を選択してください。")
                 print("无效选择。请选择 1-5。")

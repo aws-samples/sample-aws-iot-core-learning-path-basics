@@ -1265,6 +1265,93 @@ MESSAGES = {
             },
         },
     },
+    "ko": {
+        "title": "🔐 AWS IoT 인증서 및 정책 관리자",
+        "separator": "=" * 50,
+        "aws_config": "📍 AWS 구성:",
+        "account_id": "계정 ID",
+        "region": "리전",
+        "aws_context_error": "⚠️ AWS 컨텍스트를 검색할 수 없습니다:",
+        "aws_credentials_reminder": "   AWS 자격 증명이 구성되어 있는지 확인하세요",
+        "description_intro": "이 스크립트는 AWS IoT 보안 개념을 가르칩니다:",
+        "security_concepts": [
+            "• 디바이스 인증을 위한 X.509 인증서",
+            "• 인증서를 Things에 연결",
+            "• 권한 부여를 위한 IoT 정책",
+            "• 정책 연결 및 분리",
+            "• 외부 인증서 등록",
+            "• 각 작업에 대한 완전한 API 세부 정보",
+        ],
+        "debug_enabled": "🔍 디버그 모드 활성화",
+        "debug_features": [
+            "• 향상된 API 요청/응답 로깅",
+            "• 완전한 오류 세부 정보 및 추적",
+            "• 확장된 교육 정보",
+        ],
+        "tip": "💡 팁: 향상된 API 로깅을 위해 --debug 또는 -d 플래그를 사용하세요",
+        "client_initialized": "✅ AWS IoT 클라이언트가 초기화되었습니다",
+        "client_error": "❌ AWS IoT 클라이언트 초기화 오류:",
+        "no_region_error": "❌ AWS 리전이 구성되지 않았습니다",
+        "region_setup_instructions": [
+            "다음 방법 중 하나를 사용하여 AWS 리전을 구성하세요:",
+            "1. 환경 변수: export AWS_DEFAULT_REGION=us-east-1",
+            "2. AWS CLI 구성: aws configure",
+            "3. AWS 자격 증명 파일에서 리전 설정",
+        ],
+        "invalid_credentials": "❌ 유효하지 않은 AWS 자격 증명",
+        "credentials_check_failed": "❌ 필수 환경 변수가 누락되었습니다:",
+        "credentials_instructions": [
+            "AWS 자격 증명을 내보내세요:",
+            "export AWS_ACCESS_KEY_ID=<your-access-key>",
+            "export AWS_SECRET_ACCESS_KEY=<your-secret-key>",
+            "export AWS_SESSION_TOKEN=<your-session-token>  # 임시 자격 증명의 경우 선택사항",
+        ],
+        "press_enter": "계속하려면 Enter를 누르세요...",
+        "goodbye": "👋 안녕히 가세요!",
+        "main_menu": "📋 메인 메뉴:",
+        "menu_options": [
+            "1. AWS IoT 인증서 생성 및 Thing에 연결 (+ 선택적 정책)",
+            "2. 외부 인증서 등록 및 Thing에 연결 (+ 선택적 정책)",
+            "3. 기존 인증서에 정책 연결",
+            "4. 인증서에서 정책 분리",
+            "5. 인증서 활성화/비활성화",
+            "6. 종료",
+        ],
+        "select_option": "옵션 선택 (1-6): ",
+        "invalid_choice": "❌ 잘못된 선택입니다. 1-6을 선택해주세요.",
+        "learning_moments": {
+            "security_foundation": {
+                "title": "📚 학습 포인트: IoT 보안 기초",
+                "content": "AWS IoT 보안은 디바이스 인증을 위한 X.509 인증서와 권한 부여를 위한 IoT 정책을 기반으로 합니다. 인증서는 디바이스를 고유하게 식별하고, 정책은 디바이스가 수행할 수 있는 작업을 정의합니다. 이 보안 모델을 이해하는 것은 안전한 IoT 솔루션을 구축하는 데 중요합니다.",
+                "next": "인증서 및 정책 관리 작업을 탐색하겠습니다",
+            },
+            "certificate_creation": {
+                "title": "📚 학습 포인트: 인증서 생성 및 Thing 연결",
+                "content": "AWS IoT 인증서를 생성하면 디바이스에 대한 고유한 디지털 ID가 설정됩니다. 인증서에는 AWS IoT가 디바이스를 인증하는 데 사용하는 공개 키가 포함되어 있으며, 개인 키는 디바이스에 안전하게 보관됩니다. 인증서를 Thing에 연결하면 디바이스 ID와 AWS IoT의 논리적 표현 간의 바인딩이 생성됩니다.",
+                "next": "인증서를 생성하고 Thing에 연결하겠습니다",
+            },
+            "external_registration": {
+                "title": "📚 학습 포인트: 외부 인증서 등록",
+                "content": "때로는 자체 인증 기관(CA) 또는 기존 PKI 인프라의 인증서를 사용해야 할 수도 있습니다. AWS IoT를 사용하면 외부 인증서를 등록할 수 있어 보안을 유지하면서 인증서 관리의 유연성을 제공합니다. 이는 확립된 인증서 정책을 가진 조직에 유용합니다.",
+                "next": "AWS IoT에 외부 인증서를 등록하겠습니다",
+            },
+            "policy_attachment": {
+                "title": "📚 학습 포인트: 권한 부여를 위한 정책 연결",
+                "content": "인증서가 인증(당신이 누구인지)을 처리하는 동안 IoT 정책은 권한 부여(무엇을 할 수 있는지)를 처리합니다. 정책은 디바이스가 게시할 수 있는 MQTT 주제, 구독할 수 있는 주제, 수행할 수 있는 AWS IoT 작업을 정의합니다. 정책을 인증서에 연결하면 디바이스에 특정 권한이 부여됩니다.",
+                "next": "기존 인증서에 정책을 연결하겠습니다",
+            },
+            "policy_detachment": {
+                "title": "📚 학습 포인트: 권한 관리를 위한 정책 분리",
+                "content": "때로는 전체 인증서를 삭제하지 않고 디바이스에서 특정 권한을 제거해야 할 수도 있습니다. 정책 분리를 통해 디바이스 ID를 그대로 유지하면서 특정 권한을 취소할 수 있습니다. 이는 디바이스 역할 변경, 권한 문제 해결 또는 보안 정책 구현에 유용합니다.",
+                "next": "인증서에서 정책을 분리하겠습니다",
+            },
+            "certificate_lifecycle": {
+                "title": "📚 학습 포인트: 인증서 수명 주기 관리",
+                "content": "인증서 상태는 디바이스가 AWS IoT에 연결할 수 있는지 여부를 제어합니다. ACTIVE 인증서는 연결을 허용하고 INACTIVE 인증서는 차단합니다. 이는 즉각적인 보안 제어를 제공합니다. 인증서를 완전히 삭제하지 않고도 손상된 디바이스를 즉시 비활성화하거나 액세스를 일시적으로 중단할 수 있습니다.",
+                "next": "인증서 상태를 관리하겠습니다(활성화/비활성화)",
+            },
+        },
+    },
 }
 
 # Global variable for user's language preference
@@ -1288,20 +1375,23 @@ def get_language():
         return "zh-CN"
     elif env_lang in ["pt-br", "portuguese", "português", "pt"]:
         return "pt-BR"
+    elif env_lang in ["ko", "korean", "한국어", "kr"]:
+        return "ko"
 
     # If no environment variable, ask user
-    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma")
+    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma / 언어 선택")
     print("=" * 80)
     print("1. English")
     print("2. Español (Spanish)")
     print("3. 日本語 (Japanese)")
     print("4. 中文 (Chinese)")
     print("5. Português (Portuguese)")
+    print("6. 한국어 (Korean)")
 
     while True:
         try:
             choice = input(
-                "\nSelect language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma (1-5): "
+                "\nSelect language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): "
             ).strip()
             if choice == "1":
                 return "en"
@@ -1313,14 +1403,17 @@ def get_language():
                 return "zh-CN"
             elif choice == "5":
                 return "pt-BR"
+            elif choice == "6":
+                return "ko"
             else:
-                print("Invalid choice. Please select 1-5.")
-                print("Selección inválida. Por favor selecciona 1-5.")
-                print("無効な選択です。1-5を選択してください。")
-                print("无效选择。请选择 1-5。")
-                print("Escolha inválida. Por favor selecione 1-5.")
+                print("Invalid choice. Please select 1-6.")
+                print("Selección inválida. Por favor selecciona 1-6.")
+                print("無効な選択です。1-6を選択してください。")
+                print("无效选择。请选择 1-6。")
+                print("Escolha inválida. Por favor selecione 1-6.")
+                print("잘못된 선택입니다. 1-6을 선택해주세요.")
         except KeyboardInterrupt:
-            print("\n\nGoodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau!")
+            print("\n\nGoodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau! / 안녕히 가세요!")
             sys.exit(0)
 
 

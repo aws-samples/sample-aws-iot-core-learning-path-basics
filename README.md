@@ -1,9 +1,9 @@
 # AWS IoT Core - Learning Path - Basics
 
-> 🌍 **Available Languages** | **Idiomas Disponibles** | **利用可能な言語** | **可用语言**
+> 🌍 **Available Languages** | **Idiomas Disponibles** | **利用可能な言語** | **可用语言** | **사용 가능한 언어**
 > 
-> - **English** (Current) | [Español](README.es.md) | [中文](README.zh-CN.md) | [日本語](README.ja.md) | [Português](README.pt-BR.md)
-> - **Documentation**: [English](docs/en/) | [Español](docs/es/) | [中文](docs/zh-CN/) | [日本語](docs/ja/) | [Português](docs/pt-BR/)
+> - **English** (Current) | [Español](README.es.md) | [中文](README.zh-CN.md) | [日本語](README.ja.md) | [Português](README.pt-BR.md) | [한국어](README.ko.md)
+> - **Documentation**: [English](docs/en/) | [Español](docs/es/) | [中文](docs/zh-CN/) | [日本語](docs/ja/) | [Português](docs/pt-BR/) | [한국어](docs/ko/)
 
 A comprehensive Python toolkit for learning Amazon Web Services (AWS) IoT Core basic concepts through hands-on exploration. Interactive scripts demonstrate device management, security, API operations, and MQTT communication with detailed explanations.
 
@@ -24,7 +24,7 @@ export AWS_SECRET_ACCESS_KEY=<your-secret>
 export AWS_DEFAULT_REGION=<your-region (e.g. us-east-1)>
 
 # 4. Optional: Set language preference
-export AWS_IOT_LANG=en  # 'es' for Spanish, 'ja' for Japanese, 'zh-CN' for Chinese, 'pt-BR' for Portuguese
+export AWS_IOT_LANG=en  # 'es' for Spanish, 'ja' for Japanese, 'zh-CN' for Chinese, 'pt-BR' for Portuguese, 'ko' for Korean
 
 # 5. Complete learning sequence
 python scripts/setup_sample_data.py          # Create sample IoT resources
@@ -133,6 +133,7 @@ export AWS_IOT_LANG=es     # Spanish
 export AWS_IOT_LANG=ja     # Japanese
 export AWS_IOT_LANG=zh-CN  # Chinese
 export AWS_IOT_LANG=pt-BR  # Portuguese
+export AWS_IOT_LANG=ko     # Korean
 
 # Alternative: Scripts will prompt for language if not set
 ```
@@ -143,10 +144,11 @@ export AWS_IOT_LANG=pt-BR  # Portuguese
 - **Japanese** (`ja`, `japanese`, `日本語`, `jp`) - Full translation available
 - **Chinese** (`zh-CN`, `chinese`, `中文`, `zh`) - Full translation available
 - **Portuguese** (`pt-BR`, `portuguese`, `português`, `pt`) - Full translation available
+- **Korean** (`ko`, `korean`, `한국어`, `kr`) - Full translation available
 
 ## 🌍 Multi-Language Support
 
-All learning scripts support English, Spanish, Japanese, Chinese, and Portuguese interfaces. The language affects:
+All learning scripts support English, Spanish, Japanese, Chinese, Portuguese, and Korean interfaces. The language affects:
 
 **✅ What Gets Translated:**
 - Welcome messages and educational content
@@ -172,6 +174,7 @@ export AWS_IOT_LANG=es     # Spanish
 export AWS_IOT_LANG=ja     # Japanese
 export AWS_IOT_LANG=zh-CN  # Chinese
 export AWS_IOT_LANG=pt-BR  # Portuguese
+export AWS_IOT_LANG=ko     # Korean
 
 # Run any script - language will be applied automatically
 python scripts/iot_registry_explorer.py
@@ -183,13 +186,14 @@ python scripts/iot_registry_explorer.py
 python scripts/setup_sample_data.py
 
 # Output example:
-# 🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma
+# 🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma / 언어 선택
 # 1. English
 # 2. Español (Spanish)
 # 3. 日本語 (Japanese)
 # 4. 中文 (Chinese)
 # 5. Português (Portuguese)
-# Select language (1-5): 5
+# 6. 한국어 (Korean)
+# Select language (1-6): 6
 ```
 
 **Supported Scripts:**
@@ -315,6 +319,11 @@ python scripts/<script_name>.py --debug
 - **[详细脚本指南](docs/zh-CN/DETAILED_SCRIPTS.md)** - 每个学习脚本的深入文档
 - **[完整示例](docs/zh-CN/EXAMPLES.md)** - 完整的工作流程和实际场景
 - **[故障排除指南](docs/zh-CN/TROUBLESHOOTING.md)** - 常见问题和错误的解决方案
+
+### 한국어 문서
+- **[자세한 스크립트 가이드](docs/ko/DETAILED_SCRIPTS.md)** - 각 학습 스크립트에 대한 심층 문서
+- **[완전한 예제](docs/ko/EXAMPLES.md)** - 완전한 워크플로우 및 샘플 출력
+- **[문제 해결 가이드](docs/ko/TROUBLESHOOTING.md)** - 일반적인 문제 및 해결책
 
 
 ### Learning Resources

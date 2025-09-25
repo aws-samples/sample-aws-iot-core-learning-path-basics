@@ -619,6 +619,174 @@ MESSAGES = {
         "deleting_certificate": "🗑️  Excluindo certificado: {}",
         "error_cleaning_certificate": "❌ Erro limpando certificado {}: {}",
     },
+    "ko": {
+        "title": "🧹 AWS IoT 샘플 데이터 정리",
+        "separator": "=" * 50,
+        "aws_config": "📍 AWS 구성:",
+        "account_id": "계정 ID",
+        "region": "리전",
+        "aws_context_error": "⚠️ AWS 컨텍스트를 검색할 수 없습니다:",
+        "aws_credentials_reminder": "   AWS 자격 증명이 구성되어 있는지 확인하세요",
+        "description_intro": "이 스크립트는 다음에 의해 생성된 샘플 리소스만 정리합니다:",
+        "setup_scripts": ["• setup_sample_data.py", "• certificate_manager.py"],
+        "no_affect_other": "계정의 다른 IoT 리소스에는 영향을 주지 않습니다.",
+        "debug_enabled": "🔍 디버그 모드 활성화",
+        "debug_features": [
+            "• 상세한 API 요청 및 응답을 표시합니다",
+            "• 완전한 오류 세부 정보 및 추적을 포함합니다",
+            "• 교육용 API 호출 문서",
+        ],
+        "tip": "💡 팁: 상세한 API 호출을 보려면 --debug 또는 -d 플래그를 사용하세요",
+        "resources_to_cleanup": "🎯 정리할 리소스:",
+        "things_prefix": "• '{}'로 시작하는 Things (Vehicle-VIN-001, Vehicle-VIN-002 등)",
+        "thing_types": "• Thing Types: {} (먼저 사용 중단됩니다)",
+        "thing_groups": "• Thing Groups: {}",
+        "certificates_attached": "• 샘플 Things에 첨부된 인증서",
+        "local_cert_files": "• ./certificates/의 로컬 인증서 파일",
+        "policies_manual_review": "• 정책은 수동 검토를 위해 나열됩니다",
+        "continue_cleanup": "정리를 계속하시겠습니까? (y/N): ",
+        "cleanup_cancelled": "정리가 취소되었습니다",
+        "client_initialized": "✅ AWS IoT 클라이언트가 초기화되었습니다",
+        "debug_client_config": "🔍 디버그: 클라이언트 구성:",
+        "service_label": "서비스",
+        "api_version_label": "API 버전",
+        "learning_moment_title": "📚 학습 포인트: 리소스 정리 및 수명 주기 관리",
+        "learning_moment_content": "적절한 리소스 정리는 불필요한 비용을 피하고 보안을 유지하기 위해 IoT 배포에서 필수적입니다. AWS IoT 리소스에는 종속성이 있습니다 - 인증서는 삭제 전에 분리되어야 하고, Thing Types는 제거 전에 사용 중단되어야 하며, 정책은 장치 간에 공유될 수 있으므로 신중하게 검토되어야 합니다.",
+        "next_cleanup": "🔄 다음: 올바른 순서로 샘플 리소스를 안전하게 정리하겠습니다",
+        "press_enter_continue": "계속하려면 Enter를 누르세요...",
+        "step1_title": "🗑️ 1단계: 샘플 Things 및 인증서 정리 중...",
+        "step_separator": "-" * 50,
+        "listing_things": "🔍 샘플 Things를 찾기 위해 모든 Things 나열 중",
+        "found_sample_things": "📋 정리할 {} 샘플 Things를 찾았습니다",
+        "processing_thing": "📱 Thing 처리 중: {}",
+        "listing_principals": "🔍 Thing {}의 주체(인증서) 나열 중",
+        "found_certificates": "🔐 {}에 첨부된 {} 인증서를 찾았습니다",
+        "deleting_thing": "🗑️ Thing 삭제 중: {}",
+        "step2_title": "🔐 2단계: 고아 인증서 확인 중...",
+        "listing_certificates": "🔍 고아 인증서를 확인하기 위해 모든 인증서 나열 중",
+        "found_certificates_account": "📋 계정에서 {} 인증서를 찾았습니다",
+        "certificate_info": "ℹ️ 인증서: {} (상태: {})",
+        "checking_certificate_things": "🔍 인증서 {}가 Things에 첨부되어 있는지 확인 중",
+        "cert_attached_sample_things": "⚠️ 인증서 {}가 샘플 Things에 첨부되어 있었습니다: {}",
+        "cert_should_cleanup_step1": "   이 인증서는 1단계에서 정리되었어야 합니다",
+        "cert_not_attached_sample": "✅ 인증서 {}는 샘플 Things에 첨부되어 있지 않습니다",
+        "could_not_check_things": "⚠️ 인증서 {}의 Things를 확인할 수 없습니다: {}",
+        "step3_title": "📄 3단계: 샘플 정책 정리 중...",
+        "listing_policies": "🔍 정리를 위해 모든 정책 나열 중",
+        "found_policies_account": "📋 계정에서 {} 정책을 찾았습니다",
+        "checking_policy": "📄 정책 확인 중: {}",
+        "checking_policy_targets": "🔍 정책 {}의 대상 확인 중",
+        "policy_attached_targets": "   ⚠️ 정책 {}가 {} 대상에 첨부되어 있어 건너뜁니다",
+        "deleting_unattached_policy": "   🗑️ 첨부되지 않은 정책 삭제 중: {}",
+        "error_checking_policy": "   ❌ 정책 {} 확인 오류: {}",
+        "policy_no_sample_patterns": "   ℹ️ 정책 {}가 샘플 패턴과 일치하지 않아 건너뜁니다",
+        "policy_cleanup_summary": "📊 정책 정리 요약:",
+        "deleted_policies": "   ✅ 삭제됨: {} 정책",
+        "skipped_policies": "   ⚠️ 건너뜀: {} 정책 (여전히 리소스에 첨부됨)",
+        "certificate_cleanup_summary": "📊 인증서 정리 요약:",
+        "cleaned_certificates": "   ✅ 정리됨: {} 인증서",
+        "skipped_certificates": "   ⚠️ 건너뜀: {} 인증서",
+        "skipped_certs_production": "💡 건너뛴 인증서는 프로덕션 인증서이거나 불분명한 사용 패턴을 가지고 있는 것 같습니다",
+        "manual_cert_deletion": "   학습용이라고 확신한다면 AWS 콘솔에서 수동으로 삭제할 수 있습니다",
+        "skipped_policies_note": "💡 건너뛴 정책은 여전히 인증서나 다른 리소스에 첨부되어 있습니다",
+        "policies_cleanup_auto": "   인증서가 삭제될 때 자동으로 정리됩니다",
+        "policies_manual_cleanup": "   또는 필요한 경우 수동으로 분리하고 삭제할 수 있습니다",
+        "step4_title": "📁 4단계: 샘플 Thing Groups 정리 중...",
+        "listing_thing_groups": "🔍 샘플 그룹을 찾기 위해 모든 Thing Groups 나열 중",
+        "found_sample_groups": "📋 정리할 {} 샘플 Thing Groups를 찾았습니다",
+        "deleting_thing_group": "📁 Thing Group 삭제 중: {}",
+        "step5_title": "🏷️ 5단계: 샘플 Thing Types 정리 중...",
+        "listing_thing_types": "🔍 샘플 타입을 찾기 위해 모든 Thing Types 나열 중",
+        "found_sample_types": "📋 정리할 {} 샘플 Thing Types를 찾았습니다",
+        "no_sample_types": "ℹ️ 정리할 샘플 Thing Types를 찾지 못했습니다",
+        "thing_type_deprecated": "ℹ️ Thing Type {}는 이미 사용 중단되었습니다 ({}부터)",
+        "thing_type_active": "ℹ️ Thing Type {}는 활성 상태입니다 (사용 중단 필요)",
+        "could_not_check_status": "⚠️ {}의 상태를 확인할 수 없습니다: {}",
+        "deprecating_active_types": "⚠️ {} 활성 Thing Types를 사용 중단하는 중...",
+        "deprecating_thing_type": "🏷️ Thing Type 사용 중단 중: {}",
+        "thing_type_deprecated_success": "✅ Thing Type {} 사용 중단됨",
+        "could_not_deprecate": "❌ Thing Type {}를 사용 중단할 수 없습니다",
+        "aws_constraint_5min": "⏰ AWS IoT 제약: Thing Types는 사용 중단 후 삭제 전에 5분을 기다려야 합니다",
+        "thing_types_to_delete": "📋 삭제할 Thing Types:",
+        "deprecated_item": "   • {} (사용 중단됨: {})",
+        "deletion_options": "🎯 삭제 옵션:",
+        "wait_5min_delete": "1. 지금 5분 기다리고 자동으로 삭제",
+        "skip_deletion": "2. 삭제 건너뛰기 (나중에 정리 다시 실행)",
+        "try_deletion_now": "3. 지금 삭제 시도 (충분한 시간이 지나지 않았으면 실패할 수 있음)",
+        "select_option_1_3": "옵션 선택 (1-3): ",
+        "waiting_5min": "⏳ AWS IoT 제약으로 5분 대기 중...",
+        "constraint_explanation": "💡 이는 AWS IoT에서 요구됩니다 - Thing Types는 사용 중단 후 즉시 삭제할 수 없습니다",
+        "time_remaining": "⏰ 남은 시간: {:02d}:{:02d} - Ctrl+C로 취소할 수 있습니다",
+        "wait_completed": "✅ 5분 대기 기간이 완료되었습니다!",
+        "skipping_deletion": "⏭️ Thing Type 삭제 건너뛰기",
+        "deletion_tip": "💡 나중에 삭제하려면 실행: python cleanup_sample_data.py",
+        "types_ready_deletion": "   Thing Types는 이미 사용 중단되었으며 삭제 준비가 되었습니다",
+        "attempting_deletion_now": "🚀 지금 삭제 시도 중 (시간 제약으로 실패할 수 있음)",
+        "invalid_choice_1_3": "❌ 잘못된 선택입니다. 1, 2, 또는 3을 입력하세요",
+        "deleting_deprecated_types": "🗑️ 사용 중단된 Thing Types 삭제 중...",
+        "attempting_delete_type": "🗑️ Thing Type 삭제 시도 중: {}",
+        "deletion_failed_timing": "💡 타이밍으로 인해 삭제가 실패했다면 몇 분 더 기다린 후 다시 시도하세요",
+        "type_ready_deletion": "   Thing Type {}는 사용 중단되었으며 삭제 준비가 되었습니다",
+        "cleanup_interrupted": "🛑 사용자가 정리를 중단했습니다",
+        "types_deprecated_delete_later": "💡 사용 중단된 Thing Types는 정리를 다시 실행하여 나중에 삭제할 수 있습니다",
+        "step6_title": "🌙 6단계: 디바이스 섀도우 정리...",
+        "shadows_auto_cleanup": "ℹ️ 디바이스 섀도우는 Things가 삭제될 때 자동으로 정리됩니다",
+        "no_manual_shadow_cleanup": "   수동 섀도우 삭제가 필요하지 않습니다 - AWS IoT가 자동으로 처리합니다",
+        "debug_shadow_skipped": "🔍 디버그: 섀도우 정리 건너뜀 - Thing 삭제로 처리됨",
+        "shadow_cleanup_completed": "✅ 섀도우 정리 완료 (자동)",
+        "step7_title": "📋 7단계: 샘플 IoT 규칙 정리 중...",
+        "debug_listing_rules": "🔍 디버그: 모든 IoT 규칙 나열 중",
+        "debug_deleting_rule": "🔍 디버그: 규칙 삭제 중: {}",
+        "deleted_rule": "   ✅ 규칙 삭제됨: {}",
+        "error_deleting_rule": "   ❌ 규칙 {} 삭제 오류: {}",
+        "no_sample_rules": "   ℹ️ 삭제할 샘플 규칙을 찾지 못했습니다",
+        "rules_cleanup_summary": "📊 규칙 정리 요약: {} 규칙 삭제됨",
+        "step8_title": "💾 8단계: 로컬 인증서 파일 정리 중...",
+        "checking_cert_directory": "🔍 로컬 인증서 디렉토리 확인 중: {}",
+        "cert_directory_contents": "📁 인증서 디렉토리 내용:",
+        "removed_cert_directory": "✅ 로컬 인증서 디렉토리 제거됨: {}",
+        "directory_deleted_success": "🔍 디렉토리 {} 성공적으로 삭제됨",
+        "error_removing_cert_dir": "❌ 인증서 디렉토리 제거 오류: {}",
+        "no_cert_directory": "ℹ️ 로컬 인증서 디렉토리를 찾지 못했습니다",
+        "directory_not_exist": "🔍 디렉토리 {}가 존재하지 않습니다",
+        "checking_sample_cert_dir": "🔍 샘플 인증서 디렉토리 확인 중: {}",
+        "sample_cert_contents": "📁 sample-certs 디렉토리 내용:",
+        "removed_sample_cert_dir": "✅ 샘플 인증서 디렉토리 제거됨: {}",
+        "error_removing_sample_dir": "❌ sample-certs 디렉토리 제거 오류: {}",
+        "no_sample_cert_dir": "ℹ️ 샘플 인증서 디렉토리를 찾지 못했습니다",
+        "cleanup_summary_title": "🎉 정리 요약",
+        "summary_separator": "=" * 50,
+        "things_cleaned": "✅ 샘플 Things 정리됨 (Vehicle-VIN-001, Vehicle-VIN-002 등)",
+        "certificates_cleaned": "✅ 관련 인증서 정리됨",
+        "groups_cleaned": "✅ 샘플 Thing Groups 정리됨",
+        "types_cleaned": "✅ 샘플 Thing Types 정리됨",
+        "local_files_cleaned": "✅ 로컬 인증서 파일 정리됨 (certificates/ 및 sample-certs/)",
+        "device_state_cleaned": "✅ 디바이스 상태 파일 정리됨 (device_state.json 파일)",
+        "account_clean": "💡 AWS IoT 계정에는 이제 샘플이 아닌 리소스만 포함됩니다",
+        "error_generic": "❌ 오류: {}",
+        "debug_cleanup_completed": "🔍 디버그: 상세한 API 로깅으로 정리 세션이 완료되었습니다",
+        "api_call_header": "🔍 API 호출: {}",
+        "api_description": "📖 설명: {}",
+        "api_input_params": "📥 입력 매개변수:",
+        "api_no_params": "📥 입력 매개변수: 없음",
+        "api_response": "📤 API 응답:",
+        "api_empty_response": "빈 응답 (작업이 성공적으로 완료됨)",
+        "deleting_resource": "{} 삭제 중: {}",
+        "deleted_resource": "✅ {} 삭제됨: {}",
+        "resource_not_found": "⚠️ {} {}를 찾을 수 없어 건너뜁니다",
+        "error_deleting_resource": "❌ {} {} 삭제 오류: {}",
+        "debug_full_error": "🔍 디버그: 전체 오류 응답:",
+        "debug_full_traceback": "🔍 디버그: 전체 추적:",
+        "cleaning_certificate": "🔐 인증서 정리 중: {}",
+        "step1_list_policies": "🔍 1단계: 인증서에 첨부된 정책 나열 중",
+        "found_attached_policies": "📋 {} 첨부된 정책을 찾았습니다",
+        "detaching_policy": "🔗 정책 분리 중: {}",
+        "detaching_cert_from_thing": "🔗 Thing에서 인증서 분리 중: {}",
+        "deactivating_certificate": "⏸️ 인증서 비활성화 중: {}",
+        "certificate_deactivated": "✅ 인증서 {} 비활성화됨",
+        "deleting_certificate": "🗑️ 인증서 삭제 중: {}",
+        "error_cleaning_certificate": "❌ 인증서 {} 정리 오류: {}",
+    },
 }
 
 # Global variables for language and debug mode
@@ -640,19 +808,22 @@ def get_language():
         return "zh-CN"
     elif env_lang in ["pt-br", "portuguese", "português", "pt"]:
         return "pt-BR"
+    elif env_lang in ["ko", "korean", "한국어", "kr"]:
+        return "ko"
 
     # If no environment variable, ask user
-    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma")
+    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma / 언어 선택")
     print("=" * 80)
     print("1. English")
     print("2. Español (Spanish)")
     print("3. 日本語 (Japanese)")
     print("4. 中文 (Chinese)")
     print("5. Português (Portuguese)")
+    print("6. 한국어 (Korean)")
 
     while True:
         try:
-            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma (1-5): ").strip()
+            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): ").strip()
             if choice == "1":
                 return "en"
             elif choice == "2":
@@ -663,14 +834,17 @@ def get_language():
                 return "zh-CN"
             elif choice == "5":
                 return "pt-BR"
+            elif choice == "6":
+                return "ko"
             else:
-                print("Invalid choice. Please select 1-5.")
-                print("Selección inválida. Por favor selecciona 1-5.")
-                print("無効な選択です。1-5を選択してください。")
-                print("无效选择。请选择 1-5。")
-                print("Escolha inválida. Por favor selecione 1-5.")
+                print("Invalid choice. Please select 1-6.")
+                print("Selección inválida. Por favor selecciona 1-6.")
+                print("無効な選択です。1-6を選択してください。")
+                print("无效选择。请选择 1-6。")
+                print("Escolha inválida. Por favor selecione 1-6.")
+                print("잘못된 선택입니다. 1-6을 선택해주세요.")
         except KeyboardInterrupt:
-            print("Goodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau!")
+            print("Goodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau! / 안녕히 가세요!")
             sys.exit(0)
 
 

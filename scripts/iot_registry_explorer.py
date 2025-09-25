@@ -893,6 +893,213 @@ MESSAGES = {
         "type_label": "Tipo",
         "description_simple": "Descrição",
     },
+    "ko": {
+        "title": "🚀 AWS IoT 레지스트리 API 탐색기",
+        "separator": "=" * 40,
+        "aws_config": "📍 AWS 구성:",
+        "account_id": "계정 ID",
+        "region": "리전",
+        "description": "상세한 설명과 함께 AWS IoT 레지스트리 API의 대화형 탐색.",
+        "debug_enabled": "🔍 디버그 모드 활성화",
+        "debug_features": [
+            "• 전체 API 요청/응답 세부 정보",
+            "• 완전한 HTTP 정보",
+            "• 향상된 오류 진단",
+        ],
+        "tip": "💡 팁: 상세한 API 정보를 보려면 --debug 또는 -d 플래그를 사용하세요",
+        "tip_features": ["• 축약 모드는 핵심 메트릭만 표시", "• 디버그 모드는 완전한 API 세부 정보를 표시"],
+        "client_initialized": "✅ AWS IoT 클라이언트가 성공적으로 초기화되었습니다",
+        "invalid_credentials": "❌ 유효하지 않은 AWS 자격 증명",
+        "learning_intro_title": "AWS IoT 레지스트리 API - 디바이스 관리",
+        "learning_intro_content": "AWS IoT 레지스트리는 IoT 디바이스(Things), 그 조직(Thing Groups), 디바이스 템플릿(Thing Types) 및 보안 인증서에 대한 정보를 저장하는 중앙 데이터베이스입니다. 이러한 API를 통해 전체 IoT 디바이스 플릿을 프로그래밍 방식으로 관리할 수 있습니다. 이러한 작업을 이해하는 것은 확장 가능한 IoT 솔루션을 구축하는 데 기본적입니다.",
+        "learning_intro_next": "상세한 설명과 함께 8개의 핵심 레지스트리 API를 탐색하겠습니다",
+        "press_enter": "계속하려면 Enter를 누르세요...",
+        "goodbye": "👋 안녕히 가세요!",
+        "operations_menu": "📋 사용 가능한 작업:",
+        "operations": [
+            "1. Things 목록",
+            "2. 인증서 목록",
+            "3. Thing Groups 목록",
+            "4. Thing Types 목록",
+            "5. Thing 설명",
+            "6. Thing Group 설명",
+            "7. Thing Type 설명",
+            "8. 엔드포인트 설명",
+            "9. 종료",
+        ],
+        "select_operation": "작업 선택 (1-9):",
+        "invalid_choice": "❌ 잘못된 선택입니다. 1-9를 선택해주세요.",
+        "list_things_options": "🔍 Things 목록 옵션:",
+        "list_things_menu": [
+            "   1. 모든 Things 목록 (기본)",
+            "   2. 페이지네이션으로 Things 목록",
+            "   3. Thing Type으로 Things 필터링",
+            "   4. 속성으로 Things 필터링",
+        ],
+        "select_option": "옵션 선택 (1-4):",
+        "max_results_prompt": "페이지당 최대 결과 수 입력 (기본값 5):",
+        "thing_type_prompt": "Thing Type 이름 입력 (예: SedanVehicle):",
+        "attribute_name_prompt": "속성 이름 입력 (예: country):",
+        "attribute_value_prompt": "속성 값 입력 (예: US):",
+        "no_thing_type": "❌ Thing Type이 지정되지 않았습니다",
+        "attribute_required": "❌ 속성 이름과 값이 필요합니다",
+        "executing": "🔄 실행 중:",
+        "completed": "완료",
+        "found_things": "📊 {} Things를 찾았습니다",
+        "thing_names": "   Thing 이름:",
+        "found_certificates": "📊 {} 인증서를 찾았습니다",
+        "certificate_ids": "   인증서 ID:",
+        "found_thing_groups": "📊 {} Thing Groups를 찾았습니다",
+        "group_names": "   그룹 이름:",
+        "found_thing_types": "📊 {} Thing Types를 찾았습니다",
+        "type_names": "   타입 이름:",
+        "return_to_menu": "메뉴로 돌아가려면 Enter를 누르세요...",
+        "available_things": "📋 사용 가능한 Things",
+        "available_groups": "📋 사용 가능한 Thing Groups",
+        "available_types": "📋 사용 가능한 Thing Types",
+        "enter_thing_name": "Thing 이름 입력: ",
+        "enter_group_selection": "번호 또는 Thing Group 이름 입력: ",
+        "enter_type_selection": "번호 또는 Thing Type 이름 입력: ",
+        "no_things_found": "⚠️ 계정에서 Things를 찾을 수 없습니다",
+        "no_groups_found": "⚠️ 계정에서 Thing Groups를 찾을 수 없습니다",
+        "no_types_found": "⚠️ 계정에서 Thing Types를 찾을 수 없습니다",
+        "could_not_list_things": "⚠️ Things를 나열할 수 없습니다:",
+        "could_not_list_groups": "⚠️ Thing Groups를 나열할 수 없습니다:",
+        "could_not_list_types": "⚠️ Thing Types를 나열할 수 없습니다:",
+        "invalid_selection": "❌ 잘못된 선택입니다. 다음 중에서 선택하세요",
+        "endpoint_type_prompt": "엔드포인트 타입 입력 (iot:Data-ATS, iot:CredentialProvider, iot:Jobs) [기본값: iot:Data-ATS]: ",
+        "pagination_learning_title": "📚 학습 포인트: 페이지네이션",
+        "pagination_learning_content": "페이지네이션을 사용하면 대용량 데이터셋을 작은 단위로 검색할 수 있습니다. 이는 수백 또는 수천 개의 디바이스를 관리할 때 타임아웃과 메모리 문제를 피하기 위해 필수적입니다.",
+        "pagination_listing": "🔄 페이지네이션으로 Things 나열 중 (페이지당 최대 {}개)...",
+        "page_summary": "📊 페이지 {} 요약: {} Things 검색됨",
+        "continue_next_page": "다음 페이지로 계속하시겠습니까? (y/N): ",
+        "pagination_complete": "🏁 페이지네이션 완료: {}개 페이지에서 총 {} Things를 찾았습니다",
+        "filter_by_type_learning_title": "📚 학습 포인트: Thing Type으로 필터링",
+        "filter_by_type_learning_content": "필터링을 사용하면 특정 카테고리의 디바이스를 찾을 수 있습니다. Thing Types는 비슷한 디바이스를 함께 그룹화하는 템플릿 역할을 합니다.",
+        "filtering_by_type": "🔄 Thing Type으로 Things 필터링 중: {}...",
+        "filter_type_results": "📊 필터 결과: Thing Type '{}'로 {} Things를 찾았습니다",
+        "filter_by_attribute_learning_title": "📚 학습 포인트: 속성으로 필터링",
+        "filter_by_attribute_learning_content": "속성 필터링은 특정 특성을 가진 디바이스를 찾는 데 도움이 됩니다. 이는 위치, 고객 또는 기타 메타데이터로 디바이스를 대상으로 지정하는 데 유용합니다.",
+        "filtering_by_attribute": "🔄 속성 {}={}로 Things 필터링 중...",
+        "filter_attribute_results": "📊 필터 결과: {}='{}'로 {} Things를 찾았습니다",
+        "debug_full_error": "🔍 디버그: 전체 오류 응답:",
+        "debug_full_traceback": "🔍 디버그: 전체 추적:",
+        "api_error": "❌ API 오류:",
+        "error": "❌ 오류:",
+        "no_region_error": "❌ AWS 리전이 구성되지 않았습니다",
+        "region_setup_instructions": [
+            "다음 방법 중 하나를 사용하여 AWS 리전을 구성하세요:",
+            "1. 환경 변수 설정: export AWS_DEFAULT_REGION=us-east-1",
+            "2. AWS CLI 구성: aws configure",
+            "3. AWS 자격 증명 파일에서 리전 설정",
+        ],
+        "aws_context_error": "⚠️ AWS 컨텍스트를 검색할 수 없습니다:",
+        "aws_credentials_reminder": "   AWS 자격 증명이 구성되어 있는지 확인하세요",
+        "learning_moments": {
+            "list_things": {
+                "title": "Things 목록 - 디바이스 발견",
+                "content": "list_things API는 계정의 모든 IoT 디바이스(Things)를 검색합니다. 이는 디바이스 인벤토리 관리, 플릿 크기 모니터링 및 속성으로 디바이스 발견에 필수적입니다. 페이지네이션과 필터링을 사용하여 디바이스 플릿을 효율적으로 처리할 수 있습니다.",
+                "next": "다양한 옵션으로 list_things API를 호출하겠습니다",
+            },
+            "list_certificates": {
+                "title": "인증서 목록 - 보안 인벤토리",
+                "content": "X.509 인증서는 IoT 디바이스 보안의 기초입니다. 각 인증서는 디바이스를 고유하게 식별하고 AWS IoT Core와의 보안 통신을 가능하게 합니다. 이 API는 보안 상태를 감사하고, 인증서 수명 주기를 추적하며, 인증서 교체가 필요한 디바이스를 식별하는 데 도움이 됩니다.",
+                "next": "모든 인증서를 검색하고 보안 속성을 검토하겠습니다",
+            },
+            "list_thing_groups": {
+                "title": "Thing Groups 목록 - 디바이스 조직",
+                "content": "Thing Groups는 파일의 폴더와 유사하게 IoT 디바이스에 대한 계층적 조직을 제공합니다. 위치, 기능 또는 비즈니스 기준에 따른 대량 작업, 정책 상속 및 논리적 그룹화를 가능하게 합니다. 이는 대규모 IoT 배포를 관리하는 데 중요합니다.",
+                "next": "Thing Groups와 그 조직 구조를 탐색하겠습니다",
+            },
+            "list_thing_types": {
+                "title": "Thing Types 목록 - 디바이스 템플릿",
+                "content": "Thing Types는 IoT 디바이스 카테고리를 정의하는 템플릿입니다. 비슷한 디바이스에 대한 공통 속성과 동작을 지정하는 청사진 역할을 합니다. 예를 들어, 'SedanVehicle' 타입은 엔진 타입과 좌석 수와 같은 속성을 정의할 수 있습니다. Thing Types는 디바이스 플릿을 조직하고 표준화된 디바이스 관리를 가능하게 합니다.",
+                "next": "Thing Types와 그 속성 스키마를 검토하겠습니다",
+            },
+            "describe_thing": {
+                "title": "Thing 설명 - 디바이스 세부 정보",
+                "content": "describe_thing API는 속성, Thing Type, 버전 및 고유 식별자를 포함하여 특정 IoT 디바이스에 대한 완전한 정보를 제공합니다. 이는 디바이스 문제 해결, 구성 관리 및 IoT 아키텍처 내에서 디바이스 관계를 이해하는 데 필수적입니다.",
+                "next": "특정 Thing에 대한 상세 정보를 검토하겠습니다",
+            },
+            "describe_thing_group": {
+                "title": "Thing Group 설명 - 그룹 관리",
+                "content": "Thing Group 세부 정보는 IoT 플릿의 조직 구조를 보여줍니다. 그룹 속성, 부모-자식 계층, 첨부된 정책 및 멤버 디바이스를 볼 수 있습니다. 이 정보는 액세스 제어, 정책 상속 및 디바이스 조직 전략을 이해하는 데 중요합니다.",
+                "next": "특정 Thing Group의 상세한 속성을 검토하겠습니다",
+            },
+            "describe_thing_type": {
+                "title": "Thing Type 설명 - 템플릿 분석",
+                "content": "Thing Type 세부 정보는 디바이스 카테고리에 대한 청사진 정의를 보여줍니다. 검색 가능한 속성, 속성 제약 조건 및 이 타입의 디바이스가 어떻게 구조화되어야 하는지를 정의하는 메타데이터를 검토할 수 있습니다. 이는 일관된 디바이스 등록을 보장하고 효율적인 플릿 쿼리를 가능하게 하는 데 도움이 됩니다.",
+                "next": "특정 Thing Type의 스키마와 속성을 분석하겠습니다",
+            },
+            "describe_endpoint": {
+                "title": "엔드포인트 설명 - 연결 발견",
+                "content": "IoT 엔드포인트는 디바이스가 AWS IoT Core에 연결하는 데 사용하는 게이트웨이 URL입니다. 다른 엔드포인트 타입은 다른 목적을 제공합니다: 디바이스 통신용 Data-ATS, 인증용 CredentialProvider, 디바이스 관리용 Jobs. 엔드포인트를 이해하는 것은 디바이스 연결 구성에 중요합니다.",
+                "next": "디바이스 연결을 위한 엔드포인트 URL을 발견하겠습니다",
+            },
+        },
+        "api_desc_list_things_paginated": "페이지 {} - 최대 {} Things 검색",
+        "api_desc_list_things_by_type": "Thing Type '{}'로 필터링된 Things 검색",
+        "api_desc_list_things_by_attribute": "속성 '{}={}'로 필터링된 Things 검색",
+        "api_desc_list_things": "AWS 계정의 모든 IoT Things의 페이지네이션된 목록 검색",
+        "api_desc_list_certificates": "AWS IoT 계정에 등록된 X.509 인증서 목록 검색",
+        "api_desc_list_thing_groups": "IoT 디바이스를 조직하고 관리하는 데 사용되는 Thing Groups 목록 검색",
+        "api_desc_list_thing_types": "디바이스 템플릿과 속성을 정의하는 Thing Types 목록 검색",
+        "api_desc_describe_thing": "특정 IoT Thing에 대한 상세 정보 검색",
+        "api_desc_describe_thing_group": "특정 Thing Group에 대한 상세 정보 검색",
+        "api_desc_describe_thing_type": "특정 Thing Type에 대한 상세 정보 검색",
+        "api_desc_describe_endpoint": "AWS 계정과 리전에 대한 IoT 엔드포인트 URL 검색",
+        "api_explain_list_things": "이름, 타입, 속성 및 생성 날짜가 포함된 디바이스 인벤토리 표시",
+        "api_explain_list_certificates": "ID, ARN, 상태 및 만료 날짜가 포함된 보안 인증서 표시",
+        "api_explain_list_thing_groups": "그룹 계층과 속성이 포함된 디바이스 조직 구조 표시",
+        "api_explain_list_thing_types": "검색 가능한 속성과 속성 정의가 포함된 디바이스 템플릿 표시",
+        "api_explain_describe_thing": "속성, 타입 및 버전 정보를 포함한 완전한 디바이스 프로필 표시",
+        "api_explain_describe_thing_group": "그룹 구성, 부모/자식 관계 및 적용된 정책 표시",
+        "api_explain_describe_thing_type": "템플릿 스키마, 검색 가능한 속성 및 속성 제약 조건 표시",
+        "api_explain_describe_endpoint": "디바이스 통신 및 데이터 작업에 사용되는 HTTPS 엔드포인트 URL 반환",
+        "api_call_label": "API 호출",
+        "http_request_label": "HTTP 요청",
+        "description_label": "설명",
+        "input_parameters_label": "입력 매개변수",
+        "no_input_parameters": "없음 (이 API는 입력 매개변수가 필요하지 않습니다)",
+        "response_explanation_label": "응답 설명",
+        "response_payload_label": "응답 페이로드",
+        "thing_details": "📊 Thing 세부 정보:",
+        "thing_group_details": "📊 Thing Group 세부 정보:",
+        "thing_type_details": "📊 Thing Type 세부 정보:",
+        "name_label": "이름",
+        "type_label": "타입",
+        "description_simple": "설명",
+    },
+    "ko": {
+        "title": "🔍 AWS IoT 레지스트리 탐색기",
+        "separator": "=" * 60,
+        "aws_context_info": "🌍 AWS 컨텍스트 정보:",
+        "account_id": "계정 ID",
+        "region": "리전",
+        "press_enter": "계속하려면 Enter를 누르세요...",
+        "goodbye": "👋 안녕히 가세요!",
+        "main_menu": "📋 AWS IoT 레지스트리 API:",
+        "menu_options": [
+            "1. Things 나열 (list_things)",
+            "2. Thing 세부 정보 가져오기 (describe_thing)",
+            "3. Thing Types 나열 (list_thing_types)",
+            "4. Thing Type 세부 정보 가져오기 (describe_thing_type)",
+            "5. Thing Groups 나열 (list_thing_groups)",
+            "6. Thing Group 세부 정보 가져오기 (describe_thing_group)",
+            "7. Thing의 그룹 나열 (list_thing_groups_for_thing)",
+            "8. Thing Group의 Things 나열 (list_things_in_thing_group)",
+            "9. 종료",
+        ],
+        "select_option": "옵션 선택 (1-9): ",
+        "invalid_choice": "❌ 잘못된 선택입니다. 1-9를 선택해주세요.",
+        "operation_cancelled": "🛑 작업이 취소되었습니다",
+        "no_things_found": "❌ Things를 찾을 수 없습니다",
+        "things_found": "✅ {} Things 발견",
+        "enter_thing_name": "Thing 이름을 입력하세요: ",
+        "thing_name_required": "❌ Thing 이름이 필요합니다",
+        "api_call_successful": "✅ API 호출 성공",
+        "api_call_failed": "❌ API 호출 실패:",
+    }
 }
 
 
@@ -910,20 +1117,23 @@ def get_language():
         return "zh-CN"
     elif env_lang in ["pt-br", "portuguese", "português", "pt"]:
         return "pt-BR"
+    elif env_lang in ["ko", "korean", "한국어", "kr"]:
+        return "ko"
 
     # If no environment variable, ask user
-    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma")
+    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma / 언어 선택")
     print("=" * 80)
     print("1. English")
     print("2. Español (Spanish)")
     print("3. 日本語 (Japanese)")
     print("4. 中文 (Chinese)")
     print("5. Português (Portuguese)")
+    print("6. 한국어 (Korean)")
 
     while True:
         try:
             choice = input(
-                "\nSelect language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma (1-5): "
+                "\nSelect language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): "
             ).strip()
             if choice == "1":
                 return "en"
@@ -935,12 +1145,14 @@ def get_language():
                 return "zh-CN"
             elif choice == "5":
                 return "pt-BR"
+            elif choice == "6":
+                return "ko"
             else:
                 print(
-                    "❌ Invalid selection / Selección inválida / 無効な選択です / 无效选择 / Seleção inválida. Please select 1-5 / Por favor selecciona 1-5 / 1-5を選択してください / 请选择 1-5 / Por favor selecione 1-5。"
+                    "❌ Invalid selection / Selección inválida / 無効な選択です / 无效选择 / Seleção inválida / 잘못된 선택입니다. Please select 1-6 / Por favor selecciona 1-6 / 1-6を選択してください / 请选择 1-6 / Por favor selecione 1-6 / 1-6을 선택해주세요."
                 )
         except KeyboardInterrupt:
-            print("\n\n👋 Goodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau!")
+            print("\n\n👋 Goodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau! / 안녕히 가세요!")
             sys.exit(0)
 
 
