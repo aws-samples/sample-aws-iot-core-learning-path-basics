@@ -859,7 +859,9 @@ def get_language():
 
     while True:
         try:
-            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): ").strip()
+            choice = input(
+                "Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): "
+            ).strip()
             if choice == "1":
                 return "en"
             elif choice == "2":

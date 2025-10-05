@@ -1110,7 +1110,7 @@ MESSAGES = {
         "thank_you_message": "AWS IoT Device Shadows를 탐색해 주셔서 감사합니다!",
         "shadow_command_prompt": "🌟 Shadow> ",
         "unknown_command": "❌ 알 수 없는 명령: {}. 사용 가능한 명령을 보려면 'help'를 입력하세요.",
-    }
+    },
 }
 
 # Global variable for user's language preference
@@ -1149,7 +1149,9 @@ def get_language():
 
     while True:
         try:
-            choice = input("Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): ").strip()
+            choice = input(
+                "Select language / Seleccionar idioma / 言語を選択 / 选择语言 / Selecionar idioma / 언어 선택 (1-6): "
+            ).strip()
             if choice == "1":
                 return "en"
             elif choice == "2":
