@@ -137,13 +137,20 @@ MESSAGES = {
         "default_rule_description": "Learning rule for processing IoT messages",
         "rule_description_confirmed": "✅ Rule description: {description}",
         "building_sql_title": "📖 Building SQL Statement for IoT Rules Engine",
-        "sql_template": "💡 Template: SELECT <attributes> FROM 'testRulesEngineTopic/<deviceId>/<eventType>' WHERE <condition>",
+        "sql_template": "💡 Template: SELECT <attributes> FROM '<topic_pattern>' WHERE <condition>",
+        "topic_configuration_title": "📡 Topic Pattern Configuration",
+        "topic_option_template": "1. Use predefined template: testRulesEngineTopic/<deviceId>/<eventType>",
+        "topic_option_custom": "2. Define custom topic pattern",
+        "select_topic_option": "Select topic configuration (1-2): ",
         "available_event_types": "🎯 Available Event Types:",
         "custom_event_type": "Custom event type",
         "select_event_type": "Select event type (1-{count}): ",
         "enter_custom_event_type": "Enter custom event type: ",
         "event_type_empty": "❌ Event type cannot be empty",
         "invalid_event_selection": "❌ Invalid selection",
+        "enter_custom_topic": "📝 Enter your custom topic pattern (use + for wildcards): ",
+        "custom_topic_examples": "💡 Examples: 'sensors/+/data', 'devices/+/telemetry/+', 'factory/floor1/+/status'",
+        "custom_topic_empty": "❌ Topic pattern cannot be empty",
         "topic_pattern_confirmed": "✅ Topic pattern: {pattern}",
         "select_clause_title": "🔍 SELECT Clause - Attributes for {event_type} events:",
         "custom_selection": "Custom selection",
@@ -178,8 +185,8 @@ MESSAGES = {
         "summary_sql": "🔍 SQL: {sql}",
         "summary_role": "🔑 Role: {role}",
         "testing_rule_title": "💡 Testing Your Rule:",
-        "testing_step_1": "1. Publish a message to: testRulesEngineTopic/device123/{event_type}",
-        "testing_step_2": "2. Subscribe to: {topic}",
+        "testing_step_1": "1. Publish a message to: {source_topic}",
+        "testing_step_2": "2. Subscribe to: {target_topic}",
         "testing_step_3": "3. Check if the message is routed correctly",
         "example_test_message": "📖 Example test message:",
         # IAM role management
@@ -419,13 +426,20 @@ MESSAGES = {
         "default_rule_description": "Regla de aprendizaje para procesar mensajes IoT",
         "rule_description_confirmed": "✅ Descripción de regla: {description}",
         "building_sql_title": "📖 Construyendo Declaración SQL para Motor de Reglas IoT",
-        "sql_template": "💡 Plantilla: SELECT <atributos> FROM 'testRulesEngineTopic/<deviceId>/<eventType>' WHERE <condición>",
+        "sql_template": "💡 Plantilla: SELECT <atributos> FROM '<patrón_tema>' WHERE <condición>",
+        "topic_configuration_title": "📡 Configuración de Patrón de Tema",
+        "topic_option_template": "1. Usar plantilla predefinida: testRulesEngineTopic/<deviceId>/<eventType>",
+        "topic_option_custom": "2. Definir patrón de tema personalizado",
+        "select_topic_option": "Selecciona configuración de tema (1-2): ",
         "available_event_types": "🎯 Tipos de Eventos Disponibles:",
         "custom_event_type": "Tipo de evento personalizado",
         "select_event_type": "Selecciona tipo de evento (1-{count}): ",
         "enter_custom_event_type": "Ingresa tipo de evento personalizado: ",
         "event_type_empty": "❌ El tipo de evento no puede estar vacío",
         "invalid_event_selection": "❌ Selección inválida",
+        "enter_custom_topic": "📝 Ingresa tu patrón de tema personalizado (usa + para comodines): ",
+        "custom_topic_examples": "💡 Ejemplos: 'sensors/+/data', 'devices/+/telemetry/+', 'factory/floor1/+/status'",
+        "custom_topic_empty": "❌ El patrón de tema no puede estar vacío",
         "topic_pattern_confirmed": "✅ Patrón de tema: {pattern}",
         "select_clause_title": "🔍 Cláusula SELECT - Atributos para eventos {event_type}:",
         "custom_selection": "Selección personalizada",
@@ -460,8 +474,8 @@ MESSAGES = {
         "summary_sql": "🔍 SQL: {sql}",
         "summary_role": "🔑 Rol: {role}",
         "testing_rule_title": "💡 Probando Tu Regla:",
-        "testing_step_1": "1. Publica un mensaje a: testRulesEngineTopic/device123/{event_type}",
-        "testing_step_2": "2. Suscríbete a: {topic}",
+        "testing_step_1": "1. Publica un mensaje a: {source_topic}",
+        "testing_step_2": "2. Suscríbete a: {target_topic}",
         "testing_step_3": "3. Verifica si el mensaje se enruta correctamente",
         "example_test_message": "📖 Mensaje de prueba de ejemplo:",
         # IAM role management
@@ -682,6 +696,24 @@ MESSAGES = {
                 "next": "エラーハンドリング戦略とベストプラクティスを学習します",
             },
         },
+        "building_sql_title": "📖 IoT Rules Engine用SQL文の構築",
+        "sql_template": "💡 テンプレート: SELECT <属性> FROM '<トピックパターン>' WHERE <条件>",
+        "topic_configuration_title": "📡 トピックパターン設定",
+        "topic_option_template": "1. 定義済みテンプレートを使用: testRulesEngineTopic/<deviceId>/<eventType>",
+        "topic_option_custom": "2. カスタムトピックパターンを定義",
+        "select_topic_option": "トピック設定を選択 (1-2): ",
+        "available_event_types": "🎯 利用可能なイベントタイプ:",
+        "custom_event_type": "カスタムイベントタイプ",
+        "select_event_type": "イベントタイプを選択 (1-{count}): ",
+        "enter_custom_event_type": "カスタムイベントタイプを入力: ",
+        "event_type_empty": "❌ イベントタイプは空にできません",
+        "invalid_event_selection": "❌ 無効な選択",
+        "enter_custom_topic": "📝 カスタムトピックパターンを入力 (ワイルドカードには+を使用): ",
+        "custom_topic_examples": "💡 例: 'sensors/+/data', 'devices/+/telemetry/+', 'factory/floor1/+/status'",
+        "custom_topic_empty": "❌ トピックパターンは空にできません",
+        "topic_pattern_confirmed": "✅ トピックパターン: {pattern}",
+        "testing_step_1": "1. メッセージを公開: {source_topic}",
+        "testing_step_2": "2. 購読: {target_topic}",
         "language_selection_title": "🌍 言語選択",
         "language_options": ["1. English", "2. Español (Spanish)", "3. 日本語 (Japanese)"],
         "select_language_prompt": "言語を選択 (1-3): ",
@@ -782,10 +814,84 @@ MESSAGES = {
         "debug_full_error": "🔍 调试: 完整错误响应:",
         "debug_full_traceback": "🔍 调试: 完整堆栈跟踪:",
         "invalid_characters_topic": "主题模式中的字符无效。只允许字母数字字符、连字符、下划线、正斜杠和 + 通配符。",
+        "building_sql_title": "📖 构建IoT规则引擎SQL语句",
+        "sql_template": "💡 模板: SELECT <属性> FROM '<主题模式>' WHERE <条件>",
+        "topic_configuration_title": "📡 主题模式配置",
+        "topic_option_template": "1. 使用预定义模板: testRulesEngineTopic/<deviceId>/<eventType>",
+        "topic_option_custom": "2. 定义自定义主题模式",
+        "select_topic_option": "选择主题配置 (1-2): ",
+        "available_event_types": "🎯 可用事件类型:",
+        "custom_event_type": "自定义事件类型",
+        "select_event_type": "选择事件类型 (1-{count}): ",
+        "enter_custom_event_type": "输入自定义事件类型: ",
+        "event_type_empty": "❌ 事件类型不能为空",
+        "invalid_event_selection": "❌ 无效选择",
+        "enter_custom_topic": "📝 输入自定义主题模式 (使用+作为通配符): ",
+        "custom_topic_examples": "💡 示例: 'sensors/+/data', 'devices/+/telemetry/+', 'factory/floor1/+/status'",
+        "custom_topic_empty": "❌ 主题模式不能为空",
+        "topic_pattern_confirmed": "✅ 主题模式: {pattern}",
+        "testing_step_1": "1. 发布消息到: {source_topic}",
+        "testing_step_2": "2. 订阅: {target_topic}",
         "language_selection_title": "🌍 语言选择",
         "language_options": ["1. English", "2. Español (Spanish)", "3. 日本語 (Japanese)", "4. 中文 (Chinese)"],
         "select_language_prompt": "选择语言 (1-4): ",
         "invalid_language_choice": "无效选择。请选择 1-4。",
+    },
+    "pt-BR": {
+        "main_title": "⚙️ Explorador do Motor de Regras AWS IoT",
+        "aws_config_title": "📍 Configuração AWS:",
+        "account_id": "ID da Conta",
+        "region": "Região",
+        "main_description": "Aprenda o Motor de Regras AWS IoT através da criação e gerenciamento prático de regras.",
+        "main_features": "Esta ferramenta demonstra:",
+        "feature_sql_syntax": "• Sintaxe SQL do Motor de Regras IoT e roteamento de mensagens",
+        "feature_topic_filtering": "• Filtragem de tópicos com cláusulas SELECT, FROM e WHERE",
+        "feature_republish_actions": "• Ações de republicação e configuração de funções IAM",
+        "feature_lifecycle": "• Gerenciamento do ciclo de vida de regras (criar, habilitar, desabilitar, excluir)",
+        "learning_moment_title": "📚 MOMENTO DE APRENDIZADO: Motor de Regras IoT",
+        "learning_moment_description": "O Motor de Regras AWS IoT processa e roteia mensagens de seus dispositivos usando consultas semelhantes ao SQL. As regras podem filtrar, transformar e rotear mensagens para vários serviços AWS como Lambda, DynamoDB ou S3. Isso permite processamento de dados em tempo real, alertas e integração com sua arquitetura AWS mais ampla sem exigir mudanças na lógica do dispositivo.",
+        "next_action": "🔄 PRÓXIMO: Criaremos e gerenciaremos regras IoT para processamento de mensagens",
+        "press_enter_continue": "Pressione Enter para continuar...",
+        "debug_mode_enabled": "🔍 MODO DEBUG HABILITADO",
+        "debug_tip": "💡 Dica: Use a flag --debug ou -d para logging aprimorado",
+        "menu_title": "📋 Menu do Motor de Regras IoT:",
+        "menu_option_1": "1. Listar todas as Regras IoT",
+        "menu_option_2": "2. Descrever Regra IoT específica",
+        "menu_option_3": "3. Criar nova Regra IoT",
+        "menu_option_4": "4. Testar Regra IoT com mensagens de exemplo",
+        "menu_option_5": "5. Gerenciar Regra IoT (habilitar/desabilitar/excluir)",
+        "menu_option_6": "6. Sair",
+        "select_option": "Selecionar opção (1-6): ",
+        "invalid_choice": "❌ Escolha inválida. Por favor selecione 1-6.",
+        "press_enter_menu": "Pressione Enter para continuar...",
+        "goodbye": "👋 Tchau!",
+        "operation_failed": "❌ {operation} falhou: {error}",
+        "unexpected_error": "❌ Erro inesperado: {error}",
+        "interrupted_by_user": "🛑 Interrompido pelo usuário",
+        "aws_context_error": "⚠️ Não foi possível obter o contexto AWS: {error}",
+        "aws_credentials_check": "Certifique-se de que as credenciais AWS estejam configuradas",
+        "header_separator": "=" * 60,
+        "step_separator": "-" * 50,
+        "rule_separator": "-" * 40,
+        "building_sql_title": "📖 Construindo Declaração SQL para Motor de Regras IoT",
+        "sql_template": "💡 Modelo: SELECT <atributos> FROM '<padrão_tópico>' WHERE <condição>",
+        "topic_configuration_title": "📡 Configuração de Padrão de Tópico",
+        "topic_option_template": "1. Usar modelo predefinido: testRulesEngineTopic/<deviceId>/<eventType>",
+        "topic_option_custom": "2. Definir padrão de tópico personalizado",
+        "select_topic_option": "Selecionar configuração de tópico (1-2): ",
+        "available_event_types": "🎯 Tipos de Eventos Disponíveis:",
+        "custom_event_type": "Tipo de evento personalizado",
+        "select_event_type": "Selecionar tipo de evento (1-{count}): ",
+        "enter_custom_event_type": "Inserir tipo de evento personalizado: ",
+        "event_type_empty": "❌ O tipo de evento não pode estar vazio",
+        "invalid_event_selection": "❌ Seleção inválida",
+        "enter_custom_topic": "📝 Inserir seu padrão de tópico personalizado (use + para curingas): ",
+        "custom_topic_examples": "💡 Exemplos: 'sensors/+/data', 'devices/+/telemetry/+', 'factory/floor1/+/status'",
+        "custom_topic_empty": "❌ O padrão de tópico não pode estar vazio",
+        "topic_pattern_confirmed": "✅ Padrão de tópico: {pattern}",
+        "testing_step_1": "1. Publicar mensagem para: {source_topic}",
+        "testing_step_2": "2. Inscrever-se em: {target_topic}",
+        "enter_valid_number": "❌ Por favor insira um número válido",
     },
     "ko": {
         "main_title": "⚙️ AWS IoT 규칙 엔진 탐색기",
@@ -823,6 +929,24 @@ MESSAGES = {
         "header_separator": "=" * 60,
         "step_separator": "-" * 50,
         "rule_separator": "-" * 40,
+        "building_sql_title": "📖 IoT 규칙 엔진용 SQL 문 구축",
+        "sql_template": "💡 템플릿: SELECT <속성> FROM '<토픽_패턴>' WHERE <조건>",
+        "topic_configuration_title": "📡 토픽 패턴 구성",
+        "topic_option_template": "1. 미리 정의된 템플릿 사용: testRulesEngineTopic/<deviceId>/<eventType>",
+        "topic_option_custom": "2. 사용자 정의 토픽 패턴 정의",
+        "select_topic_option": "토픽 구성 선택 (1-2): ",
+        "available_event_types": "🎯 사용 가능한 이벤트 유형:",
+        "custom_event_type": "사용자 정의 이벤트 유형",
+        "select_event_type": "이벤트 유형 선택 (1-{count}): ",
+        "enter_custom_event_type": "사용자 정의 이벤트 유형 입력: ",
+        "event_type_empty": "❌ 이벤트 유형은 비워둘 수 없습니다",
+        "invalid_event_selection": "❌ 잘못된 선택",
+        "enter_custom_topic": "📝 사용자 정의 토픽 패턴 입력 (와일드카드에는 + 사용): ",
+        "custom_topic_examples": "💡 예시: 'sensors/+/data', 'devices/+/telemetry/+', 'factory/floor1/+/status'",
+        "custom_topic_empty": "❌ 토픽 패턴은 비워둘 수 없습니다",
+        "topic_pattern_confirmed": "✅ 토픽 패턴: {pattern}",
+        "testing_step_1": "1. 메시지 게시: {source_topic}",
+        "testing_step_2": "2. 구독: {target_topic}",
     },
 }
 
@@ -1213,33 +1337,61 @@ class IoTRulesExplorer:
         print(f"\n{get_message('building_sql_title')}")
         print(get_message("sql_template"))
 
-        # Event type selection
-        event_types = ["temperature", "humidity", "pressure", "motion", "door", "alarm", "status", "battery"]
-
-        print(f"\n{get_message('available_event_types')}")
-        for i, event_type in enumerate(event_types, 1):
-            print(f"   {i}. {event_type}")
-        print(f"   {len(event_types) + 1}. {get_message('custom_event_type')}")
+        # Topic pattern configuration
+        print(f"\n{get_message('topic_configuration_title')}")
+        print(get_message("topic_option_template"))
+        print(get_message("topic_option_custom"))
 
         while True:
             try:
-                choice = int(input(f"\n{get_message('select_event_type', count=len(event_types) + 1)}"))
-                if 1 <= choice <= len(event_types):
-                    selected_event_type = event_types[choice - 1]
+                topic_choice = int(input(f"\n{get_message('select_topic_option')}"))
+                if topic_choice in [1, 2]:
                     break
-                elif choice == len(event_types) + 1:
-                    selected_event_type = input(get_message("enter_custom_event_type")).strip()
-                    if selected_event_type:
-                        break
-                    else:
-                        print(get_message("event_type_empty"))
                 else:
-                    print(get_message("invalid_event_selection"))
+                    print(get_message("invalid_choice"))
             except ValueError:
                 print(get_message("enter_valid_number"))
 
-        # Topic pattern
-        topic_pattern = f"testRulesEngineTopic/+/{selected_event_type}"
+        if topic_choice == 1:
+            # Use predefined template with event type selection
+            event_types = ["temperature", "humidity", "pressure", "motion", "door", "alarm", "status", "battery"]
+
+            print(f"\n{get_message('available_event_types')}")
+            for i, event_type in enumerate(event_types, 1):
+                print(f"   {i}. {event_type}")
+            print(f"   {len(event_types) + 1}. {get_message('custom_event_type')}")
+
+            while True:
+                try:
+                    choice = int(input(f"\n{get_message('select_event_type', count=len(event_types) + 1)}"))
+                    if 1 <= choice <= len(event_types):
+                        selected_event_type = event_types[choice - 1]
+                        break
+                    elif choice == len(event_types) + 1:
+                        selected_event_type = input(get_message("enter_custom_event_type")).strip()
+                        if selected_event_type:
+                            break
+                        else:
+                            print(get_message("event_type_empty"))
+                    else:
+                        print(get_message("invalid_event_selection"))
+                except ValueError:
+                    print(get_message("enter_valid_number"))
+
+            # Topic pattern using template
+            topic_pattern = f"testRulesEngineTopic/+/{selected_event_type}"
+        else:
+            # Custom topic pattern
+            print(f"\n{get_message('custom_topic_examples')}")
+            while True:
+                topic_pattern = input(f"\n{get_message('enter_custom_topic')}").strip()
+                if topic_pattern:
+                    # For custom topics, we'll use a generic event type for attribute selection
+                    selected_event_type = "custom"
+                    break
+                else:
+                    print(get_message("custom_topic_empty"))
+
         print(get_message("topic_pattern_confirmed", pattern=topic_pattern))
 
         # SELECT clause based on event type
@@ -1255,6 +1407,7 @@ class IoTRulesExplorer:
             "alarm": ["*", "deviceId, timestamp, alertType", "deviceId, alertType, severity"],
             "status": ["*", "deviceId, timestamp, status", "deviceId, status, uptime"],
             "battery": ["*", "deviceId, timestamp, level", "deviceId, level, voltage"],
+            "custom": ["*", "deviceId, timestamp, value", "deviceId, value, status"],
         }
 
         # Get attributes for selected event type or use generic ones
@@ -1395,17 +1548,148 @@ class IoTRulesExplorer:
             print(f"   {get_message('summary_role', role=role_arn)}")
 
             print(f"\n{get_message('testing_rule_title')}")
-            print(f"   {get_message('testing_step_1', event_type=selected_event_type)}")
-            print(f"   {get_message('testing_step_2', topic=target_topic)}")
+            # Generate example source topic by replacing + with example values
+            example_source_topic = topic_pattern.replace("+", "device123")
+            print(f"   {get_message('testing_step_1', source_topic=example_source_topic)}")
+            print(f"   {get_message('testing_step_2', target_topic=target_topic)}")
             print(f"   {get_message('testing_step_3')}")
 
             print(f"\n{get_message('example_test_message')}")
-            example_message = {
-                "deviceId": "device123",
-                "timestamp": int(time.time() * 1000),
-                "value": 25.5 if selected_event_type in ["temperature", "humidity", "pressure"] else "active",
-            }
+            # Generate appropriate example message based on actual SQL fields
+            example_message = self.generate_example_message_from_sql(sql_statement, topic_choice, selected_event_type)
             print(f"   {json.dumps(example_message, indent=2)}")
+
+    def generate_example_message_from_sql(self, sql_statement, topic_choice, selected_event_type):
+        """Generate example message based on actual SQL SELECT fields"""
+        # Extract SELECT clause to understand expected fields
+        select_fields = self.extract_select_fields_from_sql(sql_statement)
+        
+        example_message = {}
+        
+        # Add timestamp if present in SELECT or as default
+        if any(field in select_fields for field in ['timestamp', 'timestamp()']):
+            example_message["timestamp"] = int(time.time() * 1000)
+        
+        # Analyze fields and generate appropriate values
+        for field in select_fields:
+            field_lower = field.lower().strip()
+            
+            # Skip wildcard and function calls
+            if field_lower in ['*', 'timestamp()', 'timestamp() as alert_time']:
+                continue
+                
+            # Handle common IoT fields
+            if 'vehicle_id' in field_lower or 'vehicleid' in field_lower:
+                example_message["vehicle_id"] = "vehicle123"
+            elif 'device_id' in field_lower or 'deviceid' in field_lower:
+                example_message["deviceId"] = "device123"
+            elif 'temperature' in field_lower:
+                # Use a value that would trigger the WHERE condition if present
+                if 'WHERE' in sql_statement.upper() and 'temperature >' in sql_statement:
+                    try:
+                        # Extract threshold and exceed it
+                        threshold_part = sql_statement.split('temperature >')[1].split()[0]
+                        threshold = float(threshold_part)
+                        example_message["temperature"] = threshold + 10
+                    except (ValueError, IndexError):
+                        example_message["temperature"] = 250  # Default high value
+                else:
+                    example_message["temperature"] = 25.5
+            elif 'humidity' in field_lower:
+                example_message["humidity"] = 65.0
+            elif 'pressure' in field_lower:
+                example_message["pressure"] = 1013.25
+            elif 'location' in field_lower:
+                example_message["location"] = "warehouse"
+            elif 'status' in field_lower:
+                example_message["status"] = "active"
+            elif 'level' in field_lower or 'battery' in field_lower:
+                example_message["level"] = 85
+            elif 'value' in field_lower:
+                example_message["value"] = 25.5
+            else:
+                # For unknown fields, try to infer from name
+                if field_lower.endswith('_id') or field_lower.endswith('id'):
+                    example_message[field] = "123"
+                elif any(keyword in field_lower for keyword in ['temp', 'heat', 'cold']):
+                    example_message[field] = 25.5
+                elif any(keyword in field_lower for keyword in ['count', 'num', 'qty']):
+                    example_message[field] = 10
+                else:
+                    example_message[field] = "sample_value"
+        
+        # If no specific fields found (e.g., SELECT *), add common IoT fields
+        if not example_message or '*' in select_fields:
+            if topic_choice == 1:  # Template-based
+                example_message.update({
+                    "deviceId": "device123",
+                    "timestamp": int(time.time() * 1000),
+                    selected_event_type: 25.5 if selected_event_type in ["temperature", "humidity", "pressure"] else "active",
+                })
+            else:  # Custom topic - try to infer from SQL
+                base_fields = {
+                    "timestamp": int(time.time() * 1000)
+                }
+                
+                # Look for field hints in WHERE clause
+                if 'WHERE' in sql_statement.upper():
+                    where_clause = sql_statement.split('WHERE')[1].strip()
+                    if 'vehicle_id' in where_clause.lower():
+                        base_fields["vehicle_id"] = "vehicle123"
+                    elif 'device' in where_clause.lower():
+                        base_fields["deviceId"] = "device123"
+                    
+                    if 'temperature' in where_clause.lower():
+                        # Extract threshold if possible
+                        if 'temperature >' in where_clause:
+                            try:
+                                threshold_part = where_clause.split('temperature >')[1].split()[0]
+                                threshold = float(threshold_part)
+                                base_fields["temperature"] = threshold + 10
+                            except (ValueError, IndexError):
+                                base_fields["temperature"] = 250
+                        else:
+                            base_fields["temperature"] = 25.5
+                
+                # Add default fields if none found
+                if len(base_fields) == 1:  # Only timestamp
+                    base_fields.update({
+                        "deviceId": "device123",
+                        "value": 25.5,
+                        "status": "active"
+                    })
+                
+                example_message.update(base_fields)
+        
+        return example_message
+    
+    def extract_select_fields_from_sql(self, sql_statement):
+        """Extract field names from SQL SELECT clause"""
+        try:
+            if 'SELECT' not in sql_statement.upper():
+                return ['*']
+            
+            # Get the SELECT part
+            select_part = sql_statement.split('FROM')[0].replace('SELECT', '').strip()
+            
+            # Handle SELECT *
+            if select_part.strip() == '*':
+                return ['*']
+            
+            # Split by comma and clean up field names
+            fields = []
+            for field in select_part.split(','):
+                field = field.strip()
+                # Handle aliases (field AS alias)
+                if ' AS ' in field.upper():
+                    field = field.split(' AS ')[0].strip()
+                elif ' as ' in field:
+                    field = field.split(' as ')[0].strip()
+                fields.append(field)
+            
+            return fields
+        except (IndexError, AttributeError):
+            return ['*']
 
     def ensure_iot_rule_role(self):
         """Create or verify IAM role for IoT Rules Engine"""
