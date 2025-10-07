@@ -260,6 +260,18 @@ MESSAGES = {
         "enter_qos_level": "Enter QoS level (0 or 1, default 0):",
         "enter_topic_publish": "Enter topic to publish to:",
         "enter_message": "Enter message:",
+        "client_id_prompt": "Enter custom Client ID (or press Enter for auto-generated): ",
+        "client_id_auto_generated": "Auto-generated Client ID",
+        "client_id_custom": "Custom Client ID",
+        "client_id_invalid": "❌ Invalid Client ID. Must be 1-128 characters, alphanumeric, hyphens, and underscores only.",
+        "client_id_guidelines": "💡 Client ID Guidelines:",
+        "client_id_rules": [
+            "• Must be unique per connection",
+            "• 1-128 characters allowed",
+            "• Use alphanumeric, hyphens (-), and underscores (_)",
+            "• Avoid spaces and special characters",
+            "• Example: my-device-001, sensor_temp_01",
+        ],
     },
     "es": {
         "title": "📡 Explorador de Cliente MQTT de AWS IoT",
@@ -501,6 +513,18 @@ MESSAGES = {
         "enter_qos_level": "Ingresa el nivel QoS (0 o 1, por defecto 0):",
         "enter_topic_publish": "Ingresa el tema donde publicar:",
         "enter_message": "Ingresa el mensaje:",
+        "client_id_prompt": "Ingresa ID de Cliente personalizado (o presiona Enter para auto-generar): ",
+        "client_id_auto_generated": "ID de Cliente Auto-generado",
+        "client_id_custom": "ID de Cliente Personalizado",
+        "client_id_invalid": "❌ ID de Cliente inválido. Debe tener 1-128 caracteres, solo alfanuméricos, guiones y guiones bajos.",
+        "client_id_guidelines": "💡 Guías de ID de Cliente:",
+        "client_id_rules": [
+            "• Debe ser único por conexión",
+            "• Se permiten 1-128 caracteres",
+            "• Usa alfanuméricos, guiones (-) y guiones bajos (_)",
+            "• Evita espacios y caracteres especiales",
+            "• Ejemplo: mi-dispositivo-001, sensor_temp_01",
+        ],
     },
     "ja": {
         "title": "📡 AWS IoT MQTT クライアントエクスプローラー",
@@ -583,6 +607,18 @@ MESSAGES = {
         "api_error": "❌ APIエラー:",
         "mqtt_error": "❌ MQTTエラー:",
         "error": "❌ エラー:",
+        "client_id_prompt": "カスタムクライアントIDを入力 (または自動生成するにはEnterを押す): ",
+        "client_id_auto_generated": "自動生成クライアントID",
+        "client_id_custom": "カスタムクライアントID",
+        "client_id_invalid": "❌ 無効なクライアントID。1-128文字、英数字、ハイフン、アンダースコアのみ使用可能。",
+        "client_id_guidelines": "💡 クライアントIDガイドライン:",
+        "client_id_rules": [
+            "• 接続ごとに一意である必要があります",
+            "• 1-128文字が許可されています",
+            "• 英数字、ハイフン(-)、アンダースコア(_)を使用",
+            "• スペースや特殊文字は避ける",
+            "• 例: my-device-001, sensor_temp_01",
+        ],
     },
     "pt-BR": {
         "title": "📡 Explorador de Cliente MQTT AWS IoT",
@@ -703,6 +739,18 @@ MESSAGES = {
         "subscriptions_label": "Inscrições",
         "messages_received_label": "Mensagens recebidas",
         "not_set": "Não definido",
+        "client_id_prompt": "Digite ID do Cliente personalizado (ou pressione Enter para auto-gerar): ",
+        "client_id_auto_generated": "ID do Cliente Auto-gerado",
+        "client_id_custom": "ID do Cliente Personalizado",
+        "client_id_invalid": "❌ ID do Cliente inválido. Deve ter 1-128 caracteres, apenas alfanuméricos, hífens e sublinhados.",
+        "client_id_guidelines": "💡 Diretrizes do ID do Cliente:",
+        "client_id_rules": [
+            "• Deve ser único por conexão",
+            "• 1-128 caracteres permitidos",
+            "• Use alfanuméricos, hífens (-) e sublinhados (_)",
+            "• Evite espaços e caracteres especiais",
+            "• Exemplo: meu-dispositivo-001, sensor_temp_01",
+        ],
     },
     "ko": {
         "title": "📡 AWS IoT MQTT 클라이언트 탐색기",
@@ -944,6 +992,18 @@ MESSAGES = {
         "enter_qos_level": "QoS 레벨을 입력하세요 (0 또는 1, 기본값 0):",
         "enter_topic_publish": "게시할 주제를 입력하세요:",
         "enter_message": "메시지를 입력하세요:",
+        "client_id_prompt": "사용자 정의 클라이언트 ID 입력 (또는 자동 생성하려면 Enter 누름): ",
+        "client_id_auto_generated": "자동 생성된 클라이언트 ID",
+        "client_id_custom": "사용자 정의 클라이언트 ID",
+        "client_id_invalid": "❌ 잘못된 클라이언트 ID입니다. 1-128자, 영숫자, 하이픈, 언더스코어만 사용 가능합니다.",
+        "client_id_guidelines": "💡 클라이언트 ID 가이드라인:",
+        "client_id_rules": [
+            "• 연결마다 고유해야 합니다",
+            "• 1-128자가 허용됩니다",
+            "• 영숫자, 하이픈(-), 언더스코어(_) 사용",
+            "• 공백과 특수 문자 피하기",
+            "• 예시: my-device-001, sensor_temp_01",
+        ],
     },
 }
 
@@ -1252,6 +1312,51 @@ class MQTTClientExplorer:
                     print(f"      {sub_key}: {sub_value}")
             else:
                 print(f"   {key}: {value}")
+
+    def validate_client_id(self, client_id):
+        """Validate MQTT Client ID according to AWS IoT requirements"""
+        if not client_id:
+            return False
+
+        # Length check: 1-128 characters
+        if len(client_id) < 1 or len(client_id) > 128:
+            return False
+
+        # Character check: alphanumeric, hyphens, and underscores only
+        import re
+
+        if not re.match(r"^[a-zA-Z0-9_-]+$", client_id):
+            return False
+
+        return True
+
+    def get_client_id(self, thing_name):
+        """Get client ID from user input or generate automatically"""
+        print(f"\n{get_message('client_id_guidelines', USER_LANG)}")
+        for rule in get_message("client_id_rules", USER_LANG):
+            print(f"   {rule}")
+
+        while True:
+            try:
+                custom_id = input(f"\n{get_message('client_id_prompt', USER_LANG)}").strip()
+
+                if not custom_id:
+                    # Auto-generate client ID
+                    client_id = f"{thing_name}-{uuid.uuid4().hex[:8]}"
+                    print(f"   {get_message('client_id_auto_generated', USER_LANG)}: {client_id}")
+                    return client_id
+                else:
+                    # Validate custom client ID
+                    if self.validate_client_id(custom_id):
+                        print(f"   {get_message('client_id_custom', USER_LANG)}: {custom_id}")
+                        return custom_id
+                    else:
+                        print(f"   {get_message('client_id_invalid', USER_LANG)}")
+                        continue
+
+            except KeyboardInterrupt:
+                print(f"\n{get_message('operation_cancelled', USER_LANG)}")
+                return None
 
     def get_iot_endpoint(self, debug=False):
         """Get AWS IoT endpoint for the account"""
@@ -1572,10 +1677,12 @@ class MQTTClientExplorer:
             print(f"   {get_message('endpoint_label', USER_LANG)}: {endpoint}")
 
         try:
-            # Create client ID
-            client_id = f"{thing_name}-{uuid.uuid4().hex[:8]}"
+            # Get client ID from user or auto-generate
+            client_id = self.get_client_id(thing_name)
+            if not client_id:
+                return False
 
-            print(get_message("connection_parameters", USER_LANG))
+            print(f"\n{get_message('connection_parameters', USER_LANG)}")
             print(f"   {get_message('client_id_label', USER_LANG)}: {client_id}")
             print(f"   {get_message('endpoint_label', USER_LANG)}: {endpoint}")
             print(f"   {get_message('port_label', USER_LANG)}: 8883")

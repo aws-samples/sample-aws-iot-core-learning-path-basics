@@ -305,6 +305,11 @@ python scripts/<script_name>.py --debug
 - **[Complete Examples](docs/en/EXAMPLES.md)** - Full workflows and sample outputs
 - **[Troubleshooting Guide](docs/en/TROUBLESHOOTING.md)** - Common issues and solutions
 
+### Documentación en Español
+- **[Guía Detallada de Scripts](docs/es/DETAILED_SCRIPTS.md)** - Documentación en profundidad de scripts
+- **[Ejemplos Completos](docs/es/EXAMPLES.md)** - Flujos de trabajo completos y salidas de muestra
+- **[Guía de Solución de Problemas](docs/es/TROUBLESHOOTING.md)** - Problemas comunes y soluciones
+
 ### Documentação em Português
 - **[Guia Detalhado de Scripts](docs/pt-BR/DETAILED_SCRIPTS.md)** - Documentação aprofundada dos scripts
 - **[Exemplos Completos](docs/pt-BR/EXAMPLES.md)** - Fluxos de trabalho completos e saídas de exemplo

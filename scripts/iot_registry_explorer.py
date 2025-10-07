@@ -29,7 +29,12 @@ MESSAGES = {
         "client_initialized": "✅ AWS IoT client initialized successfully",
         "invalid_credentials": "❌ Invalid AWS credentials",
         "learning_intro_title": "AWS IoT Registry APIs - Device Management",
-        "learning_intro_content": "The AWS IoT Registry is the central database that stores information about your IoT devices (Things), their organization (Thing Groups), device templates (Thing Types), and security certificates. These APIs allow you to programmatically manage your entire IoT device fleet. Understanding these operations is fundamental to building scalable IoT solutions.",
+        "learning_intro_content": (
+            "The AWS IoT Registry is the central database that stores information about your IoT devices "
+            "(Things), their organization (Thing Groups), device templates (Thing Types), and security "
+            "certificates. These APIs allow you to programmatically manage your entire IoT device fleet. "
+            "Understanding these operations is fundamental to building scalable IoT solutions."
+        ),
         "learning_intro_next": "We will explore 8 core Registry APIs with detailed explanations",
         "press_enter": "Press Enter to continue...",
         "goodbye": "👋 Goodbye!",
@@ -85,19 +90,30 @@ MESSAGES = {
         "could_not_list_groups": "⚠️ Could not list Thing Groups:",
         "could_not_list_types": "⚠️ Could not list Thing Types:",
         "invalid_selection": "❌ Invalid selection. Please choose",
-        "endpoint_type_prompt": "Enter endpoint type (iot:Data-ATS, iot:CredentialProvider, iot:Jobs) [default: iot:Data-ATS]: ",
+        "endpoint_type_prompt": (
+            "Enter endpoint type (iot:Data-ATS, iot:CredentialProvider, iot:Jobs) [default: iot:Data-ATS]: "
+        ),
         "pagination_learning_title": "📚 LEARNING MOMENT: Pagination",
-        "pagination_learning_content": "Pagination allows you to retrieve large datasets in smaller chunks. This is essential when managing hundreds or thousands of devices to avoid timeouts and memory issues.",
+        "pagination_learning_content": (
+            "Pagination allows you to retrieve large datasets in smaller chunks. This is essential when "
+            "managing hundreds or thousands of devices to avoid timeouts and memory issues."
+        ),
         "pagination_listing": "🔄 Listing Things with pagination (max {} per page)...",
         "page_summary": "📊 Page {} Summary: {} Things retrieved",
         "continue_next_page": "Continue to next page? (y/N): ",
         "pagination_complete": "🏁 Pagination Complete: {} total Things found across {} page(s)",
         "filter_by_type_learning_title": "📚 LEARNING MOMENT: Filtering by Thing Type",
-        "filter_by_type_learning_content": "Filtering allows you to find specific categories of devices. Thing Types act as templates that group similar devices together.",
+        "filter_by_type_learning_content": (
+            "Filtering allows you to find specific categories of devices. Thing Types act as templates "
+            "that group similar devices together."
+        ),
         "filtering_by_type": "🔄 Filtering Things by Thing Type: {}...",
         "filter_type_results": "📊 Filter Results: {} Things found with Thing Type '{}'",
         "filter_by_attribute_learning_title": "📚 LEARNING MOMENT: Filtering by Attributes",
-        "filter_by_attribute_learning_content": "Attribute filtering helps you find devices with specific characteristics. This is useful for targeting devices by location, customer, or other metadata.",
+        "filter_by_attribute_learning_content": (
+            "Attribute filtering helps you find devices with specific characteristics. This is useful "
+            "for targeting devices by location, customer, or other metadata."
+        ),
         "filtering_by_attribute": "🔄 Filtering Things by attribute {}={}...",
         "filter_attribute_results": "📊 Filter Results: {} Things found with {}='{}'",
         "debug_full_error": "🔍 DEBUG: Full error response:",
@@ -116,42 +132,82 @@ MESSAGES = {
         "learning_moments": {
             "list_things": {
                 "title": "List Things - Device Discovery",
-                "content": "The list_things API retrieves all IoT devices (Things) in your account. This is essential for device inventory management, monitoring fleet size, and discovering devices by attributes. You can use pagination and filtering to handle device fleets efficiently.",
+                "content": (
+                    "The list_things API retrieves all IoT devices (Things) in your account. This is "
+                    "essential for device inventory management, monitoring fleet size, and discovering "
+                    "devices by attributes. You can use pagination and filtering to handle device fleets "
+                    "efficiently."
+                ),
                 "next": "We will call the list_things API with different options",
             },
             "list_certificates": {
                 "title": "List Certificates - Security Inventory",
-                "content": "X.509 certificates are the foundation of IoT device security. Each certificate uniquely identifies a device and enables secure communication with AWS IoT Core. This API helps you audit your security posture, track certificate lifecycle, and identify devices that need certificate rotation.",
+                "content": (
+                    "X.509 certificates are the foundation of IoT device security. Each certificate uniquely "
+                    "identifies a device and enables secure communication with AWS IoT Core. This API helps "
+                    "you audit your security posture, track certificate lifecycle, and identify devices "
+                    "that need certificate rotation."
+                ),
                 "next": "We will retrieve all certificates and examine their security properties",
             },
             "list_thing_groups": {
                 "title": "List Thing Groups - Device Organization",
-                "content": "Thing Groups provide hierarchical organization for your IoT devices, similar to folders for files. They enable bulk operations, policy inheritance, and logical grouping by location, function, or any business criteria. This is crucial for managing large-scale IoT deployments.",
+                "content": (
+                    "Thing Groups provide hierarchical organization for your IoT devices, similar to folders "
+                    "for files. They enable bulk operations, policy inheritance, and logical grouping by "
+                    "location, function, or any business criteria. This is crucial for managing large-scale "
+                    "IoT deployments."
+                ),
                 "next": "We will explore your Thing Groups and their organizational structure",
             },
             "list_thing_types": {
                 "title": "List Thing Types - Device Templates",
-                "content": "Thing Types are templates that define categories of IoT devices. They act as blueprints specifying common attributes and behaviors for similar devices. For example, a 'SedanVehicle' type might define attributes like engine type and seating capacity. Thing Types help organize your device fleet and enable standardized device management.",
+                "content": (
+                    "Thing Types are templates that define categories of IoT devices. They act as blueprints "
+                    "specifying common attributes and behaviors for similar devices. For example, a "
+                    "'SedanVehicle' type might define attributes like engine type and seating capacity. "
+                    "Thing Types help organize your device fleet and enable standardized device management."
+                ),
                 "next": "We will examine your Thing Types and their attribute schemas",
             },
             "describe_thing": {
                 "title": "Describe Thing - Device Details",
-                "content": "The describe_thing API provides complete information about a specific IoT device, including its attributes, Thing Type, version, and unique identifiers. This is essential for device troubleshooting, configuration management, and understanding device relationships within your IoT architecture.",
+                "content": (
+                    "The describe_thing API provides complete information about a specific IoT device, "
+                    "including its attributes, Thing Type, version, and unique identifiers. This is "
+                    "essential for device troubleshooting, configuration management, and understanding "
+                    "device relationships within your IoT architecture."
+                ),
                 "next": "We will examine detailed information for a specific Thing",
             },
             "describe_thing_group": {
                 "title": "Describe Thing Group - Group Management",
-                "content": "Thing Group details reveal the organizational structure of your IoT fleet. You can see group properties, parent-child hierarchies, attached policies, and member devices. This information is vital for understanding access control, policy inheritance, and device organization strategies.",
+                "content": (
+                    "Thing Group details reveal the organizational structure of your IoT fleet. You can see "
+                    "group properties, parent-child hierarchies, attached policies, and member devices. "
+                    "This information is vital for understanding access control, policy inheritance, and "
+                    "device organization strategies."
+                ),
                 "next": "We will examine detailed properties of a specific Thing Group",
             },
             "describe_thing_type": {
                 "title": "Describe Thing Type - Template Analysis",
-                "content": "Thing Type details show the blueprint definition for device categories. You can examine searchable attributes, property constraints, and metadata that define how devices of this type should be structured. This helps ensure consistent device registration and enables efficient fleet queries.",
+                "content": (
+                    "Thing Type details show the blueprint definition for device categories. You can examine "
+                    "searchable attributes, property constraints, and metadata that define how devices of "
+                    "this type should be structured. This helps ensure consistent device registration and "
+                    "enables efficient fleet queries."
+                ),
                 "next": "We will analyze the schema and properties of a specific Thing Type",
             },
             "describe_endpoint": {
                 "title": "Describe Endpoint - Connection Discovery",
-                "content": "IoT endpoints are the gateway URLs that devices use to connect to AWS IoT Core. Different endpoint types serve different purposes: Data-ATS for device communication, CredentialProvider for authentication, and Jobs for device management. Understanding endpoints is crucial for device connectivity configuration.",
+                "content": (
+                    "IoT endpoints are the gateway URLs that devices use to connect to AWS IoT Core. "
+                    "Different endpoint types serve different purposes: Data-ATS for device communication, "
+                    "CredentialProvider for authentication, and Jobs for device management. Understanding "
+                    "endpoints is crucial for device connectivity configuration."
+                ),
                 "next": "We will discover the endpoint URL for device connections",
             },
         },
@@ -1135,7 +1191,9 @@ def get_language():
                 return "ko"
             else:
                 print(
-                    "❌ Invalid selection / Selección inválida / 無効な選択です / 无效选择 / Seleção inválida / 잘못된 선택입니다. Please select 1-6 / Por favor selecciona 1-6 / 1-6を選択してください / 请选择 1-6 / Por favor selecione 1-6 / 1-6을 선택해주세요."
+                    "❌ Invalid selection / Selección inválida / 無効な選択です / 无效选择 / Seleção inválida / "
+                    "잘못된 선택입니다. Please select 1-6 / Por favor selecciona 1-6 / 1-6を選択してください / "
+                    "请选择 1-6 / Por favor selecione 1-6 / 1-6을 선택해주세요."
                 )
         except KeyboardInterrupt:
             print("\n\n👋 Goodbye! / ¡Adiós! / さようなら！ / 再见！ / Tchau! / 안녕히 가세요!")

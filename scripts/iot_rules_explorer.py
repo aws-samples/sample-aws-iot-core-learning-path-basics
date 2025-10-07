@@ -1563,133 +1563,131 @@ class IoTRulesExplorer:
         """Generate example message based on actual SQL SELECT fields"""
         # Extract SELECT clause to understand expected fields
         select_fields = self.extract_select_fields_from_sql(sql_statement)
-        
+
         example_message = {}
-        
+
         # Add timestamp if present in SELECT or as default
-        if any(field in select_fields for field in ['timestamp', 'timestamp()']):
+        if any(field in select_fields for field in ["timestamp", "timestamp()"]):
             example_message["timestamp"] = int(time.time() * 1000)
-        
+
         # Analyze fields and generate appropriate values
         for field in select_fields:
             field_lower = field.lower().strip()
-            
+
             # Skip wildcard and function calls
-            if field_lower in ['*', 'timestamp()', 'timestamp() as alert_time']:
+            if field_lower in ["*", "timestamp()", "timestamp() as alert_time"]:
                 continue
-                
+
             # Handle common IoT fields
-            if 'vehicle_id' in field_lower or 'vehicleid' in field_lower:
+            if "vehicle_id" in field_lower or "vehicleid" in field_lower:
                 example_message["vehicle_id"] = "vehicle123"
-            elif 'device_id' in field_lower or 'deviceid' in field_lower:
+            elif "device_id" in field_lower or "deviceid" in field_lower:
                 example_message["deviceId"] = "device123"
-            elif 'temperature' in field_lower:
+            elif "temperature" in field_lower:
                 # Use a value that would trigger the WHERE condition if present
-                if 'WHERE' in sql_statement.upper() and 'temperature >' in sql_statement:
+                if "WHERE" in sql_statement.upper() and "temperature >" in sql_statement:
                     try:
                         # Extract threshold and exceed it
-                        threshold_part = sql_statement.split('temperature >')[1].split()[0]
+                        threshold_part = sql_statement.split("temperature >")[1].split()[0]
                         threshold = float(threshold_part)
                         example_message["temperature"] = threshold + 10
                     except (ValueError, IndexError):
                         example_message["temperature"] = 250  # Default high value
                 else:
                     example_message["temperature"] = 25.5
-            elif 'humidity' in field_lower:
+            elif "humidity" in field_lower:
                 example_message["humidity"] = 65.0
-            elif 'pressure' in field_lower:
+            elif "pressure" in field_lower:
                 example_message["pressure"] = 1013.25
-            elif 'location' in field_lower:
+            elif "location" in field_lower:
                 example_message["location"] = "warehouse"
-            elif 'status' in field_lower:
+            elif "status" in field_lower:
                 example_message["status"] = "active"
-            elif 'level' in field_lower or 'battery' in field_lower:
+            elif "level" in field_lower or "battery" in field_lower:
                 example_message["level"] = 85
-            elif 'value' in field_lower:
+            elif "value" in field_lower:
                 example_message["value"] = 25.5
             else:
                 # For unknown fields, try to infer from name
-                if field_lower.endswith('_id') or field_lower.endswith('id'):
+                if field_lower.endswith("_id") or field_lower.endswith("id"):
                     example_message[field] = "123"
-                elif any(keyword in field_lower for keyword in ['temp', 'heat', 'cold']):
+                elif any(keyword in field_lower for keyword in ["temp", "heat", "cold"]):
                     example_message[field] = 25.5
-                elif any(keyword in field_lower for keyword in ['count', 'num', 'qty']):
+                elif any(keyword in field_lower for keyword in ["count", "num", "qty"]):
                     example_message[field] = 10
                 else:
                     example_message[field] = "sample_value"
-        
+
         # If no specific fields found (e.g., SELECT *), add common IoT fields
-        if not example_message or '*' in select_fields:
+        if not example_message or "*" in select_fields:
             if topic_choice == 1:  # Template-based
-                example_message.update({
-                    "deviceId": "device123",
-                    "timestamp": int(time.time() * 1000),
-                    selected_event_type: 25.5 if selected_event_type in ["temperature", "humidity", "pressure"] else "active",
-                })
+                example_message.update(
+                    {
+                        "deviceId": "device123",
+                        "timestamp": int(time.time() * 1000),
+                        selected_event_type: (
+                            25.5 if selected_event_type in ["temperature", "humidity", "pressure"] else "active"
+                        ),
+                    }
+                )
             else:  # Custom topic - try to infer from SQL
-                base_fields = {
-                    "timestamp": int(time.time() * 1000)
-                }
-                
+                base_fields = {"timestamp": int(time.time() * 1000)}
+
                 # Look for field hints in WHERE clause
-                if 'WHERE' in sql_statement.upper():
-                    where_clause = sql_statement.split('WHERE')[1].strip()
-                    if 'vehicle_id' in where_clause.lower():
+                if "WHERE" in sql_statement.upper():
+                    where_clause = sql_statement.split("WHERE")[1].strip()
+                    if "vehicle_id" in where_clause.lower():
                         base_fields["vehicle_id"] = "vehicle123"
-                    elif 'device' in where_clause.lower():
+                    elif "device" in where_clause.lower():
                         base_fields["deviceId"] = "device123"
-                    
-                    if 'temperature' in where_clause.lower():
+
+                    if "temperature" in where_clause.lower():
                         # Extract threshold if possible
-                        if 'temperature >' in where_clause:
+                        if "temperature >" in where_clause:
                             try:
-                                threshold_part = where_clause.split('temperature >')[1].split()[0]
+                                threshold_part = where_clause.split("temperature >")[1].split()[0]
                                 threshold = float(threshold_part)
                                 base_fields["temperature"] = threshold + 10
                             except (ValueError, IndexError):
                                 base_fields["temperature"] = 250
                         else:
                             base_fields["temperature"] = 25.5
-                
+
                 # Add default fields if none found
                 if len(base_fields) == 1:  # Only timestamp
-                    base_fields.update({
-                        "deviceId": "device123",
-                        "value": 25.5,
-                        "status": "active"
-                    })
-                
+                    base_fields.update({"deviceId": "device123", "value": 25.5, "status": "active"})
+
                 example_message.update(base_fields)
-        
+
         return example_message
-    
+
     def extract_select_fields_from_sql(self, sql_statement):
         """Extract field names from SQL SELECT clause"""
         try:
-            if 'SELECT' not in sql_statement.upper():
-                return ['*']
-            
+            if "SELECT" not in sql_statement.upper():
+                return ["*"]
+
             # Get the SELECT part
-            select_part = sql_statement.split('FROM')[0].replace('SELECT', '').strip()
-            
+            select_part = sql_statement.split("FROM")[0].replace("SELECT", "").strip()
+
             # Handle SELECT *
-            if select_part.strip() == '*':
-                return ['*']
-            
+            if select_part.strip() == "*":
+                return ["*"]
+
             # Split by comma and clean up field names
             fields = []
-            for field in select_part.split(','):
+            for field in select_part.split(","):
                 field = field.strip()
                 # Handle aliases (field AS alias)
-                if ' AS ' in field.upper():
-                    field = field.split(' AS ')[0].strip()
-                elif ' as ' in field:
-                    field = field.split(' as ')[0].strip()
+                if " AS " in field.upper():
+                    field = field.split(" AS ")[0].strip()
+                elif " as " in field:
+                    field = field.split(" as ")[0].strip()
                 fields.append(field)
-            
+
             return fields
         except (IndexError, AttributeError):
-            return ['*']
+            return ["*"]
 
     def ensure_iot_rule_role(self):
         """Create or verify IAM role for IoT Rules Engine"""

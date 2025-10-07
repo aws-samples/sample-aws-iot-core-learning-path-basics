@@ -218,6 +218,18 @@ MESSAGES = {
         "invalid_props_format": "❌ Invalid properties format. Use: prop=value pairs",
         "unknown_mqtt5_property": "⚠️  Unknown MQTT5 property: {}",
         "bytes": "bytes",
+        "client_id_prompt": "Enter custom Client ID (or press Enter for auto-generated): ",
+        "client_id_auto_generated": "Auto-generated Client ID",
+        "client_id_custom": "Custom Client ID",
+        "client_id_invalid": "❌ Invalid Client ID. Must be 1-128 characters, alphanumeric, hyphens, underscores only.",
+        "client_id_guidelines": "💡 Client ID Guidelines:",
+        "client_id_rules": [
+            "• Must be unique per connection",
+            "• 1-128 characters allowed",
+            "• Use alphanumeric, hyphens (-), and underscores (_)",
+            "• Avoid spaces and special characters",
+            "• Example: my-device-001, sensor_temp_01",
+        ],
     },
     "es": {
         "title": "📡 Explorador AWS IoT MQTT sobre WebSocket",
@@ -365,7 +377,7 @@ MESSAGES = {
         "run_diagnostics": "¿Te gustaría ejecutar diagnósticos de conexión? (y/N): ",
         "topic_cannot_be_empty": "❌ El tema no puede estar vacío",
         "interactive_websocket_mode": "🎮 Modo de Mensajería MQTT WebSocket Interactivo",
-        "messages_appear_immediately": "💡 ¡Los mensajes aparecerán inmediatamente cuando se reciban en temas suscritos!",
+        "messages_appear_immediately": "💡 ¡Los mensajes aparecerán inmediatamente cuando se reciban!",
         "commands": "Comandos:",
         "command_list": [
             "• 'sub <tema>' - Suscribirse al tema (QoS 0)",
@@ -419,6 +431,18 @@ MESSAGES = {
         "invalid_props_format": "❌ Formato de propiedades inválido. Usa: pares prop=valor",
         "unknown_mqtt5_property": "⚠️  Propiedad MQTT5 desconocida: {}",
         "bytes": "bytes",
+        "client_id_prompt": "Ingresa ID de Cliente personalizado (o presiona Enter para auto-generar): ",
+        "client_id_auto_generated": "ID de Cliente Auto-generado",
+        "client_id_custom": "ID de Cliente Personalizado",
+        "client_id_invalid": "❌ ID de Cliente inválido. 1-128 caracteres, alfanuméricos, guiones y guiones bajos.",
+        "client_id_guidelines": "💡 Guías de ID de Cliente:",
+        "client_id_rules": [
+            "• Debe ser único por conexión",
+            "• Se permiten 1-128 caracteres",
+            "• Usa alfanuméricos, guiones (-) y guiones bajos (_)",
+            "• Evita espacios y caracteres especiales",
+            "• Ejemplo: mi-dispositivo-001, sensor_temp_01",
+        ],
     },
     "debug_messages": {
         "en": {
@@ -488,7 +512,10 @@ MESSAGES = {
         "aws_context_error": "⚠️ AWSコンテキストを取得できませんでした:",
         "aws_credentials_reminder": "   AWS認証情報が設定されていることを確認してください",
         "websocket_intro_title": "MQTT WebSocket - ブラウザフレンドリー通信",
-        "websocket_intro_content": "MQTT over WebSocketsにより、ウェブアプリケーションがAWS IoT Coreと直接通信できます。X.509証明書の代わりにAWS認証情報を使用し、ブラウザベースのIoTアプリケーションに最適です。これは、ダッシュボード、監視ツール、リアルタイムウェブアプリケーションの構築に重要です。",
+        "websocket_intro_content": (
+            "MQTT over WebSocketsにより、ウェブアプリケーションがAWS IoT Coreと直接通信できます。"
+            "X.509証明書の代わりにAWS認証情報を使用し、ブラウザベースのIoTアプリケーションに最適です。"
+        ),
         "websocket_intro_next": "WebSocket接続を確立し、ブラウザフレンドリーなメッセージングを探索します",
         "press_enter": "Enterキーを押して続行...",
         "goodbye": "👋 さようなら！",
@@ -507,14 +534,20 @@ MESSAGES = {
         "select_operation": "操作を選択 (1-4): ",
         "invalid_choice": "❌ 無効な選択です。1-4を選択してください。",
         "subscribe_learning_title": "📚 学習ポイント: WebSocket MQTT購読",
-        "subscribe_learning_content": "WebSocket経由のMQTT購読により、ウェブアプリケーションがリアルタイムでIoTデータを受信できます。これは、ライブダッシュボード、リアルタイム監視、インタラクティブなウェブベースのIoTアプリケーションの構築に不可欠です。",
+        "subscribe_learning_content": (
+            "WebSocket経由のMQTT購読により、ウェブアプリケーションがリアルタイムでIoTデータを受信できます。"
+            "これは、ライブダッシュボード、リアルタイム監視、インタラクティブなウェブベースのIoTアプリケーションの構築に不可欠です。"
+        ),
         "subscribe_learning_next": "WebSocket接続でトピックを購読し、リアルタイムメッセージを受信します",
         "enter_topic_subscribe": "購読するトピックを入力:",
         "subscribing_to_topic": "📡 トピック '{}' を購読中...",
         "subscribed_successfully": "✅ トピック '{}' の購読に成功しました",
         "subscription_failed": "❌ 購読に失敗しました: {}",
         "publish_learning_title": "📚 学習ポイント: WebSocket MQTT公開",
-        "publish_learning_content": "WebSocket経由のMQTT公開により、ウェブアプリケーションからIoTデバイスにコマンドやデータを送信できます。これは、リモート制御、設定更新、ウェブベースのデバイス管理に使用されます。",
+        "publish_learning_content": (
+            "WebSocket経由のMQTT公開により、ウェブアプリケーションからIoTデバイスにコマンドやデータを送信できます。"
+            "これは、リモート制御、設定更新、ウェブベースのデバイス管理に使用されます。"
+        ),
         "publish_learning_next": "WebSocket接続でメッセージを公開し、リアルタイム配信を確認します",
         "enter_topic_publish": "公開するトピックを入力:",
         "enter_message": "メッセージを入力:",
@@ -542,18 +575,172 @@ MESSAGES = {
         "learning_moments": {
             "websocket_vs_certificate": {
                 "title": "📚 学習ポイント: WebSocket vs 証明書認証",
-                "content": "WebSocket MQTTはAWS認証情報を使用し、ブラウザアプリケーションに適しています。証明書ベースのMQTTはデバイス認証により適しています。WebSocketsは、ウェブアプリケーション、ダッシュボード、管理ツールに最適です。",
+                "content": (
+                    "WebSocket MQTTはAWS認証情報を使用し、ブラウザアプリケーションに適しています。"
+                    "証明書ベースのMQTTはデバイス認証により適しています。"
+                ),
                 "next": "WebSocket接続の利点を体験します",
             },
             "browser_compatibility": {
                 "title": "📚 学習ポイント: ブラウザ互換性",
-                "content": "WebSocket MQTTにより、標準的なウェブブラウザがIoTデバイスと直接通信できます。これにより、リアルタイムダッシュボード、監視アプリケーション、インタラクティブなIoT制御パネルの構築が可能になります。",
+                "content": (
+                    "WebSocket MQTTにより、標準的なウェブブラウザがIoTデバイスと直接通信できます。"
+                    "これにより、リアルタイムダッシュボード、監視アプリケーション、インタラクティブなIoT制御パネルの構築が可能になります。"
+                ),
                 "next": "ブラウザフレンドリーなメッセージングを探索します",
             },
             "debug_connection_details": "🔍 デバッグ: 接続詳細: {}",
             "debug_message_details": "🔍 デバッグ: メッセージ詳細: {}",
             "debug_payload_length": "ペイロード長",
         },
+        "bytes": "バイト",
+        "client_id_prompt": "カスタムクライアントIDを入力 (または自動生成するにはEnterを押す): ",
+        "client_id_auto_generated": "自動生成されたクライアントID",
+        "client_id_custom": "カスタムクライアントID",
+        "client_id_invalid": "❌ 無効なクライアントIDです。1-128文字、英数字、ハイフン、アンダースコアのみ使用可能です。",
+        "client_id_guidelines": "💡 クライアントIDガイドライン:",
+        "client_id_rules": [
+            "• 接続ごとに一意である必要があります",
+            "• 1-128文字が許可されています",
+            "• 英数字、ハイフン(-)、アンダースコア(_)を使用",
+            "• スペースと特殊文字を避ける",
+            "• 例: my-device-001, sensor_temp_01",
+        ],
+    },
+    "zh-CN": {
+        "title": "📡 AWS IoT MQTT WebSocket 探索器",
+        "separator": "=" * 60,
+        "description_intro": "使用 SigV4 认证的 WebSocket 连接的教育性 MQTT 客户端。",
+        "debug_enabled": "🔍 调试模式已启用",
+        "debug_features": [
+            "• 增强的 API 请求/响应日志记录",
+            "• 完整的错误详细信息和回溯",
+            "• 扩展的教育信息",
+        ],
+        "tip": "💡 提示：使用 --debug 或 -d 标志进行增强的 API 日志记录",
+        "websocket_endpoint_discovery": "🌐 AWS IoT WebSocket 端点发现",
+        "endpoint_type": "端点类型：iot:Data-ATS（推荐）",
+        "endpoint_url": "端点 URL",
+        "port": "端口：443（HTTPS/WebSocket）",
+        "protocol": "协议：使用 SigV4 的 WebSocket 上的 MQTT",
+        "error_getting_endpoint": "❌ 获取 IoT 端点时出错：",
+        "no_aws_credentials": "❌ 未找到 AWS 凭证",
+        "credentials_help": "💡 使用以下方法之一设置凭证：",
+        "credentials_methods": [
+            "• AWS CLI：aws configure",
+            "• 环境变量：AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY",
+            "• IAM 角色（如果在 EC2 上运行）",
+        ],
+        "aws_credentials_sigv4": "🔐 用于 SigV4 认证的 AWS 凭证",
+        "access_key": "访问密钥",
+        "region": "区域",
+        "session_token": "会话令牌",
+        "present": "存在",
+        "not_present": "不存在",
+        "error_getting_credentials": "❌ 获取 AWS 凭证时出错：",
+        "connection_interrupted": "连接中断",
+        "error": "错误",
+        "timestamp": "时间戳",
+        "auto_reconnect": "自动重连：AWS IoT SDK 将自动尝试重新连接",
+        "connection_resumed": "连接已恢复",
+        "return_code": "返回代码",
+        "session_present": "会话存在",
+        "status": "状态：连接已成功恢复",
+        "incoming_message": "🔔 传入消息 #{} [{}]",
+        "topic": "📥 主题",
+        "qos": "🏷️  QoS",
+        "qos_descriptions": {0: "最多一次", 1: "至少一次", 2: "恰好一次"},
+        "payload_size": "📊 负载大小",
+        "transport": "🌐 传输：使用 SigV4 的 WebSocket",
+        "message_payload": "💬 消息负载：",
+        "json_format": "📋 JSON 格式：",
+        "text_format": "📝 文本：",
+        "establishing_connection": "建立 WebSocket 上的 MQTT 连接",
+        "websocket_connection_params": "🔗 WebSocket 连接参数：",
+        "client_id": "客户端 ID",
+        "endpoint": "端点",
+        "port_443": "端口：443",
+        "protocol_mqtt311": "协议：WebSocket 上的 MQTT 3.1.1",
+        "authentication": "认证：AWS SigV4",
+        "connecting_websocket": "🔄 通过 WebSocket 连接到 AWS IoT Core...",
+        "websocket_connection_established": "WEBSOCKET 连接已建立",
+        "connection_status": "状态：已成功连接到 AWS IoT Core",
+        "websocket_connection_failed": "❌ WebSocket 连接失败：",
+        "not_connected": "❌ 未连接到 AWS IoT Core",
+        "subscribing_topic_websocket": "📥 订阅主题（WebSocket）",
+        "websocket_subscription_established": "WEBSOCKET 订阅已建立",
+        "websocket_subscription_failed": "❌ WebSocket 订阅失败：",
+        "publishing_message_websocket": "📤 发布消息（WebSocket）",
+        "published_websocket": "✅ [{}] 通过 WebSocket 发布",
+        "websocket_publish_failed": "❌ WebSocket 发布失败：",
+        "interactive_messaging": "WebSocket 上的交互式 MQTT 消息传递",
+        "mqtt_topic_guidelines": "💡 MQTT 主题指南：",
+        "topic_guidelines": [
+            "• 使用斜杠表示层次结构：device/sensor/temperature",
+            "• 避免前导斜杠：❌ /device/data ✅ device/data",
+            "• 保持主题描述性和有组织",
+            "• AWS IoT 保留主题以 $aws/ 开头",
+        ],
+        "enter_subscribe_topic": "📥 输入要订阅的主题（或 'skip'）：",
+        "qos_level_prompt": "QoS 级别（0=最多一次，1=至少一次）[0]：",
+        "invalid_qos": "❌ 请输入 0 或 1",
+        "subscription_failed_retry": "❌ 订阅失败，请重试",
+        "run_diagnostics": "您想运行连接诊断吗？(y/N)：",
+        "topic_cannot_be_empty": "❌ 主题不能为空",
+        "interactive_websocket_mode": "🎮 交互式 WebSocket MQTT 消息传递模式",
+        "messages_appear_immediately": "💡 在订阅的主题上收到消息时会立即显示！",
+        "commands": "命令：",
+        "command_list": [
+            "• 'sub <主题>' - 订阅主题（QoS 0）",
+            "• 'sub1 <主题>' - 订阅主题（QoS 1）",
+            "• 'unsub <主题>' - 取消订阅主题",
+            "• 'pub <主题> <消息>' - 发布消息（QoS 0）",
+            "• 'pub1 <主题> <消息>' - 使用 QoS 1 发布",
+            "• 'json <主题> <键=值> [键=值...]' - 发布 JSON",
+            "• 'test' - 向订阅的主题发送测试消息",
+            "• 'status' - 显示连接和订阅状态",
+            "• 'messages' - 显示消息历史",
+            "• 'debug [主题]' - 显示连接诊断",
+            "• 'clear' - 清屏",
+            "• 'help' - 显示此帮助",
+            "• 'quit' - 退出",
+        ],
+        "mqtt_ws_prompt": "📡 MQTT-WS> ",
+        "invalid_command": "❌ 无效命令。输入 'help' 查看可用命令。",
+        "goodbye": "👋 再见！",
+        "connection_diagnostics": "🔍 连接诊断",
+        "connection_status_label": "连接状态",
+        "connected": "已连接",
+        "disconnected": "已断开",
+        "subscriptions_count": "活动订阅：{}",
+        "no_subscriptions": "无活动订阅",
+        "message_history": "📊 消息历史",
+        "received_messages": "接收的消息：{}",
+        "sent_messages": "发送的消息：{}",
+        "no_messages": "还没有消息",
+        "recent_received": "📥 最近接收的消息：",
+        "recent_sent": "📤 最近发送的消息：",
+        "size": "大小",
+        "clear_screen": "🧹 屏幕已清除",
+        "test_message_sent": "🧪 测试消息已发送到 {} 个订阅主题",
+        "no_subscribed_topics": "❌ 没有订阅的主题用于测试消息",
+        "unsubscribing_from": "📤 正在取消订阅：{}",
+        "unsubscribed_success": "✅ 已取消订阅：{}",
+        "unsubscribe_failed": "❌ 取消订阅失败：{}",
+        "not_subscribed_to": "❌ 未订阅：{}",
+        "bytes": "字节",
+        "client_id_prompt": "输入自定义客户端 ID（或按 Enter 自动生成）：",
+        "client_id_auto_generated": "自动生成的客户端 ID",
+        "client_id_custom": "自定义客户端 ID",
+        "client_id_invalid": "❌ 无效的客户端 ID。必须是 1-128 个字符，仅限字母数字、连字符和下划线。",
+        "client_id_guidelines": "💡 客户端 ID 指南：",
+        "client_id_rules": [
+            "• 每个连接必须唯一",
+            "• 允许 1-128 个字符",
+            "• 使用字母数字、连字符 (-) 和下划线 (_)",
+            "• 避免空格和特殊字符",
+            "• 示例：my-device-001, sensor_temp_01",
+        ],
     },
     "pt-BR": {
         "title": "📡 Explorador AWS IoT MQTT sobre WebSocket",
@@ -677,6 +864,18 @@ MESSAGES = {
         "unsubscribe_failed": "❌ Cancelamento de inscrição falhou: {}",
         "not_subscribed_to": "❌ Não inscrito em: {}",
         "bytes": "bytes",
+        "client_id_prompt": "Digite ID do Cliente personalizado (ou pressione Enter para auto-gerar): ",
+        "client_id_auto_generated": "ID do Cliente Auto-gerado",
+        "client_id_custom": "ID do Cliente Personalizado",
+        "client_id_invalid": "❌ ID do Cliente inválido. 1-128 caracteres, alfanuméricos, hífens e sublinhados.",
+        "client_id_guidelines": "💡 Diretrizes do ID do Cliente:",
+        "client_id_rules": [
+            "• Deve ser único por conexão",
+            "• 1-128 caracteres permitidos",
+            "• Use alfanuméricos, hífens (-) e sublinhados (_)",
+            "• Evite espaços e caracteres especiais",
+            "• Exemplo: meu-dispositivo-001, sensor_temp_01",
+        ],
     },
     "ko": {
         "title": "📡 AWS IoT MQTT WebSocket 탐색기",
@@ -800,6 +999,18 @@ MESSAGES = {
         "unsubscribe_failed": "❌ 구독 해제 실패: {}",
         "not_subscribed_to": "❌ 구독되지 않음: {}",
         "bytes": "바이트",
+        "client_id_prompt": "사용자 정의 클라이언트 ID 입력 (또는 자동 생성하려면 Enter 누름): ",
+        "client_id_auto_generated": "자동 생성된 클라이언트 ID",
+        "client_id_custom": "사용자 정의 클라이언트 ID",
+        "client_id_invalid": "❌ 잘못된 클라이언트 ID입니다. 1-128자, 영숫자, 하이픈, 언더스코어만 사용 가능합니다.",
+        "client_id_guidelines": "💡 클라이언트 ID 가이드라인:",
+        "client_id_rules": [
+            "• 연결마다 고유해야 합니다",
+            "• 1-128자가 허용됩니다",
+            "• 영숫자, 하이픈(-), 언더스코어(_) 사용",
+            "• 공백과 특수 문자 피하기",
+            "• 예시: my-device-001, sensor_temp_01",
+        ],
     },
 }
 
@@ -920,6 +1131,51 @@ class MQTTWebSocketExplorer:
             else:
                 print(f"   {key}: {value}")
 
+    def validate_client_id(self, client_id):
+        """Validate MQTT Client ID according to AWS IoT requirements"""
+        if not client_id:
+            return False
+
+        # Length check: 1-128 characters
+        if len(client_id) < 1 or len(client_id) > 128:
+            return False
+
+        # Character check: alphanumeric, hyphens, and underscores only
+        import re
+
+        if not re.match(r"^[a-zA-Z0-9_-]+$", client_id):
+            return False
+
+        return True
+
+    def get_client_id(self):
+        """Get client ID from user input or generate automatically"""
+        print(f"\n{get_message('client_id_guidelines', USER_LANG)}")
+        for rule in get_message("client_id_rules", USER_LANG):
+            print(f"   {rule}")
+
+        while True:
+            try:
+                custom_id = input(f"\n{get_message('client_id_prompt', USER_LANG)}").strip()
+
+                if not custom_id:
+                    # Auto-generate client ID
+                    client_id = f"websocket-client-{uuid.uuid4().hex[:8]}"
+                    print(f"   {get_message('client_id_auto_generated', USER_LANG)}: {client_id}")
+                    return client_id
+                else:
+                    # Validate custom client ID
+                    if self.validate_client_id(custom_id):
+                        print(f"   {get_message('client_id_custom', USER_LANG)}: {custom_id}")
+                        return custom_id
+                    else:
+                        print(f"   {get_message('client_id_invalid', USER_LANG)}")
+                        continue
+
+            except KeyboardInterrupt:
+                print(f"\n{get_message('operation_cancelled', USER_LANG)}")
+                return None
+
     def get_iot_endpoint(self, debug=False):
         """Get AWS IoT endpoint for WebSocket connections"""
         try:
@@ -983,7 +1239,8 @@ class MQTTWebSocketExplorer:
             )
             print(f"   {get_message('region', USER_LANG)}: {region}")
             print(
-                f"   {get_message('session_token', USER_LANG)}: {get_message('present', USER_LANG) if session_token else get_message('not_present', USER_LANG)}"
+                f"   {get_message('session_token', USER_LANG)}: "
+                f"{get_message('present', USER_LANG) if session_token else get_message('not_present', USER_LANG)}"
             )
 
             return access_key, secret_key, session_token, region
@@ -1422,7 +1679,8 @@ class MQTTWebSocketExplorer:
             print(f"   📤 {get_message('topic', USER_LANG)}: {topic}")
             print(f"   🏷️  QoS: {qos} | {get_message('packet_id', USER_LANG)}: {packet_id}")
             print(
-                f"   📊 {get_message('size', USER_LANG)}: {len(payload)} {get_message('bytes', USER_LANG)} | Type: {content_type}"
+                f"   📊 {get_message('size', USER_LANG)}: {len(payload)} "
+                f"{get_message('bytes', USER_LANG)} | Type: {content_type}"
             )
             print(f"   {get_message('transport', USER_LANG)}")
             if qos > 0:
@@ -1564,14 +1822,18 @@ class MQTTWebSocketExplorer:
                             all_messages.sort(key=lambda x: x["Timestamp"])
 
                             if all_messages:
-                                print(
-                                    f"\n   {get_message('recent_received', USER_LANG) if len(self.received_messages) > 0 else get_message('recent_sent', USER_LANG)}"
+                                recent_msg = (
+                                    get_message("recent_received", USER_LANG)
+                                    if len(self.received_messages) > 0
+                                    else get_message("recent_sent", USER_LANG)
                                 )
+                                print(f"\n   {recent_msg}")
                                 for msg in all_messages[-10:]:  # Show last 10 messages
                                     direction = "📤" if msg["Direction"] == "SENT" else "📥"
                                     timestamp = msg["Timestamp"].split("T")[1][:8]
                                     transport = msg.get("Transport", "Unknown")
-                                    print(f"   {direction} [{timestamp}] {msg['Topic']} (QoS {msg['QoS']}) - {transport}")
+                                    topic_qos = f"{msg['Topic']} (QoS {msg['QoS']}) - {transport}"
+                                    print(f"   {direction} [{timestamp}] {topic_qos}")
                                     if len(str(msg["Payload"])) > 50:
                                         print(f"      {str(msg['Payload'])[:50]}...")
                                     else:
@@ -1723,9 +1985,10 @@ class MQTTWebSocketExplorer:
                     # Safe screen clearing without os.system
                     print("\n" * 50)
                     print(get_message("clear_screen", USER_LANG))
-                    print(
-                        f"Connected: {'✅' if self.connected else '❌'} | Subscriptions: {len(self.subscriptions)} | Messages: {self.message_count}"
-                    )
+                    conn_status = "✅" if self.connected else "❌"
+                    subs_count = len(self.subscriptions)
+                    msg_count = self.message_count
+                    print(f"Connected: {conn_status} | Subscriptions: {subs_count} | Messages: {msg_count}")
 
                 else:
                     print(f"   {get_message('invalid_command', USER_LANG)}")
@@ -1873,14 +2136,22 @@ def main():
 
         print("\n📚 LEARNING MOMENT: MQTT over WebSocket")
         if USER_LANG == "es":
-            print(
-                "MQTT sobre WebSocket permite la comunicación IoT a través de navegadores web y conexiones amigables con firewalls. En lugar de certificados X.509, usa autenticación AWS SigV4 con credenciales IAM. Este enfoque es ideal para aplicaciones web, aplicaciones móviles y entornos donde la gestión de certificados es desafiante."
+            long_text = (
+                "MQTT sobre WebSocket permite la comunicación IoT a través de navegadores web y conexiones "
+                "amigables con firewalls. En lugar de certificados X.509, usa autenticación AWS SigV4 con "
+                "credenciales IAM. Este enfoque es ideal para aplicaciones web, aplicaciones móviles y "
+                "entornos donde la gestión de certificados es desafiante."
             )
+            print(long_text)
             print("\n🔄 SIGUIENTE: Estableceremos una conexión MQTT WebSocket usando credenciales de AWS")
         else:
-            print(
-                "MQTT over WebSocket enables IoT communication through web browsers and firewall-friendly connections. Instead of X.509 certificates, it uses AWS SigV4 authentication with IAM credentials. This approach is ideal for web applications, mobile apps, and environments where certificate management is challenging."
+            long_text = (
+                "MQTT over WebSocket enables IoT communication through web browsers and firewall-friendly "
+                "connections. Instead of X.509 certificates, it uses AWS SigV4 authentication with IAM "
+                "credentials. This approach is ideal for web applications, mobile apps, and environments "
+                "where certificate management is challenging."
             )
+            print(long_text)
             print("\n🔄 NEXT: We will establish a WebSocket MQTT connection using AWS credentials")
 
         input("Press Enter to continue..." if USER_LANG == "en" else "Presiona Enter para continuar...")
@@ -1908,9 +2179,10 @@ def main():
             if not access_key or not secret_key:
                 return
 
-            # Create client ID
-            client_id = f"websocket-client-{uuid.uuid4().hex[:8]}"
-            print(f"\n🆔 Generated Client ID: {client_id}")
+            # Get client ID from user or auto-generate
+            client_id = client.get_client_id()
+            if not client_id:
+                return
 
             # Connect to AWS IoT via WebSocket
             if not client.connect_to_aws_iot_websocket(
