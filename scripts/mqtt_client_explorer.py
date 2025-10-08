@@ -1908,6 +1908,10 @@ class MQTTClientExplorer:
             # Convert QoS to proper enum
             mqtt_qos = mqtt.QoS.AT_MOST_ONCE if qos == 0 else mqtt.QoS.AT_LEAST_ONCE
             publish_params["qos"] = mqtt_qos
+            
+            # Add content type as MQTT5 property if not already specified
+            if "content_type" not in mqtt_properties:
+                publish_params["content_type"] = content_type
 
             # Debug publish parameters
             debug_mode = getattr(self, "debug_mode", False)
