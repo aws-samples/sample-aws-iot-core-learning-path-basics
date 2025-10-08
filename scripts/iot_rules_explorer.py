@@ -1068,8 +1068,8 @@ class IoTRulesExplorer:
 
         # For IoT Rules Engine SQL, allow alphanumeric, spaces, common operators, and IoT-specific functions
         if clause_type == "SELECT":  # nosec B608
-            # Allow SELECT clause patterns: *, field names, functions like timestamp()  # nosec B608
-            allowed_pattern = r"^[a-zA-Z0-9_\s,.*()=<>!+-]+$"
+            # Allow SELECT clause patterns: *, field names, functions like timestamp(), string literals  # nosec B608
+            allowed_pattern = r"^[a-zA-Z0-9_\s,.*()=<>!+'-]+$"
         elif clause_type == "WHERE":
             # Allow WHERE clause patterns: comparisons, logical operators
             allowed_pattern = r'^[a-zA-Z0-9_\s=<>!()\'".,-]+$'
