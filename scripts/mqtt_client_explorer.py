@@ -1121,7 +1121,7 @@ def interactive_messaging(mqtt_client):
                     print("Usage: pub <topic> <message>")
                     continue
                 topic = parts[1]
-                message = " ".join(parts[2:])
+                message = "".join(parts[2:])
                 mqtt_client.publish_message(topic, message, 0)
 
             elif command == "pub1":
@@ -1129,7 +1129,7 @@ def interactive_messaging(mqtt_client):
                     print("Usage: pub1 <topic> <message>")
                     continue
                 topic = parts[1]
-                message = " ".join(parts[2:])
+                message = "".join(parts[2:])
                 mqtt_client.publish_message(topic, message, 1)
 
             elif command == "json":
@@ -1908,10 +1908,6 @@ class MQTTClientExplorer:
             # Convert QoS to proper enum
             mqtt_qos = mqtt.QoS.AT_MOST_ONCE if qos == 0 else mqtt.QoS.AT_LEAST_ONCE
             publish_params["qos"] = mqtt_qos
-            
-            # Add content type as MQTT5 property if not already specified
-            if "content_type" not in mqtt_properties:
-                publish_params["content_type"] = content_type
 
             # Debug publish parameters
             debug_mode = getattr(self, "debug_mode", False)
