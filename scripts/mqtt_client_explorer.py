@@ -1121,7 +1121,7 @@ def interactive_messaging(mqtt_client):
                     print("Usage: pub <topic> <message>")
                     continue
                 topic = parts[1]
-                message = "".join(parts[2:])
+                message = "".join(parts[2:]).strip("'\"")
                 mqtt_client.publish_message(topic, message, 0)
 
             elif command == "pub1":
@@ -1129,7 +1129,7 @@ def interactive_messaging(mqtt_client):
                     print("Usage: pub1 <topic> <message>")
                     continue
                 topic = parts[1]
-                message = "".join(parts[2:])
+                message = "".join(parts[2:]).strip("'\"")
                 mqtt_client.publish_message(topic, message, 1)
 
             elif command == "json":

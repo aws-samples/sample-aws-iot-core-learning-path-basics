@@ -1883,7 +1883,7 @@ class MQTTWebSocketExplorer:
                         continue
 
                     topic = parts[1]
-                    message = "".join(parts[2:])
+                    message = "".join(parts[2:]).strip("'\"")
                     qos = 1 if cmd == "pub1" else 0
 
                     self.publish_message(topic, message, qos)
