@@ -1605,7 +1605,12 @@ class MQTTWebSocketExplorer:
                 content_type = "application/json"
             else:
                 payload = str(message)
-                content_type = "text/plain"
+                # Auto-detect JSON content type
+                try:
+                    json.loads(payload)
+                    content_type = "application/json"
+                except (json.JSONDecodeError, ValueError):
+                    content_type = "text/plain"
 
             # Extract MQTT5 properties
             user_properties = mqtt_properties.get("user_properties", [])
