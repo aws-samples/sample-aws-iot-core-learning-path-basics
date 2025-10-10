@@ -1,0 +1,99 @@
+{
+    "title": "🚀 AWS IoT サンプルデータセットアップ",
+    "separator": "================================",
+    "aws_config": "📍 AWS設定:",
+    "aws_credentials_reminder": "   AWS認証情報が設定されていることを確認してください",
+    "description_intro": "このスクリプトは学習用のサンプルIoTリソースを作成します:",
+    "thing_types_desc": "Thing Types:",
+    "thing_groups_desc": "Thing Groups:",
+    "things_desc": "ランダム属性を持つThings",
+    "debug_features": [
+        "• 詳細なAPIリクエストとレスポンスを表示",
+        "• 拡張ポーズによる実行速度の低下",
+        "• 完全なエラー詳細とトレースバック"
+    ],
+    "continue_prompt": "続行しますか？ (y/N): ",
+    "setup_cancelled": "セットアップがキャンセルされました",
+    "client_initialized": "✅ AWS IoTクライアントが初期化されました",
+    "client_error": "❌ AWS IoTクライアントの初期化エラー:",
+    "credentials_reminder": "AWS認証情報とリージョンが設定されていることを確認してください",
+    "no_region_error": "❌ AWSリージョンが設定されていません",
+    "region_setup_instructions": [
+        "以下のいずれかの方法でAWSリージョンを設定してください:",
+        "1. 環境変数を設定: export AWS_DEFAULT_REGION=us-east-1",
+        "2. AWS CLIを設定: aws configure",
+        "3. AWS認証情報ファイルでリージョンを設定"
+    ],
+    "invalid_credentials": "❌ 無効なAWS認証情報",
+    "credentials_check_failed": "❌ 必要な環境変数が不足しています:",
+    "credentials_instructions": [
+        "AWS認証情報をエクスポートしてください:",
+        "export AWS_ACCESS_KEY_ID=<your-access-key>",
+        "export AWS_SECRET_ACCESS_KEY=<your-secret-key>",
+        "export AWS_SESSION_TOKEN=<your-session-token>  # 一時認証情報の場合はオプション"
+    ],
+    "step_1_title": "Thing Typesを作成中",
+    "step_2_title": "Thing Groupsを作成中",
+    "step_3_title": "{}個のThingsを属性付きで作成中",
+    "step_4_title": "ThingsをThing Groupsに追加中",
+    "step_5_title": "セットアップ概要",
+    "creating": "作成中",
+    "created": "作成完了",
+    "already_exists": "既に存在するため、スキップします",
+    "deprecated_undeprecating": "は非推奨です、非推奨を解除中...",
+    "undeprecated": "非推奨解除が成功しました",
+    "already_active": "既に存在し、アクティブです",
+    "error_checking": "確認エラー",
+    "error_creating": "作成エラー",
+    "creating_thing": "📱 Thing作成中:",
+    "customer_id": "顧客ID:",
+    "country": "国:",
+    "manufacturing_date": "製造日:",
+    "thing_type": "Thing Type:",
+    "adding_to_group": "{}をグループ{}に追加中",
+    "added_to_group": "{}を{}に追加しました",
+    "error_adding": "{}を{}に追加中にエラー:",
+    "resources_created": "📊 作成されたリソース:",
+    "things": "Things:",
+    "thing_types": "Thing Types:",
+    "thing_groups": "Thing Groups:",
+    "sample_thing_names": "🎯 サンプルThing名:",
+    "and_more": "... その他{}個",
+    "error_summary": "❌ 概要取得エラー:",
+    "setup_complete": "🎉 セットアップ完了！iot_registry_explorer.pyを使用してデータを探索できます。",
+    "debug_session_complete": "🔍 デバッグ: 詳細なAPIログ記録でセッションが完了しました",
+    "setup_cancelled_user": "👋 ユーザーによってセットアップがキャンセルされました。さようなら！",
+    "debug_creating": "🔍 デバッグ: 作成中",
+    "debug_api_call": "📤 API呼び出し:",
+    "debug_input_params": "📥 入力パラメータ:",
+    "debug_api_response": "📤 APIレスポンス:",
+    "debug_full_error": "🔍 デバッグ: 完全なエラーレスポンス:",
+    "debug_full_traceback": "🔍 デバッグ: 完全なトレースバック:",
+    "api_error": "❌ AWS APIエラー",
+    "missing_param_error": "❌ 必要なパラメータが不足",
+    "invalid_value_error": "❌ 無効な値",
+    "unexpected_error": "❌ 予期しないエラー",
+    "press_enter": "Enterキーを押して続行...",
+    "learning_moments": {
+        "hierarchy": {
+            "title": "📚 学習ポイント: AWS IoTリソース階層",
+            "content": "AWS IoTはデバイスを整理するために階層構造を使用します: Thing Types（テンプレート）はデバイスカテゴリを定義し、Thing Groupsは組織構造を提供し、Thingsは実際のデバイスを表します。この階層により、スケーラブルなデバイス管理、一括操作、IoTフリート全体でのポリシー継承が可能になります。",
+            "next": "この階層を実証するためにサンプルリソースを作成します"
+        },
+        "thing_groups": {
+            "title": "📚 学習ポイント: Thing Groups - デバイス組織",
+            "content": "Thing Groupsは、ファイル用のフォルダと同様に、IoTデバイスの階層組織を提供します。場所、機能、またはビジネス基準による一括操作、ポリシー継承、論理グループ化を可能にします。グループは他のグループを含むことができ、大規模なIoTデプロイメントのための柔軟な組織構造を作成します。",
+            "next": "デバイス組織のためのThing Groupsを作成します"
+        },
+        "things": {
+            "title": "📚 学習ポイント: Things - デバイス登録",
+            "content": "ThingsはAWS IoT Coreでの実際のIoTデバイスを表します。各Thingは一意の名前、オプションの属性（シリアル番号、場所など）を持ち、標準化のためにThing Typeに割り当てることができます。Thingsはデバイス管理、セキュリティポリシー、シャドウ状態同期の基盤です。",
+            "next": "現実的な属性を持つ個別のThingsを作成します"
+        },
+        "relationships": {
+            "title": "📚 学習ポイント: Thing-Group関係",
+            "content": "ThingsをGroupsに追加することで、一括操作とポリシー継承を可能にする組織関係を作成します。Thingは複数のグループに属することができ、グループはネストできます。この階層は、スケールでのデバイスフリート管理、ポリシーの適用、ビジネスロジックによるデバイスの組織化に不可欠です。",
+            "next": "適切なGroupsにThingsを割り当てます"
+        }
+    }
+}

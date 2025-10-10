@@ -1,2 +1,2 @@
 boto3>=1.26.0
-awsiotsdk>=1.11.0
+git+https://github.com/aws/aws-iot-device-sdk-python-v2.git

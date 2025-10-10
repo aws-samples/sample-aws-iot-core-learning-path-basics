@@ -1,0 +1,99 @@
+{
+    "title": "🚀 AWS IoT Sample Data Setup",
+    "separator": "================================",
+    "aws_config": "📍 AWS Configuration:",
+    "aws_credentials_reminder": "   Make sure AWS credentials are configured",
+    "description_intro": "This script will create sample IoT resources for learning:",
+    "thing_types_desc": "Thing Types:",
+    "thing_groups_desc": "Thing Groups:",
+    "things_desc": "Things with random attributes",
+    "debug_features": [
+        "• Will show detailed API requests and responses",
+        "• Slower execution with extended pauses",
+        "• Full error details and tracebacks"
+    ],
+    "continue_prompt": "Continue? (y/N): ",
+    "setup_cancelled": "Setup cancelled",
+    "client_initialized": "✅ AWS IoT client initialized",
+    "client_error": "❌ Error initializing AWS IoT client:",
+    "credentials_reminder": "Make sure you have AWS credentials and region configured",
+    "no_region_error": "❌ AWS region not configured",
+    "region_setup_instructions": [
+        "Please configure your AWS region using one of these methods:",
+        "1. Set environment variable: export AWS_DEFAULT_REGION=us-east-1",
+        "2. Configure AWS CLI: aws configure",
+        "3. Set region in AWS credentials file"
+    ],
+    "invalid_credentials": "❌ Invalid AWS credentials",
+    "credentials_check_failed": "❌ Missing required environment variables:",
+    "credentials_instructions": [
+        "Please export your AWS credentials:",
+        "export AWS_ACCESS_KEY_ID=<your-access-key>",
+        "export AWS_SECRET_ACCESS_KEY=<your-secret-key>",
+        "export AWS_SESSION_TOKEN=<your-session-token>  # Optional for temporary credentials"
+    ],
+    "step_1_title": "Creating Thing Types",
+    "step_2_title": "Creating Thing Groups",
+    "step_3_title": "Creating {} Things with attributes",
+    "step_4_title": "Adding Things to Thing Groups",
+    "step_5_title": "Setup Summary",
+    "creating": "Creating",
+    "created": "Created",
+    "already_exists": "already exists, skipping",
+    "deprecated_undeprecating": "is deprecated, undeprecating...",
+    "undeprecated": "undeprecated successfully",
+    "already_active": "already exists and is active",
+    "error_checking": "Error checking",
+    "error_creating": "Error creating",
+    "creating_thing": "📱 Creating Thing:",
+    "customer_id": "Customer ID:",
+    "country": "Country:",
+    "manufacturing_date": "Manufacturing Date:",
+    "thing_type": "Thing Type:",
+    "adding_to_group": "Adding {} to group {}",
+    "added_to_group": "Added {} to {}",
+    "error_adding": "Error adding {} to {}:",
+    "resources_created": "📊 Resources Created:",
+    "things": "Things:",
+    "thing_types": "Thing Types:",
+    "thing_groups": "Thing Groups:",
+    "sample_thing_names": "🎯 Sample Thing Names:",
+    "and_more": "... and {} more",
+    "error_summary": "❌ Error getting summary:",
+    "setup_complete": "🎉 Setup complete! You can now use iot_registry_explorer.py to explore the data.",
+    "debug_session_complete": "🔍 DEBUG: Session completed with detailed API logging",
+    "setup_cancelled_user": "👋 Setup cancelled by user. Goodbye!",
+    "debug_creating": "🔍 DEBUG: Creating",
+    "debug_api_call": "📤 API Call:",
+    "debug_input_params": "📥 Input Parameters:",
+    "debug_api_response": "📤 API Response:",
+    "debug_full_error": "🔍 DEBUG: Full error response:",
+    "debug_full_traceback": "🔍 DEBUG: Full traceback:",
+    "api_error": "❌ AWS API Error in",
+    "missing_param_error": "❌ Missing required parameter in",
+    "invalid_value_error": "❌ Invalid value in",
+    "unexpected_error": "❌ Unexpected error in",
+    "press_enter": "Press Enter to continue...",
+    "learning_moments": {
+        "hierarchy": {
+            "title": "📚 LEARNING MOMENT: AWS IoT Resource Hierarchy",
+            "content": "AWS IoT uses a hierarchical structure to organize devices: Thing Types (templates) define device categories, Thing Groups provide organizational structure, and Things represent actual devices. This hierarchy enables scalable device management, bulk operations, and policy inheritance across your IoT fleet.",
+            "next": "We will create sample resources to demonstrate this hierarchy"
+        },
+        "thing_groups": {
+            "title": "📚 LEARNING MOMENT: Thing Groups - Device Organization",
+            "content": "Thing Groups provide hierarchical organization for your IoT devices, similar to folders for files. They enable bulk operations, policy inheritance, and logical grouping by location, function, or business criteria. Groups can contain other groups, creating flexible organizational structures for large IoT deployments.",
+            "next": "We will create Thing Groups for device organization"
+        },
+        "things": {
+            "title": "📚 LEARNING MOMENT: Things - Device Registration",
+            "content": "Things represent your actual IoT devices in AWS IoT Core. Each Thing has a unique name, optional attributes (like serial number, location), and can be assigned to a Thing Type for standardization. Things are the foundation for device management, security policies, and shadow state synchronization.",
+            "next": "We will create individual Things with realistic attributes"
+        },
+        "relationships": {
+            "title": "📚 LEARNING MOMENT: Thing-Group Relationships",
+            "content": "Adding Things to Groups creates organizational relationships that enable bulk operations and policy inheritance. A Thing can belong to multiple groups, and groups can be nested. This hierarchy is essential for managing device fleets at scale, applying policies, and organizing devices by business logic.",
+            "next": "We will assign Things to appropriate Groups"
+        }
+    }
+}

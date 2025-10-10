@@ -1,0 +1,99 @@
+{
+    "title": "🚀 Configuração de Dados de Exemplo AWS IoT",
+    "separator": "================================",
+    "aws_config": "📍 Configuração AWS:",
+    "aws_credentials_reminder": "   Certifique-se de que as credenciais AWS estão configuradas",
+    "description_intro": "Este script criará recursos IoT de exemplo para aprendizado:",
+    "thing_types_desc": "Thing Types:",
+    "thing_groups_desc": "Thing Groups:",
+    "things_desc": "Things com atributos aleatórios",
+    "debug_features": [
+        "• Mostrará solicitações e respostas detalhadas da API",
+        "• Execução mais lenta com pausas estendidas",
+        "• Detalhes completos de erros e rastreamentos"
+    ],
+    "continue_prompt": "Continuar? (s/N): ",
+    "setup_cancelled": "Configuração cancelada",
+    "client_initialized": "✅ Cliente AWS IoT inicializado",
+    "client_error": "❌ Erro ao inicializar cliente AWS IoT:",
+    "credentials_reminder": "Certifique-se de ter credenciais e região AWS configuradas",
+    "no_region_error": "❌ Região AWS não configurada",
+    "region_setup_instructions": [
+        "Por favor configure sua região AWS usando um destes métodos:",
+        "1. Definir variável de ambiente: export AWS_DEFAULT_REGION=us-east-1",
+        "2. Configurar AWS CLI: aws configure",
+        "3. Definir região no arquivo de credenciais AWS"
+    ],
+    "invalid_credentials": "❌ Credenciais AWS inválidas",
+    "credentials_check_failed": "❌ Variáveis de ambiente obrigatórias ausentes:",
+    "credentials_instructions": [
+        "Por favor exporte suas credenciais AWS:",
+        "export AWS_ACCESS_KEY_ID=<sua-access-key>",
+        "export AWS_SECRET_ACCESS_KEY=<sua-secret-key>",
+        "export AWS_SESSION_TOKEN=<seu-session-token>  # Opcional para credenciais temporárias"
+    ],
+    "step_1_title": "Criando Thing Types",
+    "step_2_title": "Criando Thing Groups",
+    "step_3_title": "Criando {} Things com atributos",
+    "step_4_title": "Adicionando Things aos Thing Groups",
+    "step_5_title": "Resumo da Configuração",
+    "creating": "Criando",
+    "created": "Criado",
+    "already_exists": "já existe, pulando",
+    "deprecated_undeprecating": "está depreciado, removendo depreciação...",
+    "undeprecated": "depreciação removida com sucesso",
+    "already_active": "já existe e está ativo",
+    "error_checking": "Erro verificando",
+    "error_creating": "Erro criando",
+    "creating_thing": "📱 Criando Thing:",
+    "customer_id": "ID do Cliente:",
+    "country": "País:",
+    "manufacturing_date": "Data de Fabricação:",
+    "thing_type": "Thing Type:",
+    "adding_to_group": "Adicionando {} ao grupo {}",
+    "added_to_group": "Adicionado {} a {}",
+    "error_adding": "Erro adicionando {} a {}:",
+    "resources_created": "📊 Recursos Criados:",
+    "things": "Things:",
+    "thing_types": "Thing Types:",
+    "thing_groups": "Thing Groups:",
+    "sample_thing_names": "🎯 Nomes de Things de Exemplo:",
+    "and_more": "... e {} mais",
+    "error_summary": "❌ Erro obtendo resumo:",
+    "setup_complete": "🎉 Configuração completa! Agora você pode usar iot_registry_explorer.py para explorar os dados.",
+    "debug_session_complete": "🔍 DEBUG: Sessão completada com log detalhado da API",
+    "setup_cancelled_user": "👋 Configuração cancelada pelo usuário. Tchau!",
+    "debug_creating": "🔍 DEBUG: Criando",
+    "debug_api_call": "📤 Chamada da API:",
+    "debug_input_params": "📥 Parâmetros de Entrada:",
+    "debug_api_response": "📤 Resposta da API:",
+    "debug_full_error": "🔍 DEBUG: Resposta completa de erro:",
+    "debug_full_traceback": "🔍 DEBUG: Rastreamento completo:",
+    "api_error": "❌ Erro da API AWS em",
+    "missing_param_error": "❌ Parâmetro obrigatório ausente em",
+    "invalid_value_error": "❌ Valor inválido em",
+    "unexpected_error": "❌ Erro inesperado em",
+    "press_enter": "Pressione Enter para continuar...",
+    "learning_moments": {
+        "hierarchy": {
+            "title": "📚 MOMENTO DE APRENDIZADO: Hierarquia de Recursos AWS IoT",
+            "content": "AWS IoT usa uma estrutura hierárquica para organizar dispositivos: Thing Types (modelos) definem categorias de dispositivos, Thing Groups fornecem estrutura organizacional, e Things representam dispositivos reais. Esta hierarquia permite gerenciamento escalável de dispositivos, operações em lote e herança de políticas em sua frota IoT.",
+            "next": "Criaremos recursos de exemplo para demonstrar esta hierarquia"
+        },
+        "thing_groups": {
+            "title": "📚 MOMENTO DE APRENDIZADO: Thing Groups - Organização de Dispositivos",
+            "content": "Thing Groups fornecem organização hierárquica para seus dispositivos IoT, similar a pastas para arquivos. Eles permitem operações em lote, herança de políticas e agrupamento lógico por localização, função ou critérios de negócio. Grupos podem conter outros grupos, criando estruturas organizacionais flexíveis para grandes implantações IoT.",
+            "next": "Criaremos Thing Groups para organização de dispositivos"
+        },
+        "things": {
+            "title": "📚 MOMENTO DE APRENDIZADO: Things - Registro de Dispositivos",
+            "content": "Things representam seus dispositivos IoT reais no AWS IoT Core. Cada Thing tem um nome único, atributos opcionais (como número de série, localização), e pode ser atribuído a um Thing Type para padronização. Things são a base para gerenciamento de dispositivos, políticas de segurança e sincronização de estado shadow.",
+            "next": "Criaremos Things individuais com atributos realistas"
+        },
+        "relationships": {
+            "title": "📚 MOMENTO DE APRENDIZADO: Relacionamentos Thing-Group",
+            "content": "Adicionar Things a Groups cria relacionamentos organizacionais que permitem operações em lote e herança de políticas. Um Thing pode pertencer a múltiplos grupos, e grupos podem ser aninhados. Esta hierarquia é essencial para gerenciar frotas de dispositivos em escala, aplicar políticas e organizar dispositivos por lógica de negócio.",
+            "next": "Atribuiremos Things aos Groups apropriados"
+        }
+    }
+}

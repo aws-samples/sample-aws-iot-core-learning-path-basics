@@ -1,0 +1,10 @@
+{
+    "press_enter_continue": "Press Enter to continue...",
+    "debug_mode_enabled": "🔍 DEBUG MODE ENABLED",
+    "debug_tip": "💡 Tip: Use --debug or -d flag for enhanced logging",
+    "aws_context_info": "🌍 AWS Context Information:",
+    "account_id": "Account ID",
+    "region": "Region",
+    "aws_context_error": "⚠️ Could not retrieve AWS context: {error}",
+    "aws_credentials_check": "Make sure AWS credentials are configured"
+}

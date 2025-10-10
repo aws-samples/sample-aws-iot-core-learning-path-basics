@@ -1,0 +1,113 @@
+name: I18n Validation
+
+on:
+  push:
+    paths:
+      - 'i18n/**/*.json'
+  pull_request:
+    paths:
+      - 'i18n/**/*.json'
+
+jobs:
+  validate-i18n:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Validate I18n Keys
+      run: |
+        python3 << 'EOF'
+        import json
+        import os
+        import sys
+        from pathlib import Path
+        
+        def get_all_keys(data, prefix=""):
+            """Recursively get all keys from nested dict"""
+            keys = set()
+            for key, value in data.items():
+                full_key = f"{prefix}.{key}" if prefix else key
+                keys.add(full_key)
+                if isinstance(value, dict):
+                    keys.update(get_all_keys(value, full_key))
+            return keys
+        
+        def validate_i18n_files():
+            i18n_dir = Path("i18n")
+            languages = [d.name for d in i18n_dir.iterdir() if d.is_dir()]
+            
+            # Get all script files from English (reference language)
+            en_dir = i18n_dir / "en"
+            script_files = [f.name for f in en_dir.glob("*.json")]
+            
+            errors = []
+            
+            print(f"🌍 Found languages: {', '.join(languages)}")
+            print(f"📄 Found script files: {', '.join(script_files)}")
+            print()
+            
+            for script_file in script_files:
+                print(f"🔍 Validating {script_file}...")
+                
+                # Load English file as reference
+                en_file = en_dir / script_file
+                if not en_file.exists():
+                    continue
+                    
+                with open(en_file, 'r', encoding='utf-8') as f:
+                    en_data = json.load(f)
+                en_keys = get_all_keys(en_data)
+                
+                # Check each language
+                for lang in languages:
+                    if lang == "en":
+                        continue
+                        
+                    lang_file = i18n_dir / lang / script_file
+                    if not lang_file.exists():
+                        errors.append(f"❌ Missing file: {lang_file}")
+                        continue
+                    
+                    try:
+                        with open(lang_file, 'r', encoding='utf-8') as f:
+                            lang_data = json.load(f)
+                    except json.JSONDecodeError as e:
+                        errors.append(f"❌ Invalid JSON in {lang_file}: {e}")
+                        continue
+                    
+                    lang_keys = get_all_keys(lang_data)
+                    
+                    # Find missing and extra keys
+                    missing_keys = en_keys - lang_keys
+                    extra_keys = lang_keys - en_keys
+                    
+                    if missing_keys:
+                        errors.append(f"❌ {lang}/{script_file} missing keys: {sorted(missing_keys)}")
+                    
+                    if extra_keys:
+                        errors.append(f"⚠️  {lang}/{script_file} has extra keys: {sorted(extra_keys)}")
+                    
+                    if not missing_keys and not extra_keys:
+                        print(f"  ✅ {lang}/{script_file} - All keys match")
+                    else:
+                        print(f"  ❌ {lang}/{script_file} - Key mismatch")
+            
+            if errors:
+                print("\n🚨 I18n Validation Errors:")
+                for error in errors:
+                    print(f"  {error}")
+                return False
+            else:
+                print("\n🎉 All i18n files have consistent keys!")
+                return True
+        
+        if __name__ == "__main__":
+            success = validate_i18n_files()
+            sys.exit(0 if success else 1)
+        EOF

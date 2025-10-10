@@ -1,0 +1,99 @@
+{
+    "title": "🚀 AWS IoT 示例数据设置",
+    "separator": "================================",
+    "aws_config": "📍 AWS 配置:",
+    "aws_credentials_reminder": "   确保已配置 AWS 凭证",
+    "description_intro": "此脚本将为学习创建示例 IoT 资源:",
+    "thing_types_desc": "Thing Types:",
+    "thing_groups_desc": "Thing Groups:",
+    "things_desc": "具有随机属性的 Things",
+    "debug_features": [
+        "• 将显示详细的 API 请求和响应",
+        "• 执行较慢，有延长的暂停",
+        "• 完整的错误详细信息和堆栈跟踪"
+    ],
+    "continue_prompt": "继续吗？ (y/N): ",
+    "setup_cancelled": "设置已取消",
+    "client_initialized": "✅ AWS IoT 客户端已初始化",
+    "client_error": "❌ 初始化 AWS IoT 客户端时出错:",
+    "credentials_reminder": "确保您已配置 AWS 凭证和区域",
+    "no_region_error": "❌ 未配置 AWS 区域",
+    "region_setup_instructions": [
+        "请使用以下方法之一配置您的 AWS 区域:",
+        "1. 设置环境变量: export AWS_DEFAULT_REGION=us-east-1",
+        "2. 配置 AWS CLI: aws configure",
+        "3. 在 AWS 凭证文件中设置区域"
+    ],
+    "invalid_credentials": "❌ 无效的 AWS 凭证",
+    "credentials_check_failed": "❌ 缺少必需的环境变量:",
+    "credentials_instructions": [
+        "请导出您的 AWS 凭证:",
+        "export AWS_ACCESS_KEY_ID=<your-access-key>",
+        "export AWS_SECRET_ACCESS_KEY=<your-secret-key>",
+        "export AWS_SESSION_TOKEN=<your-session-token>  # 临时凭证可选"
+    ],
+    "step_1_title": "创建 Thing Types",
+    "step_2_title": "创建 Thing Groups",
+    "step_3_title": "创建 {} 个带属性的 Things",
+    "step_4_title": "将 Things 添加到 Thing Groups",
+    "step_5_title": "设置摘要",
+    "creating": "创建中",
+    "created": "已创建",
+    "already_exists": "已存在，跳过",
+    "deprecated_undeprecating": "已弃用，正在取消弃用...",
+    "undeprecated": "成功取消弃用",
+    "already_active": "已存在且处于活动状态",
+    "error_checking": "检查错误",
+    "error_creating": "创建错误",
+    "creating_thing": "📱 创建 Thing:",
+    "customer_id": "客户 ID:",
+    "country": "国家:",
+    "manufacturing_date": "制造日期:",
+    "thing_type": "Thing Type:",
+    "adding_to_group": "将 {} 添加到组 {}",
+    "added_to_group": "已将 {} 添加到 {}",
+    "error_adding": "将 {} 添加到 {} 时出错:",
+    "resources_created": "📊 已创建的资源:",
+    "things": "Things:",
+    "thing_types": "Thing Types:",
+    "thing_groups": "Thing Groups:",
+    "sample_thing_names": "🎯 示例 Thing 名称:",
+    "and_more": "... 还有 {} 个",
+    "error_summary": "❌ 获取摘要时出错:",
+    "setup_complete": "🎉 设置完成！现在您可以使用 iot_registry_explorer.py 来探索数据。",
+    "debug_session_complete": "🔍 调试: 会话已完成，包含详细的 API 日志记录",
+    "setup_cancelled_user": "👋 用户取消了设置。再见！",
+    "debug_creating": "🔍 调试: 创建中",
+    "debug_api_call": "📤 API 调用:",
+    "debug_input_params": "📥 输入参数:",
+    "debug_api_response": "📤 API 响应:",
+    "debug_full_error": "🔍 调试: 完整错误响应:",
+    "debug_full_traceback": "🔍 调试: 完整堆栈跟踪:",
+    "api_error": "❌ AWS API 错误在",
+    "missing_param_error": "❌ 缺少必需参数在",
+    "invalid_value_error": "❌ 无效值在",
+    "unexpected_error": "❌ 意外错误在",
+    "press_enter": "按 Enter 键继续...",
+    "learning_moments": {
+        "hierarchy": {
+            "title": "📚 学习要点: AWS IoT 资源层次结构",
+            "content": "AWS IoT 使用层次结构来组织设备: Thing Types（模板）定义设备类别，Thing Groups 提供组织结构，Things 代表实际设备。这种层次结构实现了可扩展的设备管理、批量操作和整个 IoT 车队的策略继承。",
+            "next": "我们将创建示例资源来演示这种层次结构"
+        },
+        "thing_groups": {
+            "title": "📚 学习要点: Thing Groups - 设备组织",
+            "content": "Thing Groups 为您的 IoT 设备提供层次组织，类似于文件的文件夹。它们支持批量操作、策略继承以及按位置、功能或业务标准进行逻辑分组。组可以包含其他组，为大型 IoT 部署创建灵活的组织结构。",
+            "next": "我们将创建 Thing Groups 用于设备组织"
+        },
+        "things": {
+            "title": "📚 学习要点: Things - 设备注册",
+            "content": "Things 代表您在 AWS IoT Core 中的实际 IoT 设备。每个 Thing 都有唯一的名称、可选属性（如序列号、位置），并可分配给 Thing Type 以实现标准化。Things 是设备管理、安全策略和影子状态同步的基础。",
+            "next": "我们将创建具有真实属性的单个 Things"
+        },
+        "relationships": {
+            "title": "📚 学习要点: Thing-Group 关系",
+            "content": "将 Things 添加到 Groups 会创建组织关系，支持批量操作和策略继承。一个 Thing 可以属于多个组，组可以嵌套。这种层次结构对于大规模管理设备车队、应用策略和按业务逻辑组织设备至关重要。",
+            "next": "我们将把 Things 分配给适当的 Groups"
+        }
+    }
+}
