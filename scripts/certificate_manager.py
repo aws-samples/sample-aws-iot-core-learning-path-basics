@@ -101,15 +101,11 @@ def validate_policy_security(policy_document, policy_name):
             resources = [resources]
 
         if "*" in resources:
-            warnings.append(
-                f"Policy '{policy_name}' uses wildcard resource '*' - consider using specific ARNs"
-            )
+            warnings.append(f"Policy '{policy_name}' uses wildcard resource '*' - consider using specific ARNs")
 
         # Check for missing conditions
         if not statement.get("Condition"):
-            warnings.append(
-                f"Policy '{policy_name}' lacks condition statements for additional security"
-            )
+            warnings.append(f"Policy '{policy_name}' lacks condition statements for additional security")
 
     return warnings
 
@@ -118,9 +114,7 @@ def print_enhanced_security_warning(policy_name, policy_document, validation_war
     """Print enhanced security warning with validation results"""
     print(f"\n{get_message('policy_to_be_created')}")
     print(f"   {get_message('policy_name_label')}: {policy_name}")
-    print(
-        f"   {get_message('policy_document_label')}: {json.dumps(policy_document, indent=2)}"
-    )
+    print(f"   {get_message('policy_document_label')}: {json.dumps(policy_document, indent=2)}")
 
     print(f"\n{get_message('security_warning')}")
     for detail in get_message("security_warning_details"):
@@ -150,9 +144,7 @@ def safe_operation(func, operation_name, api_details=None, debug=None, **kwargs)
         response = func(**kwargs)
 
         if debug:
-            print(
-                f"✅ {get_message('operation_completed_successfully').format(operation_name)}"
-            )
+            print(f"✅ {get_message('operation_completed_successfully').format(operation_name)}")
             print(
                 f"📤 {get_message('output_label')}: {json.dumps(response, indent=2, default=str)[:500]}{'...' if len(str(response)) > 500 else ''}"
             )
@@ -199,9 +191,7 @@ def save_certificate_files(thing_name, cert_id, cert_pem, private_key, public_ke
     """Save certificate files to local folder structure"""
     # Validate thing_name to prevent path traversal
     if not re.match(r"^[a-zA-Z0-9_-]+$", thing_name):
-        raise ValueError(
-            f"Invalid thing_name: {thing_name}. Only alphanumeric characters, hyphens, and underscores allowed."
-        )
+        raise ValueError(f"Invalid thing_name: {thing_name}. Only alphanumeric characters, hyphens, and underscores allowed.")
 
     # Create certificates directory structure
     base_dir = os.path.join(os.getcwd(), "certificates", thing_name)
@@ -238,11 +228,7 @@ def check_existing_certificates(iot, thing_name):
         cert_arns = [p for p in principals if "cert/" in p]
 
         if cert_arns:
-            print(
-                get_message("thing_already_has_certificates").format(
-                    thing_name, len(cert_arns)
-                )
-            )
+            print(get_message("thing_already_has_certificates").format(thing_name, len(cert_arns)))
             for i, cert_arn in enumerate(cert_arns, 1):
                 cert_id = cert_arn.split("/")[-1]
                 print(get_message("certificate_id_item").format(i, cert_id))
@@ -290,9 +276,7 @@ def cleanup_certificate(iot, cert_arn, thing_name):
         newStatus="INACTIVE",
     )
 
-    safe_operation(
-        iot.delete_certificate, "Deleting certificate", certificateId=cert_id
-    )
+    safe_operation(iot.delete_certificate, "Deleting certificate", certificateId=cert_id)
 
     # Remove local files if they exist
     if not re.match(r"^[a-zA-Z0-9_-]+$", thing_name):
@@ -348,9 +332,7 @@ def create_certificate(iot, thing_name=None):
 
         # Save certificate files locally
         if thing_name:
-            cert_folder = save_certificate_files(
-                thing_name, cert_id, cert_pem, private_key, public_key
-            )
+            cert_folder = save_certificate_files(thing_name, cert_id, cert_pem, private_key, public_key)
             print(f"\n{get_message('certificate_files_saved')} {cert_folder}")
 
         print(f"\n{get_message('certificate_components_created')}")
@@ -394,9 +376,7 @@ def select_thing(iot):
             display_count = min(len(things), 10)
             for i in range(display_count):
                 thing = things[i]
-                print(
-                    f"   {i+1}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})"
-                )
+                print(f"   {i+1}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})")
 
             if len(things) > 10:
                 print(f"   ... and {len(things) - 10} more")
@@ -411,9 +391,7 @@ def select_thing(iot):
             if choice.lower() == "all":
                 print(f"\n{get_message('all_things_header')}")
                 for i, thing in enumerate(things, 1):
-                    print(
-                        f"   {i}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})"
-                    )
+                    print(f"   {i}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})")
                 input(get_message("press_enter_continue_simple"))
                 continue
 
@@ -444,11 +422,7 @@ def select_thing(iot):
                         print(get_message("selected_thing").format(selected_thing))
                         return selected_thing
                     else:
-                        print(
-                            get_message("invalid_selection_enter_range").format(
-                                len(things)
-                            )
-                        )
+                        print(get_message("invalid_selection_enter_range").format(len(things)))
                 except ValueError:
                     print(get_message("enter_valid_number_all_manual"))
 
@@ -469,18 +443,14 @@ def attach_certificate_to_thing(iot, cert_arn, target_thing_name):
     # Check for existing certificates
     existing_certs = check_existing_certificates(iot, target_thing_name)
     if existing_certs:
-        cleanup_choice = (
-            input(f"\n{get_message('remove_existing_certificates')}").strip().lower()
-        )
+        cleanup_choice = input(f"\n{get_message('remove_existing_certificates')}").strip().lower()
         if cleanup_choice == "y":
             for cert_arn_existing in existing_certs:
                 cleanup_certificate(iot, cert_arn_existing, target_thing_name)
         else:
             print(get_message("proceeding_with_multiple"))
 
-    print(
-        f"\n{get_message('attaching_certificate_to_thing').format(target_thing_name)}"
-    )
+    print(f"\n{get_message('attaching_certificate_to_thing').format(target_thing_name)}")
 
     api_details = (
         "attach_thing_principal",
@@ -500,9 +470,7 @@ def attach_certificate_to_thing(iot, cert_arn, target_thing_name):
     )
 
     if response is not None:
-        print(
-            get_message("certificate_successfully_attached").format(target_thing_name)
-        )
+        print(get_message("certificate_successfully_attached").format(target_thing_name))
         print_info(get_message("thing_can_use_cert"), 1)
         return target_thing_name
 
@@ -521,9 +489,7 @@ def create_policy_interactive(iot):
     try:
         existing_policies = iot.list_policies().get("policies", [])
         if existing_policies:
-            print(
-                f"\n{get_message('found_existing_policies').format(len(existing_policies))}"
-            )
+            print(f"\n{get_message('found_existing_policies').format(len(existing_policies))}")
             for i, policy in enumerate(existing_policies, 1):
                 print(f"   {i}. {policy['policyName']}")
 
@@ -537,23 +503,10 @@ def create_policy_interactive(iot):
                     # Select existing policy
                     while True:
                         try:
-                            policy_choice = (
-                                int(
-                                    input(
-                                        f"Select policy (1-{len(existing_policies)}): "
-                                    )
-                                )
-                                - 1
-                            )
+                            policy_choice = int(input(f"Select policy (1-{len(existing_policies)}): ")) - 1
                             if 0 <= policy_choice < len(existing_policies):
-                                selected_policy = existing_policies[policy_choice][
-                                    "policyName"
-                                ]
-                                print(
-                                    get_message("selected_existing_policy").format(
-                                        selected_policy
-                                    )
-                                )
+                                selected_policy = existing_policies[policy_choice]["policyName"]
+                                print(get_message("selected_existing_policy").format(selected_policy))
                                 return selected_policy
                             else:
                                 print(get_message("invalid_selection_generic"))
@@ -592,11 +545,7 @@ def create_policy_interactive(iot):
                 print(get_message("policy_name_available").format(policy_name))
                 break
             else:
-                print(
-                    get_message("error_checking_policy").format(
-                        e.response["Error"]["Message"]
-                    )
-                )
+                print(get_message("error_checking_policy").format(e.response["Error"]["Message"]))
                 continue
 
     print(f"\n{get_message('policy_templates')}")
@@ -625,9 +574,7 @@ def create_policy_interactive(iot):
             }
             # Validate policy and show enhanced warnings
             validation_warnings = validate_policy_security(policy_document, policy_name)
-            print_enhanced_security_warning(
-                policy_name, policy_document, validation_warnings
-            )
+            print_enhanced_security_warning(policy_name, policy_document, validation_warnings)
 
             # Ask for confirmation if there are security warnings
             if validation_warnings:
@@ -650,9 +597,7 @@ def create_policy_interactive(iot):
             }
             # Validate policy and show enhanced warnings
             validation_warnings = validate_policy_security(policy_document, policy_name)
-            print_enhanced_security_warning(
-                policy_name, policy_document, validation_warnings
-            )
+            print_enhanced_security_warning(policy_name, policy_document, validation_warnings)
 
             # Ask for confirmation if there are security warnings
             if validation_warnings:
@@ -683,9 +628,7 @@ def create_policy_interactive(iot):
 
     print(f"\n{get_message('policy_to_be_created_header')}")
     print(f"   {get_message('name_label_simple')}: {policy_name}")
-    print(
-        f"   {get_message('document_label_simple')}: {json.dumps(policy_document, indent=2)}"
-    )
+    print(f"   {get_message('document_label_simple')}: {json.dumps(policy_document, indent=2)}")
 
     api_details = (
         "create_policy",
@@ -730,9 +673,7 @@ def attach_policy_to_certificate(iot, cert_arn, policy_name=None):
 
                 while True:
                     try:
-                        choice = (
-                            int(input(f"\nSelect policy (1-{len(policies)}): ")) - 1
-                        )
+                        choice = int(input(f"\nSelect policy (1-{len(policies)}): ")) - 1
                         if 0 <= choice < len(policies):
                             policy_name = policies[choice]["policyName"]
                             break
@@ -824,9 +765,7 @@ def certificate_status_workflow(iot):
         get_message("api_output_certificates_list"),
     )
 
-    response = safe_operation(
-        iot.list_certificates, get_message("listing_all_certificates"), api_details
-    )
+    response = safe_operation(iot.list_certificates, get_message("listing_all_certificates"), api_details)
 
     if not response:
         print(get_message("failed_to_list_certificates"))
@@ -856,20 +795,10 @@ def certificate_status_workflow(iot):
     for i, cert in enumerate(certificates, 1):
         status_icon = "🟢" if cert["status"] == "ACTIVE" else "🔴"
         thing_name = cert_thing_map.get(cert["certificateId"])
-        thing_info = (
-            f" → {thing_name}" if thing_name else f" {get_message('no_thing_attached')}"
-        )
-        status_text = (
-            get_message("active_status")
-            if cert["status"] == "ACTIVE"
-            else get_message("inactive_status")
-        )
-        print(
-            f"   {i}. {cert['certificateId'][:16]}...{thing_info} - {status_icon} {status_text}"
-        )
-        print(
-            f"      {get_message('created_label')}: {cert.get('creationDate', get_message('unknown_label'))}"
-        )
+        thing_info = f" → {thing_name}" if thing_name else f" {get_message('no_thing_attached')}"
+        status_text = get_message("active_status") if cert["status"] == "ACTIVE" else get_message("inactive_status")
+        print(f"   {i}. {cert['certificateId'][:16]}...{thing_info} - {status_icon} {status_text}")
+        print(f"      {get_message('created_label')}: {cert.get('creationDate', get_message('unknown_label'))}")
 
     # Select certificate
     while True:
@@ -889,13 +818,9 @@ def certificate_status_workflow(iot):
     thing_name = cert_thing_map.get(cert_id)
     print(f"\n{get_message('selected_certificate')}")
     print(f"   {get_message('certificate_id_short')}: {cert_id}")
-    print(
-        f"   {get_message('attached_to_thing')}: {thing_name or get_message('none_label')}"
-    )
+    print(f"   {get_message('attached_to_thing')}: {thing_name or get_message('none_label')}")
     print(f"   {get_message('current_status_label')}: {current_status}")
-    print(
-        f"   {get_message('arn_label')}: {selected_cert.get('certificateArn', 'N/A')}"
-    )
+    print(f"   {get_message('arn_label')}: {selected_cert.get('certificateArn', 'N/A')}")
 
     # Determine action based on current status
     if current_status == "ACTIVE":
@@ -913,11 +838,7 @@ def certificate_status_workflow(iot):
     else:
         print(f"   {icon} {get_message('disable_certificate')}")
 
-    confirm = (
-        input(f"\n{get_message('do_you_want_to_action_cert').format(action)}")
-        .strip()
-        .lower()
-    )
+    confirm = input(f"\n{get_message('do_you_want_to_action_cert').format(action)}").strip().lower()
 
     if confirm != "y":
         print(get_message("operation_cancelled_simple"))
@@ -945,9 +866,7 @@ def certificate_status_workflow(iot):
         print(f"\n{get_message('certificate_action_success').format(action)}")
         print(f"\n{get_message('status_change_summary')}")
         print(f"   {get_message('certificate_id_simple')}: {cert_id}")
-        print(
-            f"   {get_message('attached_to_thing')}: {thing_name or get_message('none_label')}"
-        )
+        print(f"   {get_message('attached_to_thing')}: {thing_name or get_message('none_label')}")
         print(f"   {get_message('previous_status_label')}: {current_status}")
         print(f"   {get_message('new_status_label_simple')}: {new_status}")
 
@@ -1002,16 +921,7 @@ def attach_policy_workflow(iot):
 
         while True:
             try:
-                choice = (
-                    int(
-                        input(
-                            get_message("select_certificate_prompt").format(
-                                len(cert_arns)
-                            )
-                        )
-                    )
-                    - 1
-                )
+                choice = int(input(get_message("select_certificate_prompt").format(len(cert_arns)))) - 1
                 if 0 <= choice < len(cert_arns):
                     selected_cert_arn = cert_arns[choice]
                     break
@@ -1024,9 +934,7 @@ def attach_policy_workflow(iot):
     policy_name = create_policy_interactive(iot)
     if policy_name:
         attach_policy_to_certificate(iot, selected_cert_arn, policy_name)
-        print(
-            f"\n🎉 Policy '{policy_name}' attached to certificate for Thing '{selected_thing}'"
-        )
+        print(f"\n🎉 Policy '{policy_name}' attached to certificate for Thing '{selected_thing}'")
 
 
 def detach_policy_workflow(iot):
@@ -1128,11 +1036,7 @@ def detach_policy_workflow(iot):
             thing_name = things[0] if things else None
             cert_thing_map[cert_arn] = thing_name
 
-            thing_info = (
-                f" → {thing_name}"
-                if thing_name
-                else f" {get_message('no_thing_attached')}"
-            )
+            thing_info = f" → {thing_name}" if thing_name else f" {get_message('no_thing_attached')}"
             print(f"   {i}. {cert_id[:16]}...{thing_info}")
         except Exception as e:
             print(f"   {i}. {cert_id[:16]}... (Error getting Thing: {str(e)})")
@@ -1141,14 +1045,7 @@ def detach_policy_workflow(iot):
     # Step 5: Select certificate
     while True:
         try:
-            choice = (
-                int(
-                    input(
-                        f"\nSelect certificate to detach policy from (1-{len(cert_targets)}): "
-                    )
-                )
-                - 1
-            )
+            choice = int(input(f"\nSelect certificate to detach policy from (1-{len(cert_targets)}): ")) - 1
             if 0 <= choice < len(cert_targets):
                 selected_cert_arn = cert_targets[choice]
                 break
@@ -1163,16 +1060,10 @@ def detach_policy_workflow(iot):
     print(f"\n{get_message('detachment_summary')}")
     print(f"   {get_message('policy_label_simple')}: {selected_policy}")
     print(f"   {get_message('certificate_id_simple')}: {selected_cert_id}")
-    print(
-        f"   {get_message('attached_to_thing')}: {thing_name or get_message('none_label')}"
-    )
+    print(f"   {get_message('attached_to_thing')}: {thing_name or get_message('none_label')}")
 
     # Step 6: Confirm detachment
-    confirm = (
-        input(f"\n{get_message('detach_policy_from_cert').format(selected_policy)}")
-        .strip()
-        .lower()
-    )
+    confirm = input(f"\n{get_message('detach_policy_from_cert').format(selected_policy)}").strip().lower()
 
     if confirm != "y":
         print(get_message("operation_cancelled_simple"))
@@ -1199,11 +1090,7 @@ def detach_policy_workflow(iot):
     if response is not None:
         print(f"\n{get_message('policy_detached_successfully')}")
         print(f"\n{get_message('detachment_results')}")
-        print(
-            get_message("policy_removed_from_cert").format(
-                selected_policy, selected_cert_id
-            )
-        )
+        print(get_message("policy_removed_from_cert").format(selected_policy, selected_cert_id))
         if thing_name:
             print(get_message("thing_cert_no_longer_has_policy").format(thing_name))
 
@@ -1252,9 +1139,7 @@ def certificate_creation_workflow(iot):
         return
 
     # Ask about policy
-    create_policy = (
-        input(f"\n{get_message('would_like_create_policy')}").strip().lower()
-    )
+    create_policy = input(f"\n{get_message('would_like_create_policy')}").strip().lower()
     policy_name = None
 
     if create_policy == "y":
@@ -1320,9 +1205,7 @@ def generate_sample_certificate():
 
         import subprocess
 
-        result = subprocess.run(
-            openssl_cmd, capture_output=True, text=True, shell=False
-        )
+        result = subprocess.run(openssl_cmd, capture_output=True, text=True, shell=False)
 
         if result.returncode == 0:
             print(get_message("certificate_generated_successfully"))
@@ -1334,9 +1217,7 @@ def generate_sample_certificate():
 
             # Show certificate info
             info_cmd = ["openssl", "x509", "-in", cert_file, "-text", "-noout"]
-            info_result = subprocess.run(
-                info_cmd, capture_output=True, text=True, shell=False
-            )
+            info_result = subprocess.run(info_cmd, capture_output=True, text=True, shell=False)
             if info_result.returncode == 0:
                 print(f"\n{get_message('certificate_information')}")
                 lines = info_result.stdout.split("\n")
@@ -1601,9 +1482,7 @@ def register_external_certificate_workflow(iot):
             manual_key = input(get_message("enter_key_path")).strip()
             if manual_key:
                 # Validate manual_key path to prevent path traversal
-                if not os.path.realpath(manual_key).startswith(
-                    os.path.realpath(os.getcwd())
-                ):
+                if not os.path.realpath(manual_key).startswith(os.path.realpath(os.getcwd())):
                     print(get_message("key_file_within_working_dir"))
                 elif os.path.exists(manual_key):
                     with open(manual_key, "r", encoding="utf-8") as f:
@@ -1630,9 +1509,7 @@ def register_external_certificate_workflow(iot):
         return
 
     # Step 6: Optional policy attachment
-    create_policy = (
-        input(f"\n{get_message('would_like_create_policy')}").strip().lower()
-    )
+    create_policy = input(f"\n{get_message('would_like_create_policy')}").strip().lower()
     policy_name = None
 
     if create_policy == "y":
@@ -1649,9 +1526,7 @@ def register_external_certificate_workflow(iot):
     print_summary(cert_id, cert_arn, thing_name, policy_name or "None", "External")
 
 
-def print_summary(
-    cert_id, cert_arn, thing_name, policy_name, cert_source="AWS-Generated"
-):
+def print_summary(cert_id, cert_arn, thing_name, policy_name, cert_source="AWS-Generated"):
     """Print enhanced setup summary with certificate source"""
     print_step("Final", get_message("setup_complete"))
 

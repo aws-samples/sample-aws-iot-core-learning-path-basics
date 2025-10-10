@@ -56,9 +56,7 @@ def check_credentials():
         print("\nPlease export your AWS credentials:")
         print("export AWS_ACCESS_KEY_ID=<your-access-key>")
         print("export AWS_SECRET_ACCESS_KEY=<your-secret-key>")
-        print(
-            "export AWS_SESSION_TOKEN=<your-session-token>  # Optional for temporary credentials"
-        )
+        print("export AWS_SESSION_TOKEN=<your-session-token>  # Optional for temporary credentials")
         sys.exit(1)
 
 
@@ -90,28 +88,20 @@ def print_api_call(operation, params=None, description=""):
     """Display the API call being made with explanation"""
     method, path = get_http_info(operation, params)
     print(f"\n🔄 {get_message('api_call_label')}: {operation}")
-    print(
-        f"🌐 {get_message('http_request_label')}: {method} https://iot.<region>.amazonaws.com{path}"
-    )
+    print(f"🌐 {get_message('http_request_label')}: {method} https://iot.<region>.amazonaws.com{path}")
     if description:
         print(f"ℹ️  {get_message('description_label')}: {description}")
     if params:
-        print(
-            f"📥 {get_message('input_parameters_label')}: {json.dumps(params, indent=2)}"
-        )
+        print(f"📥 {get_message('input_parameters_label')}: {json.dumps(params, indent=2)}")
     else:
-        print(
-            f"📥 {get_message('input_parameters_label')}: {get_message('no_input_parameters')}"
-        )
+        print(f"📥 {get_message('input_parameters_label')}: {get_message('no_input_parameters')}")
 
 
 def print_response(response, explanation=""):
     """Display the API response with explanation"""
     if explanation:
         print(f"💡 {get_message('response_explanation_label')}: {explanation}")
-    print(
-        f"📤 {get_message('response_payload_label')}: {json.dumps(response, indent=2, default=str)}"
-    )
+    print(f"📤 {get_message('response_payload_label')}: {json.dumps(response, indent=2, default=str)}")
 
 
 def list_things_paginated(iot, max_results, debug=False):
@@ -132,9 +122,7 @@ def list_things_paginated(iot, max_results, debug=False):
         safe_api_call(
             iot.list_things,
             "list_things",
-            description=get_message("api_desc_list_things_paginated").format(
-                page, max_results
-            ),
+            description=get_message("api_desc_list_things_paginated").format(page, max_results),
             explanation=get_message("api_explain_list_things"),
             debug=debug,
             **params,
@@ -151,9 +139,7 @@ def list_things_paginated(iot, max_results, debug=False):
             break
 
         page += 1
-        continue_paging = (
-            input(f"\n{get_message('continue_next_page')}").strip().lower()
-        )
+        continue_paging = input(f"\n{get_message('continue_next_page')}").strip().lower()
         if continue_paging not in [
             "y",
             "s",
@@ -192,9 +178,7 @@ def list_things_by_attribute(iot, attr_name, attr_value, debug=False):
     safe_api_call(
         iot.list_things,
         "list_things",
-        description=get_message("api_desc_list_things_by_attribute").format(
-            attr_name, attr_value
-        ),
+        description=get_message("api_desc_list_things_by_attribute").format(attr_name, attr_value),
         explanation=get_message("api_explain_list_things"),
         debug=debug,
         attributeName=attr_name,
@@ -203,14 +187,10 @@ def list_things_by_attribute(iot, attr_name, attr_value, debug=False):
 
     response = iot.list_things(attributeName=attr_name, attributeValue=attr_value)
     things = response.get("things", [])
-    print(
-        f"\n{get_message('filter_attribute_results').format(len(things), attr_name, attr_value)}"
-    )
+    print(f"\n{get_message('filter_attribute_results').format(len(things), attr_name, attr_value)}")
 
 
-def safe_api_call(
-    func, operation, description="", explanation="", debug=True, **kwargs
-):
+def safe_api_call(func, operation, description="", explanation="", debug=True, **kwargs):
     """Execute API call with error handling and explanations"""
     try:
         if debug:
@@ -229,47 +209,29 @@ def safe_api_call(
                 if isinstance(response, dict):
                     # Show key metrics instead of full response
                     if "things" in response:
-                        print(
-                            get_message("found_things").format(len(response["things"]))
-                        )
+                        print(get_message("found_things").format(len(response["things"])))
                         if response["things"]:
                             print(get_message("thing_names"))
                             for thing in response["things"]:
                                 thing_type = (
-                                    f" ({thing.get('thingTypeName', 'No Type')})"
-                                    if thing.get("thingTypeName")
-                                    else ""
+                                    f" ({thing.get('thingTypeName', 'No Type')})" if thing.get("thingTypeName") else ""
                                 )
                                 print(f"   • {thing['thingName']}{thing_type}")
                     elif "certificates" in response:
-                        print(
-                            get_message("found_certificates").format(
-                                len(response["certificates"])
-                            )
-                        )
+                        print(get_message("found_certificates").format(len(response["certificates"])))
                         if response["certificates"]:
                             print(get_message("certificate_ids"))
                             for cert in response["certificates"]:
                                 status = cert.get("status", "Unknown")
-                                print(
-                                    f"   • {cert['certificateId'][:16]}... ({status})"
-                                )
+                                print(f"   • {cert['certificateId'][:16]}... ({status})")
                     elif "thingGroups" in response:
-                        print(
-                            get_message("found_thing_groups").format(
-                                len(response["thingGroups"])
-                            )
-                        )
+                        print(get_message("found_thing_groups").format(len(response["thingGroups"])))
                         if response["thingGroups"]:
                             print(get_message("group_names"))
                             for group in response["thingGroups"]:
                                 print(f"   • {group['groupName']}")
                     elif "thingTypes" in response:
-                        print(
-                            get_message("found_thing_types").format(
-                                len(response["thingTypes"])
-                            )
-                        )
+                        print(get_message("found_thing_types").format(len(response["thingTypes"])))
                         if response["thingTypes"]:
                             print(get_message("type_names"))
                             for thing_type in response["thingTypes"]:
@@ -277,63 +239,35 @@ def safe_api_call(
                     elif "thingName" in response:
                         # Handle describe_thing response
                         print(get_message("thing_details"))
-                        print(
-                            f"   {get_message('name_label')}: {response['thingName']}"
-                        )
+                        print(f"   {get_message('name_label')}: {response['thingName']}")
                         if response.get("thingTypeName"):
-                            print(
-                                f"   {get_message('type_label')}: {response['thingTypeName']}"
-                            )
+                            print(f"   {get_message('type_label')}: {response['thingTypeName']}")
                         if response.get("attributes"):
-                            print(
-                                f"   Attributes: {len(response['attributes'])} defined"
-                            )
-                            for key, value in list(response["attributes"].items())[
-                                :3
-                            ]:  # Show first 3 attributes
+                            print(f"   Attributes: {len(response['attributes'])} defined")
+                            for key, value in list(response["attributes"].items())[:3]:  # Show first 3 attributes
                                 print(f"     • {key}: {value}")
                             if len(response["attributes"]) > 3:
-                                print(
-                                    f"     ... and {len(response['attributes']) - 3} more"
-                                )
+                                print(f"     ... and {len(response['attributes']) - 3} more")
                         print(f"   Version: {response.get('version', 'Unknown')}")
                     elif "thingGroupName" in response:
                         # Handle describe_thing_group response
                         print(get_message("thing_group_details"))
-                        print(
-                            f"   {get_message('name_label')}: {response['thingGroupName']}"
-                        )
-                        if response.get("thingGroupProperties", {}).get(
-                            "thingGroupDescription"
-                        ):
+                        print(f"   {get_message('name_label')}: {response['thingGroupName']}")
+                        if response.get("thingGroupProperties", {}).get("thingGroupDescription"):
                             print(
                                 f"   {get_message('description_simple')}: {response['thingGroupProperties']['thingGroupDescription']}"
                             )
-                        if (
-                            response.get("thingGroupProperties", {})
-                            .get("attributePayload", {})
-                            .get("attributes")
-                        ):
-                            attrs = response["thingGroupProperties"][
-                                "attributePayload"
-                            ]["attributes"]
+                        if response.get("thingGroupProperties", {}).get("attributePayload", {}).get("attributes"):
+                            attrs = response["thingGroupProperties"]["attributePayload"]["attributes"]
                             print(f"   Attributes: {len(attrs)} defined")
                     elif "thingTypeName" in response:
                         # Handle describe_thing_type response
                         print(get_message("thing_type_details"))
-                        print(
-                            f"   {get_message('name_label')}: {response['thingTypeName']}"
-                        )
+                        print(f"   {get_message('name_label')}: {response['thingTypeName']}")
                         if response.get("thingTypeProperties", {}).get("description"):
-                            print(
-                                f"   {get_message('description_simple')}: {response['thingTypeProperties']['description']}"
-                            )
-                        if response.get("thingTypeProperties", {}).get(
-                            "searchableAttributes"
-                        ):
-                            attrs = response["thingTypeProperties"][
-                                "searchableAttributes"
-                            ]
+                            print(f"   {get_message('description_simple')}: {response['thingTypeProperties']['description']}")
+                        if response.get("thingTypeProperties", {}).get("searchableAttributes"):
+                            attrs = response["thingTypeProperties"]["searchableAttributes"]
                             print(f"   Searchable Attributes: {', '.join(attrs)}")
                     elif "endpointAddress" in response:
                         # Handle describe_endpoint response
@@ -344,9 +278,7 @@ def safe_api_call(
 
         return response
     except ClientError as e:
-        print(
-            f"{get_message('api_error')} {e.response['Error']['Code']} - {e.response['Error']['Message']}"
-        )
+        print(f"{get_message('api_error')} {e.response['Error']['Code']} - {e.response['Error']['Message']}")
         if debug:
             print(get_message("debug_full_error"))
             print(json.dumps(e.response, indent=2, default=str))
@@ -529,20 +461,12 @@ def main():
                 try:
                     things_response = iot.list_things()
                     if things_response.get("things"):
-                        print(
-                            f"\n{get_message('available_things')} ({len(things_response['things'])}):"
-                        )
+                        print(f"\n{get_message('available_things')} ({len(things_response['things'])}):")
                         for i, thing in enumerate(things_response["things"][:10], 1):
-                            thing_type = (
-                                f" ({thing.get('thingTypeName', 'No Type')})"
-                                if thing.get("thingTypeName")
-                                else ""
-                            )
+                            thing_type = f" ({thing.get('thingTypeName', 'No Type')})" if thing.get("thingTypeName") else ""
                             print(f"   {i}. {thing['thingName']}{thing_type}")
                         if len(things_response["things"]) > 10:
-                            print(
-                                f"   ... and {len(things_response['things']) - 10} more"
-                            )
+                            print(f"   ... and {len(things_response['things']) - 10} more")
                     else:
                         print(f"\n{get_message('no_things_found')}")
                 except Exception as e:
@@ -568,28 +492,20 @@ def main():
                 try:
                     groups_response = iot.list_thing_groups()
                     if groups_response.get("thingGroups"):
-                        print(
-                            f"\n{get_message('available_groups')} ({len(groups_response['thingGroups'])}):"
-                        )
+                        print(f"\n{get_message('available_groups')} ({len(groups_response['thingGroups'])}):")
                         for i, group in enumerate(groups_response["thingGroups"], 1):
                             print(f"   {i}. {group['groupName']}")
 
-                        selection = input(
-                            f"\n{get_message('enter_group_selection')}"
-                        ).strip()
+                        selection = input(f"\n{get_message('enter_group_selection')}").strip()
                         group_name = None
 
                         # Check if input is a number
                         if selection.isdigit():
                             group_index = int(selection) - 1
                             if 0 <= group_index < len(groups_response["thingGroups"]):
-                                group_name = groups_response["thingGroups"][
-                                    group_index
-                                ]["groupName"]
+                                group_name = groups_response["thingGroups"][group_index]["groupName"]
                             else:
-                                print(
-                                    f"{get_message('invalid_selection')} 1-{len(groups_response['thingGroups'])}"
-                                )
+                                print(f"{get_message('invalid_selection')} 1-{len(groups_response['thingGroups'])}")
                         else:
                             # Treat as group name
                             group_name = selection
@@ -598,12 +514,8 @@ def main():
                             safe_api_call(
                                 iot.describe_thing_group,
                                 "describe_thing_group",
-                                description=get_message(
-                                    "api_desc_describe_thing_group"
-                                ),
-                                explanation=get_message(
-                                    "api_explain_describe_thing_group"
-                                ),
+                                description=get_message("api_desc_describe_thing_group"),
+                                explanation=get_message("api_explain_describe_thing_group"),
                                 debug=debug_mode,
                                 thingGroupName=group_name,
                             )
@@ -622,28 +534,20 @@ def main():
                 try:
                     types_response = iot.list_thing_types()
                     if types_response.get("thingTypes"):
-                        print(
-                            f"\n{get_message('available_types')} ({len(types_response['thingTypes'])}):"
-                        )
+                        print(f"\n{get_message('available_types')} ({len(types_response['thingTypes'])}):")
                         for i, thing_type in enumerate(types_response["thingTypes"], 1):
                             print(f"   {i}. {thing_type['thingTypeName']}")
 
-                        selection = input(
-                            f"\n{get_message('enter_type_selection')}"
-                        ).strip()
+                        selection = input(f"\n{get_message('enter_type_selection')}").strip()
                         type_name = None
 
                         # Check if input is a number
                         if selection.isdigit():
                             type_index = int(selection) - 1
                             if 0 <= type_index < len(types_response["thingTypes"]):
-                                type_name = types_response["thingTypes"][type_index][
-                                    "thingTypeName"
-                                ]
+                                type_name = types_response["thingTypes"][type_index]["thingTypeName"]
                             else:
-                                print(
-                                    f"{get_message('invalid_selection')} 1-{len(types_response['thingTypes'])}"
-                                )
+                                print(f"{get_message('invalid_selection')} 1-{len(types_response['thingTypes'])}")
                         else:
                             # Treat as type name
                             type_name = selection
@@ -653,9 +557,7 @@ def main():
                                 iot.describe_thing_type,
                                 "describe_thing_type",
                                 description=get_message("api_desc_describe_thing_type"),
-                                explanation=get_message(
-                                    "api_explain_describe_thing_type"
-                                ),
+                                explanation=get_message("api_explain_describe_thing_type"),
                                 debug=debug_mode,
                                 thingTypeName=type_name,
                             )

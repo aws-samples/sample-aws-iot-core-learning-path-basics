@@ -20,9 +20,7 @@ from loader import load_messages
 # Sample data patterns created by setup scripts
 SAMPLE_THING_TYPES = ["SedanVehicle", "SUVVehicle", "TruckVehicle"]
 SAMPLE_THING_GROUPS = ["CustomerFleet", "TestFleet", "MaintenanceFleet", "DealerFleet"]
-SAMPLE_THING_PREFIX = (
-    "Vehicle-VIN-"  # Things created as Vehicle-VIN-001, Vehicle-VIN-002, etc.
-)
+SAMPLE_THING_PREFIX = "Vehicle-VIN-"  # Things created as Vehicle-VIN-001, Vehicle-VIN-002, etc.
 
 # Global variables
 USER_LANG = "en"
@@ -98,14 +96,10 @@ def clean_certificate(iot_client, certificate_arn):
             print(f"    {get_message('detaching_policy', policy_name)}")
 
             detach_params = {"policyName": policy_name, "target": certificate_arn}
-            log_api_call(
-                "detach_policy", "Detach policy from certificate", detach_params
-            )
+            log_api_call("detach_policy", "Detach policy from certificate", detach_params)
 
             iot_client.detach_policy(policyName=policy_name, target=certificate_arn)
-            log_api_call(
-                "detach_policy", "Detach policy from certificate", detach_params, {}
-            )
+            log_api_call("detach_policy", "Detach policy from certificate", detach_params, {})
 
         # Step 2: List and detach from Things
         list_things_params = {"principal": certificate_arn}
@@ -139,9 +133,7 @@ def clean_certificate(iot_client, certificate_arn):
                 detach_thing_params,
             )
 
-            iot_client.detach_thing_principal(
-                thingName=thing_name, principal=certificate_arn
-            )
+            iot_client.detach_thing_principal(thingName=thing_name, principal=certificate_arn)
             log_api_call(
                 "detach_thing_principal",
                 "Detach certificate from Thing",
@@ -155,9 +147,7 @@ def clean_certificate(iot_client, certificate_arn):
         update_params = {"certificateId": certificate_id, "newStatus": "INACTIVE"}
         log_api_call("update_certificate", "Deactivate certificate", update_params)
 
-        iot_client.update_certificate(
-            certificateId=certificate_id, newStatus="INACTIVE"
-        )
+        iot_client.update_certificate(certificateId=certificate_id, newStatus="INACTIVE")
         log_api_call("update_certificate", "Deactivate certificate", update_params, {})
 
         print(f"    {get_message('certificate_deactivated', certificate_id)}")
@@ -174,9 +164,7 @@ def clean_certificate(iot_client, certificate_arn):
         return True
 
     except Exception as e:
-        print(
-            f"    {get_message('error_cleaning_certificate', certificate_id, str(e))}"
-        )
+        print(f"    {get_message('error_cleaning_certificate', certificate_id, str(e))}")
         if DEBUG_MODE:
             print(f"{get_message('debug_full_error')}")
             print(json.dumps(str(e), indent=2))
@@ -197,18 +185,12 @@ def cleanup_sample_things(iot_client):
 
     try:
         response = iot_client.list_things()
-        log_api_call(
-            "list_things", "List all Things to find sample Things", None, response
-        )
+        log_api_call("list_things", "List all Things to find sample Things", None, response)
 
         all_things = response.get("things", [])
 
         # Filter sample Things
-        sample_things = [
-            thing
-            for thing in all_things
-            if thing["thingName"].startswith(SAMPLE_THING_PREFIX)
-        ]
+        sample_things = [thing for thing in all_things if thing["thingName"].startswith(SAMPLE_THING_PREFIX)]
 
         print(get_message("found_sample_things", len(sample_things)))
 
@@ -229,9 +211,7 @@ def cleanup_sample_things(iot_client):
             )
 
             try:
-                principals_response = iot_client.list_thing_principals(
-                    thingName=thing_name
-                )
+                principals_response = iot_client.list_thing_principals(thingName=thing_name)
                 log_api_call(
                     "list_thing_principals",
                     "List certificates attached to Thing",
@@ -240,9 +220,7 @@ def cleanup_sample_things(iot_client):
                 )
 
                 principals = principals_response.get("principals", [])
-                print(
-                    f"  {get_message('found_certificates', len(principals), thing_name)}"
-                )
+                print(f"  {get_message('found_certificates', len(principals), thing_name)}")
 
                 # Clean up certificates
                 for principal in principals:
@@ -270,9 +248,7 @@ def cleanup_sample_things(iot_client):
                 if e.response["Error"]["Code"] == "ResourceNotFoundException":
                     print(f"  {get_message('resource_not_found', 'Thing', thing_name)}")
                 else:
-                    print(
-                        f"  {get_message('error_deleting_resource', 'Thing', thing_name, str(e))}"
-                    )
+                    print(f"  {get_message('error_deleting_resource', 'Thing', thing_name, str(e))}")
                     if DEBUG_MODE:
                         print(f"{get_message('debug_full_error')}")
                         print(json.dumps(e.response, indent=2, default=str))
@@ -294,9 +270,7 @@ def cleanup_orphaned_certificates(iot_client):
 
     print(get_message("listing_certificates"))
 
-    log_api_call(
-        "list_certificates", "List all certificates to check for orphaned ones"
-    )
+    log_api_call("list_certificates", "List all certificates to check for orphaned ones")
 
     try:
         response = iot_client.list_certificates()
@@ -341,16 +315,10 @@ def cleanup_orphaned_certificates(iot_client):
                 attached_things = things_response.get("things", [])
 
                 # Check if any attached Things are sample Things
-                sample_things_attached = [
-                    thing
-                    for thing in attached_things
-                    if thing.startswith(SAMPLE_THING_PREFIX)
-                ]
+                sample_things_attached = [thing for thing in attached_things if thing.startswith(SAMPLE_THING_PREFIX)]
 
                 if sample_things_attached:
-                    print(
-                        f"  {get_message('cert_attached_sample_things', cert_id, ', '.join(sample_things_attached))}"
-                    )
+                    print(f"  {get_message('cert_attached_sample_things', cert_id, ', '.join(sample_things_attached))}")
                     print(f"  {get_message('cert_should_cleanup_step1')}")
                 else:
                     print(f"  {get_message('cert_not_attached_sample', cert_id)}")
@@ -384,9 +352,7 @@ def cleanup_sample_policies(iot_client):
 
     try:
         response = iot_client.list_policies()
-        log_api_call(
-            "list_policies", "List all policies to check for cleanup", None, response
-        )
+        log_api_call("list_policies", "List all policies to check for cleanup", None, response)
 
         policies = response.get("policies", [])
         print(get_message("found_policies_account", len(policies)))
@@ -414,14 +380,10 @@ def cleanup_sample_policies(iot_client):
             print(f"  {get_message('checking_policy_targets', policy_name)}")
 
             list_targets_params = {"policyName": policy_name}
-            log_api_call(
-                "list_policy_targets", "Check targets for policy", list_targets_params
-            )
+            log_api_call("list_policy_targets", "Check targets for policy", list_targets_params)
 
             try:
-                targets_response = iot_client.list_targets_for_policy(
-                    policyName=policy_name
-                )
+                targets_response = iot_client.list_targets_for_policy(policyName=policy_name)
                 log_api_call(
                     "list_policy_targets",
                     "Check targets for policy",
@@ -432,9 +394,7 @@ def cleanup_sample_policies(iot_client):
                 targets = targets_response.get("targets", [])
 
                 if targets:
-                    print(
-                        f"  {get_message('policy_attached_targets', policy_name, len(targets))}"
-                    )
+                    print(f"  {get_message('policy_attached_targets', policy_name, len(targets))}")
                     skipped_policies += 1
                 else:
                     print(f"  {get_message('deleting_unattached_policy', policy_name)}")
@@ -499,9 +459,7 @@ def cleanup_sample_thing_groups(iot_client):
         all_groups = response.get("thingGroups", [])
 
         # Filter sample Thing Groups
-        sample_groups = [
-            group for group in all_groups if group["groupName"] in SAMPLE_THING_GROUPS
-        ]
+        sample_groups = [group for group in all_groups if group["groupName"] in SAMPLE_THING_GROUPS]
 
         print(get_message("found_sample_groups", len(sample_groups)))
 
@@ -510,26 +468,18 @@ def cleanup_sample_thing_groups(iot_client):
             print(f"{get_message('deleting_thing_group', group_name)}")
 
             delete_group_params = {"thingGroupName": group_name}
-            log_api_call(
-                "delete_thing_group", "Delete Thing Group", delete_group_params
-            )
+            log_api_call("delete_thing_group", "Delete Thing Group", delete_group_params)
 
             try:
                 iot_client.delete_thing_group(thingGroupName=group_name)
-                log_api_call(
-                    "delete_thing_group", "Delete Thing Group", delete_group_params, {}
-                )
+                log_api_call("delete_thing_group", "Delete Thing Group", delete_group_params, {})
                 print(f"  {get_message('deleted_resource', 'Thing Group', group_name)}")
 
             except ClientError as e:
                 if e.response["Error"]["Code"] == "ResourceNotFoundException":
-                    print(
-                        f"  {get_message('resource_not_found', 'Thing Group', group_name)}"
-                    )
+                    print(f"  {get_message('resource_not_found', 'Thing Group', group_name)}")
                 else:
-                    print(
-                        f"  {get_message('error_deleting_resource', 'Thing Group', group_name, str(e))}"
-                    )
+                    print(f"  {get_message('error_deleting_resource', 'Thing Group', group_name, str(e))}")
                     if DEBUG_MODE:
                         print(f"{get_message('debug_full_error')}")
                         print(json.dumps(e.response, indent=2, default=str))
@@ -565,11 +515,7 @@ def cleanup_sample_thing_types(iot_client):
         all_types = response.get("thingTypes", [])
 
         # Filter sample Thing Types
-        sample_types = [
-            thing_type
-            for thing_type in all_types
-            if thing_type["thingTypeName"] in SAMPLE_THING_TYPES
-        ]
+        sample_types = [thing_type for thing_type in all_types if thing_type["thingTypeName"] in SAMPLE_THING_TYPES]
 
         print(get_message("found_sample_types", len(sample_types)))
 
@@ -585,14 +531,10 @@ def cleanup_sample_thing_types(iot_client):
             type_name = thing_type["thingTypeName"]
 
             describe_params = {"thingTypeName": type_name}
-            log_api_call(
-                "describe_thing_type", "Check Thing Type status", describe_params
-            )
+            log_api_call("describe_thing_type", "Check Thing Type status", describe_params)
 
             try:
-                describe_response = iot_client.describe_thing_type(
-                    thingTypeName=type_name
-                )
+                describe_response = iot_client.describe_thing_type(thingTypeName=type_name)
                 log_api_call(
                     "describe_thing_type",
                     "Check Thing Type status",
@@ -604,11 +546,7 @@ def cleanup_sample_thing_types(iot_client):
                 deprecation_date = metadata.get("deprecationDate")
 
                 if deprecation_date:
-                    print(
-                        get_message(
-                            "thing_type_deprecated", type_name, deprecation_date
-                        )
-                    )
+                    print(get_message("thing_type_deprecated", type_name, deprecation_date))
                     deprecated_types.append((type_name, deprecation_date))
                 else:
                     print(get_message("thing_type_active", type_name))
@@ -628,9 +566,7 @@ def cleanup_sample_thing_types(iot_client):
                 print(get_message("deprecating_thing_type", type_name))
 
                 deprecate_params = {"thingTypeName": type_name}
-                log_api_call(
-                    "deprecate_thing_type", "Deprecate Thing Type", deprecate_params
-                )
+                log_api_call("deprecate_thing_type", "Deprecate Thing Type", deprecate_params)
 
                 try:
                     iot_client.deprecate_thing_type(thingTypeName=type_name)
@@ -641,9 +577,7 @@ def cleanup_sample_thing_types(iot_client):
                         {},
                     )
 
-                    print(
-                        f"  {get_message('thing_type_deprecated_success', type_name)}"
-                    )
+                    print(f"  {get_message('thing_type_deprecated_success', type_name)}")
                     deprecated_types.append((type_name, time.time()))
 
                 except ClientError as e:
@@ -659,9 +593,7 @@ def cleanup_sample_thing_types(iot_client):
 
             for type_name, dep_date in deprecated_types:
                 if isinstance(dep_date, float):
-                    dep_date_str = time.strftime(
-                        "%Y-%m-%d %H:%M:%S", time.localtime(dep_date)
-                    )
+                    dep_date_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(dep_date))
                 else:
                     dep_date_str = str(dep_date)
                 print(get_message("deprecated_item", type_name, dep_date_str))
@@ -730,19 +662,13 @@ def cleanup_sample_thing_types(iot_client):
 
                 try:
                     iot_client.delete_thing_type(thingTypeName=type_name)
-                    log_api_call(
-                        "delete_thing_type", "Delete Thing Type", delete_params, {}
-                    )
+                    log_api_call("delete_thing_type", "Delete Thing Type", delete_params, {})
 
-                    print(
-                        f"  {get_message('deleted_resource', 'Thing Type', type_name)}"
-                    )
+                    print(f"  {get_message('deleted_resource', 'Thing Type', type_name)}")
                     deleted_count += 1
 
                 except ClientError as e:
-                    print(
-                        f"  {get_message('error_deleting_resource', 'Thing Type', type_name, str(e))}"
-                    )
+                    print(f"  {get_message('error_deleting_resource', 'Thing Type', type_name, str(e))}")
                     if DEBUG_MODE:
                         print(f"{get_message('debug_full_error')}")
                         print(json.dumps(e.response, indent=2, default=str))
@@ -813,9 +739,7 @@ def cleanup_sample_rules(iot_client):
 
                 try:
                     iot_client.delete_topic_rule(ruleName=rule_name)
-                    log_api_call(
-                        "delete_topic_rule", "Delete IoT rule", delete_rule_params, {}
-                    )
+                    log_api_call("delete_topic_rule", "Delete IoT rule", delete_rule_params, {})
 
                     print(get_message("deleted_rule", rule_name))
                     deleted_rules += 1
@@ -928,9 +852,7 @@ def main():
         sts_client = boto3.client("sts")
         identity = sts_client.get_caller_identity()
         print(f"  {get_message('account_id')}: {identity.get('Account', 'Unknown')}")
-        print(
-            f"  {get_message('region')}: {boto3.Session().region_name or 'us-east-1'}"
-        )
+        print(f"  {get_message('region')}: {boto3.Session().region_name or 'us-east-1'}")
     except Exception as e:
         print(get_message("aws_context_error", str(e)))
         print(get_message("aws_credentials_reminder"))
@@ -982,12 +904,8 @@ def main():
 
         if DEBUG_MODE:
             print(get_message("debug_client_config"))
-            print(
-                f"  {get_message('service_label')}: {iot_client._service_model.service_name}"
-            )
-            print(
-                f"  {get_message('api_version_label')}: {iot_client._service_model.api_version}"
-            )
+            print(f"  {get_message('service_label')}: {iot_client._service_model.service_name}")
+            print(f"  {get_message('api_version_label')}: {iot_client._service_model.api_version}")
 
         # Learning moment
         print(f"\n{get_message('learning_moment_title')}")

@@ -128,19 +128,11 @@ def interactive_messaging(mqtt_client):
 
             elif command == "debug":
                 print(f"\n{get_message('connection_diagnostics')}")
-                print(
-                    f"   {get_message('endpoint_label')}: {mqtt_client.endpoint or get_message('not_set')}"
-                )
-                print(
-                    f"   {get_message('thing_name_label')}: {mqtt_client.thing_name or get_message('not_set')}"
-                )
+                print(f"   {get_message('endpoint_label')}: {mqtt_client.endpoint or get_message('not_set')}")
+                print(f"   {get_message('thing_name_label')}: {mqtt_client.thing_name or get_message('not_set')}")
                 print(f"   {get_message('connected_label')}: {mqtt_client.connected}")
-                print(
-                    f"   {get_message('subscriptions_label')}: {len(mqtt_client.subscriptions)}"
-                )
-                print(
-                    f"   {get_message('messages_received_label')}: {len(mqtt_client.received_messages)}"
-                )
+                print(f"   {get_message('subscriptions_label')}: {len(mqtt_client.subscriptions)}")
+                print(f"   {get_message('messages_received_label')}: {len(mqtt_client.received_messages)}")
 
             elif command == "sub":
                 if len(parts) < 2:
@@ -208,9 +200,7 @@ def interactive_messaging(mqtt_client):
 
             elif command == "test":
                 # Send a test message
-                test_topic = (
-                    f"test/{getattr(mqtt_client, 'thing_name', 'device')}/message"
-                )
+                test_topic = f"test/{getattr(mqtt_client, 'thing_name', 'device')}/message"
                 test_message = {
                     "timestamp": time.time(),
                     "message": "Hello from MQTT Client Explorer!",
@@ -357,22 +347,16 @@ class MQTTClientExplorer:
 
             if debug:
                 print(get_message("debug_calling_api"))
-                print(
-                    f"{get_message('debug_input_params')} {{'endpointType': 'iot:Data-ATS'}}"
-                )
+                print(f"{get_message('debug_input_params')} {{'endpointType': 'iot:Data-ATS'}}")
 
             response = iot.describe_endpoint(endpointType="iot:Data-ATS")
             endpoint = response["endpointAddress"]
 
             if debug:
-                print(
-                    f"{get_message('debug_api_response')} {json.dumps(response, indent=2, default=str)}"
-                )
+                print(f"{get_message('debug_api_response')} {json.dumps(response, indent=2, default=str)}")
 
             print(get_message("iot_endpoint_discovery"))
-            print(
-                f"   {get_message('endpoint_type_label')}: {get_message('endpoint_type_recommended')}"
-            )
+            print(f"   {get_message('endpoint_type_label')}: {get_message('endpoint_type_recommended')}")
             print(f"   {get_message('endpoint_url_label')}: {endpoint}")
             print(f"   {get_message('port_label')}: {get_message('port_mqtt_tls')}")
 
@@ -400,12 +384,8 @@ class MQTTClientExplorer:
             things = things_response.get("things", [])
 
             if debug:
-                print(
-                    get_message("debug_api_response_found_things").format(len(things))
-                )
-                print(
-                    f"{get_message('debug_thing_names')} {[t['thingName'] for t in things]}"
-                )
+                print(get_message("debug_api_response_found_things").format(len(things)))
+                print(f"{get_message('debug_thing_names')} {[t['thingName'] for t in things]}")
 
             if not things:
                 print(get_message("no_things_found"))
@@ -413,20 +393,11 @@ class MQTTClientExplorer:
 
             print(get_message("available_devices").format(len(things)))
             for i, thing in enumerate(things, 1):
-                print(
-                    f"   {i}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})"
-                )
+                print(f"   {i}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})")
 
             while True:
                 try:
-                    choice = (
-                        int(
-                            input(
-                                f"\n{get_message('select_device').format(len(things))} "
-                            )
-                        )
-                        - 1
-                    )
+                    choice = int(input(f"\n{get_message('select_device').format(len(things))} ")) - 1
                     if 0 <= choice < len(things):
                         selected_thing = things[choice]["thingName"]
                         break
@@ -443,20 +414,14 @@ class MQTTClientExplorer:
             # Get certificates for the selected Thing
             if debug:
                 print(get_message("debug_calling_list_principals"))
-                print(
-                    f"{get_message('debug_input_params_thing')} {{'thingName': '{selected_thing}'}}"
-                )
+                print(f"{get_message('debug_input_params_thing')} {{'thingName': '{selected_thing}'}}")
 
             principals_response = iot.list_thing_principals(thingName=selected_thing)
             principals = principals_response.get("principals", [])
             cert_arns = [p for p in principals if "cert/" in p]
 
             if debug:
-                print(
-                    get_message("debug_api_response_principals").format(
-                        len(principals), len(cert_arns)
-                    )
-                )
+                print(get_message("debug_api_response_principals").format(len(principals), len(cert_arns)))
                 print(f"{get_message('debug_certificate_arns')} {cert_arns}")
 
             if not cert_arns:
@@ -477,16 +442,7 @@ class MQTTClientExplorer:
 
                 while True:
                     try:
-                        choice = (
-                            int(
-                                input(
-                                    get_message("select_certificate").format(
-                                        len(cert_arns)
-                                    )
-                                )
-                            )
-                            - 1
-                        )
+                        choice = int(input(get_message("select_certificate").format(len(cert_arns)))) - 1
                         if 0 <= choice < len(cert_arns):
                             selected_cert_arn = cert_arns[choice]
                             cert_id = selected_cert_arn.split("/")[-1]
@@ -563,9 +519,7 @@ class MQTTClientExplorer:
             for topic, info in topics_to_resubscribe:
                 try:
                     qos = info["qos"] if isinstance(info, dict) else info
-                    mqtt_qos = (
-                        mqtt.QoS.AT_MOST_ONCE if qos == 0 else mqtt.QoS.AT_LEAST_ONCE
-                    )
+                    mqtt_qos = mqtt.QoS.AT_MOST_ONCE if qos == 0 else mqtt.QoS.AT_LEAST_ONCE
                     subscribe_future, _ = self.connection.subscribe(
                         topic=topic, qos=mqtt_qos, callback=self.on_message_received
                     )
@@ -649,26 +603,14 @@ class MQTTClientExplorer:
             if content_type:
                 mqtt5_props.append(f"{get_message('content_type_prop')} {content_type}")
             if correlation_data:
-                mqtt5_props.append(
-                    f"{get_message('correlation_data_prop')} {correlation_data}"
-                )
+                mqtt5_props.append(f"{get_message('correlation_data_prop')} {correlation_data}")
             if message_expiry_interval:
-                mqtt5_props.append(
-                    f"{get_message('message_expiry_prop')} {message_expiry_interval}s"
-                )
+                mqtt5_props.append(f"{get_message('message_expiry_prop')} {message_expiry_interval}s")
             if response_topic:
-                mqtt5_props.append(
-                    f"{get_message('response_topic_prop')} {response_topic}"
-                )
+                mqtt5_props.append(f"{get_message('response_topic_prop')} {response_topic}")
             if payload_format_indicator is not None:
-                format_desc = (
-                    get_message("utf8_string")
-                    if payload_format_indicator == 1
-                    else get_message("bytes_format")
-                )
-                mqtt5_props.append(
-                    f"{get_message('payload_format_prop')} {format_desc}"
-                )
+                format_desc = get_message("utf8_string") if payload_format_indicator == 1 else get_message("bytes_format")
+                mqtt5_props.append(f"{get_message('payload_format_prop')} {format_desc}")
             if user_properties:
                 mqtt5_props.append(
                     f"{get_message('user_properties_prop')} {get_message('properties_count').format(len(user_properties))}"
@@ -697,9 +639,7 @@ class MQTTClientExplorer:
             print(f"\n{get_message('error_processing_message')} {str(e)}")
             print(get_message("mqtt_prompt"), end="", flush=True)
 
-    def connect_to_aws_iot(
-        self, thing_name, cert_file, key_file, endpoint, debug=False
-    ):
+    def connect_to_aws_iot(self, thing_name, cert_file, key_file, endpoint, debug=False):
         """Establish MQTT connection to AWS IoT Core"""
         # Clean up any previous connection state
         self.cleanup_connection_state()
@@ -782,9 +722,7 @@ class MQTTClientExplorer:
             self.print_mqtt_details(
                 get_message("connection_established"),
                 {
-                    get_message("status_label"): get_message(
-                        "connection_status_success"
-                    ),
+                    get_message("status_label"): get_message("connection_status_success"),
                     get_message("client_id_label"): client_id,
                     get_message("endpoint_label"): endpoint,
                     get_message("mqtt_version_label"): mqtt_version,
@@ -822,11 +760,7 @@ class MQTTClientExplorer:
         try:
             print(f"\n{get_message('subscribing_to_topic')}")
             print(f"   Topic: {topic}")
-            qos_desc = (
-                get_message("qos_at_most_once")
-                if qos == 0
-                else get_message("qos_at_least_once")
-            )
+            qos_desc = get_message("qos_at_most_once") if qos == 0 else get_message("qos_at_least_once")
             print(f"   QoS: {qos} ({qos_desc})")
 
             if debug:
@@ -841,9 +775,7 @@ class MQTTClientExplorer:
 
             if debug:
                 print(f"{get_message('converted_qos_debug')} {mqtt_qos}")
-                print(
-                    f"{get_message('callback_function_debug')} {self.on_message_received}"
-                )
+                print(f"{get_message('callback_function_debug')} {self.on_message_received}")
 
             subscribe_future, packet_id = self.connection.subscribe(
                 topic=topic, qos=mqtt_qos, callback=self.on_message_received
@@ -883,9 +815,7 @@ class MQTTClientExplorer:
                     get_message("qos_granted_label"): granted_qos,
                     get_message("packet_id_label"): packet_id,
                     get_message("status_label"): get_message("status_subscribed"),
-                    get_message("wildcard_support"): get_message(
-                        "wildcard_support_msg"
-                    ),
+                    get_message("wildcard_support"): get_message("wildcard_support_msg"),
                 },
             )
 
@@ -903,11 +833,7 @@ class MQTTClientExplorer:
                 print(get_message("troubleshooting_timeout"))
                 for reason in get_message("timeout_reasons"):
                     print(reason)
-            elif (
-                "not authorized" in error_str
-                or "forbidden" in error_str
-                or "access denied" in error_str
-            ):
+            elif "not authorized" in error_str or "forbidden" in error_str or "access denied" in error_str:
                 print(get_message("troubleshooting_auth"))
                 for reason in get_message("auth_reasons"):
                     print(reason)
@@ -955,9 +881,7 @@ class MQTTClientExplorer:
             # Extract MQTT5 properties
             user_properties = mqtt_properties.get("user_properties", [])
             correlation_data = mqtt_properties.get("correlation_data", None)
-            message_expiry_interval = mqtt_properties.get(
-                "message_expiry_interval", None
-            )
+            message_expiry_interval = mqtt_properties.get("message_expiry_interval", None)
             response_topic = mqtt_properties.get("response_topic", None)
 
             print(f"\n{get_message('publishing_message')}")
@@ -974,25 +898,14 @@ class MQTTClientExplorer:
             print(f"   {get_message('content_type_label')}: {content_type}")
 
             # Show MQTT5 properties if any
-            if (
-                user_properties
-                or correlation_data
-                or message_expiry_interval
-                or response_topic
-            ):
+            if user_properties or correlation_data or message_expiry_interval or response_topic:
                 print(f"   {get_message('mqtt5_properties_label')}")
                 if correlation_data:
-                    print(
-                        f"      {get_message('correlation_data_prop')} {correlation_data}"
-                    )
+                    print(f"      {get_message('correlation_data_prop')} {correlation_data}")
                 if message_expiry_interval:
-                    print(
-                        f"      {get_message('message_expiry_prop')} {message_expiry_interval}s"
-                    )
+                    print(f"      {get_message('message_expiry_prop')} {message_expiry_interval}s")
                 if response_topic:
-                    print(
-                        f"      {get_message('response_topic_prop')} {response_topic}"
-                    )
+                    print(f"      {get_message('response_topic_prop')} {response_topic}")
                 if user_properties:
                     print(f"      {get_message('user_properties_prop')}")
                     for prop in user_properties:
@@ -1064,11 +977,7 @@ class MQTTClientExplorer:
                 print(get_message("troubleshooting_publish_timeout"))
                 for reason in get_message("timeout_reasons"):
                     print(reason)
-            elif (
-                "not authorized" in error_str
-                or "forbidden" in error_str
-                or "access denied" in error_str
-            ):
+            elif "not authorized" in error_str or "forbidden" in error_str or "access denied" in error_str:
                 print(get_message("troubleshooting_auth"))
                 for reason in get_message("auth_reasons"):
                     print(reason)
@@ -1144,9 +1053,7 @@ def main():
                             key_file,
                         ) = mqtt_client.select_device_and_certificate(DEBUG_MODE)
                         if thing_name and cert_file and key_file:
-                            if mqtt_client.connect_to_aws_iot(
-                                thing_name, cert_file, key_file, endpoint, DEBUG_MODE
-                            ):
+                            if mqtt_client.connect_to_aws_iot(thing_name, cert_file, key_file, endpoint, DEBUG_MODE):
                                 # Automatically start interactive messaging after successful connection
                                 interactive_messaging(mqtt_client)
 

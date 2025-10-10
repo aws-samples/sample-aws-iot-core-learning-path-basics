@@ -69,9 +69,7 @@ def check_requirements():
     print("\n🔍 Checking requirements.txt...")
 
     # Look for requirements.txt in parent directory if we're in scripts/
-    req_file = (
-        "../requirements.txt" if Path.cwd().name == "scripts" else "requirements.txt"
-    )
+    req_file = "../requirements.txt" if Path.cwd().name == "scripts" else "requirements.txt"
 
     if not os.path.exists(req_file):
         print("❌ requirements.txt not found")
@@ -108,9 +106,7 @@ def main():
     print("\n" + "=" * 50)
     print("📊 SUMMARY")
 
-    total_errors = (
-        len(syntax_errors) + len(import_errors) + (0 if requirements_ok else 1)
-    )
+    total_errors = len(syntax_errors) + len(import_errors) + (0 if requirements_ok else 1)
 
     if total_errors == 0:
         print("✅ ALL CHECKS PASSED - Ready for publication!")

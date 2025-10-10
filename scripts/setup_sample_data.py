@@ -99,9 +99,7 @@ def safe_create(func, resource_type, name, debug=False, **kwargs):
         if e.response["Error"]["Code"] == "ResourceAlreadyExistsException":
             print(f"⚠️  {resource_type} {name} {get_message('already_exists')}")
         else:
-            print(
-                f"❌ {get_message('error_creating')} {resource_type} {name}: {e.response['Error']['Message']}"
-            )
+            print(f"❌ {get_message('error_creating')} {resource_type} {name}: {e.response['Error']['Message']}")
             if debug:
                 print(get_message("debug_full_error"))
                 print(json.dumps(e.response, indent=2, default=str))
@@ -123,9 +121,7 @@ def create_thing_types(iot, debug=False):
         try:
             response = iot.describe_thing_type(thingTypeName=thing_type)
             if response.get("thingTypeMetadata", {}).get("deprecated"):
-                print(
-                    f"   ⚠️ Thing Type {thing_type} {get_message('deprecated_undeprecating')}"
-                )
+                print(f"   ⚠️ Thing Type {thing_type} {get_message('deprecated_undeprecating')}")
                 iot.deprecate_thing_type(thingTypeName=thing_type, undoDeprecate=True)
                 print(f"   ✅ Thing Type {thing_type} {get_message('undeprecated')}")
             else:
@@ -135,14 +131,10 @@ def create_thing_types(iot, debug=False):
             # Thing Type doesn't exist, create it
             pass
         except Exception as e:
-            print(
-                f"   ❌ {get_message('error_checking')} Thing Type {thing_type}: {str(e)}"
-            )
+            print(f"   ❌ {get_message('error_checking')} Thing Type {thing_type}: {str(e)}")
             continue
 
-        description = (
-            f"Template for {thing_type.replace('Vehicle', ' Vehicle')} category"
-        )
+        description = f"Template for {thing_type.replace('Vehicle', ' Vehicle')} category"
         safe_create(
             iot.create_thing_type,
             "Thing Type",
@@ -170,9 +162,7 @@ def create_thing_groups(iot, debug=False):
             thingGroupName=group,
             thingGroupProperties={
                 "thingGroupDescription": description,
-                "attributePayload": {
-                    "attributes": {"location": group, "managed": "true"}
-                },
+                "attributePayload": {"attributes": {"location": group, "managed": "true"}},
             },
         )
 
@@ -181,9 +171,7 @@ def generate_random_date():
     """Generate random date within last year"""
     end_date = datetime.now()
     start_date = end_date - timedelta(days=365)
-    random_date = start_date + timedelta(
-        seconds=random.randint(0, int((end_date - start_date).total_seconds()))
-    )
+    random_date = start_date + timedelta(seconds=random.randint(0, int((end_date - start_date).total_seconds())))
     return random_date.strftime("%Y-%m-%d")
 
 
@@ -233,9 +221,7 @@ def add_things_to_groups(iot, debug=False):
 
         try:
             if debug:
-                print(
-                    f"\n🔍 DEBUG: {get_message('adding_to_group', thing_name, group_name)}"
-                )
+                print(f"\n🔍 DEBUG: {get_message('adding_to_group', thing_name, group_name)}")
                 print(f"{get_message('debug_api_call')} add_thing_to_thing_group")
                 print(get_message("debug_input_params"))
                 print(
@@ -247,9 +233,7 @@ def add_things_to_groups(iot, debug=False):
             else:
                 print(get_message("adding_to_group", thing_name, group_name))
 
-            response = iot.add_thing_to_thing_group(
-                thingGroupName=group_name, thingName=thing_name
-            )
+            response = iot.add_thing_to_thing_group(thingGroupName=group_name, thingName=thing_name)
 
             if debug:
                 print(get_message("debug_api_response"))
@@ -258,9 +242,7 @@ def add_things_to_groups(iot, debug=False):
             print(f"✅ {get_message('added_to_group', thing_name, group_name)}")
             time.sleep(0.3 if not debug else 1.0)
         except ClientError as e:
-            print(
-                f"❌ {get_message('error_adding', thing_name, group_name)} {e.response['Error']['Message']}"
-            )
+            print(f"❌ {get_message('error_adding', thing_name, group_name)} {e.response['Error']['Message']}")
             if debug:
                 print(get_message("debug_full_error"))
                 print(json.dumps(e.response, indent=2, default=str))
@@ -278,12 +260,8 @@ def print_summary(iot):
 
         print(get_message("resources_created"))
         print(f"   {get_message('things')} {len(things.get('things', []))}")
-        print(
-            f"   {get_message('thing_types')} {len(thing_types.get('thingTypes', []))}"
-        )
-        print(
-            f"   {get_message('thing_groups')} {len(thing_groups.get('thingGroups', []))}"
-        )
+        print(f"   {get_message('thing_types')} {len(thing_types.get('thingTypes', []))}")
+        print(f"   {get_message('thing_groups')} {len(thing_groups.get('thingGroups', []))}")
 
         print(f"\n{get_message('sample_thing_names')}")
         for thing in things.get("things", [])[:5]:
@@ -331,12 +309,8 @@ def main():
             print()
 
         print(get_message("description_intro"))
-        print(
-            f"• {len(THING_TYPES)} {get_message('thing_types_desc')} {', '.join(THING_TYPES)}"
-        )
-        print(
-            f"• {len(THING_GROUPS)} {get_message('thing_groups_desc')} {', '.join(THING_GROUPS)}"
-        )
+        print(f"• {len(THING_TYPES)} {get_message('thing_types_desc')} {', '.join(THING_TYPES)}")
+        print(f"• {len(THING_GROUPS)} {get_message('thing_groups_desc')} {', '.join(THING_GROUPS)}")
         print(f"• {THING_COUNT} {get_message('things_desc')}")
 
         if debug_mode:

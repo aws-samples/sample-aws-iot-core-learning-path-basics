@@ -170,9 +170,7 @@ def validate_i18n_files(i18n_dir: Path = None) -> bool:
             if status == "valid":
                 print(f"  ✅ {lang}/{script_file} - All {len(lang_keys)} keys match")
             else:
-                print(
-                    f"  ❌ {lang}/{script_file} - {len(missing_keys)} missing, {len(extra_keys)} extra"
-                )
+                print(f"  ❌ {lang}/{script_file} - {len(missing_keys)} missing, {len(extra_keys)} extra")
 
     # Print summary
     print("\n" + "=" * 60)
@@ -213,9 +211,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="Validate i18n JSON files")
-    parser.add_argument(
-        "--i18n-dir", type=Path, help="Path to i18n directory (default: ../i18n)"
-    )
+    parser.add_argument("--i18n-dir", type=Path, help="Path to i18n directory (default: ../i18n)")
 
     args = parser.parse_args()
 

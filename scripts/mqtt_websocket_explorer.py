@@ -63,17 +63,13 @@ class MQTTWebSocketExplorer:
 
             if debug:
                 print(get_message("debug_calling_api"))
-                print(
-                    f"📥 {get_message('debug_input_params')}: {{'endpointType': 'iot:Data-ATS'}}"
-                )
+                print(f"📥 {get_message('debug_input_params')}: {{'endpointType': 'iot:Data-ATS'}}")
 
             response = iot.describe_endpoint(endpointType="iot:Data-ATS")
             endpoint = response["endpointAddress"]
 
             if debug:
-                print(
-                    f"📤 {get_message('debug_api_response')}: {json.dumps(response, indent=2, default=str)}"
-                )
+                print(f"📤 {get_message('debug_api_response')}: {json.dumps(response, indent=2, default=str)}")
 
             print(get_message("websocket_endpoint_discovery"))
             print(f"   {get_message('endpoint_type')}")
@@ -109,16 +105,8 @@ class MQTTWebSocketExplorer:
 
             if debug:
                 print("🔍 DEBUG: AWS Credentials Retrieved")
-                print(
-                    f"   Access Key: {access_key[:10]}..."
-                    if access_key
-                    else "   Access Key: None"
-                )
-                print(
-                    f"   Secret Key: {'*' * 20}"
-                    if secret_key
-                    else "   Secret Key: None"
-                )
+                print(f"   Access Key: {access_key[:10]}..." if access_key else "   Access Key: None")
+                print(f"   Secret Key: {'*' * 20}" if secret_key else "   Secret Key: None")
                 print(f"   Session Token: {'Present' if session_token else 'None'}")
                 print(f"   Region: {region}")
 
@@ -217,9 +205,7 @@ class MQTTWebSocketExplorer:
             print(f"   {get_message('client_id')}: {client_id}")
             print(f"   {get_message('endpoint')}: {endpoint}")
             print(f"   {get_message('port_443')}")
-            print(
-                f"   {get_message('protocol_label')}: MQTT {mqtt_version} over WebSocket"
-            )
+            print(f"   {get_message('protocol_label')}: MQTT {mqtt_version} over WebSocket")
             print(f"   {get_message('authentication')}")
             print(f"   {get_message('region')}: {region}")
 
@@ -232,28 +218,7 @@ class MQTTWebSocketExplorer:
             # Build MQTT connection using appropriate WebSocket builder
             if mqtt_version == "5.0" and MQTT5_AVAILABLE:
                 try:
-                    self.connection = (
-                        mqtt5_connection_builder.websockets_with_default_aws_signing(
-                            endpoint=endpoint,
-                            region=region,
-                            credentials_provider=credentials_provider,
-                            client_id=client_id,
-                            clean_session=True,
-                            keep_alive_secs=30,
-                            on_connection_interrupted=self.on_connection_interrupted,
-                            on_connection_resumed=self.on_connection_resumed,
-                        )
-                    )
-                except Exception as mqtt5_error:
-                    print(
-                        f"⚠️  MQTT 5.0 WebSocket connection failed: {str(mqtt5_error)}"
-                    )
-                    print(f"🔄 {get_message('falling_back_mqtt311')}")
-                    mqtt_version = "3.1.1"
-
-            if mqtt_version == "3.1.1" or not MQTT5_AVAILABLE:
-                self.connection = (
-                    mqtt_connection_builder.websockets_with_default_aws_signing(
+                    self.connection = mqtt5_connection_builder.websockets_with_default_aws_signing(
                         endpoint=endpoint,
                         region=region,
                         credentials_provider=credentials_provider,
@@ -263,6 +228,21 @@ class MQTTWebSocketExplorer:
                         on_connection_interrupted=self.on_connection_interrupted,
                         on_connection_resumed=self.on_connection_resumed,
                     )
+                except Exception as mqtt5_error:
+                    print(f"⚠️  MQTT 5.0 WebSocket connection failed: {str(mqtt5_error)}")
+                    print(f"🔄 {get_message('falling_back_mqtt311')}")
+                    mqtt_version = "3.1.1"
+
+            if mqtt_version == "3.1.1" or not MQTT5_AVAILABLE:
+                self.connection = mqtt_connection_builder.websockets_with_default_aws_signing(
+                    endpoint=endpoint,
+                    region=region,
+                    credentials_provider=credentials_provider,
+                    client_id=client_id,
+                    clean_session=True,
+                    keep_alive_secs=30,
+                    on_connection_interrupted=self.on_connection_interrupted,
+                    on_connection_resumed=self.on_connection_resumed,
                 )
 
             print(f"\n{get_message('connecting_websocket')}")
@@ -271,9 +251,7 @@ class MQTTWebSocketExplorer:
 
             self.connected = True
 
-            print(
-                f"\n📊 {get_message('websocket_connection_established')} [{datetime.now().strftime('%H:%M:%S')}]"
-            )
+            print(f"\n📊 {get_message('websocket_connection_established')} [{datetime.now().strftime('%H:%M:%S')}]")
             print("-" * 40)
             print(f"   {get_message('connection_status')}")
             print(f"   {get_message('client_id')}: {client_id}")
@@ -329,9 +307,7 @@ class MQTTWebSocketExplorer:
             print(f"{get_message('topic')}: {topic}")
             qos_desc = get_message("qos_descriptions").get(qos, f"QoS {qos}")
             print(f"{get_message('qos')}: {qos} ({qos_desc})")
-            print(
-                f"{get_message('payload_size')}: {len(payload)} {get_message('bytes')}"
-            )
+            print(f"{get_message('payload_size')}: {len(payload)} {get_message('bytes')}")
             print(get_message("transport"))
 
             print(get_message("message_payload"))
@@ -408,13 +384,9 @@ class MQTTWebSocketExplorer:
                         print(f"   {command_help}")
                 elif cmd == "status":
                     print(f"\n📊 {get_message('connection_status_label')}:")
-                    print(
-                        f"   {get_message('connected')}: {'✅ Yes' if self.connected else '❌ No'}"
-                    )
+                    print(f"   {get_message('connected')}: {'✅ Yes' if self.connected else '❌ No'}")
                     print("   Transport: WebSocket with SigV4")
-                    print(
-                        f"   {get_message('subscriptions_count', len(self.subscriptions))}"
-                    )
+                    print(f"   {get_message('subscriptions_count', len(self.subscriptions))}")
                 elif cmd in ["sub", "sub1"]:
                     if len(parts) < 2:
                         print("   ❌ Usage: sub <topic>")
@@ -465,9 +437,7 @@ class MQTTWebSocketExplorer:
                 "subscribed_at": datetime.now().isoformat(),
             }
 
-            print(
-                f"\n📊 {get_message('websocket_subscription_established')} [{datetime.now().strftime('%H:%M:%S')}]"
-            )
+            print(f"\n📊 {get_message('websocket_subscription_established')} [{datetime.now().strftime('%H:%M:%S')}]")
             print("-" * 40)
             print(f"   {get_message('topic')}: {topic}")
             print(f"   QoS: {qos}")
@@ -495,9 +465,7 @@ class MQTTWebSocketExplorer:
             print(f"\n{get_message('publishing_message_websocket')}")
             print(f"   {get_message('topic')}: {topic}")
             print(f"   QoS: {qos}")
-            print(
-                f"   {get_message('payload_size')}: {len(payload)} {get_message('bytes')}"
-            )
+            print(f"   {get_message('payload_size')}: {len(payload)} {get_message('bytes')}")
 
             publish_future, packet_id = self.connection.publish(
                 topic=topic,
@@ -575,9 +543,7 @@ def main():
             if not endpoint:
                 return
 
-            access_key, secret_key, session_token, region = client.get_aws_credentials(
-                debug=debug_mode
-            )
+            access_key, secret_key, session_token, region = client.get_aws_credentials(debug=debug_mode)
             if not access_key or not secret_key:
                 return
 

@@ -22,9 +22,7 @@ def load_messages(lang="en"):
     """Load messages from i18n files"""
     try:
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        i18n_path = os.path.join(
-            script_dir, "..", "i18n", lang, "iot_rules_explorer.json"
-        )
+        i18n_path = os.path.join(script_dir, "..", "i18n", lang, "iot_rules_explorer.json")
         with open(i18n_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
@@ -51,9 +49,7 @@ def get_language():
         return "en"
 
     # Interactive selection
-    print(
-        "🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma / 언어 선택"
-    )
+    print("🌍 Language Selection / Selección de Idioma / 言語選択 / 语言选择 / Seleção de Idioma / 언어 선택")
     print("=" * 80)
     print("1. English")
     print("2. Español (Spanish)")
@@ -112,11 +108,7 @@ class IoTRulesExplorer:
         try:
             if self.debug_mode:
                 print(get_message("debug_operation", operation=operation_name))
-                print(
-                    get_message(
-                        "debug_input", input=json.dumps(kwargs, indent=2, default=str)
-                    )
-                )
+                print(get_message("debug_input", input=json.dumps(kwargs, indent=2, default=str)))
 
             response = func(**kwargs)
 
@@ -124,9 +116,7 @@ class IoTRulesExplorer:
                 print(get_message("debug_completed", operation=operation_name))
                 if response:
                     output_str = json.dumps(response, indent=2, default=str)
-                    truncated_output = output_str[:500] + (
-                        "..." if len(output_str) > 500 else ""
-                    )
+                    truncated_output = output_str[:500] + ("..." if len(output_str) > 500 else "")
                     print(get_message("debug_output", output=truncated_output))
 
             return response, True
@@ -142,9 +132,7 @@ class IoTRulesExplorer:
                 print(get_message("debug_error_code", code=e.response["Error"]["Code"]))
             return None, False
         except Exception as e:
-            print(
-                get_message("operation_failed", operation=operation_name, error=str(e))
-            )
+            print(get_message("operation_failed", operation=operation_name, error=str(e)))
             return None, False
 
     def validate_sql_clause(self, clause, clause_type):
@@ -162,9 +150,7 @@ class IoTRulesExplorer:
             allowed_pattern = r"^[a-zA-Z0-9_\s]+$"
 
         if not re.match(allowed_pattern, clause):
-            raise ValueError(
-                get_message("invalid_characters_clause", clause_type=clause_type)
-            )
+            raise ValueError(get_message("invalid_characters_clause", clause_type=clause_type))
 
         dangerous_patterns = [
             "--",
@@ -209,9 +195,7 @@ class IoTRulesExplorer:
         print(f"\n{get_message('list_rules_title')}")
         print(get_message("header_separator"))
 
-        response, success = self.safe_operation(
-            self.iot.list_topic_rules, get_message("list_rules_title")
-        )
+        response, success = self.safe_operation(self.iot.list_topic_rules, get_message("list_rules_title"))
         if not success:
             return
 
@@ -228,19 +212,13 @@ class IoTRulesExplorer:
             rule_name = rule["ruleName"]
             created_at = rule.get("createdAt", "Unknown")
             rule_disabled = rule.get("ruleDisabled", False)
-            status = (
-                get_message("rule_status_disabled")
-                if rule_disabled
-                else get_message("rule_status_enabled")
-            )
+            status = get_message("rule_status_disabled") if rule_disabled else get_message("rule_status_enabled")
 
             print(f"{i}. {rule_name} - {status}")
             print(f"   {get_message('created_label', date=created_at)}")
 
             if self.debug_mode:
-                print(
-                    f"   {get_message('debug_rule_arn', arn=rule.get('ruleArn', 'N/A'))}"
-                )
+                print(f"   {get_message('debug_rule_arn', arn=rule.get('ruleArn', 'N/A'))}")
 
             rule_response, rule_success = self.safe_operation(
                 self.iot.get_topic_rule,
@@ -259,22 +237,14 @@ class IoTRulesExplorer:
                 for j, action in enumerate(actions, 1):
                     if "republish" in action:
                         topic = action["republish"].get("topic", "N/A")
-                        print(
-                            f"      {j}. {get_message('action_republish', topic=topic)}"
-                        )
+                        print(f"      {j}. {get_message('action_republish', topic=topic)}")
                     elif "s3" in action:
                         bucket = action["s3"].get("bucketName", "N/A")
                         print(f"      {j}. {get_message('action_s3', bucket=bucket)}")
                     elif "lambda" in action:
                         function_arn = action["lambda"].get("functionArn", "N/A")
-                        function_name = (
-                            function_arn.split(":")[-1]
-                            if ":" in function_arn
-                            else function_arn
-                        )
-                        print(
-                            f"      {j}. {get_message('action_lambda', function=function_name)}"
-                        )
+                        function_name = function_arn.split(":")[-1] if ":" in function_arn else function_arn
+                        print(f"      {j}. {get_message('action_lambda', function=function_name)}")
                     else:
                         action_type = list(action.keys())[0] if action else "Unknown"
                         print(f"      {j}. {action_type}")
@@ -285,9 +255,7 @@ class IoTRulesExplorer:
         print(f"\n{get_message('describe_rule_title')}")
         print(get_message("header_separator"))
 
-        response, success = self.safe_operation(
-            self.iot.list_topic_rules, get_message("list_rules_for_selection")
-        )
+        response, success = self.safe_operation(self.iot.list_topic_rules, get_message("list_rules_for_selection"))
         if not success:
             return
 
@@ -299,22 +267,13 @@ class IoTRulesExplorer:
         print(get_message("available_rules"))
         for i, rule in enumerate(rules, 1):
             status = (
-                get_message("rule_status_disabled")
-                if rule.get("ruleDisabled", False)
-                else get_message("rule_status_enabled")
+                get_message("rule_status_disabled") if rule.get("ruleDisabled", False) else get_message("rule_status_enabled")
             )
             print(f"   {i}. {rule['ruleName']} - {status}")
 
         while True:
             try:
-                choice = (
-                    int(
-                        input(
-                            f"\n{get_message('select_rule_describe', count=len(rules))}"
-                        )
-                    )
-                    - 1
-                )
+                choice = int(input(f"\n{get_message('select_rule_describe', count=len(rules))}")) - 1
                 if 0 <= choice < len(rules):
                     selected_rule = rules[choice]["ruleName"]
                     break
@@ -348,9 +307,7 @@ class IoTRulesExplorer:
 
         if "FROM" in sql.upper():
             from_part = (
-                sql.split("FROM")[1].split("WHERE")[0].strip()
-                if "WHERE" in sql.upper()
-                else sql.split("FROM")[1].strip()
+                sql.split("FROM")[1].split("WHERE")[0].strip() if "WHERE" in sql.upper() else sql.split("FROM")[1].strip()
             )
             print(f"   {get_message('from_clause', clause=from_part)}")
 
@@ -367,12 +324,8 @@ class IoTRulesExplorer:
 
             if "republish" in action:
                 republish = action["republish"]
-                print(
-                    f"      {get_message('target_topic', topic=republish.get('topic', 'N/A'))}"
-                )
-                print(
-                    f"      {get_message('role_arn', arn=republish.get('roleArn', 'N/A'))}"
-                )
+                print(f"      {get_message('target_topic', topic=republish.get('topic', 'N/A'))}")
+                print(f"      {get_message('role_arn', arn=republish.get('roleArn', 'N/A'))}")
                 if "qos" in republish:
                     print(f"      {get_message('qos_label', qos=republish['qos'])}")
 
@@ -389,9 +342,7 @@ class IoTRulesExplorer:
             else get_message("rule_status_enabled")
         )
         print(f"   {get_message('rule_status', status=status)}")
-        print(
-            f"   {get_message('rule_created', date=rule_payload.get('createdAt', 'N/A'))}"
-        )
+        print(f"   {get_message('rule_created', date=rule_payload.get('createdAt', 'N/A'))}")
 
         if self.debug_mode:
             print(f"\n{get_message('debug_complete_payload')}")
@@ -464,18 +415,12 @@ class IoTRulesExplorer:
 
             while True:
                 try:
-                    choice = int(
-                        input(
-                            f"\n{get_message('select_event_type', count=len(event_types) + 1)}"
-                        )
-                    )
+                    choice = int(input(f"\n{get_message('select_event_type', count=len(event_types) + 1)}"))
                     if 1 <= choice <= len(event_types):
                         selected_event_type = event_types[choice - 1]
                         break
                     elif choice == len(event_types) + 1:
-                        selected_event_type = input(
-                            get_message("enter_custom_event_type")
-                        ).strip()
+                        selected_event_type = input(get_message("enter_custom_event_type")).strip()
                         if selected_event_type:
                             break
                         else:
@@ -544,11 +489,7 @@ class IoTRulesExplorer:
 
         while True:
             try:
-                choice = int(
-                    input(
-                        f"\n{get_message('select_attributes', count=len(available_attributes))}"
-                    )
-                )
+                choice = int(input(f"\n{get_message('select_attributes', count=len(available_attributes))}"))
                 if 1 <= choice <= len(available_attributes) - 1:
                     select_clause = available_attributes[choice - 1]
                     break
@@ -617,13 +558,9 @@ class IoTRulesExplorer:
         try:
             safe_select_clause = self.validate_sql_clause(select_clause, "SELECT")
             safe_topic_pattern = self.validate_topic_pattern(topic_pattern)
-            safe_where_clause = (
-                self.validate_sql_clause(where_clause, "WHERE") if where_clause else ""
-            )
+            safe_where_clause = self.validate_sql_clause(where_clause, "WHERE") if where_clause else ""
 
-            sql_statement = "SELECT {} FROM '{}'".format(
-                safe_select_clause, safe_topic_pattern
-            )
+            sql_statement = "SELECT {} FROM '{}'".format(safe_select_clause, safe_topic_pattern)
             if safe_where_clause:
                 sql_statement += " WHERE {}".format(safe_where_clause)
         except ValueError as e:
@@ -656,9 +593,7 @@ class IoTRulesExplorer:
         rule_payload = {
             "sql": sql_statement,
             "description": rule_description,
-            "actions": [
-                {"republish": {"topic": target_topic, "roleArn": role_arn, "qos": 1}}
-            ],
+            "actions": [{"republish": {"topic": target_topic, "roleArn": role_arn, "qos": 1}}],
             "ruleDisabled": False,
         }
 
@@ -701,16 +636,12 @@ class IoTRulesExplorer:
 
             print(f"\n{get_message('testing_rule_title')}")
             example_source_topic = topic_pattern.replace("+", "device123")
-            print(
-                f"   {get_message('testing_step_1', source_topic=example_source_topic)}"
-            )
+            print(f"   {get_message('testing_step_1', source_topic=example_source_topic)}")
             print(f"   {get_message('testing_step_2', target_topic=target_topic)}")
             print(f"   {get_message('testing_step_3')}")
 
             print(f"\n{get_message('example_test_message')}")
-            example_message = self.generate_example_message(
-                selected_event_type, sql_statement
-            )
+            example_message = self.generate_example_message(selected_event_type, sql_statement)
             print(f"   {json.dumps(example_message, indent=2)}")
 
     def generate_example_message(self, event_type, sql_statement):
@@ -718,15 +649,11 @@ class IoTRulesExplorer:
         base_message = {"deviceId": "device123", "timestamp": int(time.time() * 1000)}
 
         if event_type == "temperature":
-            base_message["temperature"] = (
-                30.0 if "temperature >" in sql_statement else 25.5
-            )
+            base_message["temperature"] = 30.0 if "temperature >" in sql_statement else 25.5
         elif event_type == "humidity":
             base_message["humidity"] = 85.0 if "humidity >" in sql_statement else 65.0
         elif event_type == "pressure":
-            base_message["pressure"] = (
-                1020.0 if "pressure >" in sql_statement else 1013.25
-            )
+            base_message["pressure"] = 1020.0 if "pressure >" in sql_statement else 1013.25
         elif event_type == "motion":
             base_message["detected"] = True
         elif event_type == "door":
@@ -736,9 +663,7 @@ class IoTRulesExplorer:
         elif event_type == "status":
             base_message.update({"status": "active", "uptime": 3600})
         elif event_type == "battery":
-            base_message.update(
-                {"level": 15 if "level <" in sql_statement else 85, "voltage": 3.2}
-            )
+            base_message.update({"level": 15 if "level <" in sql_statement else 85, "voltage": 3.2})
         else:
             base_message.update({"value": 25.5, "status": "active"})
 
@@ -761,11 +686,7 @@ class IoTRulesExplorer:
                 print(get_message("creating_iam_role", name=self.rule_role_name))
                 return self.create_iot_rule_role()
             else:
-                print(
-                    get_message(
-                        "error_checking_role", error=e.response["Error"]["Message"]
-                    )
-                )
+                print(get_message("error_checking_role", error=e.response["Error"]["Message"]))
                 return None
 
     def create_iot_rule_role(self):
@@ -796,9 +717,7 @@ class IoTRulesExplorer:
 
         policy_document = {
             "Version": "2012-10-17",
-            "Statement": [
-                {"Effect": "Allow", "Action": ["iot:Publish"], "Resource": "*"}
-            ],
+            "Statement": [{"Effect": "Allow", "Action": ["iot:Publish"], "Resource": "*"}],
         }
 
         policy_name = "IoTRulesEnginePolicy"
@@ -834,9 +753,7 @@ class IoTRulesExplorer:
         print(f"\n{get_message('manage_rule_title')}")
         print(get_message("header_separator"))
 
-        response, success = self.safe_operation(
-            self.iot.list_topic_rules, get_message("list_rules_for_management")
-        )
+        response, success = self.safe_operation(self.iot.list_topic_rules, get_message("list_rules_for_management"))
         if not success:
             return
 
@@ -848,22 +765,13 @@ class IoTRulesExplorer:
         print(get_message("available_rules"))
         for i, rule in enumerate(rules, 1):
             status = (
-                get_message("rule_status_disabled")
-                if rule.get("ruleDisabled", False)
-                else get_message("rule_status_enabled")
+                get_message("rule_status_disabled") if rule.get("ruleDisabled", False) else get_message("rule_status_enabled")
             )
             print(f"   {i}. {rule['ruleName']} - {status}")
 
         while True:
             try:
-                choice = (
-                    int(
-                        input(
-                            f"\n{get_message('select_rule_manage', count=len(rules))}"
-                        )
-                    )
-                    - 1
-                )
+                choice = int(input(f"\n{get_message('select_rule_manage', count=len(rules))}")) - 1
                 if 0 <= choice < len(rules):
                     selected_rule = rules[choice]
                     break
@@ -876,11 +784,7 @@ class IoTRulesExplorer:
         is_disabled = selected_rule.get("ruleDisabled", False)
 
         print(f"\n{get_message('managing_rule', name=rule_name)}")
-        current_status = (
-            get_message("rule_status_disabled")
-            if is_disabled
-            else get_message("rule_status_enabled")
-        )
+        current_status = get_message("rule_status_disabled") if is_disabled else get_message("rule_status_enabled")
         print(f"{get_message('current_status', status=current_status)}")
 
         print(f"\n{get_message('management_options')}")
@@ -941,25 +845,15 @@ class IoTRulesExplorer:
 
                 if success:
                     status_text = (
-                        get_message("rule_status_enabled")
-                        if not new_disabled_status
-                        else get_message("rule_status_disabled")
+                        get_message("rule_status_enabled") if not new_disabled_status else get_message("rule_status_disabled")
                     )
-                    print(
-                        get_message(
-                            "rule_status_updated", name=rule_name, status=status_text
-                        )
-                    )
+                    print(get_message("rule_status_updated", name=rule_name, status=status_text))
             else:
                 print(get_message("failed_get_rule_settings", name=rule_name))
 
         elif action == 2:
             # Delete rule
-            confirm = (
-                input(get_message("confirm_delete_rule", name=rule_name))
-                .strip()
-                .lower()
-            )
+            confirm = input(get_message("confirm_delete_rule", name=rule_name)).strip().lower()
 
             if confirm == "y":
                 response, success = self.safe_operation(
@@ -988,9 +882,7 @@ class IoTRulesExplorer:
         print(get_message("test_objective_4"))
         print()
 
-        response, success = self.safe_operation(
-            self.iot.list_topic_rules, get_message("list_rules_for_testing")
-        )
+        response, success = self.safe_operation(self.iot.list_topic_rules, get_message("list_rules_for_testing"))
         if not success:
             return
 
@@ -1003,18 +895,13 @@ class IoTRulesExplorer:
         print(get_message("available_rules"))
         for i, rule in enumerate(rules, 1):
             status = (
-                get_message("rule_status_disabled")
-                if rule.get("ruleDisabled", False)
-                else get_message("rule_status_enabled")
+                get_message("rule_status_disabled") if rule.get("ruleDisabled", False) else get_message("rule_status_enabled")
             )
             print(f"   {i}. {rule['ruleName']} - {status}")
 
         while True:
             try:
-                choice = (
-                    int(input(f"\n{get_message('select_rule_test', count=len(rules))}"))
-                    - 1
-                )
+                choice = int(input(f"\n{get_message('select_rule_test', count=len(rules))}")) - 1
                 if 0 <= choice < len(rules):
                     selected_rule = rules[choice]
                     break
@@ -1086,9 +973,7 @@ class IoTRulesExplorer:
         try:
             if "FROM" in sql.upper():
                 from_part = (
-                    sql.split("FROM")[1].split("WHERE")[0].strip()
-                    if "WHERE" in sql.upper()
-                    else sql.split("FROM")[1].strip()
+                    sql.split("FROM")[1].split("WHERE")[0].strip() if "WHERE" in sql.upper() else sql.split("FROM")[1].strip()
                 )
                 topic = from_part.strip("'\"")
                 return topic
@@ -1150,21 +1035,10 @@ class IoTRulesExplorer:
         else:
             while True:
                 try:
-                    choice = (
-                        int(
-                            input(
-                                f"\n{get_message('select_device', count=len(available_devices))}"
-                            )
-                        )
-                        - 1
-                    )
+                    choice = int(input(f"\n{get_message('select_device', count=len(available_devices))}")) - 1
                     if 0 <= choice < len(available_devices):
                         selected_device = available_devices[choice]
-                        print(
-                            get_message(
-                                "selected_device", name=selected_device["thing_name"]
-                            )
-                        )
+                        print(get_message("selected_device", name=selected_device["thing_name"]))
                         break
                     else:
                         print(get_message("invalid_device_selection"))
@@ -1252,12 +1126,8 @@ class IoTRulesExplorer:
                 print(f"{get_message('header_separator')}")
 
                 pattern_display = topic_pattern or get_message("no_specific_pattern")
-                print(
-                    f"\n{get_message('topic_pattern_display', pattern=pattern_display)}"
-                )
-                topic_should_match = (
-                    input(get_message("should_match_topic")).strip().lower()
-                )
+                print(f"\n{get_message('topic_pattern_display', pattern=pattern_display)}")
+                topic_should_match = input(get_message("should_match_topic")).strip().lower()
 
                 if topic_should_match == "quit":
                     break
@@ -1271,28 +1141,16 @@ class IoTRulesExplorer:
 
                 where_should_match = "y"
                 if where_condition:
-                    print(
-                        f"\n{get_message('where_condition_label', condition=where_condition)}"
-                    )
-                    where_should_match = (
-                        input(get_message("should_match_where")).strip().lower()
-                    )
+                    print(f"\n{get_message('where_condition_label', condition=where_condition)}")
+                    where_should_match = input(get_message("should_match_where")).strip().lower()
 
-                test_message = self.generate_test_message(
-                    where_condition, where_should_match == "y"
-                )
+                test_message = self.generate_test_message(where_condition, where_should_match == "y")
 
                 print(f"\n{get_message('test_message_display')}")
                 print(get_message("topic_label", topic=test_topic))
-                print(
-                    get_message(
-                        "payload_label", payload=json.dumps(test_message, indent=2)
-                    )
-                )
+                print(get_message("payload_label", payload=json.dumps(test_message, indent=2)))
 
-                should_trigger = (topic_should_match == "y") and (
-                    where_should_match == "y"
-                )
+                should_trigger = (topic_should_match == "y") and (where_should_match == "y")
                 prediction_msg = (
                     get_message("prediction_should_trigger")
                     if should_trigger
@@ -1352,9 +1210,7 @@ class IoTRulesExplorer:
         }
 
         if not where_condition:
-            base_message.update(
-                {"temperature": 23.5, "humidity": 45.0, "status": "active"}
-            )
+            base_message.update({"temperature": 23.5, "humidity": 45.0, "status": "active"})
             return base_message
 
         condition_lower = where_condition.lower()
@@ -1390,9 +1246,7 @@ class IoTRulesExplorer:
                         base_message["temperature"] = 30.0
 
         elif "humidity" in condition_lower:
-            base_message["humidity"] = (
-                85.0 if should_match and ">" in condition_lower else 40.0
-            )
+            base_message["humidity"] = 85.0 if should_match and ">" in condition_lower else 40.0
 
         elif "status" in condition_lower:
             if should_match:
@@ -1406,9 +1260,7 @@ class IoTRulesExplorer:
                 base_message["status"] = "inactive"
 
         elif "level" in condition_lower or "battery" in condition_lower:
-            base_message["level"] = (
-                15 if should_match and "<" in condition_lower else 50
-            )
+            base_message["level"] = 15 if should_match and "<" in condition_lower else 50
 
         else:
             base_message.update(
