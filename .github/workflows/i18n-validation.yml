@@ -1,5 +1,6 @@
 name: I18n Validation
-
+permissions:
+  contents: read
 on:
   push:
     paths:
