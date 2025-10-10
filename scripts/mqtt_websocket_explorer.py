@@ -14,6 +14,9 @@ import traceback
 import uuid
 from datetime import datetime
 
+# Add i18n to path
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "i18n"))
+
 import boto3
 from awscrt import auth, mqtt
 from awsiot import mqtt_connection_builder
@@ -24,9 +27,6 @@ try:
     MQTT5_AVAILABLE = True
 except ImportError:
     MQTT5_AVAILABLE = False
-
-# Add i18n to path
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "i18n"))
 
 from language_selector import get_language
 from loader import load_messages

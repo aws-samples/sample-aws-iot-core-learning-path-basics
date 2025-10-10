@@ -11,11 +11,11 @@ import traceback
 import uuid
 from datetime import datetime, timedelta
 
-import boto3
-from botocore.exceptions import ClientError, NoCredentialsError, NoRegionError
-
 # Add i18n to path
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "i18n"))
+
+import boto3
+from botocore.exceptions import ClientError, NoCredentialsError, NoRegionError
 
 from language_selector import get_language
 from loader import load_messages
