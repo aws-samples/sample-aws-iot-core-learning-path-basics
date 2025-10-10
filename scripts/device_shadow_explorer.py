@@ -125,10 +125,16 @@ class DeviceShadowExplorer:
             endpoint = response["endpointAddress"]
 
             if debug:
-                print(get_message("debug_api_response").format(json.dumps(response, indent=2, default=str)))
+                print(
+                    get_message("debug_api_response").format(
+                        json.dumps(response, indent=2, default=str)
+                    )
+                )
 
             print(get_message("iot_endpoint_discovery"))
-            print(f"   {get_message('endpoint_type')}: {get_message('endpoint_type_ats')}")
+            print(
+                f"   {get_message('endpoint_type')}: {get_message('endpoint_type_ats')}"
+            )
             print(f"   {get_message('endpoint_url')}: {endpoint}")
             print(f"   {get_message('port_mqtt_tls')}")
             print(f"   {get_message('protocol_mqtt')}")
@@ -158,7 +164,9 @@ class DeviceShadowExplorer:
 
             if debug:
                 print(get_message("debug_found_things", len(things)))
-                print(get_message("debug_thing_names", [t["thingName"] for t in things]))
+                print(
+                    get_message("debug_thing_names", [t["thingName"] for t in things])
+                )
 
             if not things:
                 print(get_message("no_things_found"))
@@ -172,7 +180,14 @@ class DeviceShadowExplorer:
 
             while True:
                 try:
-                    choice = int(input(f"\n{get_message('select_option').replace('(1-7)', f'(1-{len(things)})')}: ")) - 1
+                    choice = (
+                        int(
+                            input(
+                                f"\n{get_message('select_option').replace('(1-7)', f'(1-{len(things)})')}: "
+                            )
+                        )
+                        - 1
+                    )
                     if 0 <= choice < len(things):
                         selected_thing = things[choice]["thingName"]
                         break
@@ -196,7 +211,11 @@ class DeviceShadowExplorer:
             cert_arns = [p for p in principals if "cert/" in p]
 
             if debug:
-                print(get_message("debug_found_principals", len(principals), len(cert_arns)))
+                print(
+                    get_message(
+                        "debug_found_principals", len(principals), len(cert_arns)
+                    )
+                )
                 print(get_message("debug_cert_arns", cert_arns))
 
             if not cert_arns:
@@ -217,7 +236,12 @@ class DeviceShadowExplorer:
 
                 while True:
                     try:
-                        choice = int(input(get_message("select_certificate", len(cert_arns)))) - 1
+                        choice = (
+                            int(
+                                input(get_message("select_certificate", len(cert_arns)))
+                            )
+                            - 1
+                        )
                         if 0 <= choice < len(cert_arns):
                             selected_cert_arn = cert_arns[choice]
                             cert_id = selected_cert_arn.split("/")[-1]
@@ -268,7 +292,9 @@ class DeviceShadowExplorer:
 
         cert_dir = os.path.join(os.getcwd(), "certificates", thing_name)
         # Validate the constructed path stays within certificates directory
-        if not os.path.abspath(cert_dir).startswith(os.path.abspath(os.path.join(os.getcwd(), "certificates"))):
+        if not os.path.abspath(cert_dir).startswith(
+            os.path.abspath(os.path.join(os.getcwd(), "certificates"))
+        ):
             print(f"{get_message('unsafe_path_detected')} {thing_name}")
             return None
 
@@ -293,14 +319,18 @@ class DeviceShadowExplorer:
                 json.dump(default_state, f, indent=2)
 
             print(f"{get_message('created_default_state')} {state_file}")
-            print(f"{get_message('default_state')} {json.dumps(default_state, indent=2)}")
+            print(
+                f"{get_message('default_state')} {json.dumps(default_state, indent=2)}"
+            )
             if debug:
                 print(get_message("debug_created_new_state", len(default_state)))
         else:
             print(f"{get_message('using_existing_state')} {state_file}")
             with open(state_file, "r", encoding="utf-8") as f:
                 current_state = json.load(f)
-            print(f"{get_message('current_local_state')} {json.dumps(current_state, indent=2)}")
+            print(
+                f"{get_message('current_local_state')} {json.dumps(current_state, indent=2)}"
+            )
             if debug:
                 print(get_message("debug_loaded_existing_state", len(current_state)))
                 print(get_message("debug_file_size", os.path.getsize(state_file)))
@@ -407,7 +437,11 @@ class DeviceShadowExplorer:
                 print(get_message("debug_raw_topic").format(topic))
                 print(get_message("debug_qos_duplicate").format(qos, dup, retain))
                 print(get_message("debug_payload_size").format(len(payload)))
-                print(get_message("debug_message_count").format(len(self.received_messages)))
+                print(
+                    get_message("debug_message_count").format(
+                        len(self.received_messages)
+                    )
+                )
 
             # Analyze topic to determine message type
             if "get" in topic and "accepted" in topic:
@@ -436,7 +470,9 @@ class DeviceShadowExplorer:
         """Handle shadow get accepted response"""
         print(get_message("shadow_get_accepted"))
         if self.debug_mode:
-            print(f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/get/accepted")
+            print(
+                f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/get/accepted"
+            )
         print(get_message("shadow_document_retrieved"))
 
         state = shadow_data.get("state", {})
@@ -445,8 +481,12 @@ class DeviceShadowExplorer:
         version = shadow_data.get("version", "Unknown")
 
         print(f"   📊 {get_message('version')}: {version}")
-        print(f"   🎯 {get_message('desired_state')}: {json.dumps(desired, indent=6) if desired else get_message('none')}")
-        print(f"   📡 {get_message('reported_state')}: {json.dumps(reported, indent=6) if reported else get_message('none')}")
+        print(
+            f"   🎯 {get_message('desired_state')}: {json.dumps(desired, indent=6) if desired else get_message('none')}"
+        )
+        print(
+            f"   📡 {get_message('reported_state')}: {json.dumps(reported, indent=6) if reported else get_message('none')}"
+        )
 
         # Compare with local state
         if desired:
@@ -461,7 +501,9 @@ class DeviceShadowExplorer:
         """Handle shadow get rejected response"""
         print(get_message("shadow_get_rejected"))
         if self.debug_mode:
-            print(f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/get/rejected")
+            print(
+                f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/get/rejected"
+            )
         error_code = shadow_data.get("code", "Unknown")
         error_message = shadow_data.get("message", "No message")
         print(f"   🚫 {get_message('error_code')}: {error_code}")
@@ -469,20 +511,29 @@ class DeviceShadowExplorer:
 
         # Store error code for shadow existence checking
         with self.message_lock:
-            self.last_shadow_response = {"error_code": error_code, "error_message": error_message}
+            self.last_shadow_response = {
+                "error_code": error_code,
+                "error_message": error_message,
+            }
 
         if error_code == 404:
             print(f"   💡 {get_message('shadow_doesnt_exist')}")
             if self.debug_mode:
                 print(get_message("debug_normal_for_new"))
         elif self.debug_mode:
-            print(get_message("debug_error_code_indicates").format(error_code, error_message))
+            print(
+                get_message("debug_error_code_indicates").format(
+                    error_code, error_message
+                )
+            )
 
     def handle_shadow_update_accepted(self, shadow_data):
         """Handle shadow update accepted response"""
         print(get_message("shadow_update_accepted"))
         if self.debug_mode:
-            print(f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/update/accepted")
+            print(
+                f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/update/accepted"
+            )
         state = shadow_data.get("state", {})
         version = shadow_data.get("version", "Unknown")
         timestamp = shadow_data.get("timestamp", "Unknown")
@@ -490,15 +541,21 @@ class DeviceShadowExplorer:
         print(f"   📊 {get_message('new_version')}: {version}")
         print(f"   ⏰ {get_message('timestamp')}: {timestamp}")
         if "desired" in state:
-            print(f"   🎯 {get_message('updated_desired')}: {json.dumps(state['desired'], indent=6)}")
+            print(
+                f"   🎯 {get_message('updated_desired')}: {json.dumps(state['desired'], indent=6)}"
+            )
         if "reported" in state:
-            print(f"   📡 {get_message('updated_reported')}: {json.dumps(state['reported'], indent=6)}")
+            print(
+                f"   📡 {get_message('updated_reported')}: {json.dumps(state['reported'], indent=6)}"
+            )
 
     def handle_shadow_update_rejected(self, shadow_data):
         """Handle shadow update rejected response"""
         print(get_message("shadow_update_rejected"))
         if self.debug_mode:
-            print(f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/update/rejected")
+            print(
+                f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/update/rejected"
+            )
         error_code = shadow_data.get("code", "Unknown")
         error_message = shadow_data.get("message", "No message")
         print(f"   🚫 {get_message('error_code')}: {error_code}")
@@ -508,8 +565,12 @@ class DeviceShadowExplorer:
         """Handle shadow delta message (desired != reported)"""
         print(get_message("shadow_delta_received"))
         if self.debug_mode:
-            print(f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/update/delta")
-        print(f"   📝 {get_message('description')}: {get_message('desired_differs_reported')}")
+            print(
+                f"   📝 {get_message('topic')}: $aws/things/{self.thing_name}/shadow/update/delta"
+            )
+        print(
+            f"   📝 {get_message('description')}: {get_message('desired_differs_reported')}"
+        )
 
         state = shadow_data.get("state", {})
         version = shadow_data.get("version", "Unknown")
@@ -535,7 +596,9 @@ class DeviceShadowExplorer:
 
         print(f"\n{get_message('state_comparison')}")
         print(f"   📱 {get_message('local_state')}: {json.dumps(local_state, indent=6)}")
-        print(f"   {get_message('delta') if is_delta else get_message('desired')}: {json.dumps(desired_state, indent=6)}")
+        print(
+            f"   {get_message('delta') if is_delta else get_message('desired')}: {json.dumps(desired_state, indent=6)}"
+        )
 
         # Find differences
         differences = {}
@@ -546,16 +609,24 @@ class DeviceShadowExplorer:
 
         if differences:
             if self.debug_mode:
-                print(get_message("debug_differences_found").format(len(differences), len(desired_state)))
+                print(
+                    get_message("debug_differences_found").format(
+                        len(differences), len(desired_state)
+                    )
+                )
             print(f"\n{get_message('differences_found')}")
             for key, diff in differences.items():
                 print(f"   • {key}: {diff['local']} → {diff['desired']}")
                 if self.debug_mode:
                     print(
-                        get_message("debug_type_change").format(type(diff["local"]).__name__, type(diff["desired"]).__name__)
+                        get_message("debug_type_change").format(
+                            type(diff["local"]).__name__, type(diff["desired"]).__name__
+                        )
                     )
 
-            apply_changes = input(f"\n{get_message('apply_changes_prompt')}").strip().lower()
+            apply_changes = (
+                input(f"\n{get_message('apply_changes_prompt')}").strip().lower()
+            )
             if apply_changes == "y":
                 time.sleep(0.1)  # nosemgrep: arbitrary-sleep
                 # Update local state
@@ -564,8 +635,14 @@ class DeviceShadowExplorer:
 
                 if self.save_local_state(local_state):
                     if self.debug_mode:
-                        print(get_message("debug_updated_properties").format(len(desired_state)))
-                        print(get_message("debug_new_state_size").format(len(local_state)))
+                        print(
+                            get_message("debug_updated_properties").format(
+                                len(desired_state)
+                            )
+                        )
+                        print(
+                            get_message("debug_new_state_size").format(len(local_state))
+                        )
                     print(get_message("local_state_updated"))
 
                     # Automatically report back to shadow (required for proper synchronization)
@@ -630,7 +707,9 @@ class DeviceShadowExplorer:
                 print(f"\n{get_message('operation_cancelled')}")
                 return None
 
-    def connect_to_aws_iot(self, thing_name, cert_file, key_file, endpoint, debug=False):
+    def connect_to_aws_iot(
+        self, thing_name, cert_file, key_file, endpoint, debug=False
+    ):
         """Establish MQTT connection to AWS IoT Core for Shadow operations"""
         self.print_step(1, get_message("step_establishing_connection"))
 
@@ -654,7 +733,9 @@ class DeviceShadowExplorer:
             print(f"   {get_message('port')}: 8883")
             print(f"   {get_message('protocol')}: MQTT 3.1.1 over TLS")
             print(f"   {get_message('authentication')}: X.509 Certificate")
-            print(f"   {get_message('shadow_type')}: {get_message('shadow_type_classic')}")
+            print(
+                f"   {get_message('shadow_type')}: {get_message('shadow_type_classic')}"
+            )
 
             # Build MQTT connection
             self.connection = mqtt_connection_builder.mtls_from_path(
@@ -727,7 +808,9 @@ class DeviceShadowExplorer:
                     print(get_message("debug_subscribing_topic").format(topic))
 
                 subscribe_future, packet_id = self.connection.subscribe(
-                    topic=topic, qos=mqtt.QoS.AT_LEAST_ONCE, callback=self.on_shadow_message_received
+                    topic=topic,
+                    qos=mqtt.QoS.AT_LEAST_ONCE,
+                    callback=self.on_shadow_message_received,
                 )
 
                 subscribe_future.result()
@@ -736,7 +819,9 @@ class DeviceShadowExplorer:
                 success_count += 1
 
                 if debug:
-                    print(get_message("debug_subscription_successful").format(packet_id))
+                    print(
+                        get_message("debug_subscription_successful").format(packet_id)
+                    )
 
             except Exception as e:
                 print(f"   ❌ {topic} - Error: {str(e)}")
@@ -753,7 +838,11 @@ class DeviceShadowExplorer:
 
             return True
         else:
-            print(get_message("subscription_partial").format(success_count, len(shadow_topics)))
+            print(
+                get_message("subscription_partial").format(
+                    success_count, len(shadow_topics)
+                )
+            )
             return False
 
     def get_shadow_document(self, debug=False, wait_for_response=False):
@@ -768,7 +857,9 @@ class DeviceShadowExplorer:
             print(f"\n{get_message('requesting_shadow_document')}")
             print(f"   {get_message('topic')}: {get_topic}")
             print(f"   {get_message('thing')}: {self.thing_name}")
-            print(f"   {get_message('shadow_type')}: {get_message('shadow_type_classic')}")
+            print(
+                f"   {get_message('shadow_type')}: {get_message('shadow_type_classic')}"
+            )
 
             if debug:
                 print(get_message("debug_publishing_shadow_get"))
@@ -776,13 +867,17 @@ class DeviceShadowExplorer:
                 print(get_message("debug_payload_empty"))
 
             # Shadow get requests have empty payload
-            publish_future, packet_id = self.connection.publish(topic=get_topic, payload="", qos=mqtt.QoS.AT_LEAST_ONCE)
+            publish_future, packet_id = self.connection.publish(
+                topic=get_topic, payload="", qos=mqtt.QoS.AT_LEAST_ONCE
+            )
 
             # Non-blocking publish - don't wait for result
             timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
             print(f"{get_message('shadow_get_request_sent')} [{timestamp}]")
             print(f"   📤 {get_message('topic')}: {get_topic}")
-            print(f"   🏷️  {get_message('qos')}: 1 | {get_message('packet_id')}: {packet_id}")
+            print(
+                f"   🏷️  {get_message('qos')}: 1 | {get_message('packet_id')}: {packet_id}"
+            )
             print(f"   {get_message('waiting_for_response')}")
 
             return True
@@ -802,19 +897,27 @@ class DeviceShadowExplorer:
 
             print(f"\n{get_message('updating_shadow_reported')}")
             print(f"\n{get_message('reported_state_update')}")
-            print(f"   {get_message('current_local_state_label')}: {json.dumps(reported_state, indent=2)}")
+            print(
+                f"   {get_message('current_local_state_label')}: {json.dumps(reported_state, indent=2)}"
+            )
 
             # Create shadow update payload
             shadow_update = {"state": {"reported": reported_state}}
 
-            print(f"   {get_message('shadow_update_payload')}: {json.dumps(shadow_update, indent=2)}")
+            print(
+                f"   {get_message('shadow_update_payload')}: {json.dumps(shadow_update, indent=2)}"
+            )
 
             payload = json.dumps(shadow_update)
 
             if debug:
                 print(get_message("debug_publishing_shadow_update"))
                 print(get_message("debug_topic").format(update_topic))
-                print(get_message("debug_payload_json").format(json.dumps(shadow_update, indent=2)))
+                print(
+                    get_message("debug_payload_json").format(
+                        json.dumps(shadow_update, indent=2)
+                    )
+                )
                 print(get_message("debug_update_type").format("reported"))
 
             publish_future, packet_id = self.connection.publish(
@@ -825,7 +928,9 @@ class DeviceShadowExplorer:
             timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
             print(f"{get_message('shadow_update_sent')} [{timestamp}]")
             print(f"   📤 {get_message('topic')}: {update_topic}")
-            print(f"   🏷️  {get_message('qos')}: 1 | {get_message('packet_id')}: {packet_id}")
+            print(
+                f"   🏷️  {get_message('qos')}: 1 | {get_message('packet_id')}: {packet_id}"
+            )
             print(f"   {get_message('waiting_for_response')}")
 
             return True
@@ -845,20 +950,28 @@ class DeviceShadowExplorer:
 
             print(f"\n{get_message('updating_shadow_desired')}")
             print(f"\n{get_message('desired_state_update')}")
-            print(f"   {get_message('desired_state_to_set')}: {json.dumps(desired_state, indent=2)}")
+            print(
+                f"   {get_message('desired_state_to_set')}: {json.dumps(desired_state, indent=2)}"
+            )
 
             # Create shadow update payload
             shadow_update = {"state": {"desired": desired_state}}
 
             payload = json.dumps(shadow_update)
 
-            print(f"   {get_message('shadow_update_payload')}: {json.dumps(shadow_update, indent=2)}")
+            print(
+                f"   {get_message('shadow_update_payload')}: {json.dumps(shadow_update, indent=2)}"
+            )
             print(f"   {get_message('topic')}: {update_topic}")
             print(f"   {get_message('thing')}: {self.thing_name}")
             if debug:
                 print(get_message("debug_publishing_shadow_update"))
                 print(get_message("debug_topic", update_topic))
-                print(get_message("debug_payload_json", json.dumps(shadow_update, indent=2)))
+                print(
+                    get_message(
+                        "debug_payload_json", json.dumps(shadow_update, indent=2)
+                    )
+                )
                 print(get_message("debug_update_type", "desired"))
 
             publish_future, packet_id = self.connection.publish(
@@ -869,7 +982,9 @@ class DeviceShadowExplorer:
             timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
             print(f"{get_message('shadow_update_desired_sent')} [{timestamp}]")
             print(f"   📤 {get_message('topic')}: {update_topic}")
-            print(f"   🏷️  {get_message('qos')}: 1 | {get_message('packet_id')}: {packet_id}")
+            print(
+                f"   🏷️  {get_message('qos')}: 1 | {get_message('packet_id')}: {packet_id}"
+            )
             print(f"   {get_message('waiting_for_response')}")
 
             return True
@@ -901,7 +1016,11 @@ class DeviceShadowExplorer:
                             continue
 
                         # Select device and certificate
-                        thing_name, cert_file, key_file = self.select_device_and_certificate(debug=self.debug_mode)
+                        (
+                            thing_name,
+                            cert_file,
+                            key_file,
+                        ) = self.select_device_and_certificate(debug=self.debug_mode)
                         if not thing_name:
                             continue
 
@@ -909,7 +1028,13 @@ class DeviceShadowExplorer:
                         self.setup_local_state_file(thing_name, debug=self.debug_mode)
 
                         # Connect to AWS IoT
-                        if self.connect_to_aws_iot(thing_name, cert_file, key_file, endpoint, debug=self.debug_mode):
+                        if self.connect_to_aws_iot(
+                            thing_name,
+                            cert_file,
+                            key_file,
+                            endpoint,
+                            debug=self.debug_mode,
+                        ):
                             # Subscribe to shadow topics
                             if self.subscribe_to_shadow_topics(debug=self.debug_mode):
                                 connected = True
@@ -999,7 +1124,9 @@ class DeviceShadowExplorer:
             return
 
         # Select device and certificate
-        thing_name, cert_file, key_file = self.select_device_and_certificate(debug=self.debug_mode)
+        thing_name, cert_file, key_file = self.select_device_and_certificate(
+            debug=self.debug_mode
+        )
         if not thing_name:
             print("❌ Failed to select device and certificate")
             return
@@ -1008,7 +1135,9 @@ class DeviceShadowExplorer:
         self.setup_local_state_file(thing_name, debug=self.debug_mode)
 
         # Connect to AWS IoT
-        if not self.connect_to_aws_iot(thing_name, cert_file, key_file, endpoint, debug=self.debug_mode):
+        if not self.connect_to_aws_iot(
+            thing_name, cert_file, key_file, endpoint, debug=self.debug_mode
+        ):
             print("❌ Failed to connect to AWS IoT")
             return
 
@@ -1041,7 +1170,10 @@ class DeviceShadowExplorer:
 
             # Check if we got a successful response
             if hasattr(self, "last_shadow_response") and self.last_shadow_response:
-                if "error_code" not in self.last_shadow_response or self.last_shadow_response.get("error_code") != 404:
+                if (
+                    "error_code" not in self.last_shadow_response
+                    or self.last_shadow_response.get("error_code") != 404
+                ):
                     shadow_exists = True
 
         except Exception as e:
@@ -1059,7 +1191,12 @@ class DeviceShadowExplorer:
                     self.update_shadow_reported(local_state, debug=self.debug_mode)
                 else:
                     # Create a basic initial state if no local state exists
-                    initial_state = {"temperature": 22.5, "humidity": 45.0, "status": "online", "firmware_version": "1.0.0"}
+                    initial_state = {
+                        "temperature": 22.5,
+                        "humidity": 45.0,
+                        "status": "online",
+                        "firmware_version": "1.0.0",
+                    }
                     self.update_shadow_reported(initial_state, debug=self.debug_mode)
                 print(f"✅ {get_message('initial_shadow_created')}")
 
@@ -1152,7 +1289,9 @@ class DeviceShadowExplorer:
             import random
 
             old_humidity = local_state.get("humidity", 45.0)
-            new_humidity = round(max(0, min(100, old_humidity + random.uniform(-10, 10))), 1)
+            new_humidity = round(
+                max(0, min(100, old_humidity + random.uniform(-10, 10))), 1
+            )
             local_state["humidity"] = new_humidity
             print(get_message("humidity_changed").format(old_humidity, new_humidity))
 
@@ -1186,7 +1325,11 @@ class DeviceShadowExplorer:
 
             old_value = local_state.get(prop_name, "None")
             local_state[prop_name] = prop_value
-            print(get_message("custom_property_changed").format(prop_name, old_value, prop_value))
+            print(
+                get_message("custom_property_changed").format(
+                    prop_name, old_value, prop_value
+                )
+            )
 
         # Show summary
         print(f"\n{get_message('state_change_summary')}")
@@ -1211,16 +1354,24 @@ class DeviceShadowExplorer:
                 print(get_message("try_other_operations"))
                 return
 
-            print(f"\n{get_message('message_history').format(len(self.received_messages))}")
+            print(
+                f"\n{get_message('message_history').format(len(self.received_messages))}"
+            )
 
             for i, msg in enumerate(self.received_messages[-10:], 1):  # Show last 10
-                timestamp = msg.get("Timestamp", "").split("T")[1][:8] if "T" in msg.get("Timestamp", "") else "Unknown"
+                timestamp = (
+                    msg.get("Timestamp", "").split("T")[1][:8]
+                    if "T" in msg.get("Timestamp", "")
+                    else "Unknown"
+                )
                 topic = msg.get("Topic", "Unknown")
                 topic_type = topic.split("/")[-1] if "/" in topic else topic
 
                 print(f"\n   {i}. [{timestamp}] {topic_type}")
                 print(f"      {get_message('topic')}: {topic}")
-                print(f"      {get_message('direction')}: {msg.get('Direction', 'Unknown')}")
+                print(
+                    f"      {get_message('direction')}: {msg.get('Direction', 'Unknown')}"
+                )
 
                 if msg.get("Shadow Data"):
                     shadow_data = str(msg["Shadow Data"])
@@ -1275,8 +1426,12 @@ class DeviceShadowExplorer:
         self.print_step(3, get_message("step_simulating_changes"))
 
         print(f"💡 {get_message('shadow_concepts')[0].replace('•', '').strip()}:")
-        print(f"   • {get_message('desired_state')} represents what the device should be")
-        print(f"   • {get_message('reported_state')} represents what the device currently is")
+        print(
+            f"   • {get_message('desired_state')} represents what the device should be"
+        )
+        print(
+            f"   • {get_message('reported_state')} represents what the device currently is"
+        )
         print(
             f"   • {get_message('topic_update_delta').replace('• update/delta - ', '').replace(' (action needed)', '')} occur when desired ≠ reported"
         )
@@ -1295,7 +1450,9 @@ class DeviceShadowExplorer:
         print("   • 'local' - Show current local device state")
         print("   • 'edit' - Edit local device state")
         print("   • 'report' - Report current local state to shadow")
-        print("   • 'desire <key=value> [key=value...]' - Set desired state (simulate cloud)")
+        print(
+            "   • 'desire <key=value> [key=value...]' - Set desired state (simulate cloud)"
+        )
         print("   • 'status' - Show connection and shadow status")
         print("   • 'messages' - Show shadow message history")
         print("   • 'debug' - Show connection diagnostics")
@@ -1335,7 +1492,9 @@ class DeviceShadowExplorer:
                         "Getting the shadow document retrieves the complete JSON state including desired, reported, and metadata. This shows the current synchronization status between your application's intentions (desired) and the device's actual state (reported). The version number helps track changes."
                     )
                     print("\n🔄 NEXT: Retrieving the current shadow document...")
-                    time.sleep(1)  # Brief pause instead of blocking input  # nosemgrep: arbitrary-sleep
+                    time.sleep(
+                        1
+                    )  # Brief pause instead of blocking input  # nosemgrep: arbitrary-sleep
 
                     self.get_shadow_document(debug=self.debug_mode)
                     time.sleep(0.5)  # nosemgrep: arbitrary-sleep
@@ -1354,7 +1513,9 @@ class DeviceShadowExplorer:
                         "Reporting state updates the shadow's 'reported' section with the device's current status. This is how devices communicate their actual state to applications. The shadow service automatically calculates deltas when reported state differs from desired state."
                     )
                     print("\n🔄 NEXT: Reporting local device state to the shadow...")
-                    time.sleep(1)  # Brief pause instead of blocking input  # nosemgrep: arbitrary-sleep
+                    time.sleep(
+                        1
+                    )  # Brief pause instead of blocking input  # nosemgrep: arbitrary-sleep
 
                     local_state = self.load_local_state()
                     print("\n📡 Reporting local state to shadow...")
@@ -1370,8 +1531,12 @@ class DeviceShadowExplorer:
                         print(
                             "Setting desired state simulates how applications or cloud services request changes to device configuration. The shadow service stores these requests and notifies devices through delta messages when desired state differs from reported state. This enables remote device control."
                         )
-                        print("\n🔄 NEXT: Setting desired state to trigger device changes...")
-                        time.sleep(1)  # Brief pause instead of blocking input  # nosemgrep: arbitrary-sleep
+                        print(
+                            "\n🔄 NEXT: Setting desired state to trigger device changes..."
+                        )
+                        time.sleep(
+                            1
+                        )  # Brief pause instead of blocking input  # nosemgrep: arbitrary-sleep
 
                     # Parse key=value pairs
                     desired_updates = {}
@@ -1392,30 +1557,44 @@ class DeviceShadowExplorer:
                                 desired_updates[key] = value
 
                     if desired_updates:
-                        print(get_message("setting_desired_state").format(json.dumps(desired_updates, indent=2)))
-                        self.update_shadow_desired(desired_updates, debug=self.debug_mode)
+                        print(
+                            get_message("setting_desired_state").format(
+                                json.dumps(desired_updates, indent=2)
+                            )
+                        )
+                        self.update_shadow_desired(
+                            desired_updates, debug=self.debug_mode
+                        )
                         time.sleep(0.5)  # nosemgrep: arbitrary-sleep
                     else:
                         print(f"   {get_message('no_valid_pairs')}")
 
                 elif cmd == "status":
                     print(f"\n{get_message('shadow_connection_status')}")
-                    print(f"   {get_message('connected')}: {get_message('yes') if self.connected else get_message('no')}")
+                    print(
+                        f"   {get_message('connected')}: {get_message('yes') if self.connected else get_message('no')}"
+                    )
                     print(f"   {get_message('thing_name')}: {self.thing_name}")
-                    print(f"   {get_message('shadow_type')}: {get_message('shadow_type_classic')}")
+                    print(
+                        f"   {get_message('shadow_type')}: {get_message('shadow_type_classic')}"
+                    )
                     print(f"   Local State File: {self.local_state_file}")
                     print(f"   Messages Received: {len(self.received_messages)}")
 
                 elif cmd == "messages":
                     print(f"\n{get_message('shadow_message_history')}")
                     with self.message_lock:
-                        for msg in self.received_messages[-10:]:  # Show last 10 messages
+                        for msg in self.received_messages[
+                            -10:
+                        ]:  # Show last 10 messages
                             timestamp = msg["Timestamp"].split("T")[1][:8]
                             topic_type = msg["Topic"].split("/")[-1]
                             print(f"   📥 [{timestamp}] {topic_type}")
                             if msg.get("Shadow Data"):
                                 shadow_summary = str(msg["Shadow Data"])[:100]
-                                print(f"      {shadow_summary}{'...' if len(str(msg['Shadow Data'])) > 100 else ''}")
+                                print(
+                                    f"      {shadow_summary}{'...' if len(str(msg['Shadow Data'])) > 100 else ''}"
+                                )
 
                 elif cmd == "debug":
                     self.show_shadow_diagnostics()
@@ -1455,13 +1634,19 @@ class DeviceShadowExplorer:
 
                 while True:
                     try:
-                        edit_choice = int(input(f"\n{get_message('select_item_to_edit').format(len(keys) + 2)}"))
+                        edit_choice = int(
+                            input(
+                                f"\n{get_message('select_item_to_edit').format(len(keys) + 2)}"
+                            )
+                        )
 
                         if 1 <= edit_choice <= len(keys):
                             # Edit existing key
                             key = keys[edit_choice - 1]
                             current_value = local_state[key]
-                            print(f"\n{get_message('editing_key').format(key, current_value)}")
+                            print(
+                                f"\n{get_message('editing_key').format(key, current_value)}"
+                            )
                             new_value = input(get_message("new_value_prompt")).strip()
 
                             if new_value:
@@ -1471,35 +1656,61 @@ class DeviceShadowExplorer:
                                         local_state[key] = new_value.lower() == "true"
                                     elif new_value.isdigit():
                                         local_state[key] = int(new_value)
-                                    elif "." in new_value and new_value.replace(".", "").isdigit():
+                                    elif (
+                                        "." in new_value
+                                        and new_value.replace(".", "").isdigit()
+                                    ):
                                         local_state[key] = float(new_value)
                                     else:
                                         local_state[key] = new_value
-                                    print(get_message("updated_key").format(key, local_state[key]))
+                                    print(
+                                        get_message("updated_key").format(
+                                            key, local_state[key]
+                                        )
+                                    )
                                 except (ValueError, TypeError):
                                     local_state[key] = new_value
-                                    print(get_message("updated_key").format(key, local_state[key]))
+                                    print(
+                                        get_message("updated_key").format(
+                                            key, local_state[key]
+                                        )
+                                    )
 
                         elif edit_choice == len(keys) + 1:
                             # Add new key
                             new_key = input(get_message("new_key_name")).strip()
                             if new_key:
-                                new_value = input(get_message("value_for_key").format(new_key)).strip()
+                                new_value = input(
+                                    get_message("value_for_key").format(new_key)
+                                ).strip()
                                 # Try to convert to appropriate type
                                 try:
                                     if new_value.lower() in ["true", "false"]:
-                                        local_state[new_key] = new_value.lower() == "true"
+                                        local_state[new_key] = (
+                                            new_value.lower() == "true"
+                                        )
                                     elif new_value.isdigit():
                                         local_state[new_key] = int(new_value)
-                                    elif "." in new_value and new_value.replace(".", "").isdigit():
+                                    elif (
+                                        "." in new_value
+                                        and new_value.replace(".", "").isdigit()
+                                    ):
                                         local_state[new_key] = float(new_value)
                                     else:
                                         local_state[new_key] = new_value
-                                    print(get_message("added_new_key").format(new_key, local_state[new_key]))
+                                    print(
+                                        get_message("added_new_key").format(
+                                            new_key, local_state[new_key]
+                                        )
+                                    )
                                     keys.append(new_key)  # Update keys list
                                 except (ValueError, TypeError):
                                     local_state[new_key] = new_value
-                                    print(get_message("added_new_key").format(new_key, local_state[new_key]))
+                                    print(
+                                        get_message("added_new_key").format(
+                                            new_key, local_state[new_key]
+                                        )
+                                    )
                                     keys.append(new_key)
 
                         elif edit_choice == len(keys) + 2:
@@ -1544,7 +1755,9 @@ class DeviceShadowExplorer:
         # Save updated state
         if self.save_local_state(local_state):
             print(f"\n{get_message('local_state_updated_sim')}")
-            print(f"📊 {get_message('current_state')} {json.dumps(local_state, indent=2)}")
+            print(
+                f"📊 {get_message('current_state')} {json.dumps(local_state, indent=2)}"
+            )
 
             # Ask if user wants to report to shadow
             report = input(f"\n{get_message('report_updated_state')}").strip().lower()
@@ -1567,7 +1780,9 @@ class DeviceShadowExplorer:
         if self.local_state_file:
             print("\n📱 Local Device State:")
             print(f"   • State File: {self.local_state_file}")
-            print(f"   • File Exists: {'✅ Yes' if os.path.exists(self.local_state_file) else '❌ No'}")
+            print(
+                f"   • File Exists: {'✅ Yes' if os.path.exists(self.local_state_file) else '❌ No'}"
+            )
 
             if os.path.exists(self.local_state_file):
                 try:
@@ -1597,7 +1812,9 @@ class DeviceShadowExplorer:
 
         print("\n🔧 Troubleshooting:")
         print("1. Verify certificate is ACTIVE and attached to Thing")
-        print("2. Check policy allows shadow operations (iot:GetThingShadow, iot:UpdateThingShadow)")
+        print(
+            "2. Check policy allows shadow operations (iot:GetThingShadow, iot:UpdateThingShadow)"
+        )
         print("3. Ensure Thing name matches exactly")
         print("4. Check AWS IoT logs in CloudWatch (if enabled)")
 

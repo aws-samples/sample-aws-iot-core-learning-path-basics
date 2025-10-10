@@ -108,7 +108,10 @@ def validate_i18n_files(i18n_dir: Path = None) -> bool:
             continue
 
         en_keys = get_all_keys(en_data)
-        validation_results[script_file] = {"en_keys_count": len(en_keys), "languages": {}}
+        validation_results[script_file] = {
+            "en_keys_count": len(en_keys),
+            "languages": {},
+        }
 
         # Check each language
         for lang in sorted(languages):
@@ -167,7 +170,9 @@ def validate_i18n_files(i18n_dir: Path = None) -> bool:
             if status == "valid":
                 print(f"  ✅ {lang}/{script_file} - All {len(lang_keys)} keys match")
             else:
-                print(f"  ❌ {lang}/{script_file} - {len(missing_keys)} missing, {len(extra_keys)} extra")
+                print(
+                    f"  ❌ {lang}/{script_file} - {len(missing_keys)} missing, {len(extra_keys)} extra"
+                )
 
     # Print summary
     print("\n" + "=" * 60)
@@ -177,9 +182,13 @@ def validate_i18n_files(i18n_dir: Path = None) -> bool:
     for script_file, results in validation_results.items():
         print(f"\n📄 {script_file} ({results['en_keys_count']} keys in English)")
         for lang, lang_results in results["languages"].items():
-            status_icon = {"reference": "🔵", "valid": "✅", "invalid": "❌", "missing_file": "📁", "invalid_json": "🔧"}.get(
-                lang_results["status"], "❓"
-            )
+            status_icon = {
+                "reference": "🔵",
+                "valid": "✅",
+                "invalid": "❌",
+                "missing_file": "📁",
+                "invalid_json": "🔧",
+            }.get(lang_results["status"], "❓")
 
             print(f"  {status_icon} {lang}: {lang_results['keys_count']} keys", end="")
 
@@ -204,7 +213,9 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="Validate i18n JSON files")
-    parser.add_argument("--i18n-dir", type=Path, help="Path to i18n directory (default: ../i18n)")
+    parser.add_argument(
+        "--i18n-dir", type=Path, help="Path to i18n directory (default: ../i18n)"
+    )
 
     args = parser.parse_args()
 
