@@ -400,9 +400,67 @@ class MQTTWebSocketExplorer:
                         print("   ❌ Usage: pub <topic> <message>")
                         continue
                     topic = parts[1]
-                    message = "".join(parts[2:]).strip("'\"")
+                    message = " ".join(parts[2:]).strip("'\"")
                     qos = 1 if cmd == "pub1" else 0
                     self.publish_message(topic, message, qos)
+                elif cmd == "json":
+                    if len(parts) < 3:
+                        print("   ❌ Usage: json <topic> key=val key2=val2...")
+                        continue
+                    topic = parts[1]
+                    # Parse key=value pairs into JSON
+                    json_data = {}
+                    for pair in parts[2:]:
+                        if "=" in pair:
+                            key, value = pair.split("=", 1)
+                            # Try to parse as number or boolean
+                            if value.lower() == "true":
+                                json_data[key] = True
+                            elif value.lower() == "false":
+                                json_data[key] = False
+                            elif value.isdigit():
+                                json_data[key] = int(value)
+                            else:
+                                try:
+                                    json_data[key] = float(value)
+                                except ValueError:
+                                    json_data[key] = value
+                    self.publish_message(topic, json_data, 0)
+                elif cmd == "unsub":
+                    if len(parts) < 2:
+                        print("   ❌ Usage: unsub <topic>")
+                        continue
+                    topic = parts[1]
+                    print(f"   ℹ️  Unsubscribe functionality not yet implemented for WebSocket")
+                elif cmd == "test":
+                    # Send a test message
+                    test_topic = f"test/websocket/message"
+                    test_message = {
+                        "timestamp": datetime.now().isoformat(),
+                        "message": "Hello from WebSocket MQTT Explorer!",
+                        "transport": "WebSocket with SigV4",
+                    }
+                    self.publish_message(test_topic, test_message, 0)
+                elif cmd == "messages":
+                    print(f"\n📊 {get_message('message_history')}")
+                    if self.received_messages:
+                        for i, msg in enumerate(self.received_messages[-10:], 1):
+                            print(f"   {i}. {msg}")
+                    else:
+                        print("   No messages received yet")
+                elif cmd == "debug":
+                    if len(parts) > 1:
+                        topic = parts[1]
+                        print(f"\n🔍 Debug info for topic: {topic}")
+                        if topic in self.subscriptions:
+                            print(f"   Subscription exists: {self.subscriptions[topic]}")
+                        else:
+                            print(f"   Not subscribed to {topic}")
+                    else:
+                        print(f"\n🔍 {get_message('connection_diagnostics')}")
+                        print(f"   Connected: {self.connected}")
+                        print(f"   Subscriptions: {len(self.subscriptions)}")
+                        print(f"   Messages received: {len(self.received_messages)}")
                 elif cmd == "clear":
                     print("\n" * 50)
                     print(get_message("clear_screen"))

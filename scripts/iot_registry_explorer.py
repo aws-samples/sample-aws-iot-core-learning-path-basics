@@ -467,22 +467,36 @@ def main():
                             print(f"   {i}. {thing['thingName']}{thing_type}")
                         if len(things_response["things"]) > 10:
                             print(f"   ... and {len(things_response['things']) - 10} more")
+
+                        selection = input(f"\n{get_message('enter_thing_selection')}").strip()
+                        thing_name = None
+
+                        # Check if input is a number
+                        if selection.isdigit():
+                            thing_index = int(selection) - 1
+                            if 0 <= thing_index < len(things_response["things"]):
+                                thing_name = things_response["things"][thing_index]["thingName"]
+                            else:
+                                print(f"{get_message('invalid_selection')} 1-{len(things_response['things'])}")
+                        else:
+                            # Treat as thing name
+                            thing_name = selection
+
+                        if thing_name:
+                            safe_api_call(
+                                iot.describe_thing,
+                                "describe_thing",
+                                description=get_message("api_desc_describe_thing"),
+                                explanation=get_message("api_explain_describe_thing"),
+                                debug=debug_mode,
+                                thingName=thing_name,
+                            )
                     else:
                         print(f"\n{get_message('no_things_found')}")
                 except Exception as e:
                     print(f"\n{get_message('could_not_list_things')} {str(e)}")
 
-                thing_name = input(f"\n{get_message('enter_thing_name')}").strip()
-                if thing_name:
-                    safe_api_call(
-                        iot.describe_thing,
-                        "describe_thing",
-                        description=get_message("api_desc_describe_thing"),
-                        explanation=get_message("api_explain_describe_thing"),
-                        debug=debug_mode,
-                        thingName=thing_name,
-                    )
-                    input(f"\n{get_message('return_to_menu')}")
+                input(f"\n{get_message('return_to_menu')}")
 
             elif choice == "6":
                 print_learning_moment("describe_thing_group")

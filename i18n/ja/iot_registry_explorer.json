@@ -65,7 +65,7 @@
   "available_things": "📋 利用可能なThings",
   "available_groups": "📋 利用可能なThing Groups",
   "available_types": "📋 利用可能なThing Types",
-  "enter_thing_name": "Thing名を入力: ",
+  "enter_thing_selection": "番号またはThing名を入力: ",
   "enter_group_selection": "番号またはThing Group名を入力: ",
   "enter_type_selection": "番号またはThing Type名を入力: ",
   "no_things_found": "⚠️ アカウントにThingsが見つかりません",

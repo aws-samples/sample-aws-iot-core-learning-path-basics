@@ -65,7 +65,7 @@
   "available_things": "📋 可用的 Things",
   "available_groups": "📋 可用的 Thing Groups",
   "available_types": "📋 可用的 Thing Types",
-  "enter_thing_name": "输入 Thing 名称: ",
+  "enter_thing_selection": "输入编号或 Thing 名称: ",
   "enter_group_selection": "输入编号或 Thing Group 名称: ",
   "enter_type_selection": "输入编号或 Thing Type 名称: ",
   "no_things_found": "⚠️ 在您的账户中未找到 Things",

@@ -65,7 +65,7 @@
     "available_things": "📋 Available Things",
     "available_groups": "📋 Available Thing Groups",
     "available_types": "📋 Available Thing Types",
-    "enter_thing_name": "Enter Thing name: ",
+    "enter_thing_selection": "Enter number or Thing name: ",
     "enter_group_selection": "Enter number or Thing Group name: ",
     "enter_type_selection": "Enter number or Thing Type name: ",
     "no_things_found": "⚠️ No Things found in your account",
