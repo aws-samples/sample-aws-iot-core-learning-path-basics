@@ -141,7 +141,7 @@
     },
     "describe_endpoint": {
       "title": "Describe Endpoint - Descoberta de Conexão",
-      "content": "Endpoints IoT são as URLs de gateway que os dispositivos usam para se conectar ao AWS IoT Core. Diferentes tipos de endpoint servem diferentes propósitos: Data-ATS para comunicação de dispositivos, CredentialProvider para autenticação e Jobs para gerenciamento de dispositivos. Compreender endpoints é crucial para configuração de conectividade de dispositivos.",
+      "content": "Endpoints IoT são as URLs de gateway que os dispositivos usam para se conectar ao AWS IoT Core. Diferentes tipos de endpoint servem diferentes propósitos: Data-ATS para comunicação de dispositivos, CredentialProvider para autenticação e AWS IoT Jobs para gerenciamento de dispositivos. Compreender endpoints é crucial para configuração de conectividade de dispositivos.",
       "next": "Descobriremos a URL do endpoint para conexões de dispositivos"
     }
   },

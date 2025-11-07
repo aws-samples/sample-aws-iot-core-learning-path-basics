@@ -1,6 +1,6 @@
 # Guia de Solução de Problemas
 
-Este documento fornece orientação abrangente de solução de problemas para o projeto de aprendizagem Amazon Web Services (AWS) IoT Core - Básicos.
+Este documento fornece orientação abrangente de solução de problemas para o projeto de aprendizagem Amazon Web Services (AWS) AWS IoT Core - Básicos.
 
 ## Índice
 
@@ -13,7 +13,7 @@ Este documento fornece orientação abrangente de solução de problemas para o 
 - [Problemas de Conexão MQTT](#problemas-de-conexão-mqtt)
   - [Problemas MQTT Baseado em Certificado](#problemas-mqtt-baseado-em-certificado)
   - [Problemas MQTT WebSocket](#problemas-mqtt-websocket)
-- [Problemas de Device Shadow](#problemas-de-device-shadow)
+- [Problemas de AWS IoT Device Shadow service](#problemas-de-device-shadow)
   - [Problemas de Conexão Shadow](#problemas-de-conexão-shadow)
   - [Problemas de Arquivo de Estado Shadow](#problemas-de-arquivo-de-estado-shadow)
 - [Problemas do Rules Engine](#problemas-do-rules-engine)
@@ -31,7 +31,7 @@ Este documento fornece orientação abrangente de solução de problemas para o 
 - [Obtendo Ajuda Adicional](#obtendo-ajuda-adicional)
   - [Uso do Modo Debug](#uso-do-modo-debug)
   - [Verificação do Console AWS IoT](#verificação-do-console-aws-iot)
-  - [CloudWatch Logs](#cloudwatch-logs)
+  - [Amazon CloudWatch Logs](#cloudwatch-logs)
   - [Passos Comuns de Resolução](#passos-comuns-de-resolução)
   - [Recursos de Suporte](#recursos-de-suporte)
 
@@ -186,7 +186,7 @@ pip install --upgrade certifi
 
 ### Problemas de Permissão
 
-#### Permissões AWS Identity and Access Management (IAM)
+#### Permissões AWS Identity and Access Management (AWS IAM)
 
 **Permissões Necessárias para Scripts de Aprendizagem:**
 ```json
@@ -263,12 +263,12 @@ pip install --upgrade certifi
 **Erros Comuns de Permissão:**
 
 **Problema: "User is not authorized to perform: iot:CreateThing"**
-- **Causa**: Permissões IAM insuficientes
-- **Solução**: Adicionar permissões IoT ao seu usuário/função IAM
+- **Causa**: Permissões AWS IAM insuficientes
+- **Solução**: Adicionar permissões IoT ao seu usuário/função AWS IAM
 
-**Problema: "Access Denied" ao criar funções IAM**
-- **Causa**: Permissões IAM ausentes para Rules Engine
-- **Solução**: Adicionar permissões IAM ou usar função existente
+**Problema: "Access Denied" ao criar funções AWS IAM**
+- **Causa**: Permissões AWS IAM ausentes para Rules Engine
+- **Solução**: Adicionar permissões AWS IAM ou usar função existente
 
 ### Problemas de Certificado
 
@@ -442,7 +442,7 @@ python mqtt_websocket_explorer.py --debug
   aws sts get-caller-identity
   ```
 
-### Problemas de Device Shadow
+### Problemas de AWS IoT Device Shadow service
 
 #### Problemas de Conexão Shadow
 
@@ -499,8 +499,8 @@ python mqtt_websocket_explorer.py --debug
 
 #### Problemas de Criação de Regra
 
-**Problema: Falha na criação de função IAM**
-- **Causas**: Permissões IAM insuficientes, função já existe
+**Problema: Falha na criação de função AWS IAM**
+- **Causas**: Permissões AWS IAM insuficientes, função já existe
 - **Soluções**:
   ```bash
   # Verificar se função existe
@@ -662,17 +662,17 @@ python nome_do_script.py --debug
 ### Verificação do Console AWS IoT
 
 **Verificar recursos no Console AWS:**
-1. **Things**: IoT Core → Gerenciar → Things
-2. **Certificados**: IoT Core → Proteger → Certificados
-3. **Políticas**: IoT Core → Proteger → Políticas
-4. **Regras**: IoT Core → Agir → Regras
+1. **Things**: AWS IoT Core → Gerenciar → Things
+2. **Certificados**: AWS IoT Core → Proteger → Certificados
+3. **Políticas**: AWS IoT Core → Proteger → Políticas
+4. **Regras**: AWS IoT Core → Agir → Regras
 
 ### Amazon CloudWatch Logs
 
 **Habilitar logging IoT para debug de produção:**
-1. Ir para IoT Core → Configurações
+1. Ir para AWS IoT Core → Configurações
 2. Habilitar logging com nível de log apropriado
-3. Verificar CloudWatch Logs para informações detalhadas de erro
+3. Verificar Amazon CloudWatch Logs para informações detalhadas de erro
 
 ### Passos Comuns de Resolução
 

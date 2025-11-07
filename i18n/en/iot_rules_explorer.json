@@ -18,7 +18,7 @@
   "debug_enabled": "🔍 DEBUG MODE ENABLED",
   "debug_features": [
     "• Enhanced AWS IoT API logging",
-    "• Detailed rule payload and IAM operations", 
+    "• Detailed rule payload and AWS IAM operations", 
     "• Extended error diagnostics"
   ],
   "tip": "💡 Tip: Use --debug or -d flag for enhanced logging",
@@ -38,7 +38,7 @@
   "learning_moments": {
     "rules_foundation": {
       "title": "📚 LEARNING MOMENT: IoT Rules Engine",
-      "content": "The AWS IoT Rules Engine processes and routes messages from your devices using SQL-like queries. Rules can filter, transform, and route messages to various AWS services like Lambda, DynamoDB, or S3. This enables real-time data processing, alerting, and integration with your broader AWS architecture without requiring device-side logic changes.",
+      "content": "The AWS IoT Rules Engine processes and routes messages from your devices using SQL-like queries. Rules can filter, transform, and route messages to various AWS services like AWS Lambda, Amazon DynamoDB, or Amazon S3. This enables real-time data processing, alerting, and integration with your broader AWS architecture without requiring device-side logic changes.",
       "next": "We will create and manage IoT rules for message processing"
     },
     "rules_inventory": {
@@ -88,13 +88,13 @@
   "feature_republish_actions": "• Republish actions and IAM role configuration", 
   "feature_lifecycle": "• Rule lifecycle management (create, enable, disable, delete)",
   "learning_moment_title": "📚 LEARNING MOMENT: IoT Rules Engine",
-  "learning_moment_description": "The AWS IoT Rules Engine processes and routes messages from your devices using SQL-like queries. Rules can filter, transform, and route messages to various AWS services like Lambda, DynamoDB, or S3. This enables real-time data processing, alerting, and integration with your broader AWS architecture without requiring device-side logic changes.",
+  "learning_moment_description": "The AWS IoT Rules Engine processes and routes messages from your devices using SQL-like queries. Rules can filter, transform, and route messages to various AWS services like AWS Lambda, Amazon DynamoDB, or Amazon S3. This enables real-time data processing, alerting, and integration with your broader AWS architecture without requiring device-side logic changes.",
   "next_action": "🔄 NEXT: We will create and manage IoT rules for message processing",
   "press_enter_continue": "Press Enter to continue...",
   "debug_mode_enabled": "🔍 DEBUG MODE ENABLED",
   "debug_features_list": [
     "• Enhanced AWS IoT API logging",
-    "• Detailed rule payload and IAM operations",
+    "• Detailed rule payload and AWS IAM operations",
     "• Extended error diagnostics"
   ],
   "debug_tip": "💡 Tip: Use --debug or -d flag for enhanced logging",
@@ -212,8 +212,8 @@
   "republish_config_title": "📤 Republish Action Configuration",
   "enter_target_topic": "Enter target topic for republishing (e.g., 'processed/temperature'): ",
   "default_target_topic": "✅ Using default target topic: {topic}",
-  "iam_role_setup": "🔑 Setting up IAM Role for Rule Actions",
-  "iam_role_failed": "❌ Failed to create/verify IAM role. Cannot create rule.",
+  "iam_role_setup": "🔑 Setting up AWS IAM Role for Rule Actions",
+  "iam_role_failed": "❌ Failed to create/verify AWS IAM role. Cannot create rule.",
   "creating_rule": "🔧 Creating IoT Rule...",
   "debug_rule_payload": "🔍 DEBUG: Rule payload:",
   "create_rule_attempt": "Create IoT Rule '{name}' (attempt {attempt}/{max_attempts})",

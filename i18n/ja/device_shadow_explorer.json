@@ -8,7 +8,7 @@
     "aws_credentials_reminder": "   AWS 認証情報が設定されていることを確認してください",
     "description_intro": "このスクリプトは AWS IoT Device Shadow の概念を教えます：",
     "shadow_concepts": [
-        "• 状態同期のための Device Shadow サービス",
+        "• 状態同期のための AWS IoT Device Shadow service",
         "• Shadow ドキュメント構造（期待状態 vs 報告状態）",
         "• Shadow 操作のための MQTT トピック",
         "• 状態差異のためのデルタメッセージ",
@@ -24,7 +24,7 @@
     "tip": "💡 ヒント：拡張 Shadow ログには --debug または -d フラグを使用",
     "press_enter": "Enter キーを押して続行...",
     "goodbye": "👋 さようなら！",
-    "main_menu": "📋 Device Shadow 操作：",
+    "main_menu": "📋 AWS IoT Device Shadow service 操作：",
     "menu_options": [
         "1. デバイスに接続して Shadow トピックを購読",
         "2. 現在の Shadow ドキュメントを取得",
@@ -38,13 +38,13 @@
     "invalid_choice": "❌ 無効な選択です。1-7 を選択してください。",
     "learning_moments": {
         "shadow_foundation": {
-            "title": "📚 学習ポイント：Device Shadow の基礎",
-            "content": "AWS IoT Device Shadow は、デバイスの現在の状態情報を保存および取得する JSON ドキュメントです。Shadow はデバイスとアプリケーション間の仲介役として機能し、デバイスがオフラインでも信頼性の高い通信を可能にします。Shadow の概念を理解することは、堅牢な IoT アプリケーションを構築するために不可欠です。",
+            "title": "📚 学習ポイント：AWS IoT Device Shadow service の基礎",
+            "content": "AWS IoT Device Shadow service は、デバイスの現在の状態情報を保存および取得する JSON ドキュメントです。Shadow はデバイスとアプリケーション間の仲介役として機能し、デバイスがオフラインでも信頼性の高い通信を可能にします。Shadow の概念を理解することは、堅牢な IoT アプリケーションを構築するために不可欠です。",
             "next": "Shadow 操作と MQTT 通信を探索します"
         },
         "shadow_connection": {
             "title": "📚 学習ポイント：Shadow MQTT 接続",
-            "content": "Device Shadow は通信に MQTT トピックを使用します。各 Shadow 操作（get、update、delete）には対応する accepted/rejected 応答トピックがあります。期待状態が報告状態と異なる場合、デルタトピックが通知します。この pub/sub モデルにより、デバイスとアプリケーション間のリアルタイム双方向通信が可能になります。",
+            "content": "AWS IoT Device Shadow service は通信に MQTT トピックを使用します。各 Shadow 操作（get、update、delete）には対応する accepted/rejected 応答トピックがあります。期待状態が報告状態と異なる場合、デルタトピックが通知します。この pub/sub モデルにより、デバイスとアプリケーション間のリアルタイム双方向通信が可能になります。",
             "next": "MQTT 接続を確立し、Shadow トピックを購読します"
         },
         "shadow_document": {

@@ -9,7 +9,7 @@ Este documento fornece exemplos detalhados e fluxos de trabalho completos para o
 - [Exemplos do Explorador de API do Registro IoT](#exemplos-do-explorador-de-api-do-registro-iot)
 - [Exemplos do Gerenciador de Certificados](#exemplos-do-gerenciador-de-certificados)
 - [Exemplos de Comunicação MQTT](#exemplos-de-comunicação-mqtt)
-- [Exemplos de Device Shadow](#exemplos-de-device-shadow)
+- [Exemplos de AWS IoT Device Shadow service](#exemplos-de-device-shadow)
 - [Exemplos do Rules Engine](#exemplos-do-rules-engine)
 - [Exemplos de Limpeza](#exemplos-de-limpeza)
 - [Exemplos de Tratamento de Erros](#exemplos-de-tratamento-de-erros)
@@ -362,7 +362,7 @@ Comandos disponíveis:
 ======================================================================
 ```
 
-## Exemplos de Device Shadow
+## Exemplos de AWS IoT Device Shadow service
 
 ### Sincronização de Estado Shadow
 

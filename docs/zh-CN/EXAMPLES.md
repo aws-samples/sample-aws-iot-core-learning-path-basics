@@ -19,7 +19,7 @@
 - [MQTT 通信示例](#mqtt-通信示例)
   - [基于证书的 MQTT 会话](#基于证书的-mqtt-会话)
   - [WebSocket MQTT 会话](#websocket-mqtt-会话)
-- [Device Shadow 示例](#device-shadow-示例)
+- [AWS IoT Device Shadow service 示例](#device-shadow-示例)
   - [影子状态同步](#影子状态同步)
 - [Rules Engine 示例](#rules-engine-示例)
   - [规则创建工作流程](#规则创建工作流程)
@@ -576,7 +576,7 @@ MIIDQTCCAimgAwIBAgIJAK1234567890...
 [等待事件...]
 ```
 
-## Device Shadow 示例
+## AWS IoT Device Shadow service 示例
 
 ### 影子状态同步
 
@@ -1118,14 +1118,14 @@ SELECT *, topic(2) as deviceId FROM 'vehicles/+/telemetry' WHERE temperature > 3
 1. **设备管理**: 创建和管理 IoT Things、Types 和 Groups
 2. **安全性**: X.509 证书和 IoT 策略管理
 3. **通信**: MQTT 发布/订阅模式
-4. **状态同步**: Device Shadow 操作
+4. **状态同步**: AWS IoT Device Shadow service 操作
 5. **消息处理**: Rules Engine 和 SQL 过滤
 6. **最佳实践**: 资源生命周期管理
 
 ### 后续步骤
 
-- 探索高级 IoT 功能（Jobs、Fleet Provisioning）
-- 与其他 AWS 服务集成（Lambda、DynamoDB、SNS）
+- 探索高级 IoT 功能（AWS IoT Jobs、Fleet Provisioning）
+- 与其他 AWS 服务集成（AWS Lambda、Amazon DynamoDB、Amazon SNS）
 - 构建端到端 IoT 解决方案
 - 实施生产就绪的安全实践
 - 优化成本和性能

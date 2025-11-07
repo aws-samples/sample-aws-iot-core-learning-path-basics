@@ -9,7 +9,7 @@ Este documento proporciona documentación completa para todos los scripts de apr
 - [Explorador de API del Registro IoT](#explorador-de-api-del-registro-iot)
 - [Gestor de Certificados y Políticas](#gestor-de-certificados-y-políticas)
 - [Comunicación MQTT](#comunicación-mqtt)
-- [Explorador de Device Shadow](#explorador-de-device-shadow)
+- [Explorador de AWS IoT Device Shadow service](#explorador-de-device-shadow)
 - [Explorador del Motor de Reglas IoT](#explorador-del-motor-de-reglas-iot)
 
 ## Explorador de API del Registro IoT
@@ -105,7 +105,8 @@ Seleccionar operación (1-9):
 - **Propósito**: Obtener URLs de endpoint IoT para tu cuenta
 - **HTTP**: `GET /endpoint`
 - **Opciones de Entrada**: Tipo de endpoint (iot:Data-ATS, iot:CredentialProvider, iot:Jobs)
-- **Aprender**: Diferentes tipos de endpoint y sus propósitos
+- **Aprender**: Diferentes tipos de endpoint y sus propósitos (iot:Jobs es para AWS IoT Jobs service)
+- **Salida**: URL de endpoint HTTPS para conexiones de dispositivos
 - **Salida**: URL de endpoint HTTPS para conexiones de dispositivos
 
 ### Características de Aprendizaje
@@ -237,7 +238,7 @@ Una vez conectado, usa estos comandos:
 📡 MQTT> quit                                      # Salir del cliente
 ```
 
-## Explorador de Device Shadow
+## Explorador de AWS IoT Device Shadow service
 
 ### Propósito
 Aprender el servicio AWS IoT Device Shadow a través de exploración práctica de sincronización de estado de dispositivos. Este script enseña el ciclo de vida completo del shadow: estado deseado, estado reportado y procesamiento delta.
@@ -321,7 +322,7 @@ Una vez conectado, usa estos comandos:
 ## Explorador del Motor de Reglas IoT
 
 ### Propósito
-Aprender el Motor de Reglas de AWS IoT a través de creación y gestión práctica de reglas. Este script enseña enrutamiento de mensajes, filtrado basado en SQL y configuración de acciones con configuración automática de roles IAM.
+Aprender el Motor de Reglas de AWS IoT a través de creación y gestión práctica de reglas. Este script enseña enrutamiento de mensajes, filtrado basado en SQL y configuración de acciones con configuración automática de roles AWS IAM.
 
 ### Cómo Ejecutar
 
@@ -330,13 +331,13 @@ Aprender el Motor de Reglas de AWS IoT a través de creación y gestión prácti
 python scripts/iot_rules_explorer.py
 ```
 
-**Con Modo Debug (operaciones detalladas de API e IAM):**
+**Con Modo Debug (operaciones detalladas de API e AWS IAM):**
 ```bash
 python scripts/iot_rules_explorer.py --debug
 ```
 
 ### Prerrequisitos
-- **Credenciales AWS** - Permisos IAM para Reglas IoT y gestión de roles IAM
+- **Credenciales AWS** - Permisos AWS IAM para Reglas IoT y gestión de roles AWS IAM
 - **No se necesitan certificados** - El Motor de Reglas opera a nivel de servicio
 
 ### Características Clave de Aprendizaje
@@ -346,8 +347,8 @@ python scripts/iot_rules_explorer.py --debug
 1. **Nomenclatura de Reglas** - Aprender convenciones de nomenclatura y requisitos de unicidad
 2. **Selección de Tipo de Evento** - Elegir entre tipos de eventos IoT comunes o personalizados
 3. **Construcción de Declaración SQL** - Construcción interactiva de cláusulas SELECT, FROM, WHERE
-4. **Configuración de Acciones** - Configurar objetivos de republicación con roles IAM apropiados
-5. **Configuración Automática de IAM** - El script crea y configura permisos necesarios
+4. **Configuración de Acciones** - Configurar objetivos de republicación con roles AWS IAM apropiados
+5. **Configuración Automática de AWS IAM** - El script crea y configura permisos necesarios
 
 #### Ejemplos Completos de SQL
 **Monitoreo de Temperatura:**
@@ -371,13 +372,13 @@ FROM 'testRulesEngineTopic/+/motion'
 WHERE value = 'detected'
 ```
 
-### Configuración Automática de IAM
+### Configuración Automática de AWS IAM
 
-#### Creación de Rol IAM
+#### Creación de Rol AWS IAM
 **Configuración Automática:**
 - Crea `IoTRulesEngineRole` si no existe
 - Configura política de confianza para `iot.amazonaws.com`
 - Adjunta permisos necesarios para acciones de republicación
-- Maneja retrasos de consistencia eventual de IAM
+- Maneja retrasos de consistencia eventual de AWS IAM
 
 **📚 Aprender Más**: [Motor de Reglas de AWS IoT](https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html) | [Referencia SQL del Motor de Reglas](https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html)

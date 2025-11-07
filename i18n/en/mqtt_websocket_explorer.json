@@ -20,7 +20,7 @@
   "credentials_methods": [
     "• AWS CLI: aws configure",
     "• Environment variables: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY",
-    "• IAM roles (if running on EC2)"
+    "• IAM roles (if running on Amazon EC2)"
   ],
   "aws_credentials_sigv4": "🔐 AWS Credentials for SigV4 Authentication",
   "access_key": "Access Key",
@@ -120,7 +120,7 @@
   "troubleshooting_unknown": "💡 Troubleshooting: Unknown subscription failure",
   "unknown_causes": [
     "• Run 'debug {}' command for detailed diagnostics",
-    "• Check AWS IoT logs in CloudWatch if enabled"
+    "• Check AWS IoT logs in Amazon CloudWatch if enabled"
   ],
   "publishing_message_websocket": "📤 Publishing Message (WebSocket)",
   "published_websocket": "✅ [{}] PUBLISHED via WebSocket",

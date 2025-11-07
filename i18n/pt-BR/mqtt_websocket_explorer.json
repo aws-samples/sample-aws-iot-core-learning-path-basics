@@ -20,7 +20,7 @@
   "credentials_methods": [
     "• AWS CLI: aws configure",
     "• Variáveis de ambiente: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY",
-    "• Funções IAM (se executando no EC2)"
+    "• Funções AWS IAM (se executando no Amazon EC2)"
   ],
   "aws_credentials_sigv4": "🔐 Credenciais AWS para Autenticação SigV4",
   "access_key": "Chave de Acesso",
@@ -102,8 +102,8 @@
   "troubleshooting_auth": "💡 Solução de Problemas: Autorização falhou",
   "auth_causes": [
     "• Credenciais AWS podem ser inválidas ou expiradas",
-    "• Política IAM pode não permitir ação 'iot:Subscribe'",
-    "• Verifique permissões do usuário/função IAM"
+    "• Política AWS IAM pode não permitir ação 'iot:Subscribe'",
+    "• Verifique permissões do usuário/função AWS IAM"
   ],
   "troubleshooting_invalid_topic": "💡 Solução de Problemas: Formato de tópico inválido",
   "invalid_topic_causes": [
@@ -120,7 +120,7 @@
   "troubleshooting_unknown": "💡 Solução de Problemas: Falha de inscrição desconhecida",
   "unknown_causes": [
     "• Execute comando 'debug {}' para diagnósticos detalhados",
-    "• Verifique logs AWS IoT no CloudWatch se habilitado"
+    "• Verifique logs AWS IoT no Amazon CloudWatch se habilitado"
   ],
   "publishing_message_websocket": "📤 Publicando Mensagem (WebSocket)",
   "published_websocket": "✅ [{}] PUBLICADO via WebSocket",

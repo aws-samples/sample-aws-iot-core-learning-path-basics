@@ -1,6 +1,6 @@
 # 故障排除指南
 
-本文档为 Amazon Web Services (AWS) IoT Core - 基础学习项目提供全面的故障排除指导。
+本文档为 Amazon Web Services (AWS) AWS IoT Core - 基础学习项目提供全面的故障排除指导。
 
 ## 目录
 
@@ -13,7 +13,7 @@
 - [MQTT 连接问题](#mqtt-连接问题)
   - [基于证书的 MQTT 问题](#基于证书的-mqtt-问题)
   - [WebSocket MQTT 问题](#websocket-mqtt-问题)
-- [Device Shadow 问题](#device-shadow-问题)
+- [AWS IoT Device Shadow service 问题](#device-shadow-问题)
   - [Shadow 连接问题](#shadow-连接问题)
   - [Shadow 状态文件问题](#shadow-状态文件问题)
 - [Rules Engine 问题](#rules-engine-问题)
@@ -31,7 +31,7 @@
 - [获取额外帮助](#获取额外帮助)
   - [使用调试模式](#使用调试模式)
   - [AWS IoT 控制台检查](#aws-iot-控制台检查)
-  - [CloudWatch 日志](#cloudwatch-日志)
+  - [Amazon CloudWatch 日志](#cloudwatch-日志)
   - [通用解决步骤](#通用解决步骤)
   - [支持资源](#支持资源)
 
@@ -181,7 +181,7 @@ pip install --upgrade awsiotsdk>=1.11.0
 
 ### 权限问题
 
-#### 检查 IAM 权限
+#### 检查 AWS IAM 权限
 您的 AWS 用户或角色需要以下权限：
 
 **基本 IoT 权限:**
@@ -211,8 +211,8 @@ pip install --upgrade awsiotsdk>=1.11.0
 - **解决方案**: 将 IoT 权限添加到您的 IAM 用户/角色
 
 **问题: "User is not authorized to perform: iam:CreateRole"**
-- **原因**: Rules Engine 脚本需要 IAM 权限
-- **解决方案**: 添加 IAM 权限或跳过 Rules Engine 脚本
+- **原因**: Rules Engine 脚本需要 AWS IAM 权限
+- **解决方案**: 添加 AWS IAM 权限或跳过 Rules Engine 脚本
 
 ### 证书问题
 
@@ -310,7 +310,7 @@ aws iam get-user
   2. 刷新 AWS 凭证
   3. 检查区域设置
 
-## Device Shadow 问题
+## AWS IoT Device Shadow service 问题
 
 ### Shadow 连接问题
 
@@ -327,8 +327,8 @@ python scripts/setup_sample_data.py
 ```
 
 **问题: "Access denied to shadow"**
-- **原因**: 缺少 Device Shadow 权限
-- **解决方案**: 添加 Shadow 权限到您的 IAM 策略
+- **原因**: 缺少 AWS IoT Device Shadow service 权限
+- **解决方案**: 添加 Shadow 权限到您的 AWS IAM 策略
 ```json
 {
   "Effect": "Allow",
@@ -370,9 +370,9 @@ SELECT * FROM 'topic/+/data' WHERE temperature > 25
 SELECT * FROM topic/+/data WHERE temperature > 25  -- 错误
 ```
 
-**问题: "IAM role creation failed"**
-- **原因**: 缺少 IAM 权限
-- **解决方案**: 添加 IAM 权限或手动创建角色
+**问题: "AWS IAM role creation failed"**
+- **原因**: 缺少 AWS IAM 权限
+- **解决方案**: 添加 AWS IAM 权限或手动创建角色
 
 ### 规则测试问题
 
@@ -495,9 +495,9 @@ python scripts/<script_name>.py --debug
 3. **策略**: 检查策略文档和附加
 4. **规则**: 验证规则配置和状态
 
-### CloudWatch 日志
+### Amazon CloudWatch 日志
 
-检查 CloudWatch 日志以获得额外见解：
+检查 Amazon CloudWatch 日志以获得额外见解：
 ```bash
 # 使用 AWS CLI 检查日志
 aws logs describe-log-groups --log-group-name-prefix "/aws/iot"
@@ -520,7 +520,7 @@ aws logs get-log-events --log-group-name "/aws/iot/rules" --log-stream-name "you
 3. **检查 AWS 控制台**:
    - 验证资源存在
    - 检查权限和策略
-   - 查看 CloudWatch 日志
+   - 查看 Amazon CloudWatch 日志
 
 4. **网络故障排除**:
    - 测试连接性

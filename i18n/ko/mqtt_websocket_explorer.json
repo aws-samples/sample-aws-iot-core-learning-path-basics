@@ -20,7 +20,7 @@
   "credentials_methods": [
     "• AWS CLI: aws configure",
     "• 환경 변수: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY",
-    "• IAM 역할 (EC2에서 실행하는 경우)"
+    "• AWS IAM 역할 (Amazon EC2에서 실행하는 경우)"
   ],
   "aws_credentials_sigv4": "🔐 SigV4 인증을 위한 AWS 자격 증명",
   "access_key": "액세스 키",

@@ -19,7 +19,7 @@ This document provides detailed examples and complete workflows for the AWS IoT 
 - [MQTT Communication Examples](#mqtt-communication-examples)
   - [Certificate-Based MQTT Session](#certificate-based-mqtt-session)
   - [WebSocket MQTT Session](#websocket-mqtt-session)
-- [Device Shadow Examples](#device-shadow-examples)
+- [AWS IoT Device Shadow service Examples](#device-shadow-examples)
   - [Shadow State Synchronization](#shadow-state-synchronization)
 - [Rules Engine Examples](#rules-engine-examples)
   - [Rule Creation Workflow](#rule-creation-workflow)
@@ -588,13 +588,13 @@ Available commands:
    💬 Message: High temperature detected
 ```
 
-## Device Shadow Examples
+## AWS IoT Device Shadow service Examples
 
 ### Shadow State Synchronization
 
 **Initial Shadow Setup:**
 ```
-🌟 Device Shadow Explorer
+🌟 AWS IoT Device Shadow service Explorer
 =========================
 🔍 Discovering Things with certificates...
 ✅ Selected Thing: Vehicle-VIN-001
@@ -824,24 +824,24 @@ WHERE value > 30
 
 🎯 Action Configuration:
 📤 Republish target topic: processed/temperature
-🔑 IAM Role: IoTRulesEngineRole (will be created if needed)
+🔑 AWS IAM Role: IoTRulesEngineRole (will be created if needed)
 
 Confirm rule creation? (y/N): y
 ```
 
-**Automatic IAM Setup:**
+**Automatic AWS IAM Setup:**
 ```
-🔧 Setting up IAM role for Rules Engine...
+🔧 Setting up AWS IAM role for Rules Engine...
 🔍 Checking if role 'IoTRulesEngineRole' exists...
 ❌ Role not found, creating new role...
 
-🔄 Creating IAM role 'IoTRulesEngineRole'...
-✅ IAM role created successfully
+🔄 Creating AWS IAM role 'IoTRulesEngineRole'...
+✅ AWS IAM role created successfully
 
 🔄 Attaching policy to role...
 ✅ Policy attached successfully
 
-⏳ Waiting for IAM eventual consistency (5 seconds)...
+⏳ Waiting for AWS IAM eventual consistency (5 seconds)...
 
 🔄 Creating IoT Rule 'TemperatureAlert'...
 ✅ Rule 'TemperatureAlert' created successfully!
@@ -1053,7 +1053,7 @@ Certificate files not found for Thing: Vehicle-VIN-001
 ❌ Error: AccessDeniedException - User is not authorized to perform: iot:CreateThing
 
 💡 Solution:
-Your AWS credentials need IoT permissions. Add this policy to your IAM user:
+Your AWS credentials need IoT permissions. Add this policy to your AWS IAM user:
 {
   "Version": "2012-10-17",
   "Statement": [{

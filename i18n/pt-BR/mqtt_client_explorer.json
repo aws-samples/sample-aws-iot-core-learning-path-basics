@@ -184,7 +184,7 @@
     "troubleshooting_unknown": "💡 Solução de Problemas: Falha de assinatura desconhecida",
     "unknown_reasons": [
         "   • Execute o comando 'debug {}' para diagnósticos detalhados",
-        "   • Verifique os logs AWS IoT no CloudWatch se habilitado"
+        "   • Verifique os logs AWS IoT no Amazon CloudWatch se habilitado"
     ],
     "publishing_message": "📤 Publicando Mensagem",
     "content_type_label": "Content-Type",

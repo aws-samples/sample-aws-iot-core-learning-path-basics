@@ -31,15 +31,15 @@ This document provides comprehensive documentation for all learning scripts in t
   - [Certificate-Based MQTT Client](#certificate-based-mqtt-client)
   - [WebSocket MQTT Client](#websocket-mqtt-client)
   - [MQTT Protocol Learning](#mqtt-protocol-learning)
-- [Device Shadow Explorer](#device-shadow-explorer)
+- [AWS IoT Device Shadow service Explorer](#device-shadow-explorer)
   - [Purpose](#purpose-3)
   - [How to Run](#how-to-run-2)
   - [Prerequisites](#prerequisites)
-  - [Interactive Device Shadow Learning](#interactive-device-shadow-learning)
+  - [Interactive AWS IoT Device Shadow service Learning](#interactive-device-shadow-learning)
   - [Key Learning Features](#key-learning-features)
   - [Shadow Message Analysis](#shadow-message-analysis)
   - [Learning Scenarios](#learning-scenarios)
-  - [Required IAM Permissions](#required-iam-permissions)
+  - [Required AWS IAM Permissions](#required-iam-permissions)
 - [IoT Rules Engine Explorer](#iot-rules-engine-explorer)
   - [Purpose](#purpose-4)
   - [How to Run](#how-to-run-3)
@@ -47,10 +47,10 @@ This document provides comprehensive documentation for all learning scripts in t
   - [Interactive Rules Engine Learning](#interactive-rules-engine-learning)
   - [Key Learning Features](#key-learning-features-1)
   - [Rule Management Features](#rule-management-features)
-  - [Automatic IAM Configuration](#automatic-iam-configuration)
+  - [Automatic AWS IAM Configuration](#automatic-iam-configuration)
   - [Testing Your Rules](#testing-your-rules)
   - [Learning Scenarios](#learning-scenarios-1)
-  - [Required IAM Permissions](#required-iam-permissions-1)
+  - [Required AWS IAM Permissions](#required-iam-permissions-1)
 
 ## IoT Registry API Explorer
 
@@ -151,7 +151,7 @@ Select operation (1-9):
 #### 8. Describe Endpoint
 - **Purpose**: Get IoT endpoint URLs for your account
 - **HTTP**: `GET /endpoint`
-- **Input Options**: Endpoint type (iot:Data-ATS, iot:Data, iot:CredentialProvider, iot:Jobs)
+- **Input Options**: Endpoint type (iot:Data-ATS, iot:Data, iot:CredentialProvider, iot:Jobs for AWS IoT Jobs service)
 - **Learn**: Different endpoint types and their purposes
 - **Output**: HTTPS endpoint URL for device connections
 - **📚 API Reference**: [DescribeEndpoint](https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeEndpoint.html)
@@ -540,7 +540,7 @@ The script handles and explains common security errors:
 - **Certificate already exists** - How to handle duplicates
 - **Thing not found** - Device discovery issues
 - **Policy name conflicts** - Naming strategy solutions
-- **Permission denied** - IAM permission troubleshooting
+- **Permission denied** - AWS IAM permission troubleshooting
 - **Invalid policy JSON** - Syntax error resolution
 
 ## MQTT Communication
@@ -670,8 +670,8 @@ python mqtt_websocket_explorer.py --debug
 
 #### Prerequisites
 - **AWS Credentials** - Access Key and Secret Key configured
-- **IAM Permissions** - IoT connect, publish, subscribe permissions
-- **No certificates needed** - Uses IAM authentication instead
+- **AWS IAM Permissions** - IoT connect, publish, subscribe permissions
+- **No certificates needed** - Uses AWS IAM authentication instead
 
 **⚠️ Production Note**: Direct AWS credential usage shown here is for learning purposes only. Production web applications should use Custom Authorizers with JWT/identity tokens instead of exposing AWS credentials to client applications.
 
@@ -681,7 +681,7 @@ python mqtt_websocket_explorer.py --debug
 - **SigV4 Signing** - Uses AWS Access Key/Secret Key (demonstration only)
 - **WebSocket Protocol** - MQTT over WebSocket (port 443)
 - **Firewall Friendly** - Works through corporate firewalls
-- **IAM Integration** - Uses standard AWS permissions
+- **AWS IAM Integration** - Uses standard AWS permissions
 - **⚠️ Production Alternative** - Use Custom Authorizers with JWT/identity tokens
 
 **Connection Process:**
@@ -725,17 +725,17 @@ python mqtt_websocket_explorer.py --debug
 - ✅ **Scalable** - Millions of devices supported
 - ❌ **Complex Setup** - Certificate management required
 
-**WebSocket/IAM (Development/Web Apps):**
+**WebSocket/AWS IAM (Development/Web Apps):**
 - ✅ **Simple Setup** - Uses existing AWS credentials
 - ✅ **Firewall Friendly** - Standard HTTPS port
-- ✅ **IAM Integration** - Familiar AWS permissions
+- ✅ **AWS IAM Integration** - Familiar AWS permissions
 - ❌ **Internet Required** - Needs AWS API access
-- ❌ **Less Scalable** - IAM user limits apply
+- ❌ **Less Scalable** - AWS IAM user limits apply
 
-## Device Shadow Explorer
+## AWS IoT Device Shadow service Explorer
 
 ### Purpose
-Learn AWS IoT Device Shadow service through hands-on exploration of device state synchronization. This script teaches the complete shadow lifecycle: desired state, reported state, and delta processing.
+Learn AWS IoT AWS IoT Device Shadow service service through hands-on exploration of device state synchronization. This script teaches the complete shadow lifecycle: desired state, reported state, and delta processing.
 
 ### How to Run
 
@@ -754,7 +754,7 @@ python device_shadow_explorer.py --debug
 - **Policy with shadow permissions** - Certificate needs IoT shadow permissions
 - **Thing association** - Certificate must be attached to a Thing
 
-### Interactive Device Shadow Learning
+### Interactive AWS IoT Device Shadow service Learning
 
 #### Device Selection and Setup
 When you run the script:
@@ -953,7 +953,7 @@ New value (or press Enter to keep current): 24.0
 2. Observe automatic delta processing
 3. Learn about conflict resolution
 
-### Required IAM Permissions
+### Required AWS IAM Permissions
 
 **Shadow Policy Example:**
 ```json
@@ -981,7 +981,7 @@ New value (or press Enter to keep current): 24.0
 ## IoT Rules Engine Explorer
 
 ### Purpose
-Learn AWS IoT Rules Engine through hands-on rule creation and management. This script teaches message routing, SQL-based filtering, and action configuration with automatic IAM role setup.
+Learn AWS IoT Rules Engine through hands-on rule creation and management. This script teaches message routing, SQL-based filtering, and action configuration with automatic AWS IAM role setup.
 
 ### How to Run
 
@@ -990,13 +990,13 @@ Learn AWS IoT Rules Engine through hands-on rule creation and management. This s
 python iot_rules_explorer.py
 ```
 
-**With Debug Mode (detailed API and IAM operations):**
+**With Debug Mode (detailed API and AWS IAM operations):**
 ```bash
 python iot_rules_explorer.py --debug
 ```
 
 ### Prerequisites
-- **AWS Credentials** - IAM permissions for IoT Rules and IAM role management
+- **AWS Credentials** - AWS IAM permissions for IoT Rules and AWS IAM role management
 - **No certificates needed** - Rules Engine operates at the service level
 
 ### Interactive Rules Engine Learning
@@ -1015,8 +1015,8 @@ When you run the script:
 1. **Rule Naming** - Learn naming conventions and uniqueness requirements
 2. **Event Type Selection** - Choose from common IoT event types or custom
 3. **SQL Statement Building** - Interactive SELECT, FROM, WHERE clause construction
-4. **Action Configuration** - Set up republish targets with proper IAM roles
-5. **Automatic IAM Setup** - Script creates and configures necessary permissions
+4. **Action Configuration** - Set up republish targets with proper AWS IAM roles
+5. **Automatic AWS IAM Setup** - Script creates and configures necessary permissions
 
 #### SQL Statement Builder
 
@@ -1191,7 +1191,7 @@ WHERE value = 'detected'
 - Complete SQL statement breakdown
 - SELECT, FROM, WHERE clause explanation
 - Action configuration details
-- IAM role and permission information
+- AWS IAM role and permission information
 - Error action configuration (if any)
 
 **SQL Breakdown Example:**
@@ -1211,14 +1211,14 @@ WHERE value = 'detected'
       🏷️  QoS: 1
 ```
 
-### Automatic IAM Configuration
+### Automatic AWS IAM Configuration
 
-#### IAM Role Creation
+#### AWS IAM Role Creation
 **Automatic Setup:**
 - Creates `IoTRulesEngineRole` if it doesn't exist
 - Configures trust policy for `iot.amazonaws.com`
 - Attaches necessary permissions for republish actions
-- Handles IAM eventual consistency delays
+- Handles AWS IAM eventual consistency delays
 
 **Trust Policy:**
 ```json
@@ -1309,7 +1309,7 @@ WHERE value = 'detected'
 2. Test edge cases and boundary conditions
 3. Learn SQL operator behavior
 
-### Required IAM Permissions
+### Required AWS IAM Permissions
 
 **For the Script User:**
 ```json

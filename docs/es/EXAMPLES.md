@@ -9,7 +9,7 @@ Esta guía proporciona ejemplos completos de flujos de trabajo y escenarios de u
 - [Flujo de Trabajo Completo](#flujo-de-trabajo-completo)
 - [Escenarios de Aprendizaje](#escenarios-de-aprendizaje)
 - [Ejemplos de MQTT](#ejemplos-de-mqtt)
-- [Ejemplos de Device Shadow](#ejemplos-de-device-shadow)
+- [Ejemplos de AWS IoT Device Shadow service](#ejemplos-de-device-shadow)
 - [Ejemplos del Motor de Reglas](#ejemplos-del-motor-de-reglas)
 - [Casos de Uso del Mundo Real](#casos-de-uso-del-mundo-real)
 
@@ -161,7 +161,7 @@ Seleccionar dispositivo (1): 1
 ======================================================================
 ```
 
-#### Paso 6: Explorar Device Shadow
+#### Paso 6: Explorar AWS IoT Device Shadow service
 ```bash
 python scripts/device_shadow_explorer.py
 ```
@@ -328,7 +328,7 @@ WHERE temperature > 80
 
 ### Escenario 2: Gestión de Estado de Dispositivos
 
-**Objetivo:** Usar Device Shadow para sincronizar configuración de dispositivos.
+**Objetivo:** Usar AWS IoT Device Shadow service para sincronizar configuración de dispositivos.
 
 #### Configuración de Shadow:
 ```bash
@@ -410,7 +410,7 @@ python scripts/mqtt_client_explorer.py
 📡 MQTT> json sensors/pressure001/data value=1013.25 unit=hPa location=outdoor
 ```
 
-## Ejemplos de Device Shadow
+## Ejemplos de AWS IoT Device Shadow service
 
 ### Ejemplo 1: Configuración de Termostato
 
@@ -590,7 +590,7 @@ FROM 'farm/+/sensors'
 WHERE soilMoisture > 70
 ```
 
-#### Device Shadow para Configuración:
+#### AWS IoT Device Shadow service para Configuración:
 ```json
 {
   "desired": {

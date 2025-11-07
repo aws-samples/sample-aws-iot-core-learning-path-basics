@@ -18,7 +18,7 @@
     ],
     "client_initialized": "✅ AWS IoT client initialized successfully",
     "invalid_credentials": "❌ Invalid AWS credentials",
-    "learning_intro_title": "AWS IoT Registry APIs - Device Management",
+    "learning_intro_title": "AWS IoT Registry APIs - AWS IoT Device Management",
     "learning_intro_content": "The AWS IoT Registry is the central database that stores information about your IoT devices (Things), their organization (Thing Groups), device templates (Thing Types), and security certificates. These APIs allow you to programmatically manage your entire IoT device fleet. Understanding these operations is fundamental to building scalable IoT solutions.",
     "learning_intro_next": "We will explore 8 core Registry APIs with detailed explanations",
     "press_enter": "Press Enter to continue...",
@@ -141,7 +141,7 @@
         },
         "describe_endpoint": {
             "title": "Describe Endpoint - Connection Discovery",
-            "content": "IoT endpoints are the gateway URLs that devices use to connect to AWS IoT Core. Different endpoint types serve different purposes: Data-ATS for device communication, CredentialProvider for authentication, and Jobs for device management. Understanding endpoints is crucial for device connectivity configuration.",
+            "content": "IoT endpoints are the gateway URLs that devices use to connect to AWS IoT Core. Different endpoint types serve different purposes: Data-ATS for device communication, CredentialProvider for authentication, and AWS IoT Jobs for device management. Understanding endpoints is crucial for device connectivity configuration.",
             "next": "We will discover the endpoint URL for device connections"
         }
     },

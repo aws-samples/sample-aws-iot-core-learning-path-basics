@@ -31,15 +31,15 @@
   - [인증서 기반 MQTT 클라이언트](#인증서-기반-mqtt-클라이언트)
   - [WebSocket MQTT 클라이언트](#websocket-mqtt-클라이언트)
   - [MQTT 프로토콜 학습](#mqtt-프로토콜-학습)
-- [Device Shadow 탐색기](#device-shadow-탐색기)
+- [AWS IoT Device Shadow service 탐색기](#device-shadow-탐색기)
   - [목적](#목적-3)
   - [실행 방법](#실행-방법-2)
   - [전제 조건](#전제-조건)
-  - [대화형 Device Shadow 학습](#대화형-device-shadow-학습)
+  - [대화형 AWS IoT Device Shadow service 학습](#대화형-device-shadow-학습)
   - [주요 학습 기능](#주요-학습-기능)
   - [Shadow 메시지 분석](#shadow-메시지-분석)
   - [학습 시나리오](#학습-시나리오)
-  - [필요한 IAM 권한](#필요한-iam-권한)
+  - [필요한 AWS IAM 권한](#필요한-iam-권한)
 - [IoT Rules Engine 탐색기](#iot-rules-engine-탐색기)
   - [목적](#목적-4)
   - [실행 방법](#실행-방법-3)
@@ -47,10 +47,10 @@
   - [대화형 Rules Engine 학습](#대화형-rules-engine-학습)
   - [주요 학습 기능](#주요-학습-기능-1)
   - [규칙 관리 기능](#규칙-관리-기능)
-  - [자동 IAM 구성](#자동-iam-구성)
+  - [자동 AWS IAM 구성](#자동-iam-구성)
   - [규칙 테스트](#규칙-테스트)
   - [학습 시나리오](#학습-시나리오-1)
-  - [필요한 IAM 권한](#필요한-iam-권한-1)
+  - [필요한 AWS IAM 권한](#필요한-iam-권한-1)
 
 ## IoT 레지스트리 API 탐색기
 
@@ -152,7 +152,7 @@ python iot_registry_explorer.py --debug
 - **목적**: 계정의 IoT 엔드포인트 URL 가져오기
 - **HTTP**: `GET /endpoint`
 - **입력 옵션**: 엔드포인트 유형 (iot:Data-ATS, iot:Data, iot:CredentialProvider, iot:Jobs)
-- **학습**: 다양한 엔드포인트 유형과 그 목적
+- **학습**: 다양한 엔드포인트 유형과 그 목적 (iot:Jobs는 AWS IoT Jobs service용)
 - **출력**: 디바이스 연결을 위한 HTTPS 엔드포인트 URL
 - **📚 API 참조**: [DescribeEndpoint](https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeEndpoint.html)
 
@@ -448,7 +448,7 @@ sample-certs/                    # OpenSSL 생성 인증서
 - **인증서가 이미 존재함** - 중복 처리 방법
 - **Thing을 찾을 수 없음** - 디바이스 검색 문제
 - **정책 이름 충돌** - 명명 전략 솔루션
-- **권한 거부됨** - IAM 권한 문제 해결
+- **권한 거부됨** - AWS IAM 권한 문제 해결
 - **잘못된 정책 JSON** - 구문 오류 해결
 
 ## MQTT 통신
@@ -537,7 +537,7 @@ python mqtt_client_explorer.py --debug
 - **QoS 1 (최소 한 번)**: 전달 보장, 중복 가능
 - **QoS 2 (정확히 한 번)**: AWS IoT에서 지원되지 않음
 
-## Device Shadow 탐색기
+## AWS IoT Device Shadow service 탐색기
 
 ### 목적
 디바이스 상태 동기화의 실습 탐색을 통해 AWS IoT Device Shadow 서비스를 학습합니다. 이 스크립트는 완전한 섀도우 수명 주기인 원하는 상태, 보고된 상태 및 델타 처리를 가르칩니다.
@@ -559,7 +559,7 @@ python device_shadow_explorer.py --debug
 - **섀도우 권한이 있는 정책** - 인증서에 IoT 섀도우 권한 필요
 - **Thing 연결** - 인증서가 Thing에 연결되어야 함
 
-### 대화형 Device Shadow 학습
+### 대화형 AWS IoT Device Shadow service 학습
 
 #### Shadow 문서 구조
 
@@ -638,7 +638,7 @@ python device_shadow_explorer.py --debug
 2. `report` 명령을 사용하여 섀도우 업데이트
 3. 섀도우 업데이트 승인 관찰
 
-### 필요한 IAM 권한
+### 필요한 AWS IAM 권한
 
 **Shadow 정책 예시:**
 ```json
@@ -664,7 +664,7 @@ python device_shadow_explorer.py --debug
 ## IoT Rules Engine 탐색기
 
 ### 목적
-실습 규칙 생성 및 관리를 통해 AWS IoT Rules Engine을 학습합니다. 이 스크립트는 자동 IAM 역할 설정과 함께 메시지 라우팅, SQL 기반 필터링 및 액션 구성을 가르칩니다.
+실습 규칙 생성 및 관리를 통해 AWS IoT Rules Engine을 학습합니다. 이 스크립트는 자동 AWS IAM 역할 설정과 함께 메시지 라우팅, SQL 기반 필터링 및 액션 구성을 가르칩니다.
 
 ### 실행 방법
 
@@ -673,13 +673,13 @@ python device_shadow_explorer.py --debug
 python iot_rules_explorer.py
 ```
 
-**디버그 모드 (자세한 API 및 IAM 작업):**
+**디버그 모드 (자세한 API 및 AWS IAM 작업):**
 ```bash
 python iot_rules_explorer.py --debug
 ```
 
 ### 전제 조건
-- **AWS 자격 증명** - IoT Rules 및 IAM 역할 관리를 위한 IAM 권한
+- **AWS 자격 증명** - IoT Rules 및 AWS IAM 역할 관리를 위한 AWS IAM 권한
 - **인증서 불필요** - Rules Engine은 서비스 레벨에서 작동
 
 ### 대화형 Rules Engine 학습
@@ -698,8 +698,8 @@ python iot_rules_explorer.py --debug
 1. **규칙 명명** - 명명 규칙 및 고유성 요구사항 학습
 2. **이벤트 유형 선택** - 일반적인 IoT 이벤트 유형 또는 사용자 정의에서 선택
 3. **SQL 문 구축** - 대화형 SELECT, FROM, WHERE 절 구성
-4. **액션 구성** - 적절한 IAM 역할로 재게시 대상 설정
-5. **자동 IAM 설정** - 스크립트가 필요한 권한을 생성하고 구성
+4. **액션 구성** - 적절한 AWS IAM 역할로 재게시 대상 설정
+5. **자동 AWS IAM 설정** - 스크립트가 필요한 권한을 생성하고 구성
 
 #### SQL 문 빌더
 
@@ -743,14 +743,14 @@ SELECT deviceId, value, status, battery FROM 'testRulesEngineTopic/+/status'
 - SQL 문 및 액션 수
 - 액션 유형 및 대상 목적지
 
-### 자동 IAM 구성
+### 자동 AWS IAM 구성
 
-#### IAM 역할 생성
+#### AWS IAM 역할 생성
 **자동 설정:**
 - 존재하지 않는 경우 `IoTRulesEngineRole` 생성
 - `iot.amazonaws.com`에 대한 신뢰 정책 구성
 - 재게시 액션에 필요한 권한 연결
-- IAM 최종 일관성 지연 처리
+- AWS IAM 최종 일관성 지연 처리
 
 ### 규칙 테스트
 
@@ -788,7 +788,7 @@ SELECT deviceId, value, status, battery FROM 'testRulesEngineTopic/+/status'
 2. 입력 vs 출력 메시지 구조 비교
 3. 데이터 변환 이해
 
-### 필요한 IAM 권한
+### 필요한 AWS IAM 권한
 
 **스크립트 사용자용:**
 ```json

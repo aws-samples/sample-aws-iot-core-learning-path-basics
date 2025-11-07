@@ -1,5 +1,5 @@
 {
-    "title": "🌟 Explorador de Device Shadow de AWS IoT",
+    "title": "🌟 Explorador de AWS IoT Device Shadow service de AWS IoT",
     "separator": "============================================================",
     "aws_context_info": "🌍 Información de Contexto de AWS:",
     "account_id": "ID de Cuenta",
@@ -8,7 +8,7 @@
     "aws_credentials_reminder": "   Asegúrate de que las credenciales de AWS estén configuradas",
     "description_intro": "Este script te enseña conceptos de AWS IoT Device Shadow:",
     "shadow_concepts": [
-        "• Servicio Device Shadow para sincronización de estado",
+        "• Servicio AWS IoT Device Shadow service para sincronización de estado",
         "• Estructura del documento Shadow (deseado vs reportado)",
         "• Tópicos MQTT para operaciones de shadow",
         "• Mensajes delta para diferencias de estado",
@@ -38,7 +38,7 @@
     "invalid_choice": "❌ Selección inválida. Por favor selecciona 1-7.",
     "learning_moments": {
         "shadow_foundation": {
-            "title": "📚 MOMENTO DE APRENDIZAJE: Fundamentos de Device Shadow",
+            "title": "📚 MOMENTO DE APRENDIZAJE: Fundamentos de AWS IoT Device Shadow service",
             "content": "AWS IoT Device Shadow es un documento JSON que almacena y recupera información del estado actual de un dispositivo. El shadow actúa como intermediario entre dispositivos y aplicaciones, permitiendo comunicación confiable incluso cuando los dispositivos están desconectados. Entender los conceptos de shadow es esencial para construir aplicaciones IoT robustas.",
             "next": "Exploraremos operaciones de shadow y comunicación MQTT"
         },

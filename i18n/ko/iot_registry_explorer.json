@@ -141,7 +141,7 @@
     },
     "describe_endpoint": {
       "title": "엔드포인트 설명 - 연결 발견",
-      "content": "IoT 엔드포인트는 디바이스가 AWS IoT Core에 연결하는 데 사용하는 게이트웨이 URL입니다. 다른 엔드포인트 타입은 다른 목적을 제공합니다: 디바이스 통신용 Data-ATS, 인증용 CredentialProvider, 디바이스 관리용 Jobs. 엔드포인트를 이해하는 것은 디바이스 연결 구성에 중요합니다.",
+      "content": "IoT 엔드포인트는 디바이스가 AWS IoT Core에 연결하는 데 사용하는 게이트웨이 URL입니다. 다른 엔드포인트 타입은 다른 목적을 제공합니다: 디바이스 통신용 Data-ATS, 인증용 CredentialProvider, 디바이스 관리용 AWS IoT Jobs. 엔드포인트를 이해하는 것은 디바이스 연결 구성에 중요합니다.",
       "next": "디바이스 연결을 위한 엔드포인트 URL을 발견하겠습니다"
     }
   },

@@ -1,6 +1,6 @@
 # 문제 해결 가이드
 
-이 문서는 Amazon Web Services (AWS) IoT Core - 기초 학습 프로젝트에 대한 포괄적인 문제 해결 지침을 제공합니다.
+이 문서는 Amazon Web Services (AWS) AWS IoT Core - 기초 학습 프로젝트에 대한 포괄적인 문제 해결 지침을 제공합니다.
 
 ## 목차
 
@@ -13,7 +13,7 @@
 - [MQTT 연결 문제](#mqtt-연결-문제)
   - [인증서 기반 MQTT 문제](#인증서-기반-mqtt-문제)
   - [WebSocket MQTT 문제](#websocket-mqtt-문제)
-- [Device Shadow 문제](#device-shadow-문제)
+- [AWS IoT Device Shadow service 문제](#device-shadow-문제)
   - [Shadow 연결 문제](#shadow-연결-문제)
   - [Shadow 상태 파일 문제](#shadow-상태-파일-문제)
 - [Rules Engine 문제](#rules-engine-문제)
@@ -31,7 +31,7 @@
 - [추가 도움 받기](#추가-도움-받기)
   - [디버그 모드 사용법](#디버그-모드-사용법)
   - [AWS IoT 콘솔 확인](#aws-iot-콘솔-확인)
-  - [CloudWatch 로그](#cloudwatch-로그)
+  - [Amazon CloudWatch 로그](#cloudwatch-로그)
   - [일반적인 해결 단계](#일반적인-해결-단계)
   - [지원 리소스](#지원-리소스)
 
@@ -186,7 +186,7 @@ pip install --upgrade certifi
 
 ### 권한 문제
 
-#### AWS Identity and Access Management (IAM) 권한
+#### AWS Identity and Access Management (AWS IAM) 권한
 
 **학습 스크립트에 필요한 권한:**
 ```json
@@ -263,12 +263,12 @@ pip install --upgrade certifi
 **일반적인 권한 오류:**
 
 **문제: "사용자가 iot:CreateThing 수행 권한이 없습니다"**
-- **원인**: IAM 권한 부족
-- **해결책**: IAM 사용자/역할에 IoT 권한 추가
+- **원인**: AWS IAM 권한 부족
+- **해결책**: AWS IAM 사용자/역할에 IoT 권한 추가
 
-**문제: IAM 역할 생성 시 "액세스 거부됨"**
-- **원인**: Rules Engine용 IAM 권한 누락
-- **해결책**: IAM 권한 추가 또는 기존 역할 사용
+**문제: AWS IAM 역할 생성 시 "액세스 거부됨"**
+- **원인**: Rules Engine용 AWS IAM 권한 누락
+- **해결책**: AWS IAM 권한 추가 또는 기존 역할 사용
 
 ### 인증서 문제
 
@@ -442,7 +442,7 @@ python mqtt_websocket_explorer.py --debug
   aws sts get-caller-identity
   ```
 
-### Device Shadow 문제
+### AWS IoT Device Shadow service 문제
 
 #### Shadow 연결 문제
 
@@ -499,8 +499,8 @@ python mqtt_websocket_explorer.py --debug
 
 #### 규칙 생성 문제
 
-**문제: IAM 역할 생성 실패**
-- **원인**: IAM 권한 부족, 역할이 이미 존재함
+**문제: AWS IAM 역할 생성 실패**
+- **원인**: AWS IAM 권한 부족, 역할이 이미 존재함
 - **해결책**:
   ```bash
   # 역할이 존재하는지 확인
@@ -662,17 +662,17 @@ python script_name.py --debug
 ### AWS IoT 콘솔 확인
 
 **AWS 콘솔에서 리소스 확인:**
-1. **Things**: IoT Core → 관리 → Things
-2. **인증서**: IoT Core → 보안 → 인증서
-3. **정책**: IoT Core → 보안 → 정책
-4. **규칙**: IoT Core → 작업 → 규칙
+1. **Things**: AWS IoT Core → 관리 → Things
+2. **인증서**: AWS IoT Core → 보안 → 인증서
+3. **정책**: AWS IoT Core → 보안 → 정책
+4. **규칙**: AWS IoT Core → 작업 → 규칙
 
-### CloudWatch 로그
+### Amazon CloudWatch 로그
 
 **프로덕션 디버깅을 위한 IoT 로깅 활성화:**
-1. IoT Core → 설정으로 이동
+1. AWS IoT Core → 설정으로 이동
 2. 적절한 로그 레벨로 로깅 활성화
-3. 자세한 오류 정보는 CloudWatch 로그 확인
+3. 자세한 오류 정보는 Amazon CloudWatch 로그 확인
 
 ### 일반적인 해결 단계
 

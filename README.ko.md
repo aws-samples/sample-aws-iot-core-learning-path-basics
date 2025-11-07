@@ -5,7 +5,7 @@
 > - [English](README.md) | [Español](README.es.md) | [中文](README.zh-CN.md) | [日本語](README.ja.md) | [Português](README.pt-BR.md) | **한국어** (현재)
 > - **문서**: [English](docs/en/) | [Español](docs/es/) | [中文](docs/zh-CN/) | [日本語](docs/ja/) | [Português](docs/pt-BR/) | [한국어](docs/ko/)
 
-실습을 통해 Amazon Web Services (AWS) IoT Core 기본 개념을 학습할 수 있는 포괄적인 Python 툴킷입니다. 대화형 스크립트는 디바이스 관리, 보안, API 작업 및 MQTT 통신을 자세한 설명과 함께 시연합니다.
+실습을 통해 Amazon Web Services (AWS) AWS IoT Core 기본 개념을 학습할 수 있는 포괄적인 Python 툴킷입니다. 대화형 스크립트는 디바이스 관리, 보안, API 작업 및 MQTT 통신을 자세한 설명과 함께 시연합니다.
 
 ## 🚀 빠른 시작 - 완전한 학습 경로
 
@@ -54,7 +54,7 @@ python scripts/cleanup_sample_data.py        # 리소스 정리 (중요!)
 - **목적**: 모든 AWS IoT 레지스트리 작업, 인증서 관리 및 규칙 엔진 상호작용을 지원
 - **버전**: `>=1.26.0`
 - **문서**: [Boto3 문서](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-- **IoT Core API**: [Boto3 IoT 클라이언트](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iot.html)
+- **AWS IoT Core API**: [Boto3 IoT 클라이언트](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iot.html)
 
 ### **Python용 AWS IoT 디바이스 SDK**
 - **목적**: X.509 인증서를 사용하여 AWS IoT Core와 진정한 MQTT 통신 가능
@@ -94,7 +94,7 @@ python scripts/cleanup_sample_data.py        # 리소스 정리 (중요!)
 | 서비스 | 사용량 | 예상 비용 (USD) |
 |---------|-------|---------------------|
 | **AWS IoT Core** | ~100개 메시지, 20개 디바이스 | $0.10 |
-| **IoT Device Shadow** | ~30개 섀도우 작업 | $0.04 |
+| **AWS IoT Device Shadow service** | ~30개 섀도우 작업 | $0.04 |
 | **IoT Rules Engine** | ~50개 규칙 실행 | $0.01 |
 | **인증서 저장소** | 1일간 20개 인증서 | $0.01 |
 | **Amazon CloudWatch Logs** | 기본 로깅 | $0.01 |
@@ -200,7 +200,7 @@ python scripts/setup_sample_data.py
 - ✅ `certificate_manager.py` - 인증서 관리
 - ✅ `mqtt_client_explorer.py` - MQTT 통신
 - ✅ `mqtt_websocket_explorer.py` - WebSocket MQTT
-- ✅ `device_shadow_explorer.py` - Device Shadow 작업
+- ✅ `device_shadow_explorer.py` - AWS IoT Device Shadow service 작업
 - ✅ `iot_rules_explorer.py` - Rules Engine 탐색
 - ✅ `cleanup_sample_data.py` - 리소스 정리
 
@@ -231,7 +231,7 @@ python scripts/setup_sample_data.py
 **목적**: MQTT 프로토콜을 사용한 실시간 IoT 통신 경험
 **기능**: 대화형 명령줄 인터페이스, 주제 구독, 메시지 게시
 
-### 5. 🌟 Device Shadow 탐색기
+### 5. 🌟 AWS IoT Device Shadow service 탐색기
 **파일**: `scripts/device_shadow_explorer.py`
 **목적**: AWS IoT Device Shadow를 사용한 디바이스 상태 동기화 학습
 **기능**: 대화형 섀도우 관리, 상태 업데이트, 델타 처리
@@ -239,7 +239,7 @@ python scripts/setup_sample_data.py
 ### 6. ⚙️ IoT Rules Engine 탐색기
 **파일**: `scripts/iot_rules_explorer.py`
 **목적**: IoT Rules Engine을 사용한 메시지 라우팅 및 처리 학습
-**기능**: 규칙 생성, SQL 필터링, 자동 IAM 설정
+**기능**: 규칙 생성, SQL 필터링, 자동 AWS IAM 설정
 
 ### 7. 🧹 샘플 데이터 정리
 **파일**: `scripts/cleanup_sample_data.py`

@@ -5,7 +5,7 @@
 > - [English](README.md) | [Español](README.es.md) | **中文** (当前) | [日本語](README.ja.md) | [Português](README.pt-BR.md)
 > - **文档**: [English](docs/en/) | [Español](docs/es/) | **中文** (docs/zh-CN/) | [日本語](docs/ja/) | [Português](docs/pt-BR/)
 
-通过动手探索学习 Amazon Web Services (AWS) IoT Core 基本概念的综合 Python 工具包。交互式脚本演示设备管理、安全性、API 操作和 MQTT 通信，并提供详细说明。
+通过动手探索学习 Amazon Web Services (AWS) AWS IoT Core 基本概念的综合 Python 工具包。交互式脚本演示设备管理、安全性、API 操作和 MQTT 通信，并提供详细说明。
 
 ## 🚀 快速开始 - 完整学习路径
 
@@ -54,7 +54,7 @@ python scripts/cleanup_sample_data.py        # 清理资源（重要！）
 - **目的**: 支持所有 AWS IoT Registry 操作、证书管理和 Rules Engine 交互
 - **版本**: `>=1.26.0`
 - **文档**: [Boto3 文档](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-- **IoT Core API**: [Boto3 IoT 客户端](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iot.html)
+- **AWS IoT Core API**: [Boto3 IoT 客户端](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iot.html)
 
 ### **AWS IoT Device SDK for Python**
 - **目的**: 使用 X.509 证书实现与 AWS IoT Core 的真实 MQTT 通信
@@ -94,7 +94,7 @@ python scripts/cleanup_sample_data.py        # 清理资源（重要！）
 | 服务 | 使用量 | 预估费用 (USD) |
 |---------|-------|---------------------|
 | **AWS IoT Core** | 约100条消息，20个设备 | $0.10 |
-| **IoT Device Shadow** | 约30次影子操作 | $0.04 |
+| **AWS IoT Device Shadow service** | 约30次影子操作 | $0.04 |
 | **IoT Rules Engine** | 约50次规则执行 | $0.01 |
 | **证书存储** | 20个证书存储1天 | $0.01 |
 | **Amazon CloudWatch Logs** | 基本日志记录 | $0.01 |
@@ -194,7 +194,7 @@ python scripts/setup_sample_data.py
 - ✅ `certificate_manager.py` - 证书管理
 - ✅ `mqtt_client_explorer.py` - MQTT 通信
 - ✅ `mqtt_websocket_explorer.py` - WebSocket MQTT
-- ✅ `device_shadow_explorer.py` - Device Shadow 操作
+- ✅ `device_shadow_explorer.py` - AWS IoT Device Shadow service 操作
 - ✅ `iot_rules_explorer.py` - Rules Engine 探索
 - ✅ `cleanup_sample_data.py` - 资源清理
 
@@ -225,7 +225,7 @@ python scripts/setup_sample_data.py
 **目的**: 使用 MQTT 协议体验实时 IoT 通信
 **功能**: 交互式命令行界面、主题订阅、消息发布
 
-### 5. 🌟 Device Shadow 探索器
+### 5. 🌟 AWS IoT Device Shadow service 探索器
 **文件**: `scripts/device_shadow_explorer.py`
 **目的**: 使用 AWS IoT Device Shadow 学习设备状态同步
 **功能**: 交互式影子管理、状态更新、增量处理
@@ -233,7 +233,7 @@ python scripts/setup_sample_data.py
 ### 6. ⚙️ IoT Rules Engine 探索器
 **文件**: `scripts/iot_rules_explorer.py`
 **目的**: 使用 IoT Rules Engine 学习消息路由和处理
-**功能**: 规则创建、SQL 过滤、自动 IAM 设置
+**功能**: 规则创建、SQL 过滤、自动 AWS IAM 设置
 
 ### 7. 🧹 示例数据清理
 **文件**: `scripts/cleanup_sample_data.py`

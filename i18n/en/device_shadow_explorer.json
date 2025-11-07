@@ -38,7 +38,7 @@
     "invalid_choice": "❌ Invalid choice. Please select 1-7.",
     "learning_moments": {
         "shadow_foundation": {
-            "title": "📚 LEARNING MOMENT: Device Shadow Foundation",
+            "title": "📚 LEARNING MOMENT: AWS IoT Device Shadow service Foundation",
             "content": "AWS IoT Device Shadow is a JSON document that stores and retrieves current state information for a device. The shadow acts as an intermediary between devices and applications, enabling reliable communication even when devices are offline. Understanding shadow concepts is essential for building robust IoT applications.",
             "next": "We will explore shadow operations and MQTT communication"
         },

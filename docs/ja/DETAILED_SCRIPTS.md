@@ -31,7 +31,7 @@
   - [証明書ベースMQTTクライアント](#証明書ベースmqttクライアント)
   - [WebSocket MQTTクライアント](#websocket-mqttクライアント)
   - [MQTTプロトコル学習](#mqttプロトコル学習)
-- [Device Shadow エクスプローラー](#device-shadow-エクスプローラー)
+- [AWS IoT Device Shadow service エクスプローラー](#device-shadow-エクスプローラー)
   - [目的](#目的-3)
   - [実行方法](#実行方法-2)
   - [前提条件](#前提条件)
@@ -168,7 +168,7 @@ python iot_registry_explorer.py --debug
 - **エンドポイントタイプ**:
   - iot:Data-ATS（MQTT/HTTPS）
   - iot:CredentialProvider（認証情報プロバイダー）
-  - iot:Jobs（ジョブ管理）
+  - iot:Jobs（AWS IoT Jobs ジョブ管理）
 
 ### 学習機能
 
@@ -472,7 +472,7 @@ python mqtt_websocket_explorer.py
 - **QoS 1**: 最低1回配信（At Least Once）
 - **QoS 2**: 正確に1回配信（Exactly Once）- AWS IoT未サポート
 
-## Device Shadow エクスプローラー
+## AWS IoT Device Shadow service エクスプローラー
 
 ### 目的
 AWS IoT Device Shadowサービスを使用したデバイス状態同期を学習し、オフラインデバイス管理とリアルタイム状態更新を体験します。
@@ -649,7 +649,7 @@ python iot_rules_explorer.py --debug
 
 ### 前提条件
 - 適切なIAM権限（IoT Rules Engine操作用）
-- オプション: 他のAWSサービス（Lambda、DynamoDB、S3など）へのアクセス
+- オプション: 他のAWSサービス（AWS Lambda、Amazon DynamoDB、Amazon S3など）へのアクセス
 
 ### インタラクティブRules Engine学習
 
@@ -730,11 +730,11 @@ WHERE temperature > 25
 - **権限**: 指定されたアクションの実行権限
 
 #### サポートされるアクション
-- **Lambda**: 関数呼び出し
-- **DynamoDB**: テーブルへの書き込み
-- **S3**: オブジェクトの保存
-- **SNS**: 通知の送信
-- **SQS**: メッセージのキューイング
+- **AWS Lambda**: 関数呼び出し
+- **Amazon DynamoDB**: テーブルへの書き込み
+- **Amazon S3**: オブジェクトの保存
+- **Amazon SNS**: 通知の送信
+- **Amazon SQS**: メッセージのキューイング
 
 ### ルールのテスト
 

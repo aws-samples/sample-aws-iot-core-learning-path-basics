@@ -5,7 +5,7 @@
 > - [English](README.md) | [Español](README.es.md) | [中文](README.zh-CN.md) | **日本語** (現在) | [Português](README.pt-BR.md)
 > - **ドキュメント**: [English](docs/en/) | [Español](docs/es/) | [中文](docs/zh-CN/) | **日本語** (docs/ja/) | [Português](docs/pt-BR/)
 
-Amazon Web Services (AWS) IoT Core の基本概念をハンズオン探索で学習するための包括的なPythonツールキット。インタラクティブなスクリプトで、デバイス管理、セキュリティ、API操作、MQTT通信を詳細な説明付きで実演します。
+Amazon Web Services (AWS) AWS IoT Core の基本概念をハンズオン探索で学習するための包括的なPythonツールキット。インタラクティブなスクリプトで、デバイス管理、セキュリティ、API操作、MQTT通信を詳細な説明付きで実演します。
 
 ## 🚀 クイックスタート - 完全学習パス
 
@@ -54,7 +54,7 @@ python scripts/cleanup_sample_data.py        # リソースクリーンアップ
 - **目的**: すべてのAWS IoT Registry操作、証明書管理、Rules Engineインタラクションを強化
 - **バージョン**: `>=1.26.0`
 - **ドキュメント**: [Boto3ドキュメント](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-- **IoT Core API**: [Boto3 IoTクライアント](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iot.html)
+- **AWS IoT Core API**: [Boto3 IoTクライアント](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iot.html)
 
 ### **AWS IoT Device SDK for Python**
 - **目的**: X.509証明書を使用してAWS IoT Coreとの本格的なMQTT通信を可能にする
@@ -94,7 +94,7 @@ python scripts/cleanup_sample_data.py        # リソースクリーンアップ
 | サービス | 使用量 | 推定コスト (USD) |
 |---------|-------|---------------------|
 | **AWS IoT Core** | 約100メッセージ、20デバイス | $0.10 |
-| **IoT Device Shadow** | 約30シャドウ操作 | $0.04 |
+| **AWS IoT Device Shadow service** | 約30シャドウ操作 | $0.04 |
 | **IoT Rules Engine** | 約50ルール実行 | $0.01 |
 | **証明書ストレージ** | 20証明書を1日間 | $0.01 |
 | **Amazon CloudWatch Logs** | 基本ログ記録 | $0.01 |
@@ -225,7 +225,7 @@ python scripts/setup_sample_data.py
 **目的**: MQTTプロトコルを使用したリアルタイムIoT通信を体験
 **機能**: インタラクティブコマンドラインインターフェース、トピック購読、メッセージ公開
 
-### 5. 🌟 Device Shadow エクスプローラー
+### 5. 🌟 AWS IoT Device Shadow service エクスプローラー
 **ファイル**: `scripts/device_shadow_explorer.py`
 **目的**: AWS IoT Device Shadowを使用したデバイス状態同期を学習
 **機能**: インタラクティブシャドウ管理、状態更新、差分処理

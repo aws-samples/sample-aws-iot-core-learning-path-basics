@@ -31,15 +31,15 @@
   - [基于证书的 MQTT 客户端](#基于证书的-mqtt-客户端)
   - [WebSocket MQTT 客户端](#websocket-mqtt-客户端)
   - [MQTT 协议学习](#mqtt-协议学习)
-- [Device Shadow 探索器](#device-shadow-探索器)
+- [AWS IoT Device Shadow service 探索器](#device-shadow-探索器)
   - [目的](#目的-3)
   - [运行方法](#运行方法-2)
   - [先决条件](#先决条件)
-  - [交互式 Device Shadow 学习](#交互式-device-shadow-学习)
+  - [交互式 AWS IoT Device Shadow service 学习](#交互式-device-shadow-学习)
   - [主要学习功能](#主要学习功能)
   - [影子消息分析](#影子消息分析)
   - [学习场景](#学习场景)
-  - [所需的 IAM 权限](#所需的-iam-权限)
+  - [所需的 AWS IAM 权限](#所需的-iam-权限)
 - [IoT Rules Engine 探索器](#iot-rules-engine-探索器)
   - [目的](#目的-4)
   - [运行方法](#运行方法-3)
@@ -47,10 +47,10 @@
   - [交互式 Rules Engine 学习](#交互式-rules-engine-学习)
   - [主要学习功能](#主要学习功能-1)
   - [规则管理功能](#规则管理功能)
-  - [自动 IAM 设置](#自动-iam-设置)
+  - [自动 AWS IAM 设置](#自动-iam-设置)
   - [规则测试](#规则测试)
   - [学习场景](#学习场景-1)
-  - [所需的 IAM 权限](#所需的-iam-权限-1)
+  - [所需的 AWS IAM 权限](#所需的-iam-权限-1)
 
 ## IoT Registry API 探索器
 
@@ -159,7 +159,7 @@ python iot_registry_explorer.py --debug
 - **端点类型**:
   - **iot:Data-ATS**: 用于设备通信的数据端点
   - **iot:CredentialProvider**: 用于凭证提供程序的端点
-  - **iot:Jobs**: 用于 IoT Jobs 的端点
+  - **iot:Jobs**: 用于 AWS IoT Jobs service 的端点
 
 ### 学习功能
 
@@ -185,7 +185,7 @@ python iot_registry_explorer.py --debug
 
 脚本故意包含错误学习场景：
 - **无效参数**: 了解 API 验证
-- **权限错误**: 了解 IAM 要求
+- **权限错误**: 了解 AWS IAM 要求
 - **资源未找到**: 了解错误处理
 - **限制错误**: 了解 API 限制
 
@@ -377,7 +377,7 @@ certificates/
 脚本包含教育性错误场景：
 - **无效证书格式**: 学习证书验证
 - **策略语法错误**: 学习策略结构
-- **权限错误**: 学习 IAM 要求
+- **权限错误**: 学习 AWS IAM 要求
 - **证书状态冲突**: 学习状态管理
 
 ## MQTT 通信
@@ -470,7 +470,7 @@ python mqtt_websocket_explorer.py
 
 #### 先决条件
 - 配置的 AWS 凭证
-- 具有 IoT 权限的 IAM 策略
+- 具有 IoT 权限的 AWS IAM 策略
 - 网络访问 AWS IoT 端点
 
 #### WebSocket 特定功能
@@ -478,7 +478,7 @@ python mqtt_websocket_explorer.py
 ##### 认证
 - **AWS SigV4**: 使用 AWS 凭证进行签名
 - **临时凭证**: 支持 STS 令牌
-- **IAM 策略**: 基于策略的访问控制
+- **AWS IAM 策略**: 基于策略的访问控制
 
 ##### Web 集成
 - **浏览器兼容**: 可在 Web 应用程序中使用
@@ -499,7 +499,7 @@ python mqtt_websocket_explorer.py
 - **规则引擎**: 消息路由和处理
 - **生命周期事件**: 连接状态通知
 
-## Device Shadow 探索器
+## AWS IoT Device Shadow service 探索器
 
 ### 目的
 使用 AWS IoT Device Shadow 学习设备状态同步。此脚本教授影子概念、状态管理和设备-云同步模式。
@@ -519,13 +519,13 @@ python device_shadow_explorer.py --debug
 ### 先决条件
 - 现有的 IoT Things（来自 setup_sample_data.py）
 - 配置的 AWS 凭证
-- 具有 Device Shadow 权限的 IAM 策略
+- 具有 AWS IoT Device Shadow service 权限的 AWS IAM 策略
 
-### 交互式 Device Shadow 学习
+### 交互式 AWS IoT Device Shadow service 学习
 
 **主菜单**:
 ```
-🌟 Device Shadow 选项:
+🌟 AWS IoT Device Shadow service 选项:
 1. 获取设备影子
 2. 更新设备影子
 3. 删除设备影子
@@ -622,7 +622,7 @@ python device_shadow_explorer.py --debug
 - **更新进度**: 设备报告更新进度
 - **完成确认**: 设备确认更新完成
 
-### 所需的 IAM 权限
+### 所需的 AWS IAM 权限
 
 ```json
 {
@@ -661,7 +661,7 @@ python iot_rules_explorer.py --debug
 ### 先决条件
 - 现有的 IoT Things（来自 setup_sample_data.py）
 - 配置的 AWS 凭证
-- 具有 Rules Engine 权限的 IAM 策略
+- 具有 Rules Engine 权限的 AWS IAM 策略
 
 ### 交互式 Rules Engine 学习
 
@@ -682,8 +682,8 @@ python iot_rules_explorer.py --debug
 
 #### 1. 规则创建
 - **SQL 语句**: 创建消息过滤 SQL
-- **操作配置**: 设置规则操作（CloudWatch、SNS 等）
-- **IAM 角色**: 自动创建所需的 IAM 角色
+- **操作配置**: 设置规则操作（Amazon CloudWatch、Amazon SNS 等）
+- **AWS IAM 角色**: 自动创建所需的 AWS IAM 角色
 - **规则验证**: 验证规则语法和配置
 
 #### 2. 规则管理
@@ -716,15 +716,15 @@ SELECT *, topic(2) as device_id FROM 'devices/+/telemetry'
 ```
 
 #### 支持的操作
-- **CloudWatch**: 发送指标到 CloudWatch
-- **SNS**: 发送通知到 SNS 主题
-- **SQS**: 发送消息到 SQS 队列
-- **Lambda**: 调用 Lambda 函数
-- **DynamoDB**: 写入 DynamoDB 表
+- **Amazon CloudWatch**: 发送指标到 Amazon CloudWatch
+- **Amazon SNS**: 发送通知到 Amazon SNS 主题
+- **Amazon SQS**: 发送消息到 Amazon SQS 队列
+- **AWS Lambda**: 调用 AWS Lambda 函数
+- **Amazon DynamoDB**: 写入 Amazon DynamoDB 表
 
-### 自动 IAM 设置
+### 自动 AWS IAM 设置
 
-脚本自动创建所需的 IAM 角色：
+脚本自动创建所需的 AWS IAM 角色：
 
 ```json
 {
@@ -770,19 +770,19 @@ SELECT *, topic(2) as device_id FROM 'devices/+/telemetry'
 #### 场景1: 温度监控
 - **规则**: 检测高温读数
 - **SQL**: `SELECT * FROM 'sensors/+/data' WHERE temperature > 30`
-- **操作**: 发送 SNS 警报
+- **操作**: 发送 Amazon SNS 警报
 
 #### 场景2: 设备健康监控
 - **规则**: 监控设备连接状态
 - **SQL**: `SELECT * FROM '$aws/events/presence/+' WHERE eventType = 'disconnected'`
-- **操作**: 记录到 CloudWatch
+- **操作**: 记录到 Amazon CloudWatch
 
 #### 场景3: 数据聚合
 - **规则**: 聚合传感器数据
 - **SQL**: `SELECT avg(temperature) as avg_temp FROM 'sensors/+/data'`
-- **操作**: 存储到 DynamoDB
+- **操作**: 存储到 Amazon DynamoDB
 
-### 所需的 IAM 权限
+### 所需的 AWS IAM 权限
 
 ```json
 {
@@ -824,7 +824,7 @@ SELECT *, topic(2) as device_id FROM 'devices/+/telemetry'
 2. **IoT Registry 探索** - 学习设备管理 API
 3. **证书管理** - 学习 IoT 安全
 4. **MQTT 通信** - 学习实时消息传递
-5. **Device Shadow** - 学习状态同步
+5. **AWS IoT Device Shadow service** - 学习状态同步
 6. **Rules Engine** - 学习消息处理
 7. **清理** - 清理学习资源
 
@@ -839,7 +839,7 @@ SELECT *, topic(2) as device_id FROM 'devices/+/telemetry'
 - IoT 安全最佳实践
 
 ### 后续步骤
-- 探索高级 IoT 功能（Jobs、Fleet Provisioning）
-- 集成其他 AWS 服务（Lambda、DynamoDB）
+- 探索高级 IoT 功能（AWS IoT Jobs、Fleet Provisioning）
+- 集成其他 AWS 服务（AWS Lambda、Amazon DynamoDB）
 - 构建端到端 IoT 解决方案
 - 实施生产就绪的安全实践

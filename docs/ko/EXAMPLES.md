@@ -19,7 +19,7 @@
 - [MQTT 통신 예제](#mqtt-통신-예제)
   - [인증서 기반 MQTT 세션](#인증서-기반-mqtt-세션)
   - [WebSocket MQTT 세션](#websocket-mqtt-세션)
-- [Device Shadow 예제](#device-shadow-예제)
+- [AWS IoT Device Shadow service 예제](#device-shadow-예제)
   - [Shadow 상태 동기화](#shadow-상태-동기화)
 - [Rules Engine 예제](#rules-engine-예제)
   - [규칙 생성 워크플로우](#규칙-생성-워크플로우)
@@ -588,7 +588,7 @@ TLS 버전: 1.2
    💬 메시지: 높은 온도가 감지되었습니다
 ```
 
-## Device Shadow 예제
+## AWS IoT Device Shadow service 예제
 
 ### Shadow 상태 동기화
 
@@ -829,7 +829,7 @@ WHERE value > 30
 규칙 생성을 확인하시겠습니까? (y/N): y
 ```
 
-**자동 IAM 설정:**
+**자동 AWS IAM 설정:**
 ```
 🔧 Rules Engine용 IAM 역할 설정 중...
 🔍 역할 'IoTRulesEngineRole'이 존재하는지 확인 중...

@@ -181,7 +181,7 @@
     "troubleshooting_unknown": "💡 Troubleshooting: Unknown subscription failure",
     "unknown_reasons": [
         "   • Run 'debug {}' command for detailed diagnostics",
-        "   • Check AWS IoT logs in CloudWatch if enabled"
+        "   • Check AWS IoT logs in Amazon CloudWatch if enabled"
     ],
     "publishing_message": "📤 Publishing Message",
     "content_type_label": "Content-Type",

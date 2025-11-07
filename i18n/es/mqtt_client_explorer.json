@@ -181,7 +181,7 @@
     "troubleshooting_unknown": "💡 Resolución de Problemas: Fallo de suscripción desconocido",
     "unknown_reasons": [
         "   • Ejecuta el comando 'debug {}' para diagnósticos detallados",
-        "   • Revisa los logs de AWS IoT en CloudWatch si están habilitados"
+        "   • Revisa los logs de AWS IoT en Amazon CloudWatch si están habilitados"
     ],
     "publishing_message": "📤 Publicando Mensaje",
     "content_type_label": "Content-Type",

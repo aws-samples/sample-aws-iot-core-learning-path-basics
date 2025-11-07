@@ -97,8 +97,8 @@ ClientError: An error occurred (AccessDenied) when calling the ListThings operat
 ```
 
 **Solución:**
-1. **Verificar permisos IAM** - Tu usuario/rol necesita permisos de AWS IoT
-2. **Política IAM mínima requerida:**
+1. **Verificar permisos AWS IAM** - Tu usuario/rol necesita permisos de AWS IoT
+2. **Política AWS IAM mínima requerida:**
 ```json
 {
     "Version": "2012-10-17",
@@ -287,8 +287,8 @@ InvalidRequestException: The role does not exist
 
 **Solución:**
 - El script debería crear el rol automáticamente
-- Si falla, verificar permisos IAM para crear roles
-- Esperar unos segundos para propagación de IAM
+- Si falla, verificar permisos AWS IAM para crear roles
+- Esperar unos segundos para propagación de AWS IAM
 
 ### Error: "Rule already exists"
 
@@ -316,7 +316,7 @@ AccessDenied: User is not authorized to perform iot:CreateThing
 ```
 
 **Solución:**
-Agregar política IAM con permisos IoT:
+Agregar política AWS IAM con permisos IoT:
 ```json
 {
     "Version": "2012-10-17",
@@ -348,7 +348,7 @@ AccessDenied: User is not authorized to perform iam:CreateRole
 ```
 
 **Solución:**
-Agregar permisos IAM:
+Agregar permisos AWS IAM:
 ```json
 {
     "Version": "2012-10-17",

@@ -7,7 +7,7 @@ Este documento fornece documentação abrangente para todos os scripts de aprend
 - [Explorador de API do Registro IoT](#explorador-de-api-do-registro-iot)
 - [Gerenciador de Certificados e Políticas](#gerenciador-de-certificados-e-políticas)
 - [Comunicação MQTT](#comunicação-mqtt)
-- [Explorador de Device Shadow](#explorador-de-device-shadow)
+- [Explorador de AWS IoT Device Shadow service](#explorador-de-device-shadow)
 - [Explorador do IoT Rules Engine](#explorador-do-iot-rules-engine)
 
 ## Explorador de API do Registro IoT
@@ -318,7 +318,7 @@ Uma vez conectado, use estes comandos:
 - **QoS 1 (Pelo menos uma vez)**: Entrega garantida, pode duplicar
 - **QoS 2 (Exatamente uma vez)**: Não suportado pelo AWS IoT
 
-## Explorador de Device Shadow
+## Explorador de AWS IoT Device Shadow service
 
 ### Propósito
 Aprender o serviço AWS IoT Device Shadow através da exploração prática da sincronização de estado de dispositivos. Este script ensina o ciclo de vida completo do shadow: estado desejado, estado relatado e processamento de delta.
@@ -409,7 +409,7 @@ Uma vez conectado, use estes comandos:
 ## Explorador do IoT Rules Engine
 
 ### Propósito
-Aprender o AWS IoT Rules Engine através da criação e gerenciamento prático de regras. Este script ensina roteamento de mensagens, filtragem baseada em SQL e configuração de ações com configuração automática de função IAM.
+Aprender o AWS IoT Rules Engine através da criação e gerenciamento prático de regras. Este script ensina roteamento de mensagens, filtragem baseada em SQL e configuração de ações com configuração automática de função AWS IAM.
 
 ### Como Executar
 
@@ -418,13 +418,13 @@ Aprender o AWS IoT Rules Engine através da criação e gerenciamento prático d
 python iot_rules_explorer.py
 ```
 
-**Com Modo Debug (operações detalhadas de API e IAM):**
+**Com Modo Debug (operações detalhadas de API e AWS IAM):**
 ```bash
 python iot_rules_explorer.py --debug
 ```
 
 ### Pré-requisitos
-- **Credenciais AWS** - Permissões IAM para IoT Rules e gerenciamento de função IAM
+- **Credenciais AWS** - Permissões AWS IAM para IoT Rules e gerenciamento de função AWS IAM
 - **Certificados não necessários** - Rules Engine opera no nível de serviço
 
 ### Opções do Menu Principal
@@ -441,8 +441,8 @@ Quando você executa o script:
 1. **Nomenclatura de Regra** - Aprender convenções de nomenclatura e requisitos de unicidade
 2. **Seleção de Tipo de Evento** - Escolher entre tipos de eventos IoT comuns ou personalizado
 3. **Construção de Declaração SQL** - Construção interativa de cláusulas SELECT, FROM, WHERE
-4. **Configuração de Ação** - Configurar destinos de republicação com funções IAM adequadas
-5. **Configuração Automática de IAM** - Script cria e configura permissões necessárias
+4. **Configuração de Ação** - Configurar destinos de republicação com funções AWS IAM adequadas
+5. **Configuração Automática de AWS IAM** - Script cria e configura permissões necessárias
 
 #### Construtor de Declaração SQL
 
@@ -484,14 +484,14 @@ FROM 'testRulesEngineTopic/+/motion'
 WHERE value = 'detected'
 ```
 
-### Configuração Automática de IAM
+### Configuração Automática de AWS IAM
 
-#### Criação de Função IAM
+#### Criação de Função AWS IAM
 **Configuração Automática:**
 - Cria `IoTRulesEngineRole` se não existir
 - Configura política de confiança para `iot.amazonaws.com`
 - Anexa permissões necessárias para ações de republicação
-- Lida com atrasos de consistência eventual do IAM
+- Lida com atrasos de consistência eventual do AWS IAM
 
 ### Testando Suas Regras
 

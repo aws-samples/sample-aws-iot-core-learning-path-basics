@@ -141,7 +141,7 @@
     },
     "describe_endpoint": {
       "title": "Describe Endpoint - 连接信息",
-      "content": "IoT 端点是设备用于连接到 AWS IoT Core 的网关 URL。不同的端点类型服务于不同的目的：Data-ATS 用于设备通信，CredentialProvider 用于身份验证，Jobs 用于设备管理。理解端点对于设备连接配置至关重要。",
+      "content": "IoT 端点是设备用于连接到 AWS IoT Core 的网关 URL。不同的端点类型服务于不同的目的：Data-ATS 用于设备通信，CredentialProvider 用于身份验证，AWS IoT Jobs 用于设备管理。理解端点对于设备连接配置至关重要。",
       "next": "我们将发现设备连接的端点 URL"
     }
   },

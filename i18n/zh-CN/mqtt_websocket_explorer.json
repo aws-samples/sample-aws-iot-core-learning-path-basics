@@ -20,7 +20,7 @@
   "credentials_methods": [
     "• AWS CLI：aws configure",
     "• 环境变量：AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY",
-    "• IAM 角色（如果在 EC2 上运行）"
+    "• AWS IAM 角色（如果在 Amazon EC2 上运行）"
   ],
   "aws_credentials_sigv4": "🔐 用于 SigV4 认证的 AWS 凭证",
   "access_key": "访问密钥",
@@ -120,7 +120,7 @@
   "troubleshooting_unknown": "💡 故障排除：未知订阅失败",
   "unknown_causes": [
     "• 运行 'debug {}' 命令进行详细诊断",
-    "• 如果启用，请检查 CloudWatch 中的 AWS IoT 日志"
+    "• 如果启用，请检查 Amazon CloudWatch 中的 AWS IoT 日志"
   ],
   "publishing_message_websocket": "📤 发布消息（WebSocket）",
   "published_websocket": "✅ [{}] 通过 WebSocket 发布",

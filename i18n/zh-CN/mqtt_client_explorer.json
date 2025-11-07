@@ -184,7 +184,7 @@
     "troubleshooting_unknown": "💡 故障排除：未知订阅失败",
     "unknown_reasons": [
         "   • 运行 'debug {}' 命令进行详细诊断",
-        "   • 如果启用，请检查 CloudWatch 中的 AWS IoT 日志"
+        "   • 如果启用，请检查 Amazon CloudWatch 中的 AWS IoT 日志"
     ],
     "publishing_message": "📤 发布消息",
     "content_type_label": "Content-Type",

@@ -5,7 +5,7 @@
 > - [English](README.md) | **Español** (Actual) | [中文](README.zh-CN.md) | [日本語](README.ja.md) | [Português](README.pt-BR.md)
 > - **Documentación**: [English](docs/en/) | [Español](docs/es/) | [中文](docs/zh-CN/) | [日本語](docs/ja/) | [Português](docs/pt-BR/)
 
-Un conjunto completo de herramientas en Python para aprender los conceptos básicos de Amazon Web Services (AWS) IoT Core a través de exploración práctica. Los scripts interactivos demuestran gestión de dispositivos, seguridad, operaciones de API y comunicación MQTT con explicaciones detalladas.
+Un conjunto completo de herramientas en Python para aprender los conceptos básicos de Amazon Web Services (AWS) AWS IoT Core a través de exploración práctica. Los scripts interactivos demuestran gestión de dispositivos, seguridad, operaciones de API y comunicación MQTT con explicaciones detalladas.
 
 ## 🚀 Resumen Rápido - Ruta de Aprendizaje Completa
 
@@ -54,7 +54,7 @@ Este proyecto aprovecha los SDKs oficiales de AWS para proporcionar experiencias
 - **Propósito**: Potencia todas las operaciones del Registro de AWS IoT, gestión de certificados e interacciones del Motor de Reglas
 - **Versión**: `>=1.26.0`
 - **Documentación**: [Documentación de Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-- **APIs de IoT Core**: [Cliente IoT de Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iot.html)
+- **APIs de AWS IoT Core**: [Cliente IoT de Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iot.html)
 
 ### **SDK de Dispositivos AWS IoT para Python**
 - **Propósito**: Permite comunicación MQTT auténtica con AWS IoT Core usando certificados X.509
@@ -95,7 +95,7 @@ Este proyecto aprovecha los SDKs oficiales de AWS para proporcionar experiencias
 | Servicio | Uso | Costo Estimado (USD) |
 |---------|-------|---------------------|
 | **AWS IoT Core** | ~100 mensajes, 20 dispositivos | $0.10 |
-| **IoT Device Shadow** | ~30 operaciones shadow | $0.04 |
+| **AWS IoT Device Shadow service** | ~30 operaciones shadow | $0.04 |
 | **IoT Rules Engine** | ~50 ejecuciones de reglas | $0.01 |
 | **Almacenamiento de Certificados** | 20 certificados por 1 día | $0.01 |
 | **Amazon CloudWatch Logs** | Logging básico | $0.01 |
@@ -212,11 +212,11 @@ python scripts/setup_sample_data.py
 - ✅ `certificate_manager.py` - Gestión de certificados
 - ✅ `mqtt_client_explorer.py` - Comunicación MQTT
 - ✅ `mqtt_websocket_explorer.py` - MQTT WebSocket
-- ✅ `device_shadow_explorer.py` - Operaciones Device Shadow
+- ✅ `device_shadow_explorer.py` - Operaciones AWS IoT Device Shadow service
 - ✅ `iot_rules_explorer.py` - Exploración Rules Engine
 - ✅ `cleanup_sample_data.py` - Limpieza de recursos
 
-**Alternativa:** Usar configuración de AWS CLI o roles de AWS Identity and Access Management (IAM).
+**Alternativa:** Usar configuración de AWS CLI o roles de AWS Identity and Access Management (AWS IAM).
 
 </details>
 
