@@ -25,7 +25,10 @@
     "press_enter": "Press Enter to continue...",
     "goodbye": "👋 Goodbye!",
     "main_menu": "📋 Main Menu:",
-    "menu_options": ["1. Connect to AWS IoT Core with Certificate", "2. Exit"],
+    "menu_options": [
+        "1. Connect to AWS IoT Core with Certificate",
+        "2. Exit"
+    ],
     "select_option": "What would you like to do? (1-2): ",
     "invalid_choice": "❌ Hmm, that's not a valid option. Please choose 1 or 2.",
     "step_establishing_connection": "Establishing MQTT Connection",
@@ -259,5 +262,15 @@
     "invalid_mqtt_version": "❌ Oops! Please choose 1 or 2.",
     "mqtt_version_label": "MQTT Version",
     "mqtt5_not_supported": "⚠️  MQTT 5.0 not supported by current SDK version:",
-    "falling_back_mqtt311": "🔄 Falling back to MQTT 3.1.1"
+    "falling_back_mqtt311": "🔄 Falling back to MQTT 3.1.1",
+    "options_header_simple": "📋 Options:",
+    "enter_number_select_thing": "• Enter number (1-{}) to select Thing",
+    "type_all_see_things": "• Type 'all' to see all Things",
+    "type_manual_enter_name": "• Type 'manual' to enter Thing name manually",
+    "your_choice": "Your choice: ",
+    "enter_thing_name": "Enter Thing name: ",
+    "thing_name_cannot_be_empty": "❌ Thing name cannot be empty",
+    "invalid_thing_name_chars": "❌ Invalid Thing name. Only alphanumeric characters, hyphens, and underscores are allowed.",
+    "thing_not_found_check": "❌ Thing '{}' not found",
+    "and_more_things": "... and {} more"
 }

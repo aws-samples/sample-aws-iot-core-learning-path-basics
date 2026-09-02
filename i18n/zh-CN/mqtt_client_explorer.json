@@ -262,5 +262,15 @@
     "invalid_mqtt_version": "❌ 哎呀！请选择 1 或 2。",
     "mqtt_version_label": "MQTT版本",
     "mqtt5_not_supported": "⚠️ 当前SDK版本不支持MQTT 5.0:",
-    "falling_back_mqtt311": "🔄 回退到MQTT 3.1.1"
+    "falling_back_mqtt311": "🔄 回退到MQTT 3.1.1",
+    "options_header_simple": "📋 选项:",
+    "enter_number_select_thing": "• 输入数字 (1-{}) 选择 Thing",
+    "type_all_see_things": "• 输入 'all' 查看所有 Things",
+    "type_manual_enter_name": "• 输入 'manual' 手动输入 Thing 名称",
+    "your_choice": "你的选择: ",
+    "enter_thing_name": "输入 Thing 名称: ",
+    "thing_name_cannot_be_empty": "❌ Thing 名称不能为空",
+    "invalid_thing_name_chars": "❌ 无效的 Thing 名称。只允许字母数字字符、连字符和下划线。",
+    "thing_not_found_check": "❌ 未找到 Thing '{}'",
+    "and_more_things": "... 还有 {} 个"
 }

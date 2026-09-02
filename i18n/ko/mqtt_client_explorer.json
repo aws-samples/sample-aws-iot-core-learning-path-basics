@@ -262,5 +262,15 @@
     "invalid_mqtt_version": "❌ 앗! 1이나 2를 선택해주세요.",
     "mqtt_version_label": "MQTT 버전",
     "mqtt5_not_supported": "⚠️ 현재 SDK 버전에서 MQTT 5.0이 지원되지 않습니다:",
-    "falling_back_mqtt311": "🔄 MQTT 3.1.1로 폴백"
+    "falling_back_mqtt311": "🔄 MQTT 3.1.1로 폴백",
+    "options_header_simple": "📋 옵션:",
+    "enter_number_select_thing": "• Thing을 선택하려면 숫자 (1-{})를 입력하세요",
+    "type_all_see_things": "• 모든 Thing을 보려면 'all'을 입력하세요",
+    "type_manual_enter_name": "• Thing 이름을 수동으로 입력하려면 'manual'을 입력하세요",
+    "your_choice": "선택: ",
+    "enter_thing_name": "Thing 이름을 입력하세요: ",
+    "thing_name_cannot_be_empty": "❌ Thing 이름은 비어 있을 수 없습니다",
+    "invalid_thing_name_chars": "❌ 잘못된 Thing 이름입니다. 영숫자, 하이픈, 밑줄만 허용됩니다.",
+    "thing_not_found_check": "❌ Thing '{}'을(를) 찾을 수 없습니다",
+    "and_more_things": "... 그리고 {} 개 더"
 }

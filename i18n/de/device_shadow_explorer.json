@@ -379,5 +379,15 @@
     "debug_simulation_type": "🔍 DEBUG: Simulationstyp: {}",
     "debug_property_change": "🔍 DEBUG: Property '{}' geändert von {} zu {}",
     "debug_state_before": "🔍 DEBUG: Zustand vorher: {}",
-    "debug_state_after": "🔍 DEBUG: Zustand nachher: {}"
+    "debug_state_after": "🔍 DEBUG: Zustand nachher: {}",
+    "options_header_simple": "📋 Optionen:",
+    "enter_number_select_thing": "• Nummer eingeben (1-{}) um Thing auszuwählen",
+    "type_all_see_things": "• 'all' eingeben um alle Things zu sehen",
+    "type_manual_enter_name": "• 'manual' eingeben um Namen manuell einzugeben",
+    "your_choice": "Deine Wahl: ",
+    "enter_thing_name": "Thing-Namen eingeben: ",
+    "thing_name_cannot_be_empty": "❌ Thing-Name darf nicht leer sein",
+    "invalid_thing_name_chars": "❌ Ungültiger Thing-Name. Nur alphanumerische Zeichen, Bindestriche und Unterstriche erlaubt.",
+    "thing_not_found_check": "❌ Thing '{}' nicht gefunden",
+    "and_more_things": "... und {} weitere"
 }

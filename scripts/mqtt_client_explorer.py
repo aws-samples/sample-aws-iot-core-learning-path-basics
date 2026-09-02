@@ -8,6 +8,7 @@ Educational MQTT client for learning AWS IoT Core communication patterns.
 """
 import json
 import os
+import re
 import sys
 import threading
 import time
@@ -375,13 +376,22 @@ class MQTTClientExplorer:
         try:
             iot = boto3.client("iot")
 
-            # Get all Things
+            # Get all Things (paginated to retrieve the complete fleet, not just the first page)
             if debug:
                 print(get_message("debug_calling_list_things"))
                 print(get_message("debug_input_params_none"))
 
-            things_response = iot.list_things()
-            things = things_response.get("things", [])
+            things = []
+            next_token = None
+            while True:
+                if next_token:
+                    things_response = iot.list_things(nextToken=next_token)
+                else:
+                    things_response = iot.list_things()
+                things.extend(things_response.get("things", []))
+                next_token = things_response.get("nextToken")
+                if not next_token:
+                    break
 
             if debug:
                 print(get_message("debug_api_response_found_things").format(len(things)))
@@ -391,16 +401,47 @@ class MQTTClientExplorer:
                 print(get_message("no_things_found"))
                 return None, None, None
 
-            print(get_message("available_devices").format(len(things)))
-            for i, thing in enumerate(things, 1):
-                print(f"   {i}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})")
+            selected_thing = None
+            while selected_thing is None:
+                print(get_message("available_devices").format(len(things)))
+                # Only display the first 10 to keep the menu manageable for large fleets
+                display_count = min(len(things), 10)
+                for i in range(display_count):
+                    thing = things[i]
+                    print(f"   {i + 1}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})")
+                if len(things) > 10:
+                    print(f"   {get_message('and_more_things').format(len(things) - 10)}")
 
-            while True:
+                print(f"\n{get_message('options_header_simple')}")
+                print(f"   {get_message('enter_number_select_thing').format(len(things))}")
+                print(f"   {get_message('type_all_see_things')}")
+                print(f"   {get_message('type_manual_enter_name')}")
+
+                choice = input(f"\n{get_message('your_choice')} ").strip()
+
+                if choice.lower() == "all":
+                    for i, thing in enumerate(things, 1):
+                        print(f"   {i}. {thing['thingName']} (Type: {thing.get('thingTypeName', 'None')})")
+                    continue
+
+                if choice.lower() == "manual":
+                    entered = input(get_message("enter_thing_name")).strip()
+                    if not entered:
+                        print(get_message("thing_name_cannot_be_empty"))
+                        continue
+                    if not re.match(r"^[a-zA-Z0-9_-]+$", entered):
+                        print(get_message("invalid_thing_name_chars"))
+                        continue
+                    if any(t["thingName"] == entered for t in things):
+                        selected_thing = entered
+                    else:
+                        print(get_message("thing_not_found_check").format(entered))
+                    continue
+
                 try:
-                    choice = int(input(f"\n{get_message('select_device').format(len(things))} ")) - 1
-                    if 0 <= choice < len(things):
-                        selected_thing = things[choice]["thingName"]
-                        break
+                    index = int(choice) - 1
+                    if 0 <= index < len(things):
+                        selected_thing = things[index]["thingName"]
                     else:
                         print(get_message("invalid_selection").format(len(things)))
                 except ValueError:

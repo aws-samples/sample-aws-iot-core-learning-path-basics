@@ -262,5 +262,15 @@
     "invalid_mqtt_version": "❌ おっと！1か2を選んでください。",
     "mqtt_version_label": "MQTTバージョン",
     "mqtt5_not_supported": "⚠️ MQTT 5.0は現在のSDKバージョンでサポートされていません:",
-    "falling_back_mqtt311": "🔄 MQTT 3.1.1にフォールバック"
+    "falling_back_mqtt311": "🔄 MQTT 3.1.1にフォールバック",
+    "options_header_simple": "📋 オプション:",
+    "enter_number_select_thing": "• 数字（1-{}）を入力してThingを選択",
+    "type_all_see_things": "• 'all'と入力してすべてのThingを表示",
+    "type_manual_enter_name": "• 'manual'と入力してThing名を手動で入力",
+    "your_choice": "あなたの選択: ",
+    "enter_thing_name": "Thing名を入力: ",
+    "thing_name_cannot_be_empty": "❌ Thing名は空にできません",
+    "invalid_thing_name_chars": "❌ 無効なThing名です。英数字、ハイフン、アンダースコアのみ使用できます。",
+    "thing_not_found_check": "❌ Thing '{}'が見つかりません",
+    "and_more_things": "... および{}個以上"
 }
