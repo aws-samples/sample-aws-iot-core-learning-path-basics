@@ -1,0 +1,304 @@
+diff --git a/samples/kvs_gstreamer_sample.cpp b/samples/kvs_gstreamer_sample.cpp
+index e9d125e..a01df58 100644
+--- a/samples/kvs_gstreamer_sample.cpp
++++ b/samples/kvs_gstreamer_sample.cpp
+@@ -623,7 +623,7 @@ static void pad_added_cb(GstElement *element, GstPad *pad, GstElement *target) {
+ 
+ int gstreamer_live_source_init(int argc, char* argv[], CustomData *data, GstElement *pipeline) {
+ 
+-    bool vtenc = false, isOnRpi = false;
++    bool vtenc = false, isOnRpi = false, useHwEncoder = false;
+ 
+     /* init stream format */
+     int width = 0, height = 0, framerate = 25, bitrateInKBPS = 512;
+@@ -725,33 +725,50 @@ int gstreamer_live_source_init(int argc, char* argv[], CustomData *data, GstElem
+             return 1;
+         }
+     } else {
+-        // Failed creating vtenc - check pi hardware encoder
+-        encoder = gst_element_factory_make("omxh264enc", "encoder");
++        // Pi 4: use v4l2h264enc (hardware H.264 via V4L2 M2M)
++        encoder = gst_element_factory_make("v4l2h264enc", "encoder");
+         if (encoder) {
+-            LOG_DEBUG("Using omxh264enc");
++            LOG_DEBUG("Using v4l2h264enc");
+             isOnRpi = true;
++            useHwEncoder = true;
++
++            // Pi Camera requires libcamerasrc on Bookworm and later
++            source = gst_element_factory_make("libcamerasrc", "source");
++            if (source) {
++                LOG_DEBUG("Using libcamerasrc");
++            } else {
++                LOG_DEBUG("libcamerasrc not available, trying v4l2src");
++                source = gst_element_factory_make("v4l2src", "source");
++                if (!source) {
++                    LOG_ERROR("Failed to create video source");
++                    return 1;
++                }
++            }
+         } else {
+-            // - attempt x264enc
+-            isOnRpi = false;
++            // Software fallback (Pi 5 or missing hardware encoder)
+             encoder = gst_element_factory_make("x264enc", "encoder");
+-            if (encoder) {
+-                LOG_DEBUG("Using x264enc");
+-            } else {
+-                LOG_ERROR("Failed to create x264enc");
++            if (!encoder) {
++                LOG_ERROR("Failed to create any H.264 encoder");
+                 return 1;
+             }
+-        }
+-        source = gst_element_factory_make("v4l2src", "source");
+-        if (source) {
+-            LOG_DEBUG("Using v4l2src");
+-        } else {
+-            LOG_DEBUG("Failed to create v4l2src, trying ksvideosrc")
+-            source = gst_element_factory_make("ksvideosrc", "source");
++            LOG_DEBUG("Using x264enc");
++
++            // On Pi 5 with Pi Camera, we still need libcamerasrc
++            source = gst_element_factory_make("libcamerasrc", "source");
+             if (source) {
+-                LOG_DEBUG("Using ksvideosrc");
++                LOG_DEBUG("Using libcamerasrc (Pi 5 software encode path)");
++                isOnRpi = true;
+             } else {
+-                LOG_ERROR("Failed to create ksvideosrc");
+-                return 1;
++                // Non-Pi fallback (EC2, desktop Linux, Windows)
++                isOnRpi = false;
++                source = gst_element_factory_make("v4l2src", "source");
++                if (!source) {
++                    source = gst_element_factory_make("ksvideosrc", "source");
++                    if (!source) {
++                        LOG_ERROR("Failed to create video source");
++                        return 1;
++                    }
++                }
+             }
+         }
+         vtenc = false;
+@@ -765,65 +782,95 @@ int gstreamer_live_source_init(int argc, char* argv[], CustomData *data, GstElem
+     /* configure source */
+     if (vtenc) {
+         g_object_set(G_OBJECT (source), "is-live", TRUE, NULL);
+-    } else {
++    } else if (!isOnRpi) {
++        // Only set device for non-Pi sources (v4l2src/ksvideosrc)
+         g_object_set(G_OBJECT (source), "do-timestamp", TRUE, "device", "/dev/video0", NULL);
+     }
++    // libcamerasrc on Pi needs no additional configuration
+ 
+     /* Determine whether device supports h264 encoding and select a streaming resolution supported by the device*/
+-    if (GST_STATE_CHANGE_FAILURE == gst_element_set_state(source, GST_STATE_READY)) {
+-        g_printerr("Unable to set the source to ready state.\n");
+-        return 1;
+-    }
+-
+-    GstPad *srcpad = gst_element_get_static_pad(source, "src");
+-    GstCaps *src_caps = gst_pad_query_caps(srcpad, NULL);
+-    gst_element_set_state(source, GST_STATE_NULL);
+-
+-    GstCaps *query_caps_raw = gst_caps_new_simple("video/x-raw",
+-                                                  "width", G_TYPE_INT, width,
+-                                                  "height", G_TYPE_INT, height,
+-                                                  NULL);
+-    GstCaps *query_caps_h264 = gst_caps_new_simple("video/x-h264",
+-                                                   "width", G_TYPE_INT, width,
+-                                                   "height", G_TYPE_INT, height,
+-                                                   NULL);
+-
+-    if (width != 0 && height != 0) {
+-        if (!resolution_supported(src_caps, query_caps_raw, query_caps_h264, *data, width, height, framerate)) {
+-            g_printerr("Resolution %dx%d not supported by video source\n", width, height);
+-            return 1;
++    if (isOnRpi) {
++        // Skip caps query for libcamerasrc: the READY->NULL cycle leaves the
++        // V4L2 M2M encoder in a bad state causing "not enough memory" errors.
++        if (width == 0 && height == 0) {
++            if (useHwEncoder) {
++                width = 1296;
++                height = 972;
++                framerate = 30;
++            } else {
++                // Pi 5 software encoding: default to 720p for performance
++                width = 1280;
++                height = 720;
++                framerate = 30;
++            }
+         }
++        data->h264_stream_supported = false;
+     } else {
+-        vector<int> res_width = {640, 1280, 1920};
+-        vector<int> res_height = {480, 720, 1080};
+-        vector<int> fps = {30, 25, 20};
+-        bool found_resolution = false;
+-        for (int i = 0; i < res_width.size(); i++) {
+-            width = res_width[i];
+-            height = res_height[i];
+-            for (int j = 0; j < fps.size(); j++) {
+-                framerate = fps[j];
+-                if (resolution_supported(src_caps, query_caps_raw, query_caps_h264, *data, width, height, framerate)) {
+-                    found_resolution = true;
++        if (GST_STATE_CHANGE_FAILURE == gst_element_set_state(source, GST_STATE_READY)) {
++            g_printerr("Unable to set the source to ready state.\n");
++            return 1;
++        }
++
++        GstPad *srcpad = gst_element_get_static_pad(source, "src");
++        GstCaps *src_caps = gst_pad_query_caps(srcpad, NULL);
++        gst_element_set_state(source, GST_STATE_NULL);
++
++        GstCaps *query_caps_raw = gst_caps_new_simple("video/x-raw",
++                                                      "width", G_TYPE_INT, width,
++                                                      "height", G_TYPE_INT, height,
++                                                      NULL);
++        GstCaps *query_caps_h264 = gst_caps_new_simple("video/x-h264",
++                                                       "width", G_TYPE_INT, width,
++                                                       "height", G_TYPE_INT, height,
++                                                       NULL);
++
++        if (width != 0 && height != 0) {
++            if (!resolution_supported(src_caps, query_caps_raw, query_caps_h264, *data, width, height, framerate)) {
++                g_printerr("Resolution %dx%d not supported by video source\n", width, height);
++                return 1;
++            }
++        } else {
++            vector<int> res_width = {640, 1280, 1920};
++            vector<int> res_height = {480, 720, 1080};
++            vector<int> fps = {30, 25, 20};
++            bool found_resolution = false;
++            for (int i = 0; i < res_width.size(); i++) {
++                width = res_width[i];
++                height = res_height[i];
++                for (int j = 0; j < fps.size(); j++) {
++                    framerate = fps[j];
++                    if (resolution_supported(src_caps, query_caps_raw, query_caps_h264, *data, width, height, framerate)) {
++                        found_resolution = true;
++                        break;
++                    }
++                }
++                if (found_resolution) {
+                     break;
+                 }
+             }
+-            if (found_resolution) {
+-                break;
++            if (!found_resolution) {
++                g_printerr("Default list of resolutions (1920x1080, 1280x720, 640x480) are not supported by video source\n");
++                return 1;
+             }
+         }
+-        if (!found_resolution) {
+-            g_printerr("Default list of resolutions (1920x1080, 1280x720, 640x480) are not supported by video source\n");
+-            return 1;
+-        }
+-    }
+ 
+-    gst_caps_unref(src_caps);
+-    gst_object_unref(srcpad);
++        gst_caps_unref(src_caps);
++        gst_object_unref(srcpad);
++        gst_caps_unref(query_caps_h264);
++        gst_caps_unref(query_caps_raw);
++    }
+ 
+     /* create the elements needed for the corresponding pipeline */
+     if (!data->h264_stream_supported) {
+-        video_convert = gst_element_factory_make("videoconvert", "video_convert");
++        if (isOnRpi) {
++            video_convert = gst_element_factory_make("v4l2convert", "video_convert");
++            if (!video_convert) {
++                LOG_WARN("v4l2convert not available, falling back to videoconvert");
++                video_convert = gst_element_factory_make("videoconvert", "video_convert");
++            }
++        } else {
++            video_convert = gst_element_factory_make("videoconvert", "video_convert");
++        }
+ 
+         if (!video_convert) {
+             g_printerr("Not all elements could be created.\n");
+@@ -831,32 +878,51 @@ int gstreamer_live_source_init(int argc, char* argv[], CustomData *data, GstElem
+         }
+     }
+ 
+-    /* source filter */
++    /* source filter: create fresh caps with explicit framerate */
+     if (!data->h264_stream_supported) {
+-        gst_caps_set_simple(query_caps_raw,
+-                            "format", G_TYPE_STRING, "I420",
+-                            NULL);
+-        g_object_set(G_OBJECT (source_filter), "caps", query_caps_raw, NULL);
++        GstCaps *raw_caps = gst_caps_new_simple("video/x-raw",
++                                                "format", G_TYPE_STRING, "I420",
++                                                "width", G_TYPE_INT, width,
++                                                "height", G_TYPE_INT, height,
++                                                "framerate", GST_TYPE_FRACTION, framerate, 1,
++                                                NULL);
++        g_object_set(G_OBJECT (source_filter), "caps", raw_caps, NULL);
++        gst_caps_unref(raw_caps);
+     } else {
+-        gst_caps_set_simple(query_caps_h264,
+-                            "stream-format", G_TYPE_STRING, "byte-stream",
+-                            "alignment", G_TYPE_STRING, "au",
+-                            NULL);
+-        g_object_set(G_OBJECT (source_filter), "caps", query_caps_h264, NULL);
++        GstCaps *h264_src_caps = gst_caps_new_simple("video/x-h264",
++                                                     "width", G_TYPE_INT, width,
++                                                     "height", G_TYPE_INT, height,
++                                                     "framerate", GST_TYPE_FRACTION, framerate, 1,
++                                                     "stream-format", G_TYPE_STRING, "byte-stream",
++                                                     "alignment", G_TYPE_STRING, "au",
++                                                     NULL);
++        g_object_set(G_OBJECT (source_filter), "caps", h264_src_caps, NULL);
++        gst_caps_unref(h264_src_caps);
+     }
+-    gst_caps_unref(query_caps_h264);
+-    gst_caps_unref(query_caps_raw);
+ 
+     /* configure encoder */
+     if (!data->h264_stream_supported){
+         if (vtenc) {
+             g_object_set(G_OBJECT (encoder), "allow-frame-reordering", FALSE, "realtime", TRUE, "max-keyframe-interval",
+                          45, "bitrate", bitrateInKBPS, NULL);
+-        } else if (isOnRpi) {
+-            g_object_set(G_OBJECT (encoder), "control-rate", 2, "target-bitrate", bitrateInKBPS*1000,
+-                         "periodicty-idr", 45, "inline-header", FALSE, NULL);
++        } else if (useHwEncoder) {
++            // v4l2h264enc uses extra-controls (V4L2 control interface)
++            GstStructure *extra_controls = gst_structure_new("controls",
++                "repeat_sequence_header", G_TYPE_INT, 1,
++                "video_bitrate", G_TYPE_INT, bitrateInKBPS * 1000,
++                "video_gop_size", G_TYPE_INT, 30,
++                "h264_i_frame_period", G_TYPE_INT, 30,
++                NULL);
++            g_object_set(G_OBJECT(encoder), "extra-controls", extra_controls, NULL);
++            gst_structure_free(extra_controls);
+         } else {
+             g_object_set(G_OBJECT (encoder), "bframes", 0, "key-int-max", 45, "bitrate", bitrateInKBPS, NULL);
++            if (isOnRpi) {
++                // Pi 5 software encoding: ultrafast preset for real-time,
++                // key-int-max = framerate for ~1 second fragments
++                g_object_set(G_OBJECT (encoder), "speed-preset", 1, "tune", 0x4,
++                             "key-int-max", framerate, NULL);
++            }
+         }
+     }
+ 
+@@ -867,8 +933,11 @@ int gstreamer_live_source_init(int argc, char* argv[], CustomData *data, GstElem
+                                              "alignment", G_TYPE_STRING, "au",
+                                              NULL);
+     if (!data->h264_stream_supported) {
+-        gst_caps_set_simple(h264_caps, "profile", G_TYPE_STRING, "baseline",
+-                            NULL);
++        if (isOnRpi) {
++            gst_caps_set_simple(h264_caps, "level", G_TYPE_STRING, "4", NULL);
++        } else {
++            gst_caps_set_simple(h264_caps, "profile", G_TYPE_STRING, "baseline", NULL);
++        }
+     }
+     g_object_set(G_OBJECT (filter), "caps", h264_caps, NULL);
+     gst_caps_unref(h264_caps);

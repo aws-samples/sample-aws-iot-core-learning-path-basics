@@ -8,6 +8,14 @@ This project uses the following third-party libraries:
 
 Both libraries are licensed under the Apache License 2.0.
 
+This project also redistributes a modified source file (and a patch) from:
+
+3. Amazon Kinesis Video Streams Producer SDK C++ (v3.6.0)
+   Files: iot_helpers/kvs_pi_camera/kvs_gstreamer_sample.cpp,
+          iot_helpers/kvs_pi_camera/kvs-producer-pi-libcamera.patch
+   Licensed under the Apache License 2.0. The file was modified to support
+   the Raspberry Pi Camera via libcamerasrc on current Raspberry Pi OS.
+
 ================================================================================
 
 BOTO3 - AWS SDK for Python
@@ -18,6 +26,11 @@ License: Apache License 2.0
 AWS IOT DEVICE SDK FOR PYTHON V2
 Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Source: https://github.com/aws/aws-iot-device-sdk-python-v2
+License: Apache License 2.0
+
+AMAZON KINESIS VIDEO STREAMS PRODUCER SDK C++
+Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Source: https://github.com/awslabs/amazon-kinesis-video-streams-producer-sdk-cpp
 License: Apache License 2.0
 
 ================================================================================
