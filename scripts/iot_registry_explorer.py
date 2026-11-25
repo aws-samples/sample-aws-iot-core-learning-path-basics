@@ -4,6 +4,7 @@
 
 import json
 import os
+import readline
 import sys
 
 # Add i18n to path
@@ -15,6 +16,8 @@ from botocore.exceptions import ClientError, NoCredentialsError, NoRegionError
 from language_selector import get_language
 from loader import load_messages
 from confirm_input import is_yes
+
+readline.set_history_length(1000)
 
 # Global variables
 USER_LANG = "en"

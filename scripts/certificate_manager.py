@@ -5,6 +5,7 @@
 import json
 import os
 import re
+import readline
 import sys
 import time
 
@@ -20,6 +21,8 @@ from language_selector import get_language
 from loader import load_messages
 from confirm_input import is_yes
 from iot_helpers.utils.resource_tagger import apply_workshop_tags
+
+readline.set_history_length(1000)
 
 # Global variables
 USER_LANG = "en"
