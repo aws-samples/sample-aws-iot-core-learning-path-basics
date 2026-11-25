@@ -9,6 +9,7 @@ Educational tool for learning AWS IoT Device Shadow service through hands-on exp
 import json
 import os
 import re
+import readline
 import sys
 import threading
 import time
@@ -24,6 +25,8 @@ from awsiot import mqtt_connection_builder
 from language_selector import get_language
 from loader import load_messages
 from confirm_input import is_yes
+
+readline.set_history_length(1000)
 
 # Global variables
 USER_LANG = "en"

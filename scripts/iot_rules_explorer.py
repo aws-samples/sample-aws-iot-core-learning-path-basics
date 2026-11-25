@@ -8,6 +8,7 @@ Educational tool for learning AWS IoT Rules Engine through hands-on rule creatio
 """
 import json
 import os
+import readline
 import sys
 import time
 from datetime import datetime
@@ -45,6 +46,8 @@ def load_messages(lang="en"):
             return load_messages("en")
         return {}
 
+
+readline.set_history_length(1000)
 
 # Global variables
 USER_LANG = get_language()

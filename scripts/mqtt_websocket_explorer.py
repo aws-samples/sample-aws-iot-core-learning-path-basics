@@ -8,6 +8,7 @@ Educational MQTT client using WebSocket connection with SigV4 authentication.
 """
 import json
 import os
+import readline
 import sys
 import threading
 import traceback
@@ -30,6 +31,8 @@ except ImportError:
 
 from language_selector import get_language
 from loader import load_messages
+
+readline.set_history_length(1000)
 
 # Global variables
 USER_LANG = "en"

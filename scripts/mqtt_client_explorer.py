@@ -9,6 +9,7 @@ Educational MQTT client for learning AWS IoT Core communication patterns.
 import json
 import os
 import re
+import readline
 import sys
 import threading
 import time
@@ -31,6 +32,8 @@ except ImportError:
 
 from language_selector import get_language
 from loader import load_messages
+
+readline.set_history_length(1000)
 
 # Global variables
 USER_LANG = "en"
